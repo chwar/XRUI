@@ -1,7 +1,7 @@
 # XRUI
 This is an extension for the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can automatically adjust depending on the deployed platform and the environment's reality, supporting regular PC environment as well as AR and VR environments. This way, users only need to design and develop their UI once for all platforms, resulting in a great saving of time.   
 
-XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html). Internally, it uses UXML and USS, so a basic knowledge and understanding of these technologies is required to use this framework. 
+XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html). Internally, it uses UXML and USS, so a basic knowledge and understanding of these technologies are required to use this framework. 
 
 ## Installation
 
@@ -45,7 +45,9 @@ card.Show(false);   // Display.None
 card.Show(myElement, false); // Hides some of the content  
 ``` 
 
-> Note: Keep in mind that hidden elements will not be found with a regular QML query, as they are hidden. You can still find them by either keeping a reference to the visual element in your code, or by querying it like this: `card.Query<TemplateContainer>().Where(ve => ve.style.display.value.Equals(DisplayStyle.None)).First()`
+> Note: Keep in mind that hidden elements will not be found with a regular QML query, as they are hidden. You can still find them by either keeping a reference to the visual element in your code, or by querying it like this: 
+> 
+> `card.Query<TemplateContainer>().Where(ve => ve.style.display.value.Equals(DisplayStyle.None)).First();`
 
 ### Menu
 
@@ -88,27 +90,24 @@ private UIDocument _uiDocument;
 
 void Start() {
 	_xruiModal = GetComponent<XRUIModal>();
-    _uiDocument = GetComponent<UIDocument>();
+	_uiDocument = GetComponent<UIDocument>();
 	StartPage();
 }
 
 void StartPage() {
 	_xruiModal.UpdateModalFlow("MyModalPage", "MainContainer", () =>
-    {
-        // This callback is only fired once, when the page is created for the first time
-        // Put here initialization code, event subscribtions, etc. 
+	{
+		// This callback is only fired once, when the page is created for the first time
+		// Put here initialization code, event subscribtions, etc. 
 
-        Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
-        _myButton.clicked += MyPage;
+		Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
+		_myButton.clicked += MyPage;
+	});
 
-
-    });
-
-    // Content to execute everytime this page is opened.
+	// Content to execute everytime this page is opened.
 }
 
 void MyPage() {
-
 	// ...
 }
 ```
