@@ -1,0 +1,7 @@
+.xrui__navbar {
+    background-color: var(--xrui-dark);
+}
+
+.xrui__navbar.play-mode {
+    background-color: var(--xrui-primary);
+}

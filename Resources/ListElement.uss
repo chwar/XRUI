@@ -1,0 +1,23 @@
+.xrui__list__item.selected {
+    background-color: var(--xrui-primary);
+}
+
+.xrui__list__item.default > #Icon {
+    display: flex;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+}
+
+.xrui__list__item > #Icon {
+    display: none;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+}
+
+.xrui__list__item.selected > #Text {
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
+.xrui__list__item.selected.default > #Icon {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}

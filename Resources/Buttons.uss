@@ -1,0 +1,51 @@
+.xrui Button {
+    background-color: var(--xrui-primary);
+    color: rgb(255, 255, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 48px;
+}
+
+.xrui Button:hover, .xrui Button:disabled {
+    background-color: var(--xrui-primary-hover);
+}
+
+.xrui Button.icon-white {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(0,0,0,0);
+    min-height: auto;
+}
+
+.xrui Button.icon-white:hover {
+    -unity-background-image-tint-color: var(--xrui-grey);
+}
+
+.xrui Button.icon-black {
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+}
+
+.xrui Button.icon-black:hover {
+    -unity-background-image-tint-color: var(--xrui-secondary);
+}
+
+.xrui Button.modal-cancel {
+    background-color: var(--xrui-secondary);
+}
+
+.xrui Button.modal-cancel:hover {
+    background-color: var(--xrui-dark);
+}

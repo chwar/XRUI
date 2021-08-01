@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Separator" style="flex-direction: row; align-items: center; justify-content: space-between;">
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="SeparatorLabel" style="font-size: 14px;" />
+        <ui:VisualElement name="Line" style="border-left-width: 0.5px; border-right-width: 0.5px; border-top-width: 0.5px; border-bottom-width: 0.5px; border-left-color: rgb(209, 209, 209); border-right-color: rgb(209, 209, 209); border-top-color: rgb(209, 209, 209); border-bottom-color: rgb(209, 209, 209); width: 100%; height: 1px; background-color: rgba(248, 248, 248, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

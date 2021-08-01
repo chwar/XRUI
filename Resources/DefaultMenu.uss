@@ -1,0 +1,13 @@
+.xrui__menu.ar {
+    width: 100%;
+    height: 100%;
+}
+
+.xrui__menu.pc {
+    width: 600px;
+    height: 100%;
+}
+
+.xrui__menu {
+    background-color: var(--xrui-dark);
+}

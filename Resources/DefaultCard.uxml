@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Card" class="xrui__card xrui" style="position: absolute; min-width: 400px; min-height: 400px; max-width: none; max-height: none; width: 400px; height: 400px;">
+        <ui:VisualElement name="TitlePart" style="height: 20%; background-color: rgb(0, 72, 255); -unity-background-image-tint-color: rgb(0, 87, 255); padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 5px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 100%; flex-wrap: nowrap; flex-grow: 0; flex-shrink: 1;">
+            <ui:Label display-tooltip-when-elided="true" name="Subtitle" style="-unity-font: resource(&apos;Roboto-Regular&apos;); font-size: 14px; margin-left: 0; color: rgb(255, 255, 255); margin-right: 0; margin-top: 0; margin-bottom: -5px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 100%; height: 40%; -unity-text-align: middle-left;" />
+            <ui:Label display-tooltip-when-elided="true" name="Title" style="font-size: 24px; margin-left: 0; color: rgb(255, 255, 255); padding-right: 0; padding-left: 0; width: 100%; height: 60%; -unity-text-align: upper-left; padding-top: 0; padding-bottom: 0; margin-bottom: 0; -unity-font-style: bold;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Main" style="width: 100%; height: 100%; background-color: rgb(255, 255, 255); border-top-left-radius: 0; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 10px; -unity-background-scale-mode: stretch-to-fill; flex-direction: column; flex-wrap: nowrap; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+    </ui:VisualElement>
+</ui:UXML>

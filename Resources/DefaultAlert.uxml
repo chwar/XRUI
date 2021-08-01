@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Alert" class="animate xrui__alert xrui">
+        <ui:Label text="Title" display-tooltip-when-elided="true" name="AlertTitle" />
+        <ui:Label text="This is an alert!" display-tooltip-when-elided="true" name="AlertContent" />
+    </ui:VisualElement>
+</ui:UXML>

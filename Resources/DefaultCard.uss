@@ -1,0 +1,26 @@
+.xrui__card.pc {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 25%;
+    height: 40%;
+    margin: 20px;
+    max-width: 400px;
+    max-height: 400px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.xrui__card.ar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    align-items: stretch;
+    flex-shrink: 0;
+}

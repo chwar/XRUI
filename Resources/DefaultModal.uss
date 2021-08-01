@@ -1,0 +1,134 @@
+.xrui__modal.pc {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 600px;
+    height: 500px;
+}
+
+.xrui__modal.ar {
+    width: 100%;
+    height: 100%;
+}
+
+.xrui__modal {
+    background-color: rgb(255, 255, 255);
+}
+
+.xrui .unity-base-text-field {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.xrui .unity-base-text-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 1.5px;
+    border-right-width: 1.5px;
+    border-top-width: 1.5px;
+    border-bottom-width: 1.5px;
+    border-left-color: var(--xrui-grey);
+    border-right-color: var(--xrui-grey);
+    border-top-color: var(--xrui-grey);
+    border-bottom-color: var(--xrui-grey);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    min-height: 48px;
+    color: rgb(0, 0, 0);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-image: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.xrui .unity-text-field__label {
+    color: var(--xrui-dark-grey);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/*.unity-toggle {*/
+/*    flex-direction: row-reverse;*/
+/*    margin-left: 10px;*/
+/*    margin-right: 10px;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.unity-toggle__checkmark {*/
+/*    border-top-left-radius: 13px;*/
+/*    border-bottom-left-radius: 13px;*/
+/*    border-top-right-radius: 13px;*/
+/*    border-bottom-right-radius: 13px;*/
+/*    width: 48px;*/
+/*    height: 24px;*/
+/*    border-left-width: 0;*/
+/*    border-right-width: 0;*/
+/*    border-top-width: 0;*/
+/*    border-bottom-width: 0;*/
+/*    background-color: var(--xrui-primary);*/
+/*    border-left-color: rgba(0, 0, 0, 0);*/
+/*    border-right-color: rgba(0, 0, 0, 0);*/
+/*    border-top-color: rgba(0, 0, 0, 0);*/
+/*    border-bottom-color: rgba(0, 0, 0, 0);*/
+/*    background-image: none;*/
+/*}*/
+
+/*.unity-toggle__label {*/
+/*    -unity-text-align: middle-left;*/
+/*    color: rgb(0, 0, 0);*/
+/*    flex-shrink: 1;*/
+/*    flex-grow: 6;*/
+/*    margin-left: 0;*/
+/*    margin-right: 0;*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 0;*/
+/*    padding-left: 0;*/
+/*    padding-right: 0;*/
+/*    padding-top: 0;*/
+/*    padding-bottom: 0;*/
+/*}*/
+
+.xrui .unity-text-field.error > Label {
+    color: var(--xrui-alert-danger);
+}
+
+.xrui .unity-text-field.error > #unity-text-input {
+    border-left-color: var(--xrui-alert-danger);
+    border-right-color: var(--xrui-alert-danger);
+    border-top-color: var(--xrui-alert-danger);
+    border-bottom-color: var(--xrui-alert-danger);
+}
+
+.xrui .unity-text-field:focus > Label {
+    color: var(--xrui-primary);
+}
+
+.xrui .unity-text-field:focus > #unity-text-input {
+    border-left-color: var(--xrui-primary);
+    border-right-color: var(--xrui-primary);
+    border-top-color: var(--xrui-primary);
+    border-bottom-color: var(--xrui-primary);
+}
+
+.xrui #ContainerWithButton > Button {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
