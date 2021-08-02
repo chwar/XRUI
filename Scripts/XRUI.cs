@@ -114,7 +114,7 @@ namespace com.chwar.xrui
         
         public void ShowAlert(VisualTreeAsset template, AlertType type, string title, string text)
         {
-            var container = GetXRUIFloatingElementContainer("XRUIAlert", false);
+            var container = GetXRUIFloatingElementContainer(type.ToString(), false);
             var uiDocument = container.GetComponent<UIDocument>();
             uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
             uiDocument.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
