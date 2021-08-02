@@ -21,6 +21,9 @@ void Start(){
 ```
 
 ## UI Elements
+
+![Screenshot from 2021-08-03 00-56-47](https://user-images.githubusercontent.com/25299178/127934016-343c5483-7143-427a-891f-46cd80c94f2f.png)
+
 XRUI provides a few UI Elements. The style is minimalistic and inspired from [Bootstrap](https://getbootstrap.com). You can add them in your project by navigating from the Unity menu to `XRUI > Add XRUI Element`. This creates a game object containing a `UIDocument` (which contains the UXML template and USS styles) and an XRUI script that matches the element. Add your own script to this object with a reference to the XRUI script to define the behaviour of the UI. 
 
 When adding UI Elements through the XRUI menu in Unity, the system uses the template referenced in the XRUI Configuration asset (see [Installation](#installation)).
@@ -50,6 +53,7 @@ card.Show(myElement, false); // Hides some of the content
 > `card.Query<TemplateContainer>().Where(ve => ve.style.display.value.Equals(DisplayStyle.None)).First();`
 
 ### Menu
+<img src="https://user-images.githubusercontent.com/25299178/127934036-f7c40049-072c-420b-ac45-1125b7f0cd30.png" alt="XRUI Menu" height="500"/>
 
 ### Navbar
 
@@ -58,6 +62,8 @@ card.Show(myElement, false); // Hides some of the content
 ### List
 
 ### Modals
+<img src="https://user-images.githubusercontent.com/25299178/127934127-dace8111-714b-44a5-a7c3-d9e0a1d2b240.png" alt="PC Modal" height="500"/> <img src="https://user-images.githubusercontent.com/25299178/127934131-e1f4e84f-e108-45ef-ab88-2f3f17c36ce8.png" alt="AR Modal" height="500"/>
+
 XRUI creates modals at runtime rather than requiring you to create all of them in the editor in order to save resources.
 
 Given the hierarchic nature of UXML, modals are easy to reproduce. XRUI provides one XR Modal template, which consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can use this template and fill its container dynamically at runtime.
@@ -158,6 +164,8 @@ _xruiModal.SetFieldError(_fieldWithError);
 ```
 
 ### Alerts
+![Peek 2021-08-03 00-03](https://user-images.githubusercontent.com/25299178/127934108-1784dc2d-36d3-4452-8119-3f910f9a258a.gif)
+![Peek 2021-08-03 00-05](https://user-images.githubusercontent.com/25299178/127934111-57e1859b-5900-4487-995f-9d3f55e8da68.gif)
 
 The provided alert template sets them as floating cards in the right corner of the screen when in PC mode, as notifications at the top of the screen in AR mode, and as \[VR style\] <!-- TODO future VR style --> in VR mode. They also come with animations to attract the attention of users. You can show alerts for different purposes; the types of alerts are inspired from [Bootstrap](https://getbootstrap.com/docs/5.0/components/alerts/).   
 
