@@ -32,12 +32,10 @@ XRUI elements are thought as basic containers for user content. Given the hierar
 
 ![Screenshot from 2021-08-03 17-34-52](https://user-images.githubusercontent.com/25299178/128044199-bc41e803-a4ae-45b8-9719-e41b4294ddd9.png)
 
-The list of UI elements is accessible within the XRUI controller's instance. You can use a function like this for easy access:
+The list of UI elements is accessible within the XRUI controller's instance. Use the `GetUIElement` method for easy access:
 ```csharp
-public VisualTreeAsset GetUIElement(string elementName)
-{
-    return XRUI.Instance.uiElements.Find(ui => ui.name.Equals(elementName));
-}
+// Use the name of the VisualTreeAsset you put in the inspector list 
+VisualTreeAsset myElement = XRUI.Instance.GetUIElement("MyElement");
 ```
 
 ### XRUI Element
@@ -48,7 +46,6 @@ To add or remove visual elements from the UI element, call these methods:
 ```csharp
 VisualElement myElement = someVisualTreeAsset.Instantiate();
 XRUICard card = GetComponent<XRUICard>();
-
 
 card.AddUIElement(myElement, "MyCardContainer");
 card.RemoveUIElement(myElement); 
@@ -115,21 +112,14 @@ In Unity, you can reference your modals in the intended list:
 
 ![Screenshot from 2021-08-03 17-35-39](https://user-images.githubusercontent.com/25299178/128054683-9a34f51f-f440-40a1-b6e5-f213e6a204dd.png)
 
-This creates `InspectorModal` objects which are accessible through the XRUI instance. The given name can be used in the code to fetch the template and contents at the time of generation. You can then pass them to the `CreateModal` method:
+The name given to each modal entry can be used to find the matching template and create a modal from it, with the `CreateModal` method:
 
 ```csharp
-public void ShowModal(string modalName)
-{
-    InspectorModal m = XRUI.Instance.modals.Find(modal => modal.modalName.Equals(modalName));
-    Type t = Type.GetType($"Modals.{modalName}");
-    if (t is null)
-    {
-        throw new ArgumentException($"No modal script matching the template '{modalName}' could be found.");
-    }
-    XRUI.Instance.CreateModal(modalName, m.mainTemplate, m.modalFlowList, t);
-}
+// Adapt the namespace to your own
+Type t = Type.GetType("myModalScript");
+XRUI.Instance.CreateModal("DemoModal", t);
 ```
-> Note: This function is placed outside the XRUI package (i.e. not provided in the package). This is because Unity packages can't access the Assemply-CSharp assembly, i.e. can't find user namespaces, and hence, can't find user scripts located in the Assets automatically.
+> Note: The user script type has to be passed outside of the XRUI package, because Unity packages can't access the Assembly-CSharp assembly, i.e. can't find user namespaces, and hence, can't find user scripts located in the Assets automatically. It's also not possible to reference it through the inspector, as it only accepts instances of a script and not the script itself.
 
 This creates a modal game object on which the `XRUIModal` script is attached, as well as a `UIDocument` script that contains the main template. You can access the modal system's API through the `XRUIModal` script.
 The user script type is used to create an instance of said script when the modal is created. This lets you define the behaviour of your elements. One approach is to create one method per page, and to setup event handlers on your buttons to navigate them. To create modal pages, use the `UpdateModalFlow` method. Its last parameter is a callback function that is fired once upon the page's creation.
@@ -139,26 +129,26 @@ private XRUIModal _xruiModal;
 private UIDocument _uiDocument;
 
 void Start() {
-	_xruiModal = GetComponent<XRUIModal>();
-	_uiDocument = GetComponent<UIDocument>();
-	StartPage();
+    _xruiModal = GetComponent<XRUIModal>();
+    _uiDocument = GetComponent<UIDocument>();
+    StartPage();
 }
 
 void StartPage() {
-	_xruiModal.UpdateModalFlow("MyModalPage", "MainContainer", () =>
-	{
-		// This callback is only fired once, when the page is created for the first time
-		// Put here initialization code, event subscribtions, etc. 
+    _xruiModal.UpdateModalFlow("MyModalPage", "MainContainer", () =>
+    {
+        // This callback is only fired once, when the page is created for the first time
+        // Put here initialization code, event subscribtions, etc. 
 
-		Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
-		_myButton.clicked += MyPage;
-	});
+        Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
+        _myButton.clicked += MyPage;
+    });
 
-	// Content to execute everytime this page is opened.
+    // Content to execute everytime this page is opened.
 }
 
 void MyPage() {
-	// ...
+    // ...
 }
 ```
 
@@ -245,10 +235,11 @@ if(XRUI.IsCurrentReality(XRUI.RealityType.AR)) {
 ``` 
 
 ## XRUI Grid System
-In order to organize easily and efficiently UI elements on screen, XRUI Framework makes use of a grid system. In the Unity editor, you can group UI components in rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows users to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
+In order to organize easily and efficiently UI elements on screen, XRUI makes use of a grid system. You can use it by navigating to `XRUI > Add XRUI Grid`. In the Unity editor, you can group UI components inside rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows you to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
 
 For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the onscren UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
 
+![Peek 2021-08-04 17-08](https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif)
 ![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png)
     
 > Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obain the expected behaviour.
