@@ -1,6 +1,7 @@
 # XRUI
-[![Unity 2021.2+](https://badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
-[![MIT](https://badgen.net/badge/license/MIT/green)](./LICENSE)
+[![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
+[![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
+[![Coverage](https://flat.badgen.net/badge/coverage/29%25/red)](./Tests)
 
 XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can automatically adjust depending on the deployed platform and the environment's reality, supporting regular PC environment as well as AR and VR environments. This way, users only need to design and develop their UI once for all platforms, resulting in a great saving of time.   
 
