@@ -40,6 +40,11 @@ namespace com.chwar.xrui.UIElements
         protected virtual void OnEnable()
         {
             if (UIDocument is null || UIDocument.rootVisualElement is null) return;
+            if (UIDocument.rootVisualElement.childCount == 0)
+            {
+                throw new NullReferenceException($"The root visual element is empty! " +
+                                                 $"You must provide a VisualTreeElement to the UIDocument");
+            }
             // Register event handlers for pointer clicks on the UI
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerLeaveEvent>(OnPointerLeave);

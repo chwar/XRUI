@@ -15,7 +15,7 @@ namespace com.chwar.xrui
         public VisualTreeAsset defaultMenuTemplate;
         public VisualTreeAsset defaultNavbarTemplate;
 
-        private void Reset()
+        internal void Reset()
         {
             panelSettings = Resources.Load<PanelSettings>("DefaultPanelSettings");
             defaultModalTemplate = Resources.Load<VisualTreeAsset>("DefaultModal");

@@ -61,5 +61,21 @@ namespace com.chwar.xrui.Tests
             Assert.NotNull(alert);
             Assert.True(alert.Alert.ClassListContains("danger"));
         }
+
+        [Test]
+        public void AlertTestCreateAlertWithTitle()
+        {
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title","Test");
+            var alert = Object.FindObjectOfType<XRUIAlert>();
+            Assert.NotNull(alert);
+            Assert.NotNull(alert.Title);
+        }
+
+        public void AlertTestDestroyAlert()
+        {
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title","Test");
+            var alert = Object.FindObjectOfType<XRUIAlert>();
+            alert.DisposeAlert();
+        }
     }
 }

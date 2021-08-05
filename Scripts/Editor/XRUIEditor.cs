@@ -1,3 +1,4 @@
+using System;
 using com.chwar.xrui.UIElements;
 using UnityEditor;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace com.chwar.xrui
         {
             GameObject xruiGo = new GameObject() {name = "XRUI"};
             var xrui = xruiGo.AddComponent<XRUI>();
-            xrui.xruiConfigurationAsset = GetXRUIConfiguration();
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
         }
         
         /// <summary>
@@ -84,14 +85,14 @@ namespace com.chwar.xrui
         /// Adds a custom XRUI Element.
         /// </summary>
         [MenuItem("XRUI/Add XRUI Element/Custom UI Element", false, 15)]
-        public static void AddCustomElement()
+        private static void AddCustomElement()
         {
-            GameObject menu = AddXRUIElement("XRUI Element");
-            menu.AddComponent<XRUIElement>();
+            GameObject element = AddXRUIElement("XRUI Element");
+            element.AddComponent<XRUIElement>();
         }
         
         [MenuItem("XRUI/Switch Reality.../PC")]
-        static void SwitchToPC()
+        internal static void SwitchToPC()
         {
             // Switch to Windows/Linux/Mac standalone build.
             if(Application.platform == RuntimePlatform.WindowsEditor)
@@ -102,7 +103,7 @@ namespace com.chwar.xrui
         }
         
         [MenuItem("XRUI/Switch Reality.../AR (Android)")]
-        static void SwitchToARAndroid()
+        internal static void SwitchToARAndroid()
         {
             // Switch to Android build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
@@ -110,7 +111,7 @@ namespace com.chwar.xrui
         }
         
         [MenuItem("XRUI/Switch Reality.../AR (iOS)")]
-        static void SwitchToARiOS()
+        internal static void SwitchToARiOS()
         {
             // Switch to iOS build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS); 
@@ -118,10 +119,10 @@ namespace com.chwar.xrui
         }
         
         [MenuItem("XRUI/Switch Reality.../VR")]
-        static void SwitchToVR()
+        internal static void SwitchToVR()
         {
             // Switch to Windows VR build.
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows);
+            SwitchToPC();
             SetCurrentReality(XRUI.RealityType.VR);
         }
         

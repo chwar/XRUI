@@ -5,6 +5,7 @@ using com.chwar.xrui.UIElements;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace com.chwar.xrui.Tests
@@ -12,24 +13,31 @@ namespace com.chwar.xrui.Tests
     [TestFixture]
     public class ModalTest
     {
-        [SetUp]
+        private XRUIModal _modal;
+        private bool _btnClicked;
+        
+        [OneTimeSetUp]
         public void Init()
         {
             var go = new GameObject() {name = "Modal"};
             var xrui = go.AddComponent<XRUI>();
             xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");
+
+            InspectorModal m = new InspectorModal
+            {
+                modalName = "TestModal", 
+                modalFlowList = new List<VisualTreeAsset>(){Resources.Load<VisualTreeAsset>("TestUIElement")}
+            };
+            XRUI.Instance.modals.Add(m);
+            XRUI.Instance.CreateModal("TestModal", null);
+            _modal = Object.FindObjectOfType<XRUIModal>();
         }
         
         [Test]
         public void ModalTestAddModalWithExistingTemplate()
         {
-            InspectorModal m = new InspectorModal();
-            m.modalName = "TestModal";
-            XRUI.Instance.modals = new List<InspectorModal> {m};
-            XRUI.Instance.CreateModal("TestModal", null);
-            var modal = Object.FindObjectOfType<XRUIModal>();
-            Assert.NotNull(modal);
+            Assert.NotNull(_modal);
         }
         
         [Test]
@@ -38,14 +46,37 @@ namespace com.chwar.xrui.Tests
             Assert.Throws<ArgumentException>(() => XRUI.Instance.CreateModal("NonExistingModal", null));
         }
 
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
-        [UnityTest]
-        public IEnumerator ModalTestWithEnumeratorPasses()
+        [Test]
+        public void ModalTestSetButtonsPlacement()
         {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+            _modal.SetButtonsPlacement(Justify.Center);
+            Assert.True(_modal.ValidateButton.parent.style.justifyContent.value.Equals(Justify.Center));
+            Assert.True(_modal.CancelButton.parent.style.justifyContent.value.Equals(Justify.Center));
+        }
+
+        [UnityTest]
+        public IEnumerator ModalTestSetCancelButtonAction()
+        {
+            _modal.ModalTitle.text = "Click on the Cancel button.";
+            _modal.SetCancelButtonAction(ModalButtonClicked);
+            yield return new WaitUntil(() => this._btnClicked);
+            Assert.True(this._btnClicked);
+            _btnClicked = false;
+        }
+        
+        [UnityTest]
+        public IEnumerator ModalTestSetValidateButtonAction()
+        {
+            _modal.ModalTitle.text = "Click on the Validate button.";
+            _modal.SetValidateButtonAction(ModalButtonClicked);
+            yield return new WaitUntil(() => this._btnClicked);
+            Assert.True(this._btnClicked);
+            _btnClicked = false;
+        }
+
+        public void ModalButtonClicked()
+        {
+            this._btnClicked = true;
         }
     }
 }

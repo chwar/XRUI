@@ -8,12 +8,7 @@ namespace com.chwar.xrui
     [ExecuteAlways]
     public class XRUIGridController : MonoBehaviour
     {
-        public List<XRUIGrid> gridElementsList;
-
-        private void Start()
-        {
-            AdaptGrid();
-        }
+        public List<XRUIGrid> gridElementsList = new();
 
         private void OnEnable()
         {

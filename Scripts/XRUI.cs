@@ -16,11 +16,11 @@ namespace com.chwar.xrui
         
         // List of UI Elements
         [SerializeField]
-        internal List<VisualTreeAsset> uiElements;
+        internal List<VisualTreeAsset> uiElements = new();
 
         // List of Modals
         [SerializeField]
-        internal List<InspectorModal> modals;
+        internal List<InspectorModal> modals = new();
         
         private void Awake()
         {
@@ -35,7 +35,7 @@ namespace com.chwar.xrui
             }
         }
 
-        private void Reset()
+        internal void Reset()
         {
             xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
         }
@@ -114,7 +114,14 @@ namespace com.chwar.xrui
         /// <returns>VisualTreeAsset of the given name from the templates list defined in the inspector.</returns>
         public VisualTreeAsset GetUIElement(string elementName)
         {
-            return uiElements.Find(ui => ui.name.Equals(elementName));
+            var asset = uiElements.Find(ui => ui.name.Equals(elementName));
+            if (asset is null)
+            {
+                throw new ArgumentException($"No UI element template with the name \"{elementName}\" could be found." +
+                                            $"Check its presence in the inspector list.");
+            }
+
+            return asset;
         }
         
         public void ShowAlert(AlertType type, string text)
@@ -194,11 +201,6 @@ namespace com.chwar.xrui
             xruiModal.modalFlowList = m.modalFlowList;
             container.AddComponent(additionalScript);
             container.transform.SetParent(container.transform);
-        }
-
-        internal void DestroyXRUIFloatingElement(GameObject obj)
-        {
-            Destroy(obj);
         }
 
         /// <summary>

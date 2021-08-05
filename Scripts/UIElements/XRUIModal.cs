@@ -30,7 +30,7 @@ namespace com.chwar.xrui.UIElements
             CancelButton = UIDocument.rootVisualElement.Q<Button>("Cancel");
             _closeButton = UIDocument.rootVisualElement.Q<Button>("CloseButton");
             _closeButton.style.backgroundImage = closeButtonTexture;
-            _closeButton.clicked += Destroy;
+            _closeButton.clicked += () => Destroy(this.gameObject);
             _buttonsContainer = UIDocument.rootVisualElement.Q<VisualElement>("ButtonsContainer");
             base.Init();
         }

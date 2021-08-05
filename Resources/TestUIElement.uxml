@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement>
+        <ui:Label text="Label" display-tooltip-when-elided="true" />
+        <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" />
+        <ui:Button text="Button" display-tooltip-when-elided="true" />
+    </ui:VisualElement>
+</ui:UXML>

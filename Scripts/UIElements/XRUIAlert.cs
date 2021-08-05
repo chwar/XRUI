@@ -21,13 +21,13 @@ namespace com.chwar.xrui.UIElements
             Content = UIDocument.rootVisualElement.Q<Label>("AlertContent");
             
             // Set handler on click to dispose of the alert
-            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(DisposeAlert);
+            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert());
             Alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
             StartCoroutine(Animate());
             base.Init();
         }
 
-        private void DisposeAlert(PointerDownEvent evt)
+        internal void DisposeAlert()
         {
             if (PointerOverUI)
             {
@@ -39,7 +39,7 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator Dispose()
         {
             yield return new WaitForSeconds(1);
-                Destroy();
+            Destroy(this.gameObject);
         }
         
         private IEnumerator Animate()
