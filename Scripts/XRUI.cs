@@ -15,12 +15,12 @@ namespace com.chwar.xrui
         internal XRUIConfiguration xruiConfigurationAsset;
         
         // List of UI Elements
-        [InspectorName("UI Elements")]
-        public List<VisualTreeAsset> uiElements;
+        [SerializeField]
+        internal List<VisualTreeAsset> uiElements;
 
         // List of Modals
         [SerializeField]
-        public List<InspectorModal> modals;
+        internal List<InspectorModal> modals;
         
         private void Awake()
         {
@@ -33,6 +33,11 @@ namespace com.chwar.xrui
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Reset()
+        {
+            xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
         }
         
         /// <summary>
@@ -55,11 +60,6 @@ namespace com.chwar.xrui
             Warning,
             Danger,
             Info
-        }
-
-        private void Reset()
-        {
-            xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
         }
 
         /// <summary>
@@ -102,6 +102,21 @@ namespace com.chwar.xrui
             return null;
         }
 
+        public static bool IsCurrentReality(RealityType type)
+        {
+            return GetCurrentReality().Equals(type.ToString().ToLower());
+        }
+        
+        /// <summary>
+        /// Returns a VisualTreeAsset of the given name from the templates list defined in the inspector. 
+        /// </summary>
+        /// <param name="elementName"></param>
+        /// <returns>VisualTreeAsset of the given name from the templates list defined in the inspector.</returns>
+        public VisualTreeAsset GetUIElement(string elementName)
+        {
+            return uiElements.Find(ui => ui.name.Equals(elementName));
+        }
+        
         public void ShowAlert(AlertType type, string text)
         {
             ShowAlert(type, null, text);     
@@ -147,15 +162,19 @@ namespace com.chwar.xrui
         }
 
         /// <summary>
-        /// Generates a modal using the provided XRUI Modal template and appends it in the modal container.
+        /// Generates a modal using the provided XRUI Modal template name and appends it in the modal container.
         /// </summary>
         /// <param name="modalName">Name of the modal.</param>
-        /// <param name="mainTemplate">Template to use as a base.</param>
-        /// <param name="modalFlowList">List of contents that can be navigated within the modal.</param>
         /// <param name="additionalScript">User script to attach to the modal for user-defined behaviour.</param>
-        public void CreateModal(string modalName, VisualTreeAsset mainTemplate,
-            List<VisualTreeAsset> modalFlowList, Type additionalScript)
+        public void CreateModal(string modalName, Type additionalScript)
         {
+            InspectorModal m = XRUI.Instance.modals.Find(modal => modal.modalName.Equals(modalName));
+            if (m.modalName is null)
+            {
+                throw new ArgumentException($"No modal with the name \"{modalName}\" was found. " +
+                                            $"Check its presence in the inspector.");
+            }
+            
             var container = GetXRUIFloatingElementContainer("XRUIModal", true);
             var uiDocument = container.GetComponent<UIDocument>();
             uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
@@ -164,7 +183,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
             
             // Instantiate main template
-            VisualElement modalContainer = mainTemplate is null ? xruiConfigurationAsset.defaultModalTemplate.Instantiate() : mainTemplate.Instantiate();
+            VisualElement modalContainer = m.mainTemplate is null ? xruiConfigurationAsset.defaultModalTemplate.Instantiate() : m.mainTemplate.Instantiate();
             modalContainer.style.width = new StyleLength(Length.Percent(100));
             modalContainer.style.height = new StyleLength(Length.Percent(100));
             modalContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
@@ -172,7 +191,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(modalContainer);
             
             var xruiModal = container.AddComponent<XRUIModal>();
-            xruiModal.modalFlowList = modalFlowList;
+            xruiModal.modalFlowList = m.modalFlowList;
             container.AddComponent(additionalScript);
             container.transform.SetParent(container.transform);
         }
@@ -207,7 +226,7 @@ namespace com.chwar.xrui
     }
     
     [Serializable]
-    public struct InspectorModal
+    struct InspectorModal
     {
         [Tooltip("Name of the modal")]
         public string modalName;

@@ -15,6 +15,30 @@ namespace com.chwar.xrui
             // Allows Editor UI Update
             EditorApplication.projectChanged += AdaptXRUI;
         }
+        
+        /// <summary>
+        /// Adds the XRUI Controller to the scene.
+        /// </summary>
+        [MenuItem("XRUI/Add XRUI Controller", false, 1)]
+        public static void AddController()
+        {
+            GameObject xruiGo = new GameObject() {name = "XRUI"};
+            var xrui = xruiGo.AddComponent<XRUI>();
+            xrui.xruiConfigurationAsset = GetXRUIConfiguration();
+        }
+        
+        /// <summary>
+        /// Adds an XRUI Grid to the scene.
+        /// </summary>
+        [MenuItem("XRUI/Add XRUI Grid", false, 1)]
+        public static void AddGrid()
+        {
+            GameObject xruiGo = new GameObject() {name = "XRUI Grid"};
+            var xrui = xruiGo.AddComponent<XRUIGridController>();
+            var ui = xruiGo.AddComponent<UIDocument>();
+            ui.panelSettings = GetXRUIConfiguration().panelSettings;
+            ui.visualTreeAsset = Resources.Load<VisualTreeAsset>("XRUIRoot");
+        }        
 
         /// <summary>
         /// Adds a Card type XRUI Element.

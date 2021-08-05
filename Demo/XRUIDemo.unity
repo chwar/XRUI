@@ -431,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b638efb99a37e179a19c2d5eb8477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardDimensions: {x: 500, y: 500}
-  titleText: Card Title
+  cardDimensions: {x: 0, y: 0}
+  titleText: XRUI Card
   subtitleText: 
 --- !u!114 &1326432754
 MonoBehaviour:
@@ -563,7 +563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xruiConfigurationAsset: {fileID: 11400000, guid: 0fdf877da6f7498e6b0038e4a8f94ceb, type: 2}
-  uiElements: []
+  uiElements:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   modals:
   - modalName: DemoModal
     mainTemplate: {fileID: 0}
@@ -663,6 +666,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8125814831120960592, guid: d7452e0b0ecd7753e8d4f7bd94824af8, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8125814831120960592, guid: d7452e0b0ecd7753e8d4f7bd94824af8, type: 3}
       propertyPath: m_Name
       value: XR UI Grid

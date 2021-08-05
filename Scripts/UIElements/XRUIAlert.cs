@@ -10,7 +10,7 @@ namespace com.chwar.xrui.UIElements
         public Label Title { get; private set; }
         public Label Content { get; private set; }
 
-        private VisualElement _alert;
+        internal VisualElement Alert;
         
         /// <summary>
         /// Initializes the UI Elements of the List.
@@ -22,7 +22,7 @@ namespace com.chwar.xrui.UIElements
             
             // Set handler on click to dispose of the alert
             UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(DisposeAlert);
-            _alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
+            Alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
             StartCoroutine(Animate());
             base.Init();
         }
@@ -45,7 +45,7 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator Animate()
         {
             yield return new WaitForFixedUpdate();
-            _alert.ToggleInClassList("animate");
+            Alert.ToggleInClassList("animate");
         }
     }
 }

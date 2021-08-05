@@ -25,15 +25,14 @@ namespace com.chwar.xrui
 
             var list = FindObjectOfType<XRUIList>();
             list.AddElement(false).Q<Label>("Text").text = "List element";
-            list.AddElement(true).Q<Label>("Text").text = "Selected list element";
+            list.AddElement(true).Q<Label>("Text").text = "Selected element";
             list.AddElement(false).Q<Label>("Text").text = "List element";
             
             yield return new WaitForSeconds(2);
             menu.SetActive(true);
             yield return new WaitForSeconds(1);
 
-            var inspectorModal = XRUI.Instance.modals[0];
-            XRUI.Instance.CreateModal(inspectorModal.modalName, inspectorModal.mainTemplate, null, null);
+            XRUI.Instance.CreateModal("DemoModal", null);
         }
     }
 }

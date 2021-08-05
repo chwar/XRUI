@@ -24,3 +24,7 @@
     align-items: stretch;
     flex-shrink: 0;
 }
+
+.xrui__card__title {
+    background-color: var(--xrui-primary);
+}

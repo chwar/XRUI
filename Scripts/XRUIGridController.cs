@@ -50,12 +50,6 @@ namespace com.chwar.xrui
             AdaptGrid();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
         [Serializable]
         public struct XRUIGrid
         {
