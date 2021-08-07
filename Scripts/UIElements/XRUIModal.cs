@@ -133,6 +133,7 @@ namespace com.chwar.xrui.UIElements
                 el.RegisterCallback<ChangeEvent<string>>(CheckFormValidity);
                 _requiredFields[page].Add(el);
             }
+            CheckFormValidity();
         }
 
         /// <summary>

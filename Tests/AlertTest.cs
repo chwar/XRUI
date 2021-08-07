@@ -1,20 +1,37 @@
+using System.Collections;
 using com.chwar.xrui.UIElements;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.Tests
 {
     [TestFixture]
     public class AlertTest
     {
+        private GameObject _go;
+        private bool _clicked;
+        
         [SetUp]
         public void Init()
         {
-            var go = new GameObject() {name = "Modal"};
-            var xrui = go.AddComponent<XRUI>();
+            _go = new GameObject() {name = "XRUI"};
+            var xrui = _go.AddComponent<XRUI>();
+            _clicked = false;
             xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            GameObject.DestroyImmediate(_go);
+            var alert = GameObject.FindObjectOfType<XRUIAlert>();
+            // Already deleted when clicked upon
+            if(alert is not null)
+                GameObject.DestroyImmediate(alert.gameObject);
         }
 
         [Test]
@@ -71,11 +88,21 @@ namespace com.chwar.xrui.Tests
             Assert.NotNull(alert.Title);
         }
 
-        public void AlertTestDestroyAlert()
+        [UnityTest]
+        public IEnumerator AlertTestDestroyAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title","Test");
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!");
             var alert = Object.FindObjectOfType<XRUIAlert>();
-            alert.DisposeAlert();
+            alert.Alert.RegisterCallback<PointerDownEvent>(AlertClick);
+            yield return new WaitUntil(() => _clicked);
+            // Wait for animation
+            yield return new WaitForSeconds(1.5f);
+            Assert.Null(GameObject.Find("PrimaryAlert"));
+        }
+
+        private void AlertClick(PointerDownEvent evt)
+        {
+            _clicked = true;
         }
     }
 }

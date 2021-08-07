@@ -114,7 +114,6 @@ namespace com.chwar.xrui.UIElements
         /// <param name="uiElement"></param>
         public void RemoveUIElement(VisualElement uiElement)
         {
-            //UIDocument.rootVisualElement.Remove(uiElement);
             uiElement.RemoveFromHierarchy();
         }
         

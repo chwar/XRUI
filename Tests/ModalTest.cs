@@ -13,14 +13,16 @@ namespace com.chwar.xrui.Tests
     [TestFixture]
     public class ModalTest
     {
+        private GameObject _go;
         private XRUIModal _modal;
-        private bool _btnClicked;
+        private UIDocument _ui;
+        private bool _clicked;
         
-        [OneTimeSetUp]
+        [SetUp]
         public void Init()
         {
-            var go = new GameObject() {name = "Modal"};
-            var xrui = go.AddComponent<XRUI>();
+            _go = new GameObject() {name = "XRUI"};
+            var xrui = _go.AddComponent<XRUI>();
             xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");
 
@@ -32,6 +34,21 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.modals.Add(m);
             XRUI.Instance.CreateModal("TestModal", null);
             _modal = Object.FindObjectOfType<XRUIModal>();
+            _ui = _modal.GetComponent<UIDocument>();
+            _clicked = false;
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            GameObject.DestroyImmediate(_go);
+            GameObject.DestroyImmediate(_modal.gameObject);
+        }
+        
+        
+        public void ModalClicked()
+        {
+            this._clicked = true;
         }
         
         [Test]
@@ -58,25 +75,109 @@ namespace com.chwar.xrui.Tests
         public IEnumerator ModalTestSetCancelButtonAction()
         {
             _modal.ModalTitle.text = "Click on the Cancel button.";
-            _modal.SetCancelButtonAction(ModalButtonClicked);
-            yield return new WaitUntil(() => this._btnClicked);
-            Assert.True(this._btnClicked);
-            _btnClicked = false;
+            _modal.SetCancelButtonAction(ModalClicked);
+            yield return new WaitUntil(() => this._clicked);
+            Assert.True(this._clicked);
+            _clicked = false;
         }
         
         [UnityTest]
         public IEnumerator ModalTestSetValidateButtonAction()
         {
             _modal.ModalTitle.text = "Click on the Validate button.";
-            _modal.SetValidateButtonAction(ModalButtonClicked);
-            yield return new WaitUntil(() => this._btnClicked);
-            Assert.True(this._btnClicked);
-            _btnClicked = false;
+            _modal.SetValidateButtonAction(ModalClicked);
+            yield return new WaitUntil(() => this._clicked);
+            Assert.True(this._clicked);
+            _clicked = false;
         }
 
-        public void ModalButtonClicked()
+        [Test]
+        public void ModalTestUpdateModalFlow()
         {
-            this._btnClicked = true;
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                
+            });
+            Assert.True(_ui.rootVisualElement.Q("MainContainer")
+                .ElementAt(0).name.Equals(_modal.modalFlowList[0].name));
+        }
+        
+        [Test]
+        public void ModalTestUpdateModalFlowTwice()
+        {
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                _modal.ModalTitle.text = "Page One";
+            });
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                _modal.ModalTitle.text = "Page Two";
+            });
+        }
+        
+        [Test]
+        public void ModalTestUpdateModalFlowWithNonExistingContent()
+        {
+            Assert.Throws<ArgumentException>(() => _modal.UpdateModalFlow("NonExistingPage", "MainContainer", null));
+        }
+        
+        [Test]
+        public void ModalTestUpdateModalFlowWithNonExistingContainer()
+        {
+            Assert.Throws<ArgumentException>(() => _modal.UpdateModalFlow("TestUIElement", "NonExistingContainer", null));
+        }
+        
+        [Test]
+        public void ModalTestSetRequiredFields()
+        {
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                var field = _ui.rootVisualElement.Q<TextField>();
+                field.value = "";
+                _modal.SetRequiredFields(field);
+            });
+            Assert.False(_modal.ValidateButton.enabledSelf);
+        }
+        
+        [UnityTest]
+        public IEnumerator ModalTestSetRequiredFieldsWithUserCheck()
+        {
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                _modal.ModalTitle.text = "Change the value of the required field.";
+                var field = _ui.rootVisualElement.Q<TextField>();
+                field.value = "";
+                _modal.SetRequiredFields(field);
+                field.RegisterCallback<InputEvent>(_ => ModalClicked());
+            });
+            yield return new WaitUntil(() => _clicked);
+            Assert.True(_modal.ValidateButton.enabledSelf);
+        }
+        
+        [Test]
+        public void ModalTestSetFieldError()
+        {
+            TextField field = null;
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                field = _ui.rootVisualElement.Q<TextField>();
+                _modal.SetFieldError(field);
+            });
+            Assert.True(field.ClassListContains("error"));
+        }
+        
+        [UnityTest]
+        public IEnumerator ModalTestClickOnErrorField()
+        {
+            TextField field = null;
+            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            {
+                _modal.ModalTitle.text = "Change the value on the field marked as error.";
+                field = _ui.rootVisualElement.Q<TextField>();
+                _modal.SetFieldError(field);
+            });
+            yield return new WaitUntil(() => !field.ClassListContains("error"));
+            Assert.False(field.ClassListContains("error"));
         }
     }
 }
