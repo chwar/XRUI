@@ -96,10 +96,10 @@ namespace com.chwar.xrui
         {
             // Switch to Windows/Linux/Mac standalone build.
             if(Application.platform == RuntimePlatform.WindowsEditor)
-                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows);
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
             else if(Application.platform == RuntimePlatform.LinuxEditor)
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneLinux64);
-            SetCurrentReality(XRUI.RealityType.PC);
+            XRUI.SetCurrentReality(XRUI.RealityType.PC);
         }
         
         [MenuItem("XRUI/Switch Reality.../AR (Android)")]
@@ -107,7 +107,7 @@ namespace com.chwar.xrui
         {
             // Switch to Android build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
-            SetCurrentReality(XRUI.RealityType.AR);
+            XRUI.SetCurrentReality(XRUI.RealityType.AR);
         }
         
         [MenuItem("XRUI/Switch Reality.../AR (iOS)")]
@@ -115,7 +115,7 @@ namespace com.chwar.xrui
         {
             // Switch to iOS build.
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS); 
-            SetCurrentReality(XRUI.RealityType.AR);
+            XRUI.SetCurrentReality(XRUI.RealityType.AR);
         }
         
         [MenuItem("XRUI/Switch Reality.../VR")]
@@ -123,7 +123,7 @@ namespace com.chwar.xrui
         {
             // Switch to Windows VR build.
             SwitchToPC();
-            SetCurrentReality(XRUI.RealityType.VR);
+            XRUI.SetCurrentReality(XRUI.RealityType.VR);
         }
         
         /// <summary>
@@ -141,17 +141,6 @@ namespace com.chwar.xrui
             return uiElement;
         }
 
-        /// <summary>
-        /// Editor method to set the current reality.
-        /// Since the runtime platform is set to Editor, this sets the correct reality in the PlayerPrefs.
-        /// </summary>
-        /// <param name="type"></param>
-        private static void SetCurrentReality(XRUI.RealityType type)
-        {
-            PlayerPrefs.SetString("reality", type.ToString().ToLower());
-            PlayerPrefs.Save();
-        }
-        
         private static XRUIConfiguration GetXRUIConfiguration()
         {
             return FindObjectOfType<XRUI>().xruiConfigurationAsset;

@@ -25,6 +25,15 @@
     flex-shrink: 0;
 }
 
+.xrui__card.vr {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
 .xrui__card__title {
     background-color: var(--xrui-primary);
 }

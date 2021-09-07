@@ -10,6 +10,14 @@ namespace com.chwar.xrui
     {
         // Singleton
         public static XRUI Instance;
+
+        // Flag that other XRUI classes wait for
+        public bool Ready { get; private set; }
+        
+        // Used to override global XRUI reality
+        public RealityType realityType = RealityType.UseGlobal; 
+        private RealityType _editorRealityType;
+        
         
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
@@ -21,6 +29,7 @@ namespace com.chwar.xrui
         // List of Modals
         [SerializeField]
         internal List<InspectorModal> modals = new();
+
         
         private void Awake()
         {
@@ -28,11 +37,26 @@ namespace com.chwar.xrui
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+
+                if (!realityType.Equals(RealityType.UseGlobal))
+                {
+                    // Use the scene specific XRUI preference
+                    Enum.TryParse(GetCurrentReality(), true, out _editorRealityType);
+                    SetCurrentReality(realityType);
+                    this.Ready = true;
+                }
             }
             else
             {
                 Destroy(gameObject);
             }
+        }
+        
+        private void OnApplicationQuit()
+        {
+            // Set back the global XRUI preference
+            if (!realityType.Equals(RealityType.UseGlobal))
+                SetCurrentReality(_editorRealityType);
         }
 
         internal void Reset()
@@ -45,6 +69,7 @@ namespace com.chwar.xrui
         /// </summary>
         public enum RealityType
         {
+            UseGlobal,
             PC,
             AR,
             VR
@@ -70,7 +95,12 @@ namespace com.chwar.xrui
         {
             if (uiDocument.rootVisualElement != null)
             {
-                uiDocument.rootVisualElement.Q(null, "xrui").EnableInClassList(GetCurrentReality(), true);
+                var xrui = uiDocument.rootVisualElement.Q(null, "xrui");
+                xrui.EnableInClassList(GetCurrentReality(), true);
+                if (IsCurrentReality(RealityType.VR) && Application.isPlaying)
+                {
+                    xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel, uiDocument);
+                }
             }
         }
         
@@ -93,11 +123,8 @@ namespace com.chwar.xrui
                 case RuntimePlatform.WindowsPlayer:
                 case RuntimePlatform.LinuxPlayer:
                     return RealityType.PC.ToString().ToLower();
-                case RuntimePlatform.LinuxEditor:
-                case RuntimePlatform.WindowsEditor:
-                    return PlayerPrefs.GetString("reality");
                 default:
-                    return RealityType.PC.ToString().ToLower();
+                    return PlayerPrefs.GetString("reality");
             }
             return null;
         }
@@ -105,6 +132,17 @@ namespace com.chwar.xrui
         public static bool IsCurrentReality(RealityType type)
         {
             return GetCurrentReality().Equals(type.ToString().ToLower());
+        }
+        
+        /// <summary>
+        /// Editor method to set the current reality.
+        /// Since the runtime platform is set to Editor, this sets the correct reality in the PlayerPrefs.
+        /// </summary>
+        /// <param name="type"></param>
+        public static void SetCurrentReality(RealityType type)
+        {
+            PlayerPrefs.SetString("reality", type.ToString().ToLower());
+            PlayerPrefs.Save();
         }
         
         /// <summary>
@@ -225,7 +263,61 @@ namespace com.chwar.xrui
             }
             return containerGO;
         }
+        
+        
+        /// <summary>
+        /// Generates a mesh on which a render texture is created. The render texture renders the XRUI element.
+        /// </summary>
+        /// <param name="uiDocument"></param>
+        internal static void GetVRPanel(GeometryChangedEvent evt, UIDocument uiDocument)
+        {
+            ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
+            // Position the GO at the same height as the HMD / Camera
+            var o = uiDocument.gameObject;
+            o.transform.position = Camera.main.transform.position + Vector3.forward * 2;
+            
+            // TODO get size of XRUI element to automatically adapt the mesh and render texture's dimensions
+            var dimensions = uiDocument.rootVisualElement.Q(null, "xrui").resolvedStyle;
+            var ratio = GCD((int) dimensions.width, (int) dimensions.height);
+
+            RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
+            {
+                name = uiDocument.name
+            };
+            rt.vrUsage = VRTextureUsage.TwoEyes;
+            rt.useDynamicScale = true;
+            rt.Create();
+            PanelSettings ps = Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings"));
+            ps.scaleMode = PanelScaleMode.ConstantPhysicalSize;
+            ps.targetTexture = rt;
+
+            try
+            {
+                uiDocument.panelSettings = ps;
+            }
+            catch (Exception e)
+            {
+                // do nothing
+            }
+            var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
+            plane.curvatureDegrees = 60;
+            plane.numSegments = 512;
+            plane.height = (dimensions.height / ratio) / 10;
+            plane.radius = (dimensions.width / ratio) / 10;
+            plane.useArc = true;
+            plane.Generate(rt);
+            plane.transform.localScale = new Vector3(1, 1, 1);
+            
+            var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
+            collider.sharedMesh = plane.mesh;
+        }
+
+        static int GCD(int a, int b) {
+            return b == 0 ? Math.Abs(a) : GCD(b, a % b);
+        }
     }
+    
+    
     
     [Serializable]
     struct InspectorModal

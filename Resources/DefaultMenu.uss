@@ -8,6 +8,11 @@
     height: 100%;
 }
 
+.xrui__menu.vr {
+    width: 1280px;
+    height: 720px;
+}
+
 .xrui__menu {
     background-color: var(--xrui-dark);
 }
