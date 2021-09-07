@@ -62,7 +62,8 @@ namespace com.chwar.xrui.UIElements
 
         public void SetCloseButtonAction(Action closeButtonAction)
         {
-            _closeButton.clicked += closeButtonAction;
+            if(_closeButton != null)
+                _closeButton.clicked += closeButtonAction;
         }
     }
 }

@@ -99,6 +99,7 @@ namespace com.chwar.xrui
                 xrui.EnableInClassList(GetCurrentReality(), true);
                 if (IsCurrentReality(RealityType.VR) && Application.isPlaying)
                 {
+                    // Create a runtime VR panel after the layout pass
                     xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel, uiDocument);
                 }
             }
@@ -276,9 +277,13 @@ namespace com.chwar.xrui
             var o = uiDocument.gameObject;
             o.transform.position = Camera.main.transform.position + Vector3.forward * 2;
             
-            // TODO get size of XRUI element to automatically adapt the mesh and render texture's dimensions
             var dimensions = uiDocument.rootVisualElement.Q(null, "xrui").resolvedStyle;
             var ratio = GCD((int) dimensions.width, (int) dimensions.height);
+
+            if (dimensions.width == 0 || dimensions.height == 0)
+            {
+                throw new ArgumentException($"The UI {uiDocument.name} has invalid dimensions. Make sure to add a corresponding VR USS rule.");
+            }
 
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
@@ -299,14 +304,23 @@ namespace com.chwar.xrui
             {
                 // do nothing
             }
+
+            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().VRParameters;
+            
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
-            plane.curvatureDegrees = 60;
             plane.numSegments = 512;
             plane.height = (dimensions.height / ratio) / 10;
             plane.radius = (dimensions.width / ratio) / 10;
-            plane.useArc = true;
+            plane.useArc = parameters.BendVRPanel;
+            plane.curvatureDegrees = parameters.BendVRPanel ? 60 : 0;
             plane.Generate(rt);
-            plane.transform.localScale = new Vector3(1, 1, 1);
+            if (parameters.AnchorVRPanelToCamera)
+            {
+                var planeTransform = plane.gameObject.transform;
+                planeTransform.position = new Vector3(0, 0, .1f);
+                planeTransform.rotation = Quaternion.identity;
+                planeTransform.parent = Camera.main.transform;
+            }
             
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;

@@ -5,3 +5,13 @@
 .xrui__navbar.play-mode {
     background-color: var(--xrui-primary);
 }
+
+.xrui__navbar.pc .xrui__navbar.ar{
+    width: 100%;
+    height: 50px;
+}
+
+.xrui__navbar.vr {
+    width: 500px;
+    height: 50px;
+}

@@ -9,6 +9,7 @@ namespace com.chwar.xrui.UIElements
     public class XRUIElement : MonoBehaviour
     {
         public bool PointerOverUI { get; private set; }
+        public VRParameters VRParameters;
         
         protected UIDocument UIDocument;
         protected XRUI _xrui;
@@ -30,7 +31,7 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator Start()
         {
             yield return new WaitUntil(() => _xrui.Ready);
-            Init();
+            //Init();
         }
 
         protected virtual void Init()
@@ -56,6 +57,7 @@ namespace com.chwar.xrui.UIElements
             // Register event handlers for pointer clicks on the UI
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
+            Init();
         }
 
         protected virtual void OnDisable()
@@ -162,5 +164,12 @@ namespace com.chwar.xrui.UIElements
             PointerOverUI = false;
             Debug.Log($"Pointer left. Element: {(evt.target as VisualElement)?.name }");
         }
+    }
+
+    [Serializable]
+    public struct VRParameters
+    {
+        public bool BendVRPanel;
+        public bool AnchorVRPanelToCamera;
     }
 }

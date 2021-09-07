@@ -11,6 +11,7 @@ namespace com.chwar.xrui
     {
         public List<XRUIGrid> gridElementsList = new();
         private XRUI _xrui;
+        private UIDocument rootUI;
         
         private IEnumerator Start()
         {
@@ -29,7 +30,7 @@ namespace com.chwar.xrui
         public void AdaptGrid()
         {
             var vr = XRUI.IsCurrentReality(XRUI.RealityType.VR) && Application.isPlaying;
-            if (vr) Destroy( GetComponent<UIDocument>());
+            //if (vr) Destroy( GetComponent<UIDocument>());
             
             // TODO Custom Editor that fills the list of elements automatically from the hierarchy
             var i = 0;
@@ -69,7 +70,13 @@ namespace com.chwar.xrui
                     // Remove the UI documents of each row in VR
                     // Each XRUI Element needs its own PanelSettings to have its own render texture to be displayed within the world
                     var xrui = ui.rootVisualElement.Q(null, "xrui");
-                    xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetVRPanel, ui);
+                    DestroyImmediate(ui);
+                    foreach (Transform uiTransform in gridElement.row.transform.GetComponentInChildren<Transform>())
+                    {
+                        var uid = uiTransform.GetComponent<UIDocument>();
+                        uid.panelSettings = Instantiate(XRUI.Instance.xruiConfigurationAsset.panelSettings);
+                    }
+                    //xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetVRPanel, ui);
                 }
             }
         }
