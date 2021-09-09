@@ -28,11 +28,11 @@ namespace com.chwar.xrui.UIElements
             _xrui = FindObjectOfType<XRUI>();
         }
 
-        private IEnumerator Start()
-        {
-            yield return new WaitUntil(() => _xrui.Ready);
-            //Init();
-        }
+        // private IEnumerator Start()
+        // {
+        //     yield return new WaitUntil(() => _xrui.Ready);
+        //     Init();
+        // }
 
         protected virtual void Init()
         {
@@ -169,7 +169,13 @@ namespace com.chwar.xrui.UIElements
     [Serializable]
     public struct VRParameters
     {
-        public bool BendVRPanel;
-        public bool AnchorVRPanelToCamera;
+        [Tooltip("Alters the VR panel by slightly bending it")]
+        public bool bendVRPanel;
+        [Tooltip("Defines if the VR Panel will be anchored to the camera or not")]
+        public bool anchorVRPanelToCamera;
+        [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
+        public Vector2 customVRPanelDimensions;
+        [Tooltip("By default, the VR panel will be automatically anchored in front of the camera. You can define a custom position here.")]
+        public Vector3 customVRPanelAnchorPosition;
     }
 }

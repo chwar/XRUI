@@ -56,9 +56,10 @@ namespace com.chwar.xrui
         {
             var filter = GetComponent<MeshFilter>();
             var meshRenderer = GetComponent<MeshRenderer>();
-            Material m = new Material(Shader.Find("Standard"))
+            Material m = new Material(Shader.Find("UI/Default"))
             {
-                mainTexture = rt
+                mainTexture = rt,
+                
             };
             meshRenderer.sharedMaterial = m;
 

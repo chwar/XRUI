@@ -93,7 +93,7 @@ namespace com.chwar.xrui
         /// <param name="uiDocument">The UIDocument to update.</param>
         internal static void UpdateDocumentUI(UIDocument uiDocument)
         {
-            if (uiDocument.rootVisualElement != null)
+            if (uiDocument != null && uiDocument.rootVisualElement != null)
             {
                 var xrui = uiDocument.rootVisualElement.Q(null, "xrui");
                 xrui.EnableInClassList(GetCurrentReality(), true);
@@ -273,12 +273,12 @@ namespace com.chwar.xrui
         internal static void GetVRPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
             ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
+            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().VRParameters;
+
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
-            o.transform.position = Camera.main.transform.position + Vector3.forward * 2;
-            
             var dimensions = uiDocument.rootVisualElement.Q(null, "xrui").resolvedStyle;
-            var ratio = GCD((int) dimensions.width, (int) dimensions.height);
+            var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
 
             if (dimensions.width == 0 || dimensions.height == 0)
             {
@@ -292,7 +292,8 @@ namespace com.chwar.xrui
             rt.vrUsage = VRTextureUsage.TwoEyes;
             rt.useDynamicScale = true;
             rt.Create();
-            PanelSettings ps = Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings"));
+            PanelSettings ps = uiDocument.panelSettings.targetTexture == null ? 
+                Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings")) : uiDocument.panelSettings;
             ps.scaleMode = PanelScaleMode.ConstantPhysicalSize;
             ps.targetTexture = rt;
 
@@ -304,35 +305,31 @@ namespace com.chwar.xrui
             {
                 // do nothing
             }
-
-            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().VRParameters;
             
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
             plane.numSegments = 512;
-            plane.height = (dimensions.height / ratio) / 10;
-            plane.radius = (dimensions.width / ratio) / 10;
-            plane.useArc = parameters.BendVRPanel;
-            plane.curvatureDegrees = parameters.BendVRPanel ? 60 : 0;
+            plane.height = parameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / 10 : parameters.customVRPanelDimensions.y;
+            plane.radius = parameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / 10 : parameters.customVRPanelDimensions.x;
+            plane.useArc = parameters.bendVRPanel;
+            plane.curvatureDegrees = parameters.bendVRPanel ? 60 : 0;
             plane.Generate(rt);
-            if (parameters.AnchorVRPanelToCamera)
+            if (parameters.anchorVRPanelToCamera)
             {
-                var planeTransform = plane.gameObject.transform;
-                planeTransform.position = new Vector3(0, 0, .1f);
-                planeTransform.rotation = Quaternion.identity;
-                planeTransform.parent = Camera.main.transform;
-            }
-            
+                o.transform.parent = Camera.main.transform;
+                o.transform.localPosition = parameters.customVRPanelAnchorPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : parameters.customVRPanelAnchorPosition;
+                o.transform.localRotation = Quaternion.identity;
+            } else
+                o.transform.position = Camera.main.transform.position + Vector3.forward * 2;
+
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
         }
 
-        static int GCD(int a, int b) {
-            return b == 0 ? Math.Abs(a) : GCD(b, a % b);
+        static int GetGreatestCommonDivisor(int a, int b) {
+            return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
         }
     }
-    
-    
-    
+
     [Serializable]
     struct InspectorModal
     {
