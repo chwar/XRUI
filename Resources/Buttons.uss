@@ -24,28 +24,31 @@
     background-color: var(--xrui-primary-hover);
 }
 
-.xrui Button.icon-white {
-    -unity-background-image-tint-color: rgb(255, 255, 255);
+.xrui Button.xrui__icon {
     background-color: rgba(0,0,0,0);
     min-height: auto;
 }
 
-.xrui Button.icon-white:hover {
+.xrui Button.xrui__icon--white {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.xrui Button.xrui__icon--white:hover {
     -unity-background-image-tint-color: var(--xrui-grey);
 }
 
-.xrui Button.icon-black {
+.xrui Button.xrui__icon--black {
     -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
-.xrui Button.icon-black:hover {
+.xrui Button.xrui__icon--black:hover {
     -unity-background-image-tint-color: var(--xrui-secondary);
 }
 
-.xrui Button.modal-cancel {
+.xrui Button.xrui__modal-cancel {
     background-color: var(--xrui-secondary);
 }
 
-.xrui Button.modal-cancel:hover {
+.xrui Button.xrui__modal-cancel:hover {
     background-color: var(--xrui-dark);
 }

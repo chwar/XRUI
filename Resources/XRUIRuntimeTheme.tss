@@ -7,6 +7,6 @@
 @import url("DefaultMenu.uss");
 @import url("DefaultModal.uss");
 @import url("DefaultNavBar.uss");
-@import url("ListElement.uss");
+@import url("DefaultListElement.uss");
 @import url("Buttons.uss");
 @import url("Scrollbar.uss");
