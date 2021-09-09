@@ -1,0 +1,14 @@
+.xrui__list.pc {
+    width: 200px;
+    height: 800px;
+}
+
+.xrui__list.ar {
+    width: 200px;
+    height: 800px;
+}
+
+.xrui__list.vr {
+    width: 200px;
+    height: 800px;
+}

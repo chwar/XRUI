@@ -5,12 +5,14 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    [ExecuteAlways]
+    //[ExecuteAlways]
     public class XRUIElement : MonoBehaviour
     {
         public bool PointerOverUI { get; private set; }
+        public VRParameters VRParameters;
         
         protected UIDocument UIDocument;
+        protected XRUI _xrui;
         
         private DeviceOrientation _previousOrientation;
         private bool _hasOrientationChanged;
@@ -19,11 +21,18 @@ namespace com.chwar.xrui.UIElements
          * Unity Events
          */
         
-        public virtual void Awake()
+        private void Awake()
         {
             UIDocument = GetComponent<UIDocument>();
             _previousOrientation = Input.deviceOrientation;
+            _xrui = FindObjectOfType<XRUI>();
         }
+
+        // private IEnumerator Start()
+        // {
+        //     yield return new WaitUntil(() => _xrui.Ready);
+        //     Init();
+        // }
 
         protected virtual void Init()
         {
@@ -31,13 +40,13 @@ namespace com.chwar.xrui.UIElements
             UpdateUI();
         }
 
-        public virtual void OnValidate()
+        public void OnValidate()
         {
             if (UIDocument is null || UIDocument.rootVisualElement is null) return;
             UpdateUI();
         }
 
-        protected virtual void OnEnable()
+        protected void OnEnable()
         {
             if (UIDocument is null || UIDocument.rootVisualElement is null) return;
             if (UIDocument.rootVisualElement.childCount == 0)
@@ -143,6 +152,7 @@ namespace com.chwar.xrui.UIElements
         protected void OnPointerEnter(PointerEnterEvent evt)
         {
             PointerOverUI = true;
+            Debug.Log($"Pointer entered. Element: {(evt.target as VisualElement)?.name }");
         }
         
         /// <summary>
@@ -152,6 +162,20 @@ namespace com.chwar.xrui.UIElements
         protected void OnPointerLeave(PointerLeaveEvent evt)
         {
             PointerOverUI = false;
+            Debug.Log($"Pointer left. Element: {(evt.target as VisualElement)?.name }");
         }
+    }
+
+    [Serializable]
+    public struct VRParameters
+    {
+        [Tooltip("Alters the VR panel by slightly bending it")]
+        public bool bendVRPanel;
+        [Tooltip("Defines if the VR Panel will be anchored to the camera or not")]
+        public bool anchorVRPanelToCamera;
+        [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
+        public Vector2 customVRPanelDimensions;
+        [Tooltip("By default, the VR panel will be automatically anchored in front of the camera. You can define a custom position here.")]
+        public Vector3 customVRPanelAnchorPosition;
     }
 }
