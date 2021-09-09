@@ -12,7 +12,7 @@ namespace com.chwar.xrui
         public static XRUI Instance;
 
         // Flag that other XRUI classes wait for
-        public bool Ready { get; private set; }
+        // public bool Ready { get; private set; }
         
         // Used to override global XRUI reality
         public RealityType realityType = RealityType.UseGlobal; 
@@ -43,8 +43,9 @@ namespace com.chwar.xrui
                     // Use the scene specific XRUI preference
                     Enum.TryParse(GetCurrentReality(), true, out _editorRealityType);
                     SetCurrentReality(realityType);
-                    this.Ready = true;
                 }
+                this.InitializeElements();
+                // this.Ready = true;
             }
             else
             {
@@ -122,6 +123,7 @@ namespace com.chwar.xrui
                         return RealityType.PC.ToString().ToLower();
                     break;
                 case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.OSXPlayer:
                 case RuntimePlatform.LinuxPlayer:
                     return RealityType.PC.ToString().ToLower();
                 default:
@@ -273,7 +275,7 @@ namespace com.chwar.xrui
         internal static void GetVRPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
             ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
-            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().VRParameters;
+            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().vrParameters;
 
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
@@ -325,8 +327,20 @@ namespace com.chwar.xrui
             collider.sharedMesh = plane.mesh;
         }
 
-        static int GetGreatestCommonDivisor(int a, int b) {
+        private static int GetGreatestCommonDivisor(int a, int b) {
             return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
+        }
+
+        private void InitializeElements()
+        {
+            foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
+            {
+                xruiElement.Init();
+                xruiElement.UpdateUI();
+            }
+            var grid = FindObjectOfType<XRUIGridController>();
+            if(grid is not null) 
+                grid.AdaptGrid();
         }
     }
 

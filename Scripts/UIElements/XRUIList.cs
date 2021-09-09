@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,14 +24,14 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Initializes the UI Elements of the List.
         /// </summary>
-        protected override void Init()
+        protected internal override void Init()
         {
+            base.Init();
             _title = UIDocument.rootVisualElement.Q<Label>("Title");
             _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
             List = UIDocument.rootVisualElement.Q("List");
             AddButton = UIDocument.rootVisualElement.Q<Button>("AddItem");
             AddButton.style.backgroundImage = addButtonTexture;
-            base.Init();
         }
         
         /// <summary>

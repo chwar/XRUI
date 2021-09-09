@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -28,8 +29,9 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Initializes the UI Elements of the List.
         /// </summary>
-        protected override void Init()
+        protected internal override void Init()
         {
+            base.Init();
             _appTitle = UIDocument.rootVisualElement.Q<Label>("AppName");
             _subtext = UIDocument.rootVisualElement.Q<Label>("Subtext");
             _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
@@ -38,7 +40,6 @@ namespace com.chwar.xrui.UIElements
             MainButton.style.backgroundImage = mainButtonTexture;
             CloseButton = UIDocument.rootVisualElement.Q<Button>("Close");
             CloseButton.style.backgroundImage = closeButtonTexture;
-            base.Init();
         }
         
         /// <summary>

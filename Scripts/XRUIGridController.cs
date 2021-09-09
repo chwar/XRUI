@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,20 +13,27 @@ namespace com.chwar.xrui
         private XRUI _xrui;
         private UIDocument _rootUI;
         private List<Transform> _listGridElements;
+        private bool _isInitialized;
         
-        private void Start()
+        private void Awake()
         {
             _listGridElements = new List<Transform>();
-            //yield return new WaitUntil(() => _xrui.Ready);
-            AdaptGrid();
+        }
+        
+        private void OnValidate()
+        {
+            if(_isInitialized || !Application.isPlaying)
+                AdaptGrid();
         }
 
         private void OnEnable()
         {
             if(_listGridElements != null)
                 _listGridElements.ForEach(x => x.gameObject.SetActive(true));
-            _xrui = FindObjectOfType<XRUI>();
-            if (_xrui.Ready)
+            
+            // This does not run during the initial run, only during the app's lifetime if the XRUIGrid has been re-enabled.
+            // During the initial run, the XRIGrid is initialized by the XRUI Instance to make sure that the instance is running first.
+            if(_isInitialized || !Application.isPlaying)
                 AdaptGrid();
         }
 
@@ -35,6 +41,7 @@ namespace com.chwar.xrui
         {
             if(Application.isPlaying)
                 _listGridElements.ForEach(x => x.gameObject.SetActive(false));
+            //_isInitialized = false;
         }
 
         // Start is called before the first frame update
@@ -56,6 +63,8 @@ namespace com.chwar.xrui
                 if (!vr)
                 {
                     var row = ui.rootVisualElement;
+                    if(row is null) return;
+                    
                     ui.sortingOrder = i;
                     row.style.flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row);
                     row.style.height = new StyleLength(StyleKeyword.Initial);
@@ -76,7 +85,7 @@ namespace com.chwar.xrui
                 }
                 else
                 {
-                    // Remove the UI documents of each row in VR
+                    // Remove the UI documents of each row in VR to break the UIDocument hierarchy
                     // Each XRUI Element needs its own PanelSettings to have its own render texture to be displayed within the world
                     if (ui != null)
                     {
@@ -87,13 +96,7 @@ namespace com.chwar.xrui
                     }
                 }
             }
-        }
-
-        private void OnValidate()
-        {
-            _xrui = FindObjectOfType<XRUI>();
-            if(_xrui.Ready)
-                AdaptGrid();
+            _isInitialized = true;
         }
 
         [Serializable]

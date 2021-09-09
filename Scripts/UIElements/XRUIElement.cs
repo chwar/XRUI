@@ -5,44 +5,35 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    //[ExecuteAlways]
+    [ExecuteAlways]
     public class XRUIElement : MonoBehaviour
     {
         public bool PointerOverUI { get; private set; }
-        public VRParameters VRParameters;
+        public VRParameters vrParameters;
         
-        protected UIDocument UIDocument;
-        protected XRUI _xrui;
-        
+        internal UIDocument UIDocument;
         private DeviceOrientation _previousOrientation;
         private bool _hasOrientationChanged;
+        private bool _isInitialized;
         
-        /*
-         * Unity Events
-         */
-        
-        private void Awake()
-        {
-            UIDocument = GetComponent<UIDocument>();
-            _previousOrientation = Input.deviceOrientation;
-            _xrui = FindObjectOfType<XRUI>();
-        }
-
-        // private IEnumerator Start()
-        // {
-        //     yield return new WaitUntil(() => _xrui.Ready);
-        //     Init();
-        // }
-
-        protected virtual void Init()
+        protected internal virtual void Init()
         {
             // To override
-            UpdateUI();
+            UIDocument = GetComponent<UIDocument>();
+            _previousOrientation = Input.deviceOrientation;
+            _isInitialized = true;
         }
 
         public void OnValidate()
         {
-            if (UIDocument is null || UIDocument.rootVisualElement is null) return;
+            if (UIDocument is null)
+            {
+                if(!Application.isPlaying)
+                    Init();
+                else
+                    return;
+            } else if(UIDocument.rootVisualElement is null)
+                return;
             UpdateUI();
         }
 
@@ -57,11 +48,19 @@ namespace com.chwar.xrui.UIElements
             // Register event handlers for pointer clicks on the UI
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
-            Init();
+            
+            // This does not run during the initial run, only during the app's lifetime if an element has been re-enabled.
+            // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
+            if (!_isInitialized)
+            {
+                Init();
+                UpdateUI();
+            }
         }
 
         protected virtual void OnDisable()
         {
+            _isInitialized = false;
             if (UIDocument is null || UIDocument.rootVisualElement is null) return;
             // Unregister event handlers for pointer clicks on the UI
             UIDocument.rootVisualElement.ElementAt(0).UnregisterCallback<PointerEnterEvent>(OnPointerEnter);

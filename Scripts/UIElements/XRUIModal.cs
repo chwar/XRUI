@@ -23,8 +23,9 @@ namespace com.chwar.xrui.UIElements
         private Action _validateButtonAction;
         private readonly Dictionary<string, List<TextField>> _requiredFields = new();
 
-        protected override void Init()
+        protected internal override void Init()
         {
+            base.Init();
             ModalTitle = UIDocument.rootVisualElement.Q<Label>("ModalTitle");
             ValidateButton = UIDocument.rootVisualElement.Q<Button>("Validate");
             CancelButton = UIDocument.rootVisualElement.Q<Button>("Cancel");
@@ -32,7 +33,6 @@ namespace com.chwar.xrui.UIElements
             _closeButton.style.backgroundImage = closeButtonTexture;
             _closeButton.clicked += () => Destroy(this.gameObject);
             _buttonsContainer = UIDocument.rootVisualElement.Q<VisualElement>("ButtonsContainer");
-            base.Init();
         }
 
         /// <summary>

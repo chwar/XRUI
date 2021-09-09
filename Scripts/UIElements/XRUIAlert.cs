@@ -15,8 +15,9 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Initializes the UI Elements of the List.
         /// </summary>
-        protected override void Init()
+        protected internal override void Init()
         {
+            base.Init();
             Title = UIDocument.rootVisualElement.Q<Label>("AlertTitle");
             Content = UIDocument.rootVisualElement.Q<Label>("AlertContent");
             
@@ -24,7 +25,6 @@ namespace com.chwar.xrui.UIElements
             UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert());
             Alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
             StartCoroutine(Animate());
-            base.Init();
         }
 
         internal void DisposeAlert()

@@ -18,12 +18,12 @@ namespace com.chwar.xrui.UIElements
         [Tooltip("Subtitle of the card")]
         public string subtitleText;
         
-        protected override void Init()
+        protected internal override void Init()
         {
+            base.Init();
             _title = UIDocument.rootVisualElement.Q<Label>("Title");
             _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtitle");
             _closeButton = UIDocument.rootVisualElement.Q<Button>("Close");
-            base.Init();
         }
 
         /// <summary>
