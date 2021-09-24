@@ -243,6 +243,61 @@ namespace com.chwar.xrui
             container.AddComponent(additionalScript);
             container.transform.SetParent(container.transform);
         }
+        
+        /// <summary>
+        /// Generates a contextual menu displayed with respect to the position of the clicked element.
+        /// </summary>
+        /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
+        /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
+        public void ShowContextualMenu(Vector2 parentCoordinates, bool showArrow)
+        {
+            ShowContextualMenu(null, parentCoordinates, showArrow);
+        }
+
+        /// <summary>
+        /// Generates a contextual menu displayed with respect to the position of the clicked element.
+        /// </summary>
+        /// <param name="template">Custom contextual menu template to use, set to null to use default.</param>
+        /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
+        /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
+        public void ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow)
+        {
+            ShowContextualMenu(template, parentCoordinates, showArrow, Single.NaN, Single.NaN);
+        }
+
+        /// <summary>
+        /// Generates a contextual menu displayed with respect to the position of the clicked element.
+        /// </summary>
+        /// <param name="template">Custom contextual menu template to use, set to null to use default.</param>
+        /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
+        /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
+        /// <param name="leftOffset">Adds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.</param>
+        /// <param name="rightOffset">Adds an offset in pixels used when the contextual menu is positioned on the right of the parent coordinates.</param>
+        public XRUIContextualMenu ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow, float leftOffset, float rightOffset)
+        {
+            var container = GetXRUIFloatingElementContainer("ContextualMenu", false);
+            var uiDocument = container.GetComponent<UIDocument>();
+            uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
+            uiDocument.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
+            uiDocument.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
+            uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
+            uiDocument.rootVisualElement.pickingMode = PickingMode.Position;
+            
+            // Instantiate template
+            VisualElement contextualMenuContainer = template == null ? xruiConfigurationAsset.defaultContextualMenuTemplate.Instantiate() : template.Instantiate();
+            var contextualMenu = contextualMenuContainer.ElementAt(0);
+            uiDocument.rootVisualElement.Add(contextualMenu);
+
+            // Style and position the contextual menu accordingly
+            contextualMenu.AddToClassList(GetCurrentReality());
+            var xrui = container.AddComponent<XRUIContextualMenu>();
+            xrui.parentCoordinates = parentCoordinates;
+            xrui.showArrow = showArrow;
+            if (!float.IsNaN(leftOffset)) xrui.positionOffsetLeft = leftOffset;
+            if (!float.IsNaN(rightOffset)) xrui.positionOffsetRight = rightOffset;
+
+            return xrui;
+        }
 
         /// <summary>
         /// Gets a Floating Element container or creates it if not existing.

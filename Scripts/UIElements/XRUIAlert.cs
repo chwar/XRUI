@@ -13,7 +13,7 @@ namespace com.chwar.xrui.UIElements
         internal VisualElement Alert;
         
         /// <summary>
-        /// Initializes the UI Elements of the List.
+        /// Initializes the UI Elements of the Alert.
         /// </summary>
         protected internal override void Init()
         {

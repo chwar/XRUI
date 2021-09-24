@@ -14,6 +14,7 @@ namespace com.chwar.xrui
         public VisualTreeAsset defaultListTemplate;
         public VisualTreeAsset defaultMenuTemplate;
         public VisualTreeAsset defaultNavbarTemplate;
+        public VisualTreeAsset defaultContextualMenuTemplate;
 
         internal void Reset()
         {
@@ -24,6 +25,7 @@ namespace com.chwar.xrui
             defaultListTemplate = Resources.Load<VisualTreeAsset>("DefaultList");
             defaultMenuTemplate = Resources.Load<VisualTreeAsset>("DefaultMenu");
             defaultNavbarTemplate = Resources.Load<VisualTreeAsset>("DefaultNavbar");
+            defaultContextualMenuTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenu");
         }
     }
 }

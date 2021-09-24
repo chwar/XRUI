@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.chwar.xrui/Resources/DefaultContextualMenu.uss?fileID=7433441132597879392&amp;guid=39585f1f8a2525a1188fa18ba3186ce7&amp;type=3#DefaultContextualMenu" />
+    <ui:VisualElement name="ContextualMenu" class="xrui xrui__contextual-menu" style="flex-shrink: 0; min-width: 200px; min-height: 50px;">
+        <ui:VisualElement name="Arrow" class="xrui__contextual-menu__arrow" style="width: 15px; height: 15px; translate: 0 0; position: absolute; left: -5px; top: 17.5px;" />
+        <ui:VisualElement name="MainContainer" style="flex-grow: 1; flex-shrink: 0; width: 100%; height: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>
