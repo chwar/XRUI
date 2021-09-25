@@ -79,7 +79,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Destroys the contextual menu.
         /// </summary>
-        internal void DisposeMenu()
+        private void DisposeMenu()
         {
             if (!PointerOverUI)
             {
@@ -92,6 +92,7 @@ namespace com.chwar.xrui.UIElements
             var el = menuElementTemplate.Instantiate();
             el.style.flexShrink = 0;
             el.style.flexGrow = 1;
+            el.ElementAt(0).AddToClassList("xrui__contextual-menu__item");
             _menu.Q("MainContainer").Add(el);
             return el.ElementAt(0);
         }

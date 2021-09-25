@@ -2,14 +2,13 @@
     background-color: var(--xrui-primary);
 }
 
-.xrui__list__item--default > .xrui__list__item__icon {
-    display: flex;
-    /*-unity-background-image-tint-color: rgb(0, 0, 0);*/
-}
-
 .xrui__list__item > .xrui__list__item__icon {
     display: none;
-    /*-unity-background-image-tint-color: rgb(0, 0, 0);*/
+}
+
+.xrui__list__item--default > .xrui__list__item__icon {
+    display: flex;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
 .xrui__list__item--selected > .xrui__list__item__text {
@@ -17,7 +16,7 @@
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
 }
-/*
-.xrui__list__item.selected.default > .xrui__list__item__icon {
+
+.xrui__list__item--selected.xrui__list__item--default > .xrui__list__item__icon {
     -unity-background-image-tint-color: rgb(255, 255, 255);
-}*/
+}

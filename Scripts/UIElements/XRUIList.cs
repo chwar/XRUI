@@ -69,15 +69,7 @@ namespace com.chwar.xrui.UIElements
         {
             var previousSelection = _container.Q(null, "xrui__list__item--selected");
             previousSelection?.ToggleInClassList("xrui__list__item--selected");
-            previousSelection?.EnableInClassList(" xrui__icon--white", false);
-            previousSelection?.EnableInClassList("xrui__icon--black", true);
             el.ToggleInClassList("xrui__list__item--selected");
-            el.Query(null, "xrui__icon")
-                .ForEach(i =>
-                {
-                    i.EnableInClassList("xrui__icon--white", true);
-                    i.EnableInClassList("xrui__icon--black", false);
-                });
         }
     }
 }
