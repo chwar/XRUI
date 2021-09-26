@@ -60,11 +60,24 @@ namespace com.chwar.xrui.UIElements
             VisualElement el = listElementTemplate.Instantiate();
             if(bSelect)
                 SelectElement(el.ElementAt(0));
+            el.ElementAt(0).AddToClassList("xrui__list__item");
             el.RegisterCallback<PointerDownEvent>(_ => SelectElement(el.ElementAt(0))); 
             _container.Add(el);
             return el;
         }
 
+        /// <summary>
+        /// Deletes all elements from the list
+        /// </summary>
+        public void RemoveAllElements()
+        {
+            _container.Query(null, "xrui__list__item").ForEach(i => i.RemoveFromHierarchy());
+        }
+
+        /// <summary>
+        /// Visually selects an element of the list
+        /// </summary>
+        /// <param name="el"></param>
         private void SelectElement(VisualElement el)
         {
             var previousSelection = _container.Q(null, "xrui__list__item--selected");
