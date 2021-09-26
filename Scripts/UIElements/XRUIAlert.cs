@@ -10,6 +10,8 @@ namespace com.chwar.xrui.UIElements
         public Label Title { get; private set; }
         public Label Content { get; private set; }
 
+        public Action ClickCallback;
+
         internal VisualElement Alert;
         
         /// <summary>
@@ -33,6 +35,7 @@ namespace com.chwar.xrui.UIElements
             {
                 StartCoroutine(Animate());
                 StartCoroutine(Dispose());
+                ClickCallback?.Invoke();
             }
         }
 

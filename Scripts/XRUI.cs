@@ -172,10 +172,15 @@ namespace com.chwar.xrui
         
         public void ShowAlert(AlertType type, string title, string text)
         {
-            ShowAlert(null, type, title, text);
+            ShowAlert(null, type, title, text, null);
         }
         
-        public void ShowAlert(VisualTreeAsset template, AlertType type, string title, string text)
+        public void ShowAlert(AlertType type, string title, string text, Action onClick)
+        {
+            ShowAlert(null, type, title, text, onClick);
+        }
+        
+        public void ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
             var uiDocument = container.GetComponent<UIDocument>();
@@ -207,6 +212,8 @@ namespace com.chwar.xrui
                 xrui.Title.text = title;
             }
             xrui.Content.text = text;
+            if (onClick != null)
+                xrui.ClickCallback = onClick;
         }
 
         /// <summary>
