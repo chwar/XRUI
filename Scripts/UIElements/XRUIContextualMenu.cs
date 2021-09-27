@@ -87,13 +87,27 @@ namespace com.chwar.xrui.UIElements
             }
         }
 
+        /// <summary>
+        /// Adds an element to the contextual menu using the provided menuElementTemplate.
+        /// </summary>
+        /// <returns>The created element.</returns>
         public VisualElement AddMenuElement()
         {
+            if (menuElementTemplate is null)
+            {
+                throw new ArgumentNullException(
+                    $"There is no template to create an entry from! " +
+                    $"Please provide a valid template like so: xruiContextualMenu.menuElementTemplate = myTemplate;");
+            }
             var el = menuElementTemplate.Instantiate();
             el.style.flexShrink = 0;
             el.style.flexGrow = 1;
             el.ElementAt(0).AddToClassList("xrui__contextual-menu__item");
             _menu.Q("MainContainer").Add(el);
+            
+            // Destroy the menu when the element is clicked
+            el.RegisterCallback<PointerDownEvent>(_ => Destroy(this.gameObject));
+            
             return el.ElementAt(0);
         }
     }

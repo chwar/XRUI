@@ -76,5 +76,13 @@ namespace com.chwar.xrui.UIElements
             _container.Add(el);
             return el;
         }
+        
+        /// <summary>
+        /// Deletes all elements from the list
+        /// </summary>
+        public void RemoveAllElements()
+        {
+            _container.Query(null, "xrui__menu__item").ForEach(i => i.RemoveFromHierarchy());
+        }
     }
 }

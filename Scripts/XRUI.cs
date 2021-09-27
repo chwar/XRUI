@@ -324,7 +324,7 @@ namespace com.chwar.xrui
                 ui.rootVisualElement.style.bottom = 0;
                 ui.rootVisualElement.style.left = 0;
                 ui.rootVisualElement.style.right = 0;
-                ui.rootVisualElement.EnableInClassList("darken", bDarkenBackground);
+                ui.rootVisualElement.EnableInClassList("xrui__background--dark", bDarkenBackground);
             }
             return containerGO;
         }

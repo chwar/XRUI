@@ -13,6 +13,6 @@
     --xrui-alert-info: rgb(13, 202, 240);
 }
 
-.darken {
+.xrui__background--dark {
     background-color: rgba(0, 0, 0, 0.5);
 }

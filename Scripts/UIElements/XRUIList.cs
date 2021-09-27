@@ -74,6 +74,11 @@ namespace com.chwar.xrui.UIElements
             _container.Query(null, "xrui__list__item").ForEach(i => i.RemoveFromHierarchy());
         }
 
+        public int GetListCount()
+        {
+            return  _container.Query(null, "xrui__list__item").ToList().Count;
+        }
+
         /// <summary>
         /// Visually selects an element of the list
         /// </summary>
