@@ -92,14 +92,14 @@
 }
 
 .xrui .unity-text-field.error > Label {
-    color: var(--xrui-alert-danger);
+    color: var(--xrui-danger);
 }
 
 .xrui .unity-text-field.error > #unity-text-input {
-    border-left-color: var(--xrui-alert-danger);
-    border-right-color: var(--xrui-alert-danger);
-    border-top-color: var(--xrui-alert-danger);
-    border-bottom-color: var(--xrui-alert-danger);
+    border-left-color: var(--xrui-danger);
+    border-right-color: var(--xrui-danger);
+    border-top-color: var(--xrui-danger);
+    border-bottom-color: var(--xrui-danger);
 }
 
 .xrui .unity-text-field:focus > Label {

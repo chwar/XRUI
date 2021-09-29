@@ -1,18 +1,70 @@
 :root {
     --xrui-primary: rgb(13, 110, 253);
+    --xrui-primary-hover: rgb(10, 87, 191);
     --xrui-secondary: rgb(108, 117, 125);
-    --xrui-primary-hover: rgb(11, 94, 215);
-    --xrui-dark: rgb(33, 37, 41);
+    --xrui-secondary-hover: rgb(76, 83, 88);
+    --xrui-success: rgb(20, 167, 68);
+    --xrui-success-hover: rgb(25, 135, 84);
+    --xrui-warning: rgb(255, 193, 7);
+    --xrui-warning-hover: rgb(255, 222, 7);
+    --xrui-danger: rgb(220, 53, 69);
+    --xrui-danger-hover: rgb(250, 0, 0);
+    --xrui-info: rgb(13, 202, 240);
+    --xrui-info-hover: rgb(9, 147, 173);
     --xrui-light-grey: rgb(233, 236, 239);
     --xrui-grey: rgb(173, 181, 189);
     --xrui-dark-grey: rgb(73, 80, 87);
-    --xrui-alert-primary: rgb(13, 110, 253);
-    --xrui-alert-success: rgb(25, 135, 84);
-    --xrui-alert-warning: rgb(255, 193, 7);
-    --xrui-alert-danger: rgb(220, 53, 69);
-    --xrui-alert-info: rgb(13, 202, 240);
+    --xrui-dark: rgb(33, 37, 41);
 }
 
-.xrui__background--dark {
+.xrui .xrui__background--primary {
+    background-color: var(--xrui-primary);
+}
+
+.xrui .xrui__background--secondary {
+    background-color: var(--xrui-secondary);
+}
+
+.xrui .xrui__background--warning {
+    background-color: var(--xrui-warning);
+}
+
+.xrui .xrui__background--success {
+    background-color: var(--xrui-success);
+}
+
+.xrui .xrui__background--danger {
+    background-color: var(--xrui-danger);
+}
+
+.xrui .xrui__background--info {
+    background-color: var(--xrui-info);
+}
+
+.xrui .xrui__background--primary:hover {
+    background-color: var(--xrui-primary-hover);
+}
+
+.xrui .xrui__background--secondary:hover {
+    background-color: var(--xrui-secondary-hover);
+}
+
+.xrui .xrui__background--warning:hover {
+    background-color: var(--xrui-warning-hover);
+}
+
+.xrui .xrui__background--success:hover {
+    background-color: var(--xrui-success-hover);
+}
+
+.xrui .xrui__background--danger:hover {
+    background-color: var(--xrui-danger-hover);
+}
+
+.xrui .xrui__background--info:hover {
+    background-color: var(--xrui-info-hover);
+}
+
+.xrui .xrui__background--dark {
     background-color: rgba(0, 0, 0, 0.5);
 }

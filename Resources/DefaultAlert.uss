@@ -59,15 +59,15 @@
 }
 
 .primary {
-    background-color: var(--xrui-alert-primary);
+    background-color: var(--xrui-primary);
 }
 
 .success {
-    background-color: var(--xrui-alert-success);
+    background-color: var(--xrui-success);
 }
 
 .warning {
-    background-color: var(--xrui-alert-warning);
+    background-color: var(--xrui-warning);
 }
 
 .warning > Label {
@@ -75,11 +75,11 @@
 }
 
 .danger {
-    background-color: var(--xrui-alert-danger);
+    background-color: var(--xrui-danger);
 }
 
 .info {
-    background-color: var(--xrui-alert-info);
+    background-color: var(--xrui-info);
 }
 
 .info > Label {

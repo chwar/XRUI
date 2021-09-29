@@ -24,6 +24,54 @@
     background-color: var(--xrui-primary-hover);
 }
 
+.xrui Button.xrui__background--primary {
+    background-color: var(--xrui-primary);
+}
+
+.xrui Button.xrui__background--secondary {
+    background-color: var(--xrui-secondary);
+}
+
+.xrui Button.xrui__background--warning {
+    background-color: var(--xrui-warning);
+}
+
+.xrui Button.xrui__background--success {
+    background-color: var(--xrui-success);
+}
+
+.xrui Button.xrui__background--danger {
+    background-color: var(--xrui-danger);
+}
+
+.xrui Button.xrui__background--info {
+    background-color: var(--xrui-info);
+}
+
+.xrui Button.xrui__background--primary:hover {
+    background-color: var(--xrui-primary-hover);
+}
+
+.xrui Button.xrui__background--secondary:hover {
+    background-color: var(--xrui-secondary-hover);
+}
+
+.xrui Button.xrui__background--warning:hover {
+    background-color: var(--xrui-warning-hover);
+}
+
+.xrui Button.xrui__background--success:hover {
+    background-color: var(--xrui-success-hover);
+}
+
+.xrui Button.xrui__background--danger:hover {
+    background-color: var(--xrui-danger-hover);
+}
+
+.xrui Button.xrui__background--info:hover {
+    background-color: var(--xrui-info-hover);
+}
+
 .xrui Button.xrui__icon {
     background-color: rgba(0,0,0,0);
     min-height: auto;
