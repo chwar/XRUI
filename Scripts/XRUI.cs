@@ -11,14 +11,11 @@ namespace com.chwar.xrui
         // Singleton
         public static XRUI Instance;
 
-        // Flag that other XRUI classes wait for
-        // public bool Ready { get; private set; }
-        
+        [HideInInspector] public XRUIGridController xruiGridController;
         // Used to override global XRUI reality
         public RealityType realityType = RealityType.UseGlobal; 
         private RealityType _editorRealityType;
-        
-        
+
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
         
@@ -400,9 +397,9 @@ namespace com.chwar.xrui
                 xruiElement.Init();
                 xruiElement.UpdateUI();
             }
-            var grid = FindObjectOfType<XRUIGridController>();
-            if(grid is not null) 
-                grid.AdaptGrid();
+            xruiGridController = FindObjectOfType<XRUIGridController>();
+            if(xruiGridController is not null) 
+                xruiGridController.AdaptGrid();
         }
     }
 

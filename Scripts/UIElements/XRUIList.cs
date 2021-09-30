@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ namespace com.chwar.xrui.UIElements
         // UXML Attributes
         public Button AddButton;
         public VisualElement List;
+        public Action<PointerDownEvent> ItemSelectedCallback; 
         
         private Label _title;
         private ScrollView _container;
@@ -58,10 +60,15 @@ namespace com.chwar.xrui.UIElements
         public VisualElement AddElement(bool bSelect)
         {
             VisualElement el = listElementTemplate.Instantiate();
-            if(bSelect)
+            if (bSelect)
                 SelectElement(el.ElementAt(0));
+            
             el.ElementAt(0).AddToClassList("xrui__list__item");
-            el.RegisterCallback<PointerDownEvent>(_ => SelectElement(el.ElementAt(0))); 
+            el.RegisterCallback<PointerDownEvent>(e =>
+            {
+                SelectElement(el.ElementAt(0));
+                ItemSelectedCallback?.Invoke(e);
+            }); 
             _container.Add(el);
             return el;
         }
@@ -83,7 +90,7 @@ namespace com.chwar.xrui.UIElements
         /// Visually selects an element of the list
         /// </summary>
         /// <param name="el"></param>
-        private void SelectElement(VisualElement el)
+        public void SelectElement(VisualElement el)
         {
             var previousSelection = _container.Q(null, "xrui__list__item--selected");
             previousSelection?.ToggleInClassList("xrui__list__item--selected");

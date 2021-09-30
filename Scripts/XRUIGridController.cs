@@ -9,9 +9,8 @@ namespace com.chwar.xrui
     [ExecuteAlways]
     public class XRUIGridController : MonoBehaviour
     {
+        public VisualElement XruiRoot;  
         public List<XRUIGrid> gridElementsList = new();
-        private XRUI _xrui;
-        private UIDocument _rootUI;
         private List<Transform> _listGridElements;
         private bool _isInitialized;
         
@@ -33,8 +32,11 @@ namespace com.chwar.xrui
             
             // This does not run during the initial run, only during the app's lifetime if the XRUIGrid has been re-enabled.
             // During the initial run, the XRIGrid is initialized by the XRUI Instance to make sure that the instance is running first.
-            if(_isInitialized || !Application.isPlaying)
+            if (_isInitialized || !Application.isPlaying)
+            {
+                XruiRoot = GetComponent<UIDocument>().rootVisualElement?.panel.visualTree;
                 AdaptGrid();
+            }
         }
 
         private void OnDisable()
