@@ -111,18 +111,18 @@ namespace com.chwar.xrui
         {
             switch (Application.platform)
             {
-                case RuntimePlatform.Android:
-                case RuntimePlatform.IPhonePlayer:
-                    if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-                        return RealityType.AR.ToString().ToLower();
-                    if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-                        Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-                        return RealityType.PC.ToString().ToLower();
-                    break;
-                case RuntimePlatform.WindowsPlayer:
-                case RuntimePlatform.OSXPlayer:
-                case RuntimePlatform.LinuxPlayer:
-                    return RealityType.PC.ToString().ToLower();
+                // case RuntimePlatform.Android:
+                // case RuntimePlatform.IPhonePlayer:
+                //     if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+                //         return RealityType.AR.ToString().ToLower();
+                //     if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
+                //         Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+                //         return RealityType.PC.ToString().ToLower();
+                //     break;
+                // case RuntimePlatform.WindowsPlayer:
+                // case RuntimePlatform.OSXPlayer:
+                // case RuntimePlatform.LinuxPlayer:
+                //     return RealityType.PC.ToString().ToLower();
                 default:
                     return PlayerPrefs.GetString("reality");
             }
@@ -334,7 +334,8 @@ namespace com.chwar.xrui
         internal static void GetVRPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
             ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
-            VRParameters parameters = uiDocument.GetComponent<XRUIElement>().vrParameters;
+            var xrui = uiDocument.GetComponent<XRUIElement>();
+            bool uiIsFloatingElement = xrui.GetType().IsSubclassOf(typeof(XRUIFloatingElement));
 
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
@@ -357,7 +358,7 @@ namespace com.chwar.xrui
                 Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings")) : uiDocument.panelSettings;
             ps.scaleMode = PanelScaleMode.ConstantPhysicalSize;
             ps.targetTexture = rt;
-
+            
             try
             {
                 uiDocument.panelSettings = ps;
@@ -367,17 +368,18 @@ namespace com.chwar.xrui
                 // do nothing
             }
             
+            o.AddComponent<XRUITextureInteraction>();
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
             plane.numSegments = 512;
-            plane.height = parameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / 10 : parameters.customVRPanelDimensions.y;
-            plane.radius = parameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / 10 : parameters.customVRPanelDimensions.x;
-            plane.useArc = parameters.bendVRPanel;
-            plane.curvatureDegrees = parameters.bendVRPanel ? 60 : 0;
+            plane.height = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / 10 : xrui.vrParameters.customVRPanelDimensions.y;
+            plane.radius = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / 10 : xrui.vrParameters.customVRPanelDimensions.x;
+            plane.useArc = xrui.vrParameters.bendVRPanel || uiIsFloatingElement;
+            plane.curvatureDegrees = xrui.vrParameters.bendVRPanel || uiIsFloatingElement ? 60 : 0;
             plane.Generate(rt);
-            if (parameters.anchorVRPanelToCamera)
+            if (xrui.vrParameters.anchorVRPanelToCamera || uiIsFloatingElement)
             {
                 o.transform.parent = Camera.main.transform;
-                o.transform.localPosition = parameters.customVRPanelAnchorPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : parameters.customVRPanelAnchorPosition;
+                o.transform.localPosition = xrui.vrParameters.customVRPanelAnchorPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.vrParameters.customVRPanelAnchorPosition;
                 o.transform.localRotation = Quaternion.identity;
             } else
                 o.transform.position = Camera.main.transform.position + Vector3.forward * 2;

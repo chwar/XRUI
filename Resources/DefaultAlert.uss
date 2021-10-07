@@ -48,6 +48,15 @@
     min-height: 75px;
 }
 
+.xrui__alert.vr {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 300px;
+    height: 100px;
+}
+
 .xrui__alert > #AlertTitle {
     font-size: 24px;
     display: flex;

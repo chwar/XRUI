@@ -12,6 +12,11 @@
     height: 100%;
 }
 
+.xrui__modal.vr {
+    width: 600px;
+    height: 500px;
+}
+
 .xrui__modal {
     background-color: rgb(255, 255, 255);
 }
