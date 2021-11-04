@@ -392,7 +392,7 @@ namespace com.chwar.xrui
             return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
         }
 
-        private void InitializeElements()
+        internal void InitializeElements()
         {
             foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
             {

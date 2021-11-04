@@ -19,6 +19,7 @@ namespace com.chwar.xrui.Tests
         {
             _go = new GameObject() {name = "XRUI"};
             var xrui = _go.AddComponent<XRUI>();
+            _go.AddComponent<Camera>();
             _clicked = false;
             xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");

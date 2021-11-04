@@ -13,6 +13,7 @@ namespace com.chwar.xrui.Tests
         {
             var go = new GameObject() {name = "Modal"};
             var xrui = go.AddComponent<XRUI>();
+            go.AddComponent<Camera>();
             xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");
         }
@@ -29,6 +30,7 @@ namespace com.chwar.xrui.Tests
             Assert.NotNull(c.defaultMenuTemplate);
             Assert.NotNull(c.defaultListTemplate);
             Assert.NotNull(c.defaultNavbarTemplate);
+            Assert.NotNull(c.defaultContextualMenuTemplate);
         }
 
         [Test]

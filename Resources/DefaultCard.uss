@@ -26,8 +26,8 @@
 }
 
 .xrui__card.vr {
-    height: 400px;
-    width: 400px;
+    height: 500px;
+    width: 500px;
     align-items: stretch;
     flex-shrink: 0;
 }
