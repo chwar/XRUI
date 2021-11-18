@@ -19,3 +19,4 @@ MonoBehaviour:
   defaultListTemplate: {fileID: 9197481963319205126, guid: 382f13292466f923db35d9729fd23878, type: 3}
   defaultMenuTemplate: {fileID: 9197481963319205126, guid: 67c1c9d1ba298f6d891001f97ed79e76, type: 3}
   defaultNavbarTemplate: {fileID: 9197481963319205126, guid: d07d4a5f4eaff12aeb3dded84e7cb019, type: 3}
+  defaultContextualMenuTemplate: {fileID: 9197481963319205126, guid: 6dba8ade0d049ed0c99ad1b4b9cdb80e, type: 3}

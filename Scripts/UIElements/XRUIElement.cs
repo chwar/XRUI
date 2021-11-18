@@ -130,7 +130,25 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         internal virtual void UpdateUI()
         {
-            XRUI.UpdateDocumentUI(UIDocument);
+            if (UIDocument != null && UIDocument.rootVisualElement != null)
+            {
+                var xrui = UIDocument.rootVisualElement.Q(null, "xrui");
+                xrui.EnableInClassList(XRUI.GetCurrentReality(), true);
+                if (XRUI.IsCurrentReality(XRUI.RealityType.AR))
+                {
+                    // Check for device orientation to refine AR USS styles
+                    if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+                         xrui.EnableInClassList("portrait", true);
+                    if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
+                        Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+                        xrui.EnableInClassList("landscape", true);
+                }
+                else if (XRUI.IsCurrentReality(XRUI.RealityType.VR) && Application.isPlaying)
+                {
+                    // Create a runtime VR panel after the layout pass
+                    xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetVRPanel, UIDocument);
+                }
+            }
         }
         
         /// <summary>

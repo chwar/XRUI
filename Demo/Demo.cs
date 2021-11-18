@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using com.chwar.xrui.UIElements;
 using UnityEngine;
@@ -7,32 +8,53 @@ namespace com.chwar.xrui
 {
     public class Demo : MonoBehaviour
     {
+
+        private XRUIMenu _menu;
         IEnumerator Start()
         {
-            var menu = FindObjectOfType<XRUIMenu>().gameObject;
-            menu.SetActive(false);
+            _menu = FindObjectOfType<XRUIMenu>();
+            var btn = _menu.MainButton;
+            btn.clicked += () => ShowEntryContextualMenu(btn);
+            _menu.AddElement();
+            _menu.AddElement();
+            _menu.AddElement();
+            _menu.AddElement();
+            _menu.AddElement();
+            _menu.AddElement();
             
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
-            yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
-            yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning message.");
-            yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, 	"Error message.");
-            yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Info, 	"Info message.");
+            // XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
+            // yield return new WaitForSeconds(1);
+            // XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
+            // yield return new WaitForSeconds(1);
+            // XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning", "Warning with a title and message.");
+            // yield return new WaitForSeconds(1);
+            // XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, 	"Error message.");
+            // yield return new WaitForSeconds(1);
+            // XRUI.Instance.ShowAlert(XRUI.AlertType.Info, 	"Info message.");
 
             var list = FindObjectOfType<XRUIList>();
             list.AddElement(false).Q<Label>("Text").text = "List element";
             list.AddElement(true).Q<Label>("Text").text = "Selected element";
             list.AddElement(false).Q<Label>("Text").text = "List element";
-            
-            yield return new WaitForSeconds(2);
-            menu.SetActive(true);
-            yield return new WaitForSeconds(1);
 
-            XRUI.Instance.CreateModal("DemoModal", null);
+        }
+        
+        private void ShowEntryContextualMenu(VisualElement parentElement)
+        {
+            var contextualMenu = XRUI.Instance.ShowContextualMenu(null, new Vector2(parentElement.worldBound.x, parentElement.worldBound.y),
+                true, _menu.Menu.resolvedStyle.width, Single.NaN);
+        
+            // Add class to identify currently selected visual element
+            parentElement.panel.visualTree.Q(null, "xrui__menu__item--selected")?.ToggleInClassList("xrui__menu__item--selected");
+            parentElement.parent.parent.parent.AddToClassList("xrui__menu__item--selected");
+
+            var el = contextualMenu.AddMenuElement();
+            el.Q<Label>("Text").text = "Contextual action 1";
+            el.RegisterCallback<PointerDownEvent>((e) => XRUI.Instance.CreateModal("MyModal", Type.GetType("com.chwar.xrui.MyModalContent")));
+            
+            var el2 = contextualMenu.AddMenuElement();
+            el2.Q<Label>("Text").text = "Contextual action 2";
         }
     }
 }

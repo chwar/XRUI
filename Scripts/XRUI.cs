@@ -42,7 +42,6 @@ namespace com.chwar.xrui
                     SetCurrentReality(realityType);
                 }
                 this.InitializeElements();
-                // this.Ready = true;
             }
             else
             {
@@ -86,31 +85,13 @@ namespace com.chwar.xrui
         }
 
         /// <summary>
-        /// Updates the USS class of the given UIDocument to the current reality.
-        /// </summary>
-        /// <param name="uiDocument">The UIDocument to update.</param>
-        internal static void UpdateDocumentUI(UIDocument uiDocument)
-        {
-            if (uiDocument != null && uiDocument.rootVisualElement != null)
-            {
-                var xrui = uiDocument.rootVisualElement.Q(null, "xrui");
-                xrui.EnableInClassList(GetCurrentReality(), true);
-                if (IsCurrentReality(RealityType.VR) && Application.isPlaying)
-                {
-                    // Create a runtime VR panel after the layout pass
-                    xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel, uiDocument);
-                }
-            }
-        }
-        
-        /// <summary>
         /// Returns the current reality based on the running platform.
         /// </summary>
         /// <returns>The current reality.</returns>
         public static string GetCurrentReality()
         {
-            switch (Application.platform)
-            {
+            // switch (Application.platform)
+            // {
                 // case RuntimePlatform.Android:
                 // case RuntimePlatform.IPhonePlayer:
                 //     if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
@@ -123,10 +104,10 @@ namespace com.chwar.xrui
                 // case RuntimePlatform.OSXPlayer:
                 // case RuntimePlatform.LinuxPlayer:
                 //     return RealityType.PC.ToString().ToLower();
-                default:
-                    return PlayerPrefs.GetString("reality");
-            }
-            return null;
+                // default:
+                //}
+                // return null;
+            return PlayerPrefs.GetString("reality");
         }
 
         public static bool IsCurrentReality(RealityType type)
@@ -235,7 +216,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
             
             // Instantiate main template
-            VisualElement modalContainer = m.mainTemplate is null ? xruiConfigurationAsset.defaultModalTemplate.Instantiate() : m.mainTemplate.Instantiate();
+            VisualElement modalContainer = m.mainTemplateOverride is null ? xruiConfigurationAsset.defaultModalTemplate.Instantiate() : m.mainTemplateOverride.Instantiate();
             modalContainer.style.width = new StyleLength(Length.Percent(100));
             modalContainer.style.height = new StyleLength(Length.Percent(100));
             modalContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
@@ -295,6 +276,8 @@ namespace com.chwar.xrui
             // Style and position the contextual menu accordingly
             contextualMenu.AddToClassList(GetCurrentReality());
             var xrui = container.AddComponent<XRUIContextualMenu>();
+            // Use default element template, can be overriden
+            xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
             xrui.parentCoordinates = parentCoordinates;
             xrui.showArrow = showArrow;
             if (!float.IsNaN(leftOffset)) xrui.positionOffsetLeft = leftOffset;
@@ -411,7 +394,7 @@ namespace com.chwar.xrui
         [Tooltip("Name of the modal")]
         public string modalName;
         [Tooltip("Main template used as root content for the modal")]
-        public VisualTreeAsset mainTemplate;
+        public VisualTreeAsset mainTemplateOverride;
         [Tooltip("List of contents that appear in this modal in order of navigation")]
         public List<VisualTreeAsset> modalFlowList;
     }

@@ -35,10 +35,10 @@ namespace com.chwar.xrui
         public static void AddGrid()
         {
             GameObject xruiGo = new GameObject() {name = "XRUI Grid"};
-            var xrui = xruiGo.AddComponent<XRUIGridController>();
             var ui = xruiGo.AddComponent<UIDocument>();
             ui.panelSettings = GetXRUIConfiguration().panelSettings;
             ui.visualTreeAsset = Resources.Load<VisualTreeAsset>("XRUIRoot");
+            var xrui = xruiGo.AddComponent<XRUIGridController>();
         }        
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace com.chwar.xrui
 
         private static XRUIConfiguration GetXRUIConfiguration()
         {
-            return FindObjectOfType<XRUI>().xruiConfigurationAsset;
+            return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
         }
 
         private static void AdaptXRUI()
@@ -151,7 +151,7 @@ namespace com.chwar.xrui
             foreach (var uiDocument in FindObjectsOfType<XRUIElement>())
             {
                 // Update USS
-                XRUI.UpdateDocumentUI(uiDocument.GetComponent<UIDocument>());
+                //XRUI.UpdateDocumentUI(uiDocument.GetComponent<UIDocument>());
                 // Update Editor values
                 uiDocument.UpdateUI();
             }
