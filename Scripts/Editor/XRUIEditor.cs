@@ -85,7 +85,7 @@ namespace com.chwar.xrui
         /// Adds a custom XRUI Element.
         /// </summary>
         [MenuItem("XRUI/Add XRUI Element/Custom UI Element", false, 15)]
-        private static void AddCustomElement()
+        public static void AddCustomElement()
         {
             GameObject element = AddXRUIElement("XRUI Element");
             element.AddComponent<XRUIElement>();

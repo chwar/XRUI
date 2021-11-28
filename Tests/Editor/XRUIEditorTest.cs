@@ -2,6 +2,7 @@ using System;
 using com.chwar.xrui.UIElements;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.Tests.Editor
 {
@@ -58,6 +59,16 @@ namespace com.chwar.xrui.Tests.Editor
         {
             XRUIEditor.AddMenu();
             var xrui = GameObject.FindObjectOfType<XRUIMenu>();
+            Assert.NotNull(xrui);
+        }
+
+        [Test]
+        public void XRUIEditorTestAddCustomElement()
+        {
+            XRUIEditor.AddCustomElement();
+            var xrui = GameObject.FindObjectOfType<XRUIElement>();
+            var uid = xrui.gameObject.GetComponent<UIDocument>();
+            uid.visualTreeAsset = Resources.Load<VisualTreeAsset>("TestUIElement");
             Assert.NotNull(xrui);
         }
 

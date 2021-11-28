@@ -36,7 +36,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="screenPosition">The position in screen coordinates.</param>
         /// <returns>Returns the coordinates in texel space, or a position containing NaN values if no hit was recorded or if the hit mesh's material is not using the render texture as their mainTexture</returns>
-        private Vector2 ScreenCoordinatesToRenderTexture(Vector2 screenPosition)
+        internal Vector2 ScreenCoordinatesToRenderTexture(Vector2 screenPosition)
         {
             var invalidPosition = new Vector2(float.NaN, float.NaN);
             //Debug.Log(screenPosition);

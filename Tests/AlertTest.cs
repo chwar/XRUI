@@ -101,7 +101,17 @@ namespace com.chwar.xrui.Tests
             Assert.Null(GameObject.Find("PrimaryAlert"));
         }
 
-        private void AlertClick(PointerDownEvent evt)
+        [UnityTest]
+        public IEnumerator AlertTestWithCallback()
+        {
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!", "Click to trigger callback", ()=> AlertClick());
+            yield return new WaitUntil(() => _clicked);
+            // Wait for animation
+            yield return new WaitForSeconds(1.5f);
+            Assert.Null(GameObject.Find("PrimaryAlert"));
+        }
+        
+        private void AlertClick(PointerDownEvent evt = null)
         {
             _clicked = true;
         }

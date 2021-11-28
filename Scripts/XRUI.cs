@@ -49,7 +49,7 @@ namespace com.chwar.xrui
             }
         }
         
-        private void OnApplicationQuit()
+        internal void OnApplicationQuit()
         {
             // Set back the global XRUI preference
             if (!realityType.Equals(RealityType.UseGlobal))
@@ -323,13 +323,13 @@ namespace com.chwar.xrui
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
             var dimensions = uiDocument.rootVisualElement.Q(null, "xrui").resolvedStyle;
-            var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
 
             if (dimensions.width == 0 || dimensions.height == 0)
             {
                 throw new ArgumentException($"The UI {uiDocument.name} has invalid dimensions. Make sure to add a corresponding VR USS rule.");
             }
 
+            var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
                 name = uiDocument.name

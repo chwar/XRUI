@@ -46,7 +46,7 @@ namespace com.chwar.xrui.UIElements
             _menu = UIDocument.rootVisualElement.Q(null, "xrui__contextual-menu");
             _contextualArrow = _menu.Q(null, "xrui__contextual-menu__arrow");
             
-            // Set handler on click to dispose of the alert
+            // Set handler on click to dispose of the contextual menu
             UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
             _menu.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
         }
@@ -55,7 +55,7 @@ namespace com.chwar.xrui.UIElements
         /// Positions the contextual menu with respect to the parent coordinates.
         /// </summary>
         /// <param name="evt"></param>
-        private void PositionRelativeToParent(GeometryChangedEvent evt)
+        internal void PositionRelativeToParent(GeometryChangedEvent evt)
         {
             _menu.style.position = new StyleEnum<Position>(Position.Absolute);
             _menu.style.top = parentCoordinates.y;
@@ -79,7 +79,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Destroys the contextual menu.
         /// </summary>
-        private void DisposeMenu()
+        internal void DisposeMenu()
         {
             if (!PointerOverUI)
             {

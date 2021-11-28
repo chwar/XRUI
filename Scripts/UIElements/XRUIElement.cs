@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -133,6 +134,14 @@ namespace com.chwar.xrui.UIElements
             if (UIDocument != null && UIDocument.rootVisualElement != null)
             {
                 var xrui = UIDocument.rootVisualElement.Q(null, "xrui");
+                if (xrui is null)
+                {
+                    // If a custom element was added without the .xrui class, we can't find it at runtime
+                    if(Application.isPlaying)
+                        Debug.LogWarning($"The .xrui USS class was not found in the provided visual " +
+                                         $"element ({UIDocument.name}). Please add it to the root element and try again.");
+                    return;
+                }
                 xrui.EnableInClassList(XRUI.GetCurrentReality(), true);
                 if (XRUI.IsCurrentReality(XRUI.RealityType.AR))
                 {
