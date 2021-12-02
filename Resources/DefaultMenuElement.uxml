@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Button text="Menu entry" display-tooltip-when-elided="true" name="MenuEntry" style="height: 50px;" />
+</ui:UXML>

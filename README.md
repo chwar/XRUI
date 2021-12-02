@@ -1,7 +1,7 @@
 # XRUI
 [![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
-[![Coverage](https://flat.badgen.net/badge/coverage/91%25/green)](./Tests)
+[![Coverage](https://flat.badgen.net/badge/coverage/85%25/green)](./Tests)
 
 XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can automatically adjust depending on the deployed platform and the environment's reality, supporting regular PC environment as well as AR and VR environments. This way, users only need to design and develop their UI once for all platforms, resulting in a great saving of time.   
 
@@ -70,7 +70,7 @@ card.Show(myElement, false); // Hides some of the content
 ### XRUI Menu
 <img src="https://user-images.githubusercontent.com/25299178/127934036-f7c40049-072c-420b-ac45-1125b7f0cd30.png" alt="XRUI Menu" height="500"/> ![Screenshot from 2021-08-03 14-35-32](https://user-images.githubusercontent.com/25299178/128016466-1b55cfd9-8bf0-499f-9b17-d35a5a1178f0.png)
 
-The provided XRUI Menu template is designed as a side menu that collapses out of the view frustrum. It can be configured in the inspector (see screenshot above).
+The provided XRUI Menu template is designed as a side menu that collapses out of the view frustum. It can be configured in the inspector (see screenshot above).
 	
 The list element template is the UXML template that is used to create entries. You can provide a template with a simple button, or more complex compositions with images, text, buttons, etc. to suit your needs.
 	
@@ -139,13 +139,13 @@ void StartPage() {
     _xruiModal.UpdateModalFlow("MyModalPage", "MainContainer", () =>
     {
         // This callback is only fired once, when the page is created for the first time
-        // Put here initialization code, event subscribtions, etc. 
+        // Put here initialization code, event subscriptions, etc. 
 
         Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
         _myButton.clicked += MyPage;
     });
 
-    // Content to execute everytime this page is opened.
+    // Content to execute every time this page is opened.
 }
 
 void MyPage() {
@@ -238,19 +238,19 @@ if(XRUI.IsCurrentReality(XRUI.RealityType.AR)) {
 ## XRUI Grid System
 In order to organize easily and efficiently UI elements on screen, XRUI makes use of a grid system. You can use it by navigating to `XRUI > Add XRUI Grid`. In the Unity editor, you can group UI components inside rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows you to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
 
-For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the onscren UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
+For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the on-screen UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
 
 ![Peek 2021-08-04 17-08](https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif)
 ![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png)
     
-> Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obain the expected behaviour.
+> Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obtain the expected behaviour.
 
 
 ## Custom UI Elements
 You can create your own UXML templates and refer them in the XRUI Configuration asset. You should however be careful in naming your elements, should you want to inherit the functionalities provided by the default UI elements. You can check them with Unity's UI Builder, or you can simply duplicate the UXML files and start working from here.
 
 ### USS styles
-XRUI comes with its own set of styles that are imported just after Unity's in UI Toolkit's pipeline. They are imported through a theme file which is used in the provided Panel Settings asset (also linked in the XRUI Configuration asset). You can add your own root styles to this theme file, override the root XRUI styles, or remove some of the imported assets if you don't need them. Should you want to inherit some of the XRUI styles for your own UI elements, you can add the USS class `.xrui` to the desired root visual elements. Aditionally, each XRUI component has its own class that uses the BEM methodology, as per Unity's recommendation. They are the following:
+XRUI comes with its own set of styles that are imported just after Unity's in UI Toolkit's pipeline. They are imported through a theme file which is used in the provided Panel Settings asset (also linked in the XRUI Configuration asset). You can add your own root styles to this theme file, override the root XRUI styles, or remove some of the imported assets if you don't need them. Should you want to inherit some of the XRUI styles for your own UI elements, you can add the USS class `.xrui` to the desired root visual elements. Additionally, each XRUI component has its own class that uses the BEM methodology, as per Unity's recommendation. They are the following:
 
 |XRUI Element|USS Class|
 |:---:|:---:|
