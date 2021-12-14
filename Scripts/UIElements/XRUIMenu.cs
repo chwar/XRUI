@@ -76,6 +76,10 @@ namespace com.chwar.xrui.UIElements
         /// <returns>The added element</returns>
         public VisualElement AddElement()
         {
+            if (menuElementTemplate is null)
+            {
+                throw new MissingReferenceException($"The menu element template of {this.gameObject.name} is missing!");
+            }
             VisualElement el = menuElementTemplate.Instantiate();
             _container.Add(el);
             return el;
