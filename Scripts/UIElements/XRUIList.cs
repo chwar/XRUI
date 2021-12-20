@@ -14,7 +14,6 @@ namespace com.chwar.xrui.UIElements
         // UXML Attributes
         public Button AddButton;
         public VisualElement List;
-        public Action<PointerDownEvent> ItemSelectedCallback; 
         
         private Label _title;
         private ScrollView _container;
@@ -69,12 +68,24 @@ namespace com.chwar.xrui.UIElements
                 SelectElement(el.ElementAt(0));
             
             el.ElementAt(0).AddToClassList("xrui__list__item");
+            _container.Add(el);
+            return el;
+        }
+
+        /// <summary>
+        /// Adds template element to the list
+        /// </summary>
+        /// <param name="bSelect">Selects the added element in the list</param>
+        /// <param name="itemSelectedCallback">The callback to trigger when the element is selected</param>
+        /// <returns>The added element</returns>
+        public VisualElement AddElement(bool bSelect, Action<PointerDownEvent> itemSelectedCallback)
+        {
+            var el = AddElement(bSelect);
             el.RegisterCallback<PointerDownEvent>(e =>
             {
                 SelectElement(el.ElementAt(0));
-                ItemSelectedCallback?.Invoke(e);
-            }); 
-            _container.Add(el);
+                itemSelectedCallback?.Invoke(e);
+            });
             return el;
         }
 

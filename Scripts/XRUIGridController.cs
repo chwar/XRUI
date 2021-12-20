@@ -81,7 +81,7 @@ namespace com.chwar.xrui
                     foreach (var child in row.Children())
                     {
                         child.style.position = new StyleEnum<Position>(Position.Absolute);
-                        child.pickingMode = PickingMode.Position;
+                        // child.pickingMode = PickingMode.Position;
                         child.style.top = 0;
                         child.style.bottom = 0;
                         child.style.left = 0;
