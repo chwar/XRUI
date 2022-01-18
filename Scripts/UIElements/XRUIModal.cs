@@ -119,6 +119,7 @@ namespace com.chwar.xrui.UIElements
                 onCreate();
             }
             CheckFormValidity();
+            UpdateUI();
         }
 
         /// <summary>
