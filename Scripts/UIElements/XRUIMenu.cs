@@ -15,22 +15,26 @@ namespace com.chwar.xrui.UIElements
         public VisualElement Menu;
         public Button CloseButton;
         
-        private Label _titleText;
-        private Label _subText;
+        private Label _appTitleLabel;
+        private Label _subtextLabel;
         private ScrollView _container;
 
         [Tooltip("Title of the menu")] 
+        [SerializeField]
+        private string titleText;
         public string TitleText
         { 
-            get => _titleText.text;
-            set => _titleText.text = value;
+            get => titleText;
+            set => UpdateTitle(value);
         }
 
         [Tooltip("Subtitle of the menu")] 
+        [SerializeField]
+        private string subText;
         public string SubText 
         { 
-            get => _subText.text;
-            set => _subText.text = value;
+            get => subText;
+            set => UpdateSubtext(value);
         }
         [Tooltip("Template used to add elements to the menu")]
         public VisualTreeAsset menuElementTemplate;
@@ -45,8 +49,8 @@ namespace com.chwar.xrui.UIElements
         protected internal override void Init()
         {
             base.Init();
-            _titleText = UIDocument.rootVisualElement.Q<Label>("AppName");
-            _subText = UIDocument.rootVisualElement.Q<Label>("Subtext");
+            _appTitleLabel = UIDocument.rootVisualElement.Q<Label>("AppName");
+            _subtextLabel = UIDocument.rootVisualElement.Q<Label>("Subtext");
             _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
             Menu = UIDocument.rootVisualElement.Q("Menu");
             MainButton = UIDocument.rootVisualElement.Q<Button>("MainButton");
@@ -69,14 +73,14 @@ namespace com.chwar.xrui.UIElements
 
         public void UpdateTitle(string text)
         {
-            if(_titleText != null && _titleText.text != text)
-                _titleText.text = text;
+            if(_appTitleLabel != null && _appTitleLabel.text != text)
+                _appTitleLabel.text = text;
         }
         
         public void UpdateSubtext(string text)
         {
-            if(_subText != null && _subText.text != text)
-                _subText.text = text;
+            if(_subtextLabel != null && _subtextLabel.text != text)
+                _subtextLabel.text = text;
         }
         
         /// <summary>

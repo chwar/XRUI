@@ -18,20 +18,10 @@ namespace com.chwar.xrui.UIElements
         
         [Tooltip("Dimensions of the card")]
         public Vector2 cardDimensions;
-
         [Tooltip("Title of the card")]
-        public string Title
-        {
-            get => _title.text;
-            set => _title.text = value;
-        }
-
+        public string titleText;
         [Tooltip("Subtitle of the card")]
-        public string Subtitle
-        {
-            get => _subtitle.text;
-            set => _subtitle.text = value;
-        }
+        public string subtitleText;
         
         protected internal override void Init()
         {
@@ -47,8 +37,8 @@ namespace com.chwar.xrui.UIElements
         internal override void UpdateUI()
         {
             base.UpdateUI();
-            UpdateTitle(Title);
-            UpdateSubtitle(Subtitle);
+            UpdateTitle(titleText);
+            UpdateSubtitle(subtitleText);
             UpdateDimensions(cardDimensions);
         }
         
