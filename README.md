@@ -31,7 +31,8 @@ XRUI provides a few UI Elements. The style is minimalistic and inspired from [Bo
 
 XRUI elements are thought as basic containers for user content. Given the hierarchic nature of UXML, it is easy to append content within the UI elements at runtime. To easily access your UXML contents and append them into various XRUI elements, reference them in the intended UI Elements list within the XRUI controller:
 
-![Screenshot from 2021-08-03 17-34-52](https://user-images.githubusercontent.com/25299178/128044199-bc41e803-a4ae-45b8-9719-e41b4294ddd9.png)
+![image](https://user-images.githubusercontent.com/25299178/150392915-51de8296-3522-4635-b419-bf2fed487808.png)
+
 
 The list of UI elements is accessible within the XRUI controller's instance. Use the `GetUIElement` method for easy access:
 ```csharp
