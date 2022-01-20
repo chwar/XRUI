@@ -95,7 +95,7 @@ namespace com.chwar.xrui
             element.AddComponent<XRUIElement>();
         }
         
-        [MenuItem("XRUI/Switch Reality.../PC")]
+        /*[MenuItem("XRUI/Switch Reality.../PC")]
         internal static void SwitchToPC()
         {
             // Switch to Windows/Linux/Mac standalone build.
@@ -128,7 +128,7 @@ namespace com.chwar.xrui
             // Switch to Windows VR build.
             SwitchToPC();
             XRUI.SetCurrentReality(XRUI.RealityType.VR);
-        }
+        }*/
         
         /// <summary>
         /// Adds a XRUI Element.

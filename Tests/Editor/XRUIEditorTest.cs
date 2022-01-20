@@ -76,7 +76,7 @@ namespace com.chwar.xrui.Tests.Editor
             Assert.NotNull(xrui);
         }
 
-        [Test]
+        /*[Test]
         public void XRUIEditorTestSwitchToPC()
         {
             XRUIEditor.SwitchToPC();
@@ -95,6 +95,6 @@ namespace com.chwar.xrui.Tests.Editor
         {
             XRUIEditor.SwitchToVR();
             Assert.True(XRUI.IsCurrentReality(XRUI.RealityType.VR));
-        }
+        }*/
     }
 }

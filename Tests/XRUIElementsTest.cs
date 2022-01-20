@@ -76,7 +76,7 @@ namespace com.chwar.xrui.Tests
             var card = GameObject.FindObjectOfType<XRUICard>();
             _xrui.InitializeElements();
             yield return new WaitForSeconds(1);
-            card.titleText = "Click on the close button";
+            card.UpdateTitle("Click on the close button");
             card.SetCloseButtonAction(XRUIElementClicked);
             yield return new WaitUntil(() => _clicked);
             Assert.True(_clicked);

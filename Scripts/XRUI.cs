@@ -18,8 +18,7 @@ namespace com.chwar.xrui
 
         [HideInInspector] public XRUIGridController xruiGridController;
         // Used to override global XRUI reality
-        public RealityType realityType = RealityType.UseGlobal; 
-        private RealityType _editorRealityType;
+        public RealityType realityType = RealityType.PC; 
 
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
@@ -39,13 +38,9 @@ namespace com.chwar.xrui
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
-
-                if (!realityType.Equals(RealityType.UseGlobal))
-                {
-                    // Use the scene specific XRUI preference
-                    Enum.TryParse(GetCurrentReality(), true, out _editorRealityType);
-                    SetCurrentReality(realityType);
-                }
+                
+                // Set the reality given in the scene
+                SetCurrentReality(realityType);
                 this.InitializeElements();
             }
             else
@@ -53,13 +48,12 @@ namespace com.chwar.xrui
                 Destroy(gameObject);
             }
         }
-        
-        internal void OnApplicationQuit()
+
+        public void OnValidate()
         {
-            // Set back the global XRUI preference
-            if (!realityType.Equals(RealityType.UseGlobal))
-                SetCurrentReality(_editorRealityType);
+            SetCurrentReality(realityType);
         }
+
 
         internal void Reset()
         {
@@ -71,7 +65,6 @@ namespace com.chwar.xrui
         /// </summary>
         public enum RealityType
         {
-            UseGlobal,
             PC,
             AR,
             VR
@@ -351,7 +344,7 @@ namespace com.chwar.xrui
             {
                 uiDocument.panelSettings = ps;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // do nothing
             }

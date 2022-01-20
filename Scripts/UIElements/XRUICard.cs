@@ -19,9 +19,11 @@ namespace com.chwar.xrui.UIElements
         [Tooltip("Dimensions of the card")]
         public Vector2 cardDimensions;
         [Tooltip("Title of the card")]
-        public string titleText;
+        [SerializeField]
+        private string titleText;
         [Tooltip("Subtitle of the card")]
-        public string subtitleText;
+        [SerializeField]
+        private string subtitleText;
         
         protected internal override void Init()
         {

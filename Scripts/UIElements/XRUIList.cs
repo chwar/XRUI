@@ -19,7 +19,8 @@ namespace com.chwar.xrui.UIElements
         private ScrollView _container;
 
         [Tooltip("Title of the list")]
-        public string titleText;
+        [SerializeField]
+        private string titleText;
         [Tooltip("Template used to add elements to the list")]
         public VisualTreeAsset listElementTemplate;
         [Tooltip("Texture used for the Add button")]

@@ -15,27 +15,16 @@ namespace com.chwar.xrui.UIElements
         public VisualElement Menu;
         public Button CloseButton;
         
-        private Label _appTitleLabel;
-        private Label _subtextLabel;
+        private Label _title;
+        private Label _subtitle;
         private ScrollView _container;
 
-        [Tooltip("Title of the menu")] 
+        [Tooltip("Title of the menu")]
         [SerializeField]
         private string titleText;
-        public string TitleText
-        { 
-            get => titleText;
-            set => UpdateTitle(value);
-        }
-
-        [Tooltip("Subtitle of the menu")] 
+        [Tooltip("Subtitle of the menu")]
         [SerializeField]
-        private string subText;
-        public string SubText 
-        { 
-            get => subText;
-            set => UpdateSubtext(value);
-        }
+        private string subtitleText;
         [Tooltip("Template used to add elements to the menu")]
         public VisualTreeAsset menuElementTemplate;
         [Tooltip("Texture used for the close button")]
@@ -49,8 +38,8 @@ namespace com.chwar.xrui.UIElements
         protected internal override void Init()
         {
             base.Init();
-            _appTitleLabel = UIDocument.rootVisualElement.Q<Label>("AppName");
-            _subtextLabel = UIDocument.rootVisualElement.Q<Label>("Subtext");
+            _title = UIDocument.rootVisualElement.Q<Label>("AppName");
+            _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtext");
             _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
             Menu = UIDocument.rootVisualElement.Q("Menu");
             MainButton = UIDocument.rootVisualElement.Q<Button>("MainButton");
@@ -65,22 +54,22 @@ namespace com.chwar.xrui.UIElements
         internal override void UpdateUI()
         {
             base.UpdateUI();
-            UpdateTitle(TitleText);
-            UpdateSubtext(SubText);
+            UpdateTitle(titleText);
+            UpdateSubtext(subtitleText);
         }
         
         /*Update Methods*/
 
         public void UpdateTitle(string text)
         {
-            if(_appTitleLabel != null && _appTitleLabel.text != text)
-                _appTitleLabel.text = text;
+            if(_title != null && _title.text != text)
+                _title.text = text;
         }
         
         public void UpdateSubtext(string text)
         {
-            if(_subtextLabel != null && _subtextLabel.text != text)
-                _subtextLabel.text = text;
+            if(_subtitle != null && _subtitle.text != text)
+                _subtitle.text = text;
         }
         
         /// <summary>

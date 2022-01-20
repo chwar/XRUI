@@ -54,16 +54,6 @@ namespace com.chwar.xrui.Tests
             Assert.NotNull(XRUI.Instance.GetUIElement("TestUIElement"));
         }
 
-        [Test]
-        public void XRUITestRealityOnApplicationQuit()
-        {
-            var xrui = GameObject.FindObjectOfType<XRUI>();
-            xrui.realityType = XRUI.RealityType.AR;
-            xrui.OnApplicationQuit();
-            Assert.True(XRUI.IsCurrentReality(XRUI.RealityType.UseGlobal));
-            XRUI.SetCurrentReality(XRUI.RealityType.PC);
-        }
-
         [UnityTest]
         public IEnumerator XRUITestVRPanel()
         {
