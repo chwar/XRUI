@@ -397,8 +397,11 @@ In order to organize easily and efficiently UI elements on screen, XRUI makes us
 
 For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the on-screen UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
 
-![Peek 2021-08-04 17-08](https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif)
-![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png)
+<!-- ![Peek 2021-08-04 17-08](https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif) -->
+<img src="https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif"  alt="pc" width = 700px>
+<img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width = 500px>
+	
+<!-- ![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png) -->
     
 > Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obtain the expected behaviour.
 
@@ -412,9 +415,13 @@ XRUI comes with its own set of styles that are imported just after Unity's in UI
 
 |XRUI Element|USS Class|
 |:---:|:---:|
-|Menu|`.xrui__alert`|
+|Menu|`.xrui__menu`|
+|Menu item|`.xrui__menu__item`|
 |List|`.xrui__list`|
+|List item|`.xrui__list__item`|
 |Navbar|`.xrui__navbar`|
 |Card|`.xrui__card`|
 |Alert|`.xrui__alert`|
 |Modal|`.xrui__modal`|
+|Contextual Menu|`.xrui__contextual-menu `|
+	
