@@ -64,6 +64,11 @@ namespace com.chwar.xrui.UIElements
         /// <returns>The added element</returns>
         public VisualElement AddElement(bool bSelect)
         {
+            if (listElementTemplate is null)
+            {
+                throw new MissingReferenceException($"The list element template of {this.gameObject.name} is missing!");
+            }
+            
             VisualElement el = listElementTemplate.Instantiate();
             if (bSelect)
                 SelectElement(el.ElementAt(0));

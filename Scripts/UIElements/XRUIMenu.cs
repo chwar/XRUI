@@ -83,6 +83,7 @@ namespace com.chwar.xrui.UIElements
                 throw new MissingReferenceException($"The menu element template of {this.gameObject.name} is missing!");
             }
             VisualElement el = menuElementTemplate.Instantiate();
+            el.ElementAt(0).AddToClassList("xrui__menu__item");
             _container.Add(el);
             return el;
         }
