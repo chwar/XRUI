@@ -62,14 +62,20 @@ namespace com.chwar.xrui.UIElements
 
         public void UpdateTitle(string text)
         {
-            if(_title != null && _title.text != text)
+            if(_title != null && _title.text != text) {
                 _title.text = text;
+                // Also update inspector value to keep only one value in case the field is updated from code 
+                titleText = text;
+            }
         }
         
         public void UpdateSubtext(string text)
         {
-            if(_subtitle != null && _subtitle.text != text)
+            if(_subtitle != null && _subtitle.text != text) {
                 _subtitle.text = text;
+                // Also update inspector value to keep only one value in case the field is updated from code 
+                subtitleText = text;
+            }
         }
         
         /// <summary>
