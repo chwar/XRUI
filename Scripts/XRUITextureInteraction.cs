@@ -56,8 +56,8 @@ namespace com.chwar.xrui
                 Debug.DrawLine(cameraRay.origin, cameraRay.direction * 10, Color.red);
                 return invalidPosition;
             }
-            Debug.Log(hit.collider.name);
-            Debug.DrawLine(cameraRay.origin, cameraRay.direction * 10, Color.green);
+            // Debug.Log(hit.collider.name);
+            // Debug.DrawLine(cameraRay.origin, cameraRay.direction * 10, Color.green);
             var targetTexture = targetPanel.targetTexture;
             MeshRenderer rend = hit.transform.GetComponent<MeshRenderer>();
 

@@ -147,21 +147,32 @@ namespace com.chwar.xrui.UIElements
                                          $"element ({UIDocument.name}). Please add it to the root element and try again.");
                     return;
                 }
-                xrui.EnableInClassList(XRUI.GetCurrentReality(), true);
-                if (XRUI.IsCurrentReality(XRUI.RealityType.AR))
+
+                if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
                 {
-                    // Check for device orientation to refine AR USS styles
-                    if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-                         xrui.EnableInClassList("portrait", true);
-                    if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-                        Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+                    // Check for device orientation to refine Mobile AR USS styles
+                    if (Input.deviceOrientation == DeviceOrientation.Portrait ||
+                        Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
+                    {
+                        xrui.EnableInClassList("portrait", true);
+                        xrui.EnableInClassList("landscape", false);
+                    }
+
+                    else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
+                        Input.deviceOrientation == DeviceOrientation.LandscapeRight || Input.deviceOrientation == DeviceOrientation.Unknown)
+                    {
+                        xrui.EnableInClassList("portrait", false);
                         xrui.EnableInClassList("landscape", true);
+                    }
+
                 }
-                else if (XRUI.IsCurrentReality(XRUI.RealityType.VR) && Application.isPlaying)
+                else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
                 {
                     // Create a runtime VR panel after the layout pass
                     xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetVRPanel, UIDocument);
                 }
+
+                xrui.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
             }
         }
         
@@ -206,7 +217,10 @@ namespace com.chwar.xrui.UIElements
         public bool anchorVRPanelToCamera;
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
         public Vector2 customVRPanelDimensions;
-        [Tooltip("By default, the VR panel will be automatically anchored in front of the camera. You can define a custom position here.")]
-        public Vector3 customVRPanelAnchorPosition;
+        [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
+        public Vector3 customVRPanelPosition;
+
+        [Tooltip("Alters the scale of the VR Panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
+        public int VRPanelScale;
     }
 }

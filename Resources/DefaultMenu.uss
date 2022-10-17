@@ -1,16 +1,16 @@
-.xrui__menu.ar {
+.xrui__menu.twodimensional.portrait {
     width: 100%;
     height: 100%;
 }
 
-.xrui__menu.pc {
+.xrui__menu.twodimensional.landscape {
     width: 600px;
     height: 100%;
 }
 
-.xrui__menu.vr {
-    width: 1280px;
-    height: 720px;
+.xrui__menu.threedimensional {
+    width: 500px;
+    height: 500px;
 }
 
 .xrui__menu {

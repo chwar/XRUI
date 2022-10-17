@@ -17,8 +17,9 @@ namespace com.chwar.xrui
         public static XRUI Instance;
 
         [HideInInspector] public XRUIGridController xruiGridController;
-        // Used to override global XRUI reality
-        public RealityType realityType = RealityType.PC; 
+        // Used to define the nature of UIs.
+        [Tooltip("Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
+        public XRUIFormat xruiFormat = XRUIFormat.TwoDimensional; 
 
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
@@ -40,7 +41,7 @@ namespace com.chwar.xrui
                 DontDestroyOnLoad(gameObject);
                 
                 // Set the reality given in the scene
-                SetCurrentReality(realityType);
+                SetCurrentXRUIFormat(xruiFormat);
                 this.InitializeElements();
             }
             else
@@ -51,7 +52,7 @@ namespace com.chwar.xrui
 
         public void OnValidate()
         {
-            SetCurrentReality(realityType);
+            SetCurrentXRUIFormat(xruiFormat);
         }
 
 
@@ -61,14 +62,13 @@ namespace com.chwar.xrui
         }
         
         /// <summary>
-        /// Defines the different XR realities
+        /// Defines the nature of the UI in order to fit the desired XR device as best as possible
         /// </summary>
-        public enum RealityType
+        public enum XRUIFormat
         {
-            PC,
-            AR,
-            VR
-        }
+            TwoDimensional,
+            ThreeDimensional
+    }
         
         /// <summary>
         /// Defines the different alert types
@@ -86,31 +86,14 @@ namespace com.chwar.xrui
         /// Returns the current reality based on the running platform.
         /// </summary>
         /// <returns>The current reality.</returns>
-        public static string GetCurrentReality()
+        public static string GetCurrentXRUIFormat()
         {
-            // switch (Application.platform)
-            // {
-                // case RuntimePlatform.Android:
-                // case RuntimePlatform.IPhonePlayer:
-                //     if(Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-                //         return RealityType.AR.ToString().ToLower();
-                //     if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-                //         Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-                //         return RealityType.PC.ToString().ToLower();
-                //     break;
-                // case RuntimePlatform.WindowsPlayer:
-                // case RuntimePlatform.OSXPlayer:
-                // case RuntimePlatform.LinuxPlayer:
-                //     return RealityType.PC.ToString().ToLower();
-                // default:
-                //}
-                // return null;
-            return PlayerPrefs.GetString("reality");
+            return PlayerPrefs.GetString("XRUIFormat");
         }
 
-        public static bool IsCurrentReality(RealityType type)
+        public static bool IsCurrentXRUIFormat(XRUIFormat format)
         {
-            return GetCurrentReality().Equals(type.ToString().ToLower());
+            return GetCurrentXRUIFormat().Equals(format.ToString().ToLower());
         }
         
         /// <summary>
@@ -118,9 +101,9 @@ namespace com.chwar.xrui
         /// Since the runtime platform is set to Editor, this sets the correct reality in the PlayerPrefs.
         /// </summary>
         /// <param name="type"></param>
-        public static void SetCurrentReality(RealityType type)
+        public static void SetCurrentXRUIFormat(XRUIFormat format)
         {
-            PlayerPrefs.SetString("reality", type.ToString().ToLower());
+            PlayerPrefs.SetString("XRUIFormat", format.ToString().ToLower());
             PlayerPrefs.Save();
         }
         
@@ -175,7 +158,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(alertContainer);
 
             // Style the alert accordingly
-            alertContainer.ElementAt(0).AddToClassList(GetCurrentReality());
+            alertContainer.ElementAt(0).AddToClassList(GetCurrentXRUIFormat());
             alertContainer.ElementAt(0).AddToClassList(type.ToString().ToLower());
 
             var xrui = container.AddComponent<XRUIAlert>();
@@ -272,7 +255,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(contextualMenu);
 
             // Style and position the contextual menu accordingly
-            contextualMenu.AddToClassList(GetCurrentReality());
+            contextualMenu.AddToClassList(GetCurrentXRUIFormat());
             var xrui = container.AddComponent<XRUIContextualMenu>();
             // Use default element template, can be overriden
             xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
@@ -328,6 +311,8 @@ namespace com.chwar.xrui
             }
 
             var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
+            if (ratio == dimensions.width)
+                ratio = ratio / 10;
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
                 name = uiDocument.name
@@ -337,8 +322,12 @@ namespace com.chwar.xrui
             rt.Create();
             PanelSettings ps = uiDocument.panelSettings.targetTexture == null ? 
                 Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings")) : uiDocument.panelSettings;
-            ps.scaleMode = PanelScaleMode.ConstantPhysicalSize;
             ps.targetTexture = rt;
+            ps.scaleMode = uiDocument.panelSettings.scaleMode;
+            ps.referenceResolution = uiDocument.panelSettings.referenceResolution;
+            ps.referenceDpi = uiDocument.panelSettings.referenceDpi;
+            ps.fallbackDpi = uiDocument.panelSettings.fallbackDpi;
+            ps.match = uiDocument.panelSettings.match;
             
             try
             {
@@ -351,19 +340,23 @@ namespace com.chwar.xrui
             
             o.AddComponent<XRUITextureInteraction>();
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
+            if (xrui.vrParameters.VRPanelScale.Equals(0))
+                xrui.vrParameters.VRPanelScale = 1;
             plane.numSegments = 512;
-            plane.height = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / 10 : xrui.vrParameters.customVRPanelDimensions.y;
-            plane.radius = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / 10 : xrui.vrParameters.customVRPanelDimensions.x;
+            plane.height = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.y;
+            plane.radius = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.x;
             plane.useArc = xrui.vrParameters.bendVRPanel || uiIsFloatingElement;
             plane.curvatureDegrees = xrui.vrParameters.bendVRPanel || uiIsFloatingElement ? 60 : 0;
             plane.Generate(rt);
             if (xrui.vrParameters.anchorVRPanelToCamera || uiIsFloatingElement)
             {
                 o.transform.parent = Camera.main.transform;
-                o.transform.localPosition = xrui.vrParameters.customVRPanelAnchorPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.vrParameters.customVRPanelAnchorPosition;
                 o.transform.localRotation = Quaternion.identity;
-            } else
-                o.transform.position = Camera.main.transform.position + Vector3.forward * 2;
+            } 
+            o.transform.localPosition = xrui.vrParameters.customVRPanelPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.vrParameters.customVRPanelPosition;
+            Debug.Log($"============ WIDTH = {dimensions.width} ===============");
+            Debug.Log($"============ HEIGHT = {dimensions.height} ===============");
+            Debug.Log($"============ RATIO = {ratio} ===============");
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
