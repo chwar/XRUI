@@ -4,14 +4,18 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
-    public class XRUITextureInteraction : MonoBehaviour
+    public class XRUIWorldSpaceInteraction : MonoBehaviour, IPointerMoveHandler, IPointerUpHandler, IPointerDownHandler,
+    ISubmitHandler, ICancelHandler, IMoveHandler, IScrollHandler, ISelectHandler, IDeselectHandler, IDragHandler
     {
         public PanelSettings targetPanel;
+        private PanelEventHandler _panelEventHandler; 
         private Func<Vector2, Vector2> _renderTextureScreenTranslation;
 
         void OnEnable()
@@ -24,6 +28,22 @@ namespace com.chwar.xrui
                     _renderTextureScreenTranslation = ScreenCoordinatesToRenderTexture;
                 }
                 targetPanel.SetScreenToPanelSpaceFunction(_renderTextureScreenTranslation);
+            }
+            
+            // find the automatically generated PanelEventHandler and PanelRaycaster for this panel and disable the raycaster
+            PanelEventHandler[] handlers = FindObjectsOfType<PanelEventHandler>();
+            var uiDocument = GetComponent<UIDocument>();
+            foreach (PanelEventHandler handler in handlers)
+            {
+                if (handler.panel == uiDocument.rootVisualElement.panel)
+                {
+                    _panelEventHandler = handler;
+                    PanelRaycaster panelRaycaster = _panelEventHandler.GetComponent<PanelRaycaster>();
+                    if (panelRaycaster != null)
+                        panelRaycaster.enabled = false;
+                    
+                    break;
+                }
             }
         }
 
@@ -44,35 +64,80 @@ namespace com.chwar.xrui
         internal Vector2 ScreenCoordinatesToRenderTexture(Vector2 screenPosition)
         {
             var invalidPosition = new Vector2(float.NaN, float.NaN);
-            //Debug.Log(screenPosition);
             screenPosition.y = Screen.height - screenPosition.y;
             Ray cameraRay = Camera.main.ScreenPointToRay(screenPosition);
             
-            // var cameraRay = Camera.main.ScreenPointToRay(screenPosition);
-
             RaycastHit hit;
             if (!Physics.Raycast(cameraRay, out hit))
             {
-                Debug.DrawLine(cameraRay.origin, cameraRay.direction * 10, Color.red);
                 return invalidPosition;
             }
-            // Debug.Log(hit.collider.name);
-            // Debug.DrawLine(cameraRay.origin, cameraRay.direction * 10, Color.green);
+            
             var targetTexture = targetPanel.targetTexture;
             MeshRenderer rend = hit.transform.GetComponent<MeshRenderer>();
-
+            
             if (rend == null || rend.sharedMaterial.mainTexture != targetTexture)
             {
                 return invalidPosition;
             }
-
+            
             Vector2 pixelUV = hit.textureCoord;
-
             //since y screen coordinates are usually inverted, we need to flip them
             pixelUV.y = 1 - pixelUV.y;
             pixelUV.x *= targetTexture.width;
             pixelUV.y *= targetTexture.height;
             return pixelUV;
         }
+
+        public void OnPointerMove (PointerEventData eventData)
+        {
+            _panelEventHandler?.OnPointerMove(eventData);
+        }
+
+        public void OnPointerDown (PointerEventData eventData)
+        {
+            _panelEventHandler?.OnPointerDown(eventData);
+        }
+
+        public void OnPointerUp (PointerEventData eventData)
+        {
+            _panelEventHandler?.OnPointerUp(eventData);
+        }
+
+        public void OnSubmit (BaseEventData eventData)
+        {
+            _panelEventHandler?.OnSubmit(eventData);
+        }
+
+        public void OnCancel (BaseEventData eventData)
+        {
+            _panelEventHandler?.OnCancel(eventData);
+        }
+
+        public void OnMove (AxisEventData eventData)
+        {
+            _panelEventHandler?.OnMove(eventData);
+        }
+
+        public void OnScroll (PointerEventData eventData)
+        {
+            _panelEventHandler?.OnScroll(eventData);
+        }
+
+        public void OnSelect (BaseEventData eventData)
+        {
+            _panelEventHandler?.OnSelect(eventData);
+        }
+
+        public void OnDeselect (BaseEventData eventData)
+        {
+            _panelEventHandler?.OnDeselect(eventData);
+        }
+
+        public void OnDrag (PointerEventData eventData)
+        {
+                OnPointerMove(eventData);
+        }
+
     }
 }

@@ -22,7 +22,7 @@
     color: rgba(255, 255, 255, 255);
 }
 
-.xrui__alert.pc {
+.xrui__alert.twodimensional.landscape {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -36,7 +36,7 @@
     min-width: 300px;
 }
 
-.xrui__alert.ar {
+.xrui__alert.twodimensional.portrait {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
@@ -48,7 +48,7 @@
     min-height: 75px;
 }
 
-.xrui__alert.vr {
+.xrui__alert.threedimensional {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;

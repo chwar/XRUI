@@ -1,6 +1,6 @@
 {
   "name": "com.chwar.xrui",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "displayName": "XRUI Framework",
   "description": "XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can automatically adjust depending on the deployed platform and the environment's reality, supporting regular PC environment as well as AR and VR environments.",
   "unity": "2021.2",
@@ -16,5 +16,8 @@
     "url": "https://github.com/chwar/XRUI.git",
     "type": "git"
   },
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "com.unity.xr.interaction.toolkit": "2.0.0"
+  }
 }

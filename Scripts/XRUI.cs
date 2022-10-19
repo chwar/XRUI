@@ -171,6 +171,12 @@ namespace com.chwar.xrui
                 xrui.Title.text = title;
             }
             xrui.Content.text = text;
+            
+            // VR parameters
+            xrui.vrParameters.anchorVRPanelToCamera = true;
+            xrui.vrParameters.customVRPanelPosition = new Vector3(0, -1f, 0);
+            xrui.vrParameters.bendVRPanel = false;
+            
             if (onClick != null)
                 xrui.ClickCallback = onClick;
         }
@@ -299,7 +305,6 @@ namespace com.chwar.xrui
         {
             ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
             var xrui = uiDocument.GetComponent<XRUIElement>();
-            bool uiIsFloatingElement = xrui.GetType().IsSubclassOf(typeof(XRUIFloatingElement));
 
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
@@ -311,8 +316,9 @@ namespace com.chwar.xrui
             }
 
             var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
-            if (ratio == dimensions.width)
-                ratio = ratio / 10;
+            // If the ratio is 1:1, the GCD will be the same value as the height/width, making the ratio value too high
+            if (ratio == (int) dimensions.width) ratio /= 10;
+            
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
                 name = uiDocument.name
@@ -338,28 +344,26 @@ namespace com.chwar.xrui
                 // do nothing
             }
             
-            o.AddComponent<XRUITextureInteraction>();
+            o.AddComponent<XRUIWorldSpaceInteraction>();
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
             if (xrui.vrParameters.VRPanelScale.Equals(0))
                 xrui.vrParameters.VRPanelScale = 1;
             plane.numSegments = 512;
             plane.height = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.y;
             plane.radius = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.x;
-            plane.useArc = xrui.vrParameters.bendVRPanel || uiIsFloatingElement;
-            plane.curvatureDegrees = xrui.vrParameters.bendVRPanel || uiIsFloatingElement ? 60 : 0;
+            plane.useArc = xrui.vrParameters.bendVRPanel;
+            plane.curvatureDegrees = xrui.vrParameters.bendVRPanel ? 60 : 0;
             plane.Generate(rt);
-            if (xrui.vrParameters.anchorVRPanelToCamera || uiIsFloatingElement)
+            if (xrui.vrParameters.anchorVRPanelToCamera)
             {
                 o.transform.parent = Camera.main.transform;
                 o.transform.localRotation = Quaternion.identity;
             } 
             o.transform.localPosition = xrui.vrParameters.customVRPanelPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.vrParameters.customVRPanelPosition;
-            Debug.Log($"============ WIDTH = {dimensions.width} ===============");
-            Debug.Log($"============ HEIGHT = {dimensions.height} ===============");
-            Debug.Log($"============ RATIO = {ratio} ===============");
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
+            o.GetComponent<MeshRenderer>().material.shader = Shader.Find("Unlit/Texture");
         }
 
         private static int GetGreatestCommonDivisor(int a, int b) {
