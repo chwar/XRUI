@@ -13,7 +13,7 @@ using Label = UnityEngine.UIElements.Label;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIModal : XRUIFloatingElement
+    public class XRUIModal : XRUIElement
     {
         public List<VisualTreeAsset> modalFlowList;
         public Label ModalTitle { get; private set; }
@@ -30,14 +30,13 @@ namespace com.chwar.xrui.UIElements
 
         protected internal override void Init()
         {
-            base.Init();
-            ModalTitle = UIDocument.rootVisualElement.Q<Label>("ModalTitle");
-            ValidateButton = UIDocument.rootVisualElement.Q<Button>("Validate");
-            CancelButton = UIDocument.rootVisualElement.Q<Button>("Cancel");
-            _closeButton = UIDocument.rootVisualElement.Q<Button>("CloseButton");
+            ModalTitle = RootElement.Q<Label>(null, "xrui-modal__title");
+            ValidateButton = RootElement.Q<Button>(null, "xrui-modal__validate-btn");
+            CancelButton = RootElement.Q<Button>(null, "xrui-modal__cancel-btn");
+            _closeButton = RootElement.Q<Button>(null, "xrui-modal__close-btn");
             _closeButton.style.backgroundImage = closeButtonTexture;
             _closeButton.clicked += () => Destroy(this.gameObject);
-            _buttonsContainer = UIDocument.rootVisualElement.Q<VisualElement>("ButtonsContainer");
+            _buttonsContainer = RootElement.Q<VisualElement>(null, "xrui-modal__btn-container");
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace com.chwar.xrui.UIElements
             }
             
             // Find the container
-            var main = UIDocument.rootVisualElement.Q(parent);
+            var main = RootElement.Q(parent);
             if (main is null)
             {
                 throw new ArgumentException($"There is no Visual Element called \"{parent}\" in the Modal. " +
@@ -102,7 +101,7 @@ namespace com.chwar.xrui.UIElements
                 current.style.display = DisplayStyle.None;
             
             // Check if content to add is already existing and hidden
-            var existingContent = UIDocument.rootVisualElement.Q<VisualElement>(contentAssetName);
+            var existingContent = RootElement.Q<VisualElement>(contentAssetName);
             if (existingContent is not null)
             {
                 existingContent.style.display = DisplayStyle.Flex;
@@ -128,7 +127,7 @@ namespace com.chwar.xrui.UIElements
         /// <param name="fields">Fields to set as required for the page they are contained in.</param>
         public void SetRequiredFields(params TextField[] fields)
         {
-            var page = UIDocument.rootVisualElement.Query<TemplateContainer>().Where(ve => 
+            var page = RootElement.Query<TemplateContainer>().Where(ve => 
                 ve.style.display.value.Equals(DisplayStyle.Flex)).Last().name;
             if (!_requiredFields.ContainsKey(page))
             {
@@ -163,7 +162,7 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         private void CheckFormValidity()
         {
-            var currentPage = UIDocument.rootVisualElement.Query<TemplateContainer>().Where(ve => 
+            var currentPage = RootElement.Query<TemplateContainer>().Where(ve => 
                 ve.style.display.value.Equals(DisplayStyle.Flex)).Last().name;
             if (_requiredFields.ContainsKey(currentPage))
             {

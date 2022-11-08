@@ -1,4 +1,4 @@
-.xrui__contextual-menu {
+.xrui-contextual-menu {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -6,21 +6,21 @@
     background-color: rgb(255, 255, 255);
 }
 
-.xrui__contextual-menu__arrow {
+.xrui-contextual-menu__arrow {
     background-color: rgb(255, 255, 255);
     transform-origin: center;
     translate: -5px -33px;
     rotate: 45deg;
 }
 
-.xrui__contextual-menu__item:hover {
+.xrui-contextual-menu__item:hover {
     background-color: var(--xrui-primary);
 }
 
-.xrui__contextual-menu__item:hover > .unity-label {
+.xrui-contextual-menu__item:hover > .unity-label {
     color: rgba(255, 255, 255, 255);
 }
 
-.xrui__contextual-menu__item:hover > .xrui__icon {
+.xrui-contextual-menu__item:hover > .xrui-icon {
     -unity-background-image-tint-color: rgba(255, 255, 255, 255);
 }

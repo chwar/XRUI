@@ -13,7 +13,6 @@ namespace com.chwar.xrui.UIElements
     {
         // UXML Attributes
         public Button AddButton;
-        public VisualElement List;
         
         private Label _title;
         private ScrollView _container;
@@ -32,11 +31,10 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         protected internal override void Init()
         {
-            base.Init();
-            _title = UIDocument.rootVisualElement.Q<Label>("Title");
-            _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
-            List = UIDocument.rootVisualElement.Q("List");
-            AddButton = UIDocument.rootVisualElement.Q<Button>("AddItem");
+            _title = RootElement.Q<Label>(null,"xrui-list__title");
+            _container = RootElement.Q<ScrollView>(null,"xrui-list__container");
+            
+            AddButton = RootElement.Q<Button>(null,"xrui-list__add-btn");
             AddButton.style.backgroundImage = addButtonTexture;
         }
         
@@ -77,7 +75,7 @@ namespace com.chwar.xrui.UIElements
             if (bSelect)
                 SelectElement(el.ElementAt(0));
             
-            el.ElementAt(0).AddToClassList("xrui__list__item");
+            el.ElementAt(0).AddToClassList("xrui-list-item");
             _container.Add(el);
             return el;
         }
@@ -104,12 +102,12 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         public void RemoveAllElements()
         {
-            _container.Query(null, "xrui__list__item").ForEach(i => i.RemoveFromHierarchy());
+            _container.Query(null, "xrui-list-item").ForEach(i => i.RemoveFromHierarchy());
         }
 
         public int GetListCount()
         {
-            return  _container.Query(null, "xrui__list__item").ToList().Count;
+            return  _container.Query(null, "xrui-list-item").ToList().Count;
         }
 
         /// <summary>
@@ -118,9 +116,9 @@ namespace com.chwar.xrui.UIElements
         /// <param name="el"></param>
         public void SelectElement(VisualElement el)
         {
-            var previousSelection = _container.Q(null, "xrui__list__item--selected");
-            previousSelection?.ToggleInClassList("xrui__list__item--selected");
-            el.ToggleInClassList("xrui__list__item--selected");
+            var previousSelection = _container.Q(null, "xrui-list-item--selected");
+            previousSelection?.ToggleInClassList("xrui-list-item--selected");
+            el.ToggleInClassList("xrui-list-item--selected");
         }
     }
 }

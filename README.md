@@ -220,7 +220,7 @@ void StartPage() {
         // This callback is only fired once, when the page is created for the first time
         // Put here initialization code, event subscriptions, etc. 
 
-        Button myButton = UIDocument.rootVisualElement.Q<Button>("myButton");
+        Button myButton = RootElement.Q<Button>("myButton");
         _myButton.clicked += MyPage;
     });
 
@@ -415,13 +415,13 @@ XRUI comes with its own set of styles that are imported just after Unity's in UI
 
 |XRUI Element|USS Class|
 |:---:|:---:|
-|Menu|`.xrui__menu`|
-|Menu item|`.xrui__menu__item`|
-|List|`.xrui__list`|
-|List item|`.xrui__list__item`|
-|Navbar|`.xrui__navbar`|
-|Card|`.xrui__card`|
-|Alert|`.xrui__alert`|
-|Modal|`.xrui__modal`|
-|Contextual Menu|`.xrui__contextual-menu `|
+|Menu|`.xrui-menu`|
+|Menu item|`.xrui-menu-item`|
+|List|`.xrui-list`|
+|List item|`.xrui-list-item`|
+|Navbar|`.xrui-navbar`|
+|Card|`.xrui-card`|
+|Alert|`.xrui-alert`|
+|Modal|`.xrui-modal`|
+|Contextual Menu|`.xrui-contextual-menu `|
 	

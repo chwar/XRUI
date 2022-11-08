@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIContextualMenu : XRUIFloatingElement
+    public class XRUIContextualMenu : XRUIElement
     {
         /// <summary>
         /// Template used to generate entries.
@@ -47,12 +47,11 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         protected internal override void Init()
         {
-            base.Init();
-            _menu = UIDocument.rootVisualElement.Q(null, "xrui__contextual-menu");
-            _contextualArrow = _menu.Q(null, "xrui__contextual-menu__arrow");
+            _menu = RootElement.Q(null, "xrui-contextual-menu");
+            _contextualArrow = _menu.Q(null, "xrui-contextual-menu__arrow");
             
             // Set handler on click to dispose of the contextual menu
-            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
+            RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
             _menu.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
         }
 
@@ -107,7 +106,7 @@ namespace com.chwar.xrui.UIElements
             var el = menuElementTemplate.Instantiate();
             el.style.flexShrink = 0;
             el.style.flexGrow = 1;
-            el.ElementAt(0).AddToClassList("xrui__contextual-menu__item");
+            el.ElementAt(0).AddToClassList("xrui-contextual-menu__item");
             _menu.Q("MainContainer").Add(el);
             
             // Destroy the menu when the element is clicked

@@ -5,6 +5,7 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,62 +15,55 @@ namespace com.chwar.xrui.UIElements
     public class XRUIElement : MonoBehaviour
     {
         public bool PointerOverUI { get; private set; }
-        public VRParameters vrParameters;
+        public WorldUIParameters worldUIParameters;
         
         internal UIDocument UIDocument;
+        internal VisualElement RootElement;
         private DeviceOrientation _previousOrientation;
         private bool _hasOrientationChanged;
-        private bool _isInitialized;
         
         protected internal virtual void Init()
         {
             // To override
-            UIDocument = GetComponent<UIDocument>();
-            _previousOrientation = Input.deviceOrientation;
-            _isInitialized = true;
         }
 
-        public void OnValidate()
+        public void Awake()
         {
-            if (UIDocument is null)
-            {
-                if(!Application.isPlaying)
-                    Init();
-                else
-                    return;
-            } else if(UIDocument.rootVisualElement is null)
-                return;
+            UIDocument = GetComponent<UIDocument>();
+            RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
+            _previousOrientation = Input.deviceOrientation;
+            
+            // The element is not initialized at this moment, but only during the app's lifetime if it has been re-enabled.
+            // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
+            if (XRUI.Instance == null) return;
+
+            Init();
             UpdateUI();
         }
 
         protected void OnEnable()
         {
-            if (UIDocument is null || UIDocument.rootVisualElement is null) return;
-            if (UIDocument.rootVisualElement.childCount == 0)
+            if (RootElement.childCount == 0)
             {
                 throw new NullReferenceException($"The root visual element is empty! " +
                                                  $"You must provide a VisualTreeElement to the UIDocument");
             }
             // Register event handlers for pointer clicks on the UI
-            UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerEnterEvent>(OnPointerEnter);
-            UIDocument.rootVisualElement.ElementAt(0).RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
-            
-            // This does not run during the initial run, only during the app's lifetime if an element has been re-enabled.
-            // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
-            if (!_isInitialized)
-            {
-                Init();
-                UpdateUI();
-            }
+            RootElement.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
+            RootElement.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
+
+            // Init();
+            UpdateUI();
         }
 
         protected virtual void OnDisable()
         {
-            _isInitialized = false;
-            if (UIDocument is null || UIDocument.rootVisualElement is null) return;
+            // When Destroying, Visual Element is null, and no need to unregister the callbacks
+            if (RootElement is null) return;
+            
             // Unregister event handlers for pointer clicks on the UI
-            UIDocument.rootVisualElement.ElementAt(0).UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
-            UIDocument.rootVisualElement.ElementAt(0).UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
+            RootElement.UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
+            RootElement.UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
         }
 
         private void Update()
@@ -88,7 +82,7 @@ namespace com.chwar.xrui.UIElements
         /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
         public void Show(bool bShow)
         {
-            Show(UIDocument.rootVisualElement, bShow);
+            Show(RootElement, bShow);
         }
 
         /// <summary>
@@ -101,7 +95,7 @@ namespace com.chwar.xrui.UIElements
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
             // Hide the panel if in 3D
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
-                UIDocument.GetComponent<MeshRenderer>().enabled = bShow;
+                GetComponent<MeshRenderer>().enabled = bShow;
         }
 
         /// <summary>
@@ -112,7 +106,7 @@ namespace com.chwar.xrui.UIElements
         /// <exception cref="ArgumentException"></exception>
         public void AddUIElement(VisualElement uiElement, string uiParent)
         {
-            VisualElement parent = UIDocument.rootVisualElement.Q(uiParent);
+            VisualElement parent = RootElement.Q(uiParent);
             if (parent != null)
             {
                 parent.Add(uiElement);
@@ -138,44 +132,32 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         internal virtual void UpdateUI()
         {
-            if (UIDocument != null && UIDocument.rootVisualElement != null)
+            if (RootElement is null)
             {
-                var xrui = UIDocument.rootVisualElement.Q(null, "xrui");
-                if (xrui is null)
-                {
-                    // If a custom element was added without the .xrui class, we can't find it at runtime
-                    if(Application.isPlaying)
-                        Debug.LogWarning($"The .xrui USS class was not found in the provided visual " +
-                                         $"element ({UIDocument.name}). Please add it to the root element and try again.");
-                    return;
-                }
-
-                if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
-                {
-                    // Check for device orientation to refine Mobile AR USS styles
-                    if (Input.deviceOrientation == DeviceOrientation.Portrait ||
-                        Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-                    {
-                        xrui.EnableInClassList("portrait", true);
-                        xrui.EnableInClassList("landscape", false);
-                    }
-
-                    else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-                        Input.deviceOrientation == DeviceOrientation.LandscapeRight || Input.deviceOrientation == DeviceOrientation.Unknown)
-                    {
-                        xrui.EnableInClassList("portrait", false);
-                        xrui.EnableInClassList("landscape", true);
-                    }
-
-                }
-                else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
-                {
-                    // Create a runtime VR panel after the layout pass
-                    xrui.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetVRPanel, UIDocument);
-                }
-
-                xrui.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
+                // If a custom element was added without the .xrui class, we can't find it at runtime
+                if(Application.isPlaying)
+                    Debug.LogWarning($"The .xrui USS class was not found in the provided visual " +
+                                     $"element ({UIDocument.name}). Please add it to the root element and try again.");
+                return;
             }
+
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            {
+                // Check for device orientation to refine Mobile AR USS styles
+                bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft 
+                                   || Input.deviceOrientation == DeviceOrientation.LandscapeRight 
+                                   || (Application.isEditor && XRUI.Instance != null && !XRUI.Instance.setTwoDimensionalFormatToPortraitInEditor);
+
+                RootElement.EnableInClassList("landscape", isLandscape);
+                RootElement.EnableInClassList("portrait", !isLandscape);
+            }
+            else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
+            {
+                // Create a runtime VR panel after the layout pass
+                RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
+            }
+
+            RootElement.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
         }
         
         /// <summary>
@@ -211,18 +193,17 @@ namespace com.chwar.xrui.UIElements
     }
 
     [Serializable]
-    public struct VRParameters
+    public struct WorldUIParameters
     {
         [Tooltip("Alters the VR panel by slightly bending it")]
-        public bool bendVRPanel;
+        public bool bendPanel;
         [Tooltip("Defines if the VR Panel will be anchored to the camera or not")]
-        public bool anchorVRPanelToCamera;
+        public bool anchorPanelToCamera;
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
-        public Vector2 customVRPanelDimensions;
+        public Vector2 customPanelDimensions;
         [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
-        public Vector3 customVRPanelPosition;
-
+        public Vector3 customPanelPosition;
         [Tooltip("Alters the scale of the VR Panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
-        public int VRPanelScale;
+        public int PanelScale;
     }
 }

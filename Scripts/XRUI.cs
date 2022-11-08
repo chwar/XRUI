@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    [ExecuteAlways]
     public class XRUI : MonoBehaviour
     {
         // Singleton
@@ -19,7 +20,10 @@ namespace com.chwar.xrui
         [HideInInspector] public XRUIGridController xruiGridController;
         // Used to define the nature of UIs.
         [Tooltip("Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
-        public XRUIFormat xruiFormat = XRUIFormat.TwoDimensional; 
+        public XRUIFormat xruiFormat = XRUIFormat.TwoDimensional;
+
+        [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in Play mode in the Unity Editor. This forces 2D Portrait USS styles.")]
+        public bool setTwoDimensionalFormatToPortraitInEditor;
 
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
@@ -37,15 +41,22 @@ namespace com.chwar.xrui
         {
             if(Instance == null)
             {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-                
-                // Set the reality given in the scene
+                if (Application.isPlaying)
+                {
+                    Instance = this;
+                    DontDestroyOnLoad(gameObject);
+                }
+                else
+                    // For Editor mode
+                    Instance = FindObjectOfType<XRUI>();
+
+                    // Set the reality given in the scene
                 SetCurrentXRUIFormat(xruiFormat);
                 this.InitializeElements();
             }
             else
             {
+                Debug.LogWarning("Found another XRUI Instance, destroying this one.");
                 Destroy(gameObject);
             }
         }
@@ -124,22 +135,31 @@ namespace com.chwar.xrui
             return asset;
         }
         
-        public void ShowAlert(AlertType type, string text)
+        public XRUIAlert ShowAlert(AlertType type, string text)
         {
-            ShowAlert(type, null, text);     
+            return ShowAlert(type, null, text);     
         }
         
-        public void ShowAlert(AlertType type, string title, string text)
+        public XRUIAlert ShowAlert(AlertType type, string title, string text)
         {
-            ShowAlert(null, type, title, text, null);
+            return ShowAlert(null, type, title, text, 0, null);
         }
         
-        public void ShowAlert(AlertType type, string title, string text, Action onClick)
+        public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown)
         {
-            ShowAlert(null, type, title, text, onClick);
+            return ShowAlert(null, type, title, text, countdown, null);
+        }               
+        public XRUIAlert ShowAlert(AlertType type, string title, string text, Action onClick)
+        {
+            return ShowAlert(null, type, title, text, 0, onClick);
+        }        
+        
+        public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown, Action onClick)
+        {
+            return ShowAlert(null, type, title, text, countdown, onClick);
         }
         
-        public void ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, Action onClick)
+        public XRUIAlert ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, int countdown, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
             var uiDocument = container.GetComponent<UIDocument>();
@@ -172,13 +192,18 @@ namespace com.chwar.xrui
             }
             xrui.Content.text = text;
             
-            // VR parameters
-            xrui.vrParameters.anchorVRPanelToCamera = true;
-            xrui.vrParameters.customVRPanelPosition = new Vector3(0, -1f, 0);
-            xrui.vrParameters.bendVRPanel = false;
+            // World UI parameters
+            xrui.worldUIParameters.anchorPanelToCamera = true;
+            xrui.worldUIParameters.customPanelPosition = new Vector3(0, -1f, 0);
+            xrui.worldUIParameters.bendPanel = false;
+            
+            if(countdown > 0)
+                xrui.DisposeAlert();
             
             if (onClick != null)
                 xrui.ClickCallback = onClick;
+
+            return xrui;
         }
 
         /// <summary>
@@ -291,7 +316,7 @@ namespace com.chwar.xrui
                 ui.rootVisualElement.style.bottom = 0;
                 ui.rootVisualElement.style.left = 0;
                 ui.rootVisualElement.style.right = 0;
-                ui.rootVisualElement.EnableInClassList("xrui__background--dark", bDarkenBackground);
+                ui.rootVisualElement.EnableInClassList("xrui-background--dark", bDarkenBackground);
             }
             return containerGO;
         }
@@ -301,9 +326,9 @@ namespace com.chwar.xrui
         /// Generates a mesh on which a render texture is created. The render texture renders the XRUI element.
         /// </summary>
         /// <param name="uiDocument"></param>
-        internal static void GetVRPanel(GeometryChangedEvent evt, UIDocument uiDocument)
+        internal static void GetWorldUIPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
-            ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetVRPanel);
+            ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetWorldUIPanel);
             var xrui = uiDocument.GetComponent<XRUIElement>();
 
             // Position the GO at the same height as the HMD / Camera
@@ -346,20 +371,20 @@ namespace com.chwar.xrui
             
             o.AddComponent<XRUIWorldSpaceInteraction>();
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
-            if (xrui.vrParameters.VRPanelScale.Equals(0))
-                xrui.vrParameters.VRPanelScale = 1;
+            if (xrui.worldUIParameters.PanelScale.Equals(0))
+                xrui.worldUIParameters.PanelScale = 1;
             plane.numSegments = 512;
-            plane.height = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.y;
-            plane.radius = xrui.vrParameters.customVRPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.vrParameters.VRPanelScale : xrui.vrParameters.customVRPanelDimensions.x;
-            plane.useArc = xrui.vrParameters.bendVRPanel;
-            plane.curvatureDegrees = xrui.vrParameters.bendVRPanel ? 60 : 0;
+            plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.worldUIParameters.PanelScale : xrui.worldUIParameters.customPanelDimensions.y;
+            plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.worldUIParameters.PanelScale : xrui.worldUIParameters.customPanelDimensions.x;
+            plane.useArc = xrui.worldUIParameters.bendPanel;
+            plane.curvatureDegrees = xrui.worldUIParameters.bendPanel ? 60 : 0;
             plane.Generate(rt);
-            if (xrui.vrParameters.anchorVRPanelToCamera)
+            if (xrui.worldUIParameters.anchorPanelToCamera)
             {
                 o.transform.parent = Camera.main.transform;
                 o.transform.localRotation = Quaternion.identity;
             } 
-            o.transform.localPosition = xrui.vrParameters.customVRPanelPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.vrParameters.customVRPanelPosition;
+            o.transform.localPosition = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.worldUIParameters.customPanelPosition;
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;

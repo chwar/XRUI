@@ -10,34 +10,33 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIAlert : XRUIFloatingElement
+    public class XRUIAlert : XRUIElement
     {
         public Label Title { get; private set; }
         public Label Content { get; private set; }
 
         public Action ClickCallback;
-
-        internal VisualElement Alert;
+        
+        public int countdown = 0;
         
         /// <summary>
         /// Initializes the UI Elements of the Alert.
         /// </summary>
         protected internal override void Init()
         {
-            base.Init();
-            Title = UIDocument.rootVisualElement.Q<Label>("AlertTitle");
-            Content = UIDocument.rootVisualElement.Q<Label>("AlertContent");
+            Title = RootElement.Q<Label>(null, "xrui-alert__title");
+            Content = RootElement.Q<Label>(null, "xrui-alert__content");
             
             // Set handler on click to dispose of the alert
-            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert());
-            Alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
+            RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert(true));
             StartCoroutine(Animate());
         }
 
-        internal void DisposeAlert()
+        public void DisposeAlert(bool requirePointerOverUI = false)
         {
-            if (PointerOverUI)
+            if ((requirePointerOverUI && PointerOverUI) || !requirePointerOverUI)
             {
+                // StartCoroutine(Animate());
                 StartCoroutine(Animate());
                 StartCoroutine(Dispose());
                 ClickCallback?.Invoke();
@@ -46,14 +45,14 @@ namespace com.chwar.xrui.UIElements
 
         private IEnumerator Dispose()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(countdown == 0 ? 2 : countdown);
             Destroy(this.gameObject);
         }
         
         private IEnumerator Animate()
         {
-            yield return new WaitForFixedUpdate();
-            Alert.ToggleInClassList("animate");
+             yield return new WaitForFixedUpdate();
+            RootElement.ToggleInClassList("animate");
         }
     }
 }

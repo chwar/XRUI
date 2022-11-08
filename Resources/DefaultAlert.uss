@@ -1,51 +1,46 @@
-.xrui__alert {
+.xrui-alert {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgb(34, 34, 34);
+    padding: 2%;
+    
+    position: absolute;
+    
     transition-timing-function: ease-in-out-sine, ease-in-out-sine;
     transition-duration: 0.5s, 0.5s;
     transition-property: bottom, top;
-    transition-delay: 0.1s, 0s;
+    transition-delay: 0.5s, 0.1s;
 }
 
-.xrui__alert > Label {
+.xrui-alert > Label {
     color: rgba(255, 255, 255, 255);
 }
 
-.xrui__alert.twodimensional.landscape {
-    width: auto;
-    height: auto;
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+.xrui-alert.twodimensional.landscape {
+    right: 2%;
+    bottom: 2%;
     max-width: 50%;
     min-width: 20%;
 }
 
-.xrui__alert.twodimensional.portrait {
+.xrui-alert.twodimensional.portrait {
+    padding: 5%;
+    top: 0%;
+    right: 0%;
+    left: 0%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    position: absolute;
-    padding-left: 20px;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 250px;
 }
 
-.xrui__alert.threedimensional {
+.xrui-alert.threedimensional {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -54,13 +49,13 @@
     height: 100px;
 }
 
-.xrui__alert > #AlertTitle {
-    font-size: 170%;
+.xrui-alert__title {
+    font-size: 200%;
     display: flex;
 }
 
-.xrui__alert > #AlertContent {
-    font-size: 160%;
+.xrui-alert__content {
+    font-size: 150%;
     flex-grow: 1;
 }
 
@@ -89,15 +84,13 @@
 }
 
 .info > Label {
-    color: rgb(0, 0, 0);
+    color: rgba(0, 0, 0, 255);
 }
 
-.xrui__alert.twodimensional.landscape.animate {
-    position: absolute;
-    bottom: -200px;
+.xrui-alert.twodimensional.landscape.animate {
+    bottom: -15%;
 }
 
-.xrui__alert.twodimensional.portrait.animate {
-    position: absolute;
-    top: -200px;
+.xrui-alert.twodimensional.portrait.animate {
+    top: -15%;
 }
