@@ -12,7 +12,6 @@ namespace com.chwar.xrui.UIElements
     {
         // UXML Attributes
         public Button MainButton;
-        public VisualElement Menu;
         public Button CloseButton;
         
         private Label _title;
@@ -37,14 +36,14 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         protected internal override void Init()
         {
-            base.Init();
-            _title = UIDocument.rootVisualElement.Q<Label>("AppName");
-            _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtext");
-            _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
-            Menu = UIDocument.rootVisualElement.Q("Menu");
-            MainButton = UIDocument.rootVisualElement.Q<Button>("MainButton");
+            _title = RootElement.Q<Label>(null,"xrui-menu__title");
+            _subtitle = RootElement.Q<Label>(null,"xrui-menu__subtitle");
+            _container = RootElement.Q<ScrollView>(null,"xrui-menu__container");
+            
+            MainButton = RootElement.Q<Button>(null,"xrui-menu__main-btn");
             MainButton.style.backgroundImage = mainButtonTexture;
-            CloseButton = UIDocument.rootVisualElement.Q<Button>("Close");
+            
+            CloseButton = RootElement.Q<Button>(null,"xrui-menu__close-btn");
             CloseButton.style.backgroundImage = closeButtonTexture;
         }
         
@@ -89,7 +88,7 @@ namespace com.chwar.xrui.UIElements
                 throw new MissingReferenceException($"The menu element template of {this.gameObject.name} is missing!");
             }
             VisualElement el = menuElementTemplate.Instantiate();
-            el.ElementAt(0).AddToClassList("xrui__menu__item");
+            el.ElementAt(0).AddToClassList("xrui-menu-item");
             _container.Add(el);
             return el;
         }
@@ -99,7 +98,7 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         public void RemoveAllElements()
         {
-            _container.Query(null, "xrui__menu__item").ForEach(i => i.RemoveFromHierarchy());
+            _container.Query(null, "xrui-menu-item").ForEach(i => i.RemoveFromHierarchy());
         }
     }
 }

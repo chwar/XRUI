@@ -27,10 +27,9 @@ namespace com.chwar.xrui.UIElements
         
         protected internal override void Init()
         {
-            base.Init();
-            _title = UIDocument.rootVisualElement.Q<Label>("Title");
-            _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtitle");
-            _closeButton = UIDocument.rootVisualElement.Q<Button>("Close");
+            _title = RootElement.Q<Label>(null,"xrui-card__title");
+            _subtitle = RootElement.Q<Label>(null, "xrui-card__subtitle");
+            _closeButton = RootElement.Q<Button>(null, "xrui-card__close");
         }
 
         /// <summary>
@@ -68,8 +67,8 @@ namespace com.chwar.xrui.UIElements
         {
             if (UIDocument != null && cardDimensions != dimensions)
             {
-                UIDocument.rootVisualElement.ElementAt(0).style.width = dimensions.x;
-                UIDocument.rootVisualElement.ElementAt(0).style.height = dimensions.y;
+                RootElement.ElementAt(0).style.width = dimensions.x;
+                RootElement.ElementAt(0).style.height = dimensions.y;
             }
         }
 

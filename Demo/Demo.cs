@@ -48,11 +48,11 @@ namespace com.chwar.xrui
         private void ShowEntryContextualMenu(VisualElement parentElement)
         {
             var contextualMenu = XRUI.Instance.ShowContextualMenu(null, new Vector2(parentElement.worldBound.x, parentElement.worldBound.y),
-                true, _menu.Menu.resolvedStyle.width, Single.NaN);
+                true, _menu.RootElement.resolvedStyle.width, Single.NaN);
         
             // Add class to identify currently selected visual element
-            parentElement.panel.visualTree.Q(null, "xrui__menu__item--selected")?.ToggleInClassList("xrui__menu__item--selected");
-            parentElement.parent.parent.parent.AddToClassList("xrui__menu__item--selected");
+            parentElement.panel.visualTree.Q(null, "xrui-menu-item--selected")?.ToggleInClassList("xrui-menu-item--selected");
+            parentElement.parent.parent.parent.AddToClassList("xrui-menu-item--selected");
 
             var el = contextualMenu.AddMenuElement();
             el.Q<Label>("Text").text = "Contextual action 1";

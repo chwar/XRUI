@@ -70,7 +70,7 @@ namespace com.chwar.xrui.Tests
             var context = Object.FindObjectOfType<XRUIContextualMenu>();
             var entry = context.AddMenuElement();
             entry.Q<Label>("Text").text = "Test";
-            Assert.True(context.UIDocument.rootVisualElement.Contains(entry));
+            Assert.True(context.RootElement.Contains(entry));
         }
 
         [Test]

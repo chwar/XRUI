@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="ContextualMenuElement" style="flex-shrink: 0; flex-direction: row; align-items: center; border-bottom-color: rgb(178, 178, 178); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
-        <ui:VisualElement name="Icon" class="xrui__icon xrui__icon--black" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
-        <ui:Label text="Label" display-tooltip-when-elided="true" name="Text" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; flex-grow: 1;" />
+    <ui:VisualElement name="ContextualMenuElement" class="xrui-contextual-menu-element"  style="flex-shrink: 0; flex-direction: row; align-items: center; border-bottom-color: rgb(178, 178, 178); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+        <ui:VisualElement name="Icon" class="xrui-icon xrui-icon--black" style="width: 20px; height: 20px; flex-shrink: 0; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="Text" class="xrui-contextual-menu-element__text" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; flex-grow: 1;" />
     </ui:VisualElement>
 </ui:UXML>

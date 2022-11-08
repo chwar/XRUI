@@ -1,26 +1,26 @@
-.xrui__list__item--selected {
+.xrui-list-item--selected {
     background-color: var(--xrui-primary);
 }
 
-.xrui__list__item > .xrui__list__item__icon {
+.xrui-list-item > .xrui-list-item__icon {
     display: none;
 }
 
-.xrui__list__item--default > .xrui__list__item__icon {
+.xrui-list-item--default > .xrui-list-item__icon {
     display: flex;
     -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
-.xrui__list__item--selected > .xrui__list__item__text {
+.xrui-list-item--selected > .xrui-list-item__text {
     font-size: 18px;
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
 }
 
-.xrui__list__item--selected .unity-text-element {
+.xrui-list-item--selected .unity-text-element {
     color: rgb(255, 255, 255);
 }
 
-.xrui__list__item--selected.xrui__list__item--default > .xrui__list__item__icon {
+.xrui-list-item--selected.xrui-list-item--default > .xrui-list-item__icon {
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }

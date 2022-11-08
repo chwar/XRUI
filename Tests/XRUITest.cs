@@ -73,7 +73,7 @@ namespace com.chwar.xrui.Tests
             yield return new WaitForSeconds(1);
             try
             {
-                XRUI.GetVRPanel(evt, uiDocument);
+                XRUI.GetWorldUIPanel(evt, uiDocument);
             }
             catch (Exception)
             {

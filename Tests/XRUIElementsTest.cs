@@ -55,7 +55,7 @@ namespace com.chwar.xrui.Tests
             list.listElementTemplate = Resources.Load<VisualTreeAsset>("TestUIElement");
             var e = list.AddElement(true);
             Assert.NotNull(e);
-            Assert.True(e.ElementAt(0).ClassListContains("xrui__list__item--selected"));
+            Assert.True(e.ElementAt(0).ClassListContains("xrui-list-item--selected"));
         }
         
         [Test]

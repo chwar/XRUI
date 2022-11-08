@@ -1,4 +1,4 @@
-.xrui__card.twodimensional.landscape {
+.xrui-card.twodimensional.landscape {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -15,7 +15,7 @@
     padding-top: 0;
 }
 
-.xrui__card.twodimensional.portrait {
+.xrui-card.twodimensional.portrait {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -25,13 +25,13 @@
     flex-shrink: 0;
 }
 
-.xrui__card.vr {
+.xrui-card.threedimensional {
     height: 500px;
     width: 500px;
     align-items: stretch;
     flex-shrink: 0;
 }
 
-.xrui__card__title {
+.xrui-card__header {
     background-color: var(--xrui-primary);
 }

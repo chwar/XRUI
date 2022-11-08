@@ -24,79 +24,79 @@
     background-color: var(--xrui-primary-hover);
 }
 
-.xrui Button.xrui__background--primary {
+.xrui Button.xrui-background--primary {
     background-color: var(--xrui-primary);
 }
 
-.xrui Button.xrui__background--secondary {
+.xrui Button.xrui-background--secondary {
     background-color: var(--xrui-secondary);
 }
 
-.xrui Button.xrui__background--warning {
+.xrui Button.xrui-background--warning {
     background-color: var(--xrui-warning);
 }
 
-.xrui Button.xrui__background--success {
+.xrui Button.xrui-background--success {
     background-color: var(--xrui-success);
 }
 
-.xrui Button.xrui__background--danger {
+.xrui Button.xrui-background--danger {
     background-color: var(--xrui-danger);
 }
 
-.xrui Button.xrui__background--info {
+.xrui Button.xrui-background--info {
     background-color: var(--xrui-info);
 }
 
-.xrui Button.xrui__background--primary:hover {
+.xrui Button.xrui-background--primary:hover {
     background-color: var(--xrui-primary-hover);
 }
 
-.xrui Button.xrui__background--secondary:hover {
+.xrui Button.xrui-background--secondary:hover {
     background-color: var(--xrui-secondary-hover);
 }
 
-.xrui Button.xrui__background--warning:hover {
+.xrui Button.xrui-background--warning:hover {
     background-color: var(--xrui-warning-hover);
 }
 
-.xrui Button.xrui__background--success:hover {
+.xrui Button.xrui-background--success:hover {
     background-color: var(--xrui-success-hover);
 }
 
-.xrui Button.xrui__background--danger:hover {
+.xrui Button.xrui-background--danger:hover {
     background-color: var(--xrui-danger-hover);
 }
 
-.xrui Button.xrui__background--info:hover {
+.xrui Button.xrui-background--info:hover {
     background-color: var(--xrui-info-hover);
 }
 
-.xrui Button.xrui__icon {
+.xrui Button.xrui-icon {
     background-color: rgba(0,0,0,0);
     min-height: auto;
 }
 
-.xrui .xrui__icon--white {
+.xrui Button.xrui-icon--white {
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
-.xrui Button.xrui__icon--white:hover {
+.xrui Button.xrui-icon--white:hover {
     -unity-background-image-tint-color: var(--xrui-grey);
 }
 
-.xrui .xrui__icon--black {
+.xrui Button.xrui-icon--black {
     -unity-background-image-tint-color: rgb(0, 0, 0);
 }
 
-.xrui Button.xrui__icon--black:hover {
+.xrui Button.xrui-icon--black:hover {
     -unity-background-image-tint-color: var(--xrui-secondary);
 }
 
-.xrui Button.xrui__modal-cancel {
+.xrui Button.xrui-modal-cancel {
     background-color: var(--xrui-secondary);
 }
 
-.xrui Button.xrui__modal-cancel:hover {
+.xrui Button.xrui-modal-cancel:hover {
     background-color: var(--xrui-dark);
 }

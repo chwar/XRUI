@@ -45,7 +45,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("primary"));
+            Assert.True(alert.RootElement.ClassListContains("primary"));
         }
         
         [Test]
@@ -54,7 +54,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("warning"));
+            Assert.True(alert.RootElement.ClassListContains("warning"));
         }
         
         [Test]
@@ -63,7 +63,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("success"));
+            Assert.True(alert.RootElement.ClassListContains("success"));
         }
         
         [Test]
@@ -72,7 +72,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("info"));
+            Assert.True(alert.RootElement.ClassListContains("info"));
         }
         
         [Test]
@@ -81,7 +81,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("danger"));
+            Assert.True(alert.RootElement.ClassListContains("danger"));
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace com.chwar.xrui.Tests
         {
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!");
             var alert = Object.FindObjectOfType<XRUIAlert>();
-            alert.Alert.RegisterCallback<PointerDownEvent>(AlertClick);
+            alert.RootElement.RegisterCallback<PointerDownEvent>(AlertClick);
             yield return new WaitUntil(() => _clicked);
             // Wait for animation
             yield return new WaitForSeconds(1.5f);
