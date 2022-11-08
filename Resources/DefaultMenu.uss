@@ -4,7 +4,7 @@
 }
 
 .xrui__menu.twodimensional.landscape {
-    width: 600px;
+    width: 40%;
     height: 100%;
 }
 

@@ -1,9 +1,9 @@
-.xrui__list.pc {
+.xrui__list.twodimensional.landscape {
     width: 300px;
     height: 800px;
 }
 
-.xrui__list.ar {
+.xrui__list.twodimensional.portrait {
     width: 300px;
     height: 800px;
 }

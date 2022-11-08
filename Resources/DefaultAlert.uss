@@ -23,17 +23,13 @@
 }
 
 .xrui__alert.twodimensional.landscape {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     width: auto;
     height: auto;
     position: absolute;
     right: 20px;
     bottom: 20px;
-    max-width: 400px;
-    min-width: 300px;
+    max-width: 50%;
+    min-width: 20%;
 }
 
 .xrui__alert.twodimensional.portrait {
@@ -42,10 +38,11 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     position: absolute;
+    padding-left: 20px;
     top: 0;
     right: 0;
     left: 0;
-    min-height: 75px;
+    height: 250px;
 }
 
 .xrui__alert.threedimensional {
@@ -58,12 +55,12 @@
 }
 
 .xrui__alert > #AlertTitle {
-    font-size: 24px;
+    font-size: 170%;
     display: flex;
 }
 
 .xrui__alert > #AlertContent {
-    font-size: 16px;
+    font-size: 160%;
     flex-grow: 1;
 }
 
@@ -95,12 +92,12 @@
     color: rgb(0, 0, 0);
 }
 
-.pc.animate {
+.xrui__alert.twodimensional.landscape.animate {
     position: absolute;
     bottom: -200px;
 }
 
-.ar.animate {
+.xrui__alert.twodimensional.portrait.animate {
     position: absolute;
-    top: -100px;
+    top: -200px;
 }

@@ -5,7 +5,6 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
-using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -100,6 +99,9 @@ namespace com.chwar.xrui.UIElements
         public void Show(VisualElement element, bool bShow)
         {
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
+            // Hide the panel if in 3D
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+                UIDocument.GetComponent<MeshRenderer>().enabled = bShow;
         }
 
         /// <summary>

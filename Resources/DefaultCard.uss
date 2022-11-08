@@ -1,4 +1,4 @@
-.xrui__card.pc {
+.xrui__card.twodimensional.landscape {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -15,7 +15,7 @@
     padding-top: 0;
 }
 
-.xrui__card.ar {
+.xrui__card.twodimensional.portrait {
     position: absolute;
     bottom: 0;
     left: 0;
