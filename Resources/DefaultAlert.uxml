@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="Alert" class="xrui-alert xrui animate" style="transition-delay: 0.1s, 0.1s; transition-timing-function: ease-in-out, ease-in-out;">
+    <ui:VisualElement name="Alert" class="xrui-alert xrui animate">
         <ui:Label text="Title" display-tooltip-when-elided="true" name="AlertTitle" class="xrui-alert__title" style="display: flex;" />
         <ui:Label text="This is an alert!" display-tooltip-when-elided="true" name="AlertContent" class="xrui-alert__content" />
     </ui:VisualElement>

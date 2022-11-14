@@ -11,11 +11,11 @@
     padding: 2%;
     
     position: absolute;
-    
-    transition-timing-function: ease-in-out-sine, ease-in-out-sine;
-    transition-duration: 0.5s, 0.5s;
+
     transition-property: bottom, top;
-    transition-delay: 0.5s, 0.1s;
+    transition-timing-function: ease-in-out, ease-in-out; 
+    transition-delay: 0.5s, 0.5s; 
+    transition-duration: 0.5s, 0.5s; 
 }
 
 .xrui-alert > Label {
@@ -89,6 +89,10 @@
 
 .xrui-alert.twodimensional.landscape.animate {
     bottom: -15%;
+    transition-property: bottom, top;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s;
 }
 
 .xrui-alert.twodimensional.portrait.animate {

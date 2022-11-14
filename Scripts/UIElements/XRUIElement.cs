@@ -35,7 +35,7 @@ namespace com.chwar.xrui.UIElements
             
             // The element is not initialized at this moment, but only during the app's lifetime if it has been re-enabled.
             // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
-            if (XRUI.Instance == null) return;
+            if (XRUI.Instance is null) return;
 
             Init();
             UpdateUI();
@@ -43,6 +43,7 @@ namespace com.chwar.xrui.UIElements
 
         protected void OnEnable()
         {
+            if (RootElement is null) return;
             if (RootElement.childCount == 0)
             {
                 throw new NullReferenceException($"The root visual element is empty! " +
@@ -178,7 +179,6 @@ namespace com.chwar.xrui.UIElements
         protected void OnPointerEnter(PointerEnterEvent evt)
         {
             PointerOverUI = true;
-            Debug.Log($"Pointer entered. Element: {(evt.target as VisualElement)?.name }");
         }
         
         /// <summary>
@@ -188,7 +188,6 @@ namespace com.chwar.xrui.UIElements
         protected void OnPointerLeave(PointerLeaveEvent evt)
         {
             PointerOverUI = false;
-            Debug.Log($"Pointer left. Element: {(evt.target as VisualElement)?.name }");
         }
     }
 
