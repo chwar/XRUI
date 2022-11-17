@@ -4,7 +4,6 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using com.chwar.xrui.UIElements;
 using UnityEngine;
@@ -188,10 +187,9 @@ namespace com.chwar.xrui
                 xrui.Title.style.display = DisplayStyle.None;
             }
             else
-            {
                 xrui.Title.text = title;
-            }
             xrui.Content.text = text;
+            xrui.countdown = countdown;
             
             // World UI parameters
             var camPos = Camera.main.transform.position;
@@ -203,7 +201,7 @@ namespace com.chwar.xrui
             xrui.worldUIParameters.cameraFollowThreshold = .1f;
             
             if(countdown > 0)
-                xrui.DisposeAlert();
+                xrui.DisposeAlert(false,false);
             
             if (onClick != null)
                 xrui.ClickCallback = onClick;

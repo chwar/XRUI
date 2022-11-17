@@ -15,9 +15,9 @@ namespace com.chwar.xrui.UIElements
     {
         public bool PointerOverUI { get; private set; }
         public WorldUIParameters worldUIParameters;
-        
+
         internal UIDocument UIDocument;
-        internal VisualElement RootElement;
+        public VisualElement RootElement;
 
         private DeviceOrientation _cachedDeviceOrientation;
         
@@ -72,8 +72,6 @@ namespace com.chwar.xrui.UIElements
 
         private void Update()
         {
-            Debug.DrawRay(Camera.main.transform.position,Camera.main.transform.forward, Color.red);
-
             if (!Input.deviceOrientation.Equals(_cachedDeviceOrientation))
                 StartCoroutine(UpdateUIOnRotation());
         }

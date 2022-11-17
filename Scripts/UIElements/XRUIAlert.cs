@@ -33,26 +33,25 @@ namespace com.chwar.xrui.UIElements
             StartCoroutine(Animate());
         }
 
-        public void DisposeAlert(bool requirePointerOverUI = false)
+        public void DisposeAlert(bool requirePointerOverUI = false, bool destroyImmediate = true)
         {
             if ((requirePointerOverUI && PointerOverUI) || !requirePointerOverUI)
             {
-                // StartCoroutine(Animate());
-                StartCoroutine(Animate());
-                StartCoroutine(Dispose());
+                StartCoroutine(Animate(destroyImmediate));
+                StartCoroutine(Dispose(destroyImmediate));
                 ClickCallback?.Invoke();
             }
         }
 
-        private IEnumerator Dispose()
+        private IEnumerator Dispose(bool destroyImmediate = true)
         {
-            yield return new WaitForSeconds(countdown == 0 ? 2 : countdown);
+            yield return new WaitForSeconds(destroyImmediate ? 1 : countdown == 0 ? 1 : countdown);
             Destroy(this.gameObject);
         }
         
-        private IEnumerator Animate()
+        private IEnumerator Animate(bool animateImmediate = true)
         {
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);
             RootElement.ToggleInClassList("animate");
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
                 StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
