@@ -12,10 +12,10 @@
     
     position: absolute;
 
-    transition-property: bottom, top;
+    transition-property: bottom, top, opacity;
     transition-timing-function: ease-in-out, ease-in-out; 
-    transition-delay: 0.5s, 0.5s; 
-    transition-duration: 0.5s, 0.5s; 
+    transition-delay: 0.5s, 0.5s, 0.5s; 
+    transition-duration: 0.5s, 0.5s, 0.5s; 
 }
 
 .xrui-alert > Label {
@@ -71,16 +71,16 @@
     background-color: var(--xrui-warning);
 }
 
-.warning > Label {
-    color: rgba(0, 0, 0, 255);
-}
-
 .danger {
     background-color: var(--xrui-danger);
 }
 
 .info {
     background-color: var(--xrui-info);
+}
+
+.warning > Label {
+    color: rgba(0, 0, 0, 255);
 }
 
 .info > Label {
@@ -97,4 +97,15 @@
 
 .xrui-alert.twodimensional.portrait.animate {
     top: -15%;
+    transition-property: bottom, top;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s;
+}
+
+.xrui-alert.threedimensional.animate {
+    transition-property: bottom, top, opacity;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s, 0.5s;
 }

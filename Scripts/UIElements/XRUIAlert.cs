@@ -29,6 +29,7 @@ namespace com.chwar.xrui.UIElements
             
             // Set handler on click to dispose of the alert
             RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert(true));
+            StartCoroutine(FollowCamera());
             StartCoroutine(Animate());
         }
 
@@ -51,8 +52,10 @@ namespace com.chwar.xrui.UIElements
         
         private IEnumerator Animate()
         {
-             yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();
             RootElement.ToggleInClassList("animate");
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+                StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
         }
     }
 }

@@ -5,7 +5,6 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,8 +18,8 @@ namespace com.chwar.xrui.UIElements
         
         internal UIDocument UIDocument;
         internal VisualElement RootElement;
-        private DeviceOrientation _previousOrientation;
-        private bool _hasOrientationChanged;
+
+        private DeviceOrientation _cachedDeviceOrientation;
         
         protected internal virtual void Init()
         {
@@ -31,7 +30,7 @@ namespace com.chwar.xrui.UIElements
         {
             UIDocument = GetComponent<UIDocument>();
             RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
-            _previousOrientation = Input.deviceOrientation;
+            _cachedDeviceOrientation = Input.deviceOrientation;
             
             // The element is not initialized at this moment, but only during the app's lifetime if it has been re-enabled.
             // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
@@ -53,8 +52,9 @@ namespace com.chwar.xrui.UIElements
             RootElement.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
 
-            // Init();
             UpdateUI();
+            if (worldUIParameters.anchorPanelToCamera)
+                StartCoroutine(FollowCamera());
         }
 
         protected virtual void OnDisable()
@@ -65,11 +65,16 @@ namespace com.chwar.xrui.UIElements
             // Unregister event handlers for pointer clicks on the UI
             RootElement.UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
+            
+            if (worldUIParameters.anchorPanelToCamera)
+                StopCoroutine(FollowCamera());
         }
 
         private void Update()
         {
-            if (!Input.deviceOrientation.Equals(_previousOrientation))
+            Debug.DrawRay(Camera.main.transform.position,Camera.main.transform.forward, Color.red);
+
+            if (!Input.deviceOrientation.Equals(_cachedDeviceOrientation))
                 StartCoroutine(UpdateUIOnRotation());
         }
         
@@ -96,7 +101,10 @@ namespace com.chwar.xrui.UIElements
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
             // Hide the panel if in 3D
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            {
                 GetComponent<MeshRenderer>().enabled = bShow;
+                GetComponent<MeshCollider>().enabled = bShow;
+            }
         }
 
         /// <summary>
@@ -167,9 +175,59 @@ namespace com.chwar.xrui.UIElements
         /// <returns></returns>
         private IEnumerator UpdateUIOnRotation()
         {
-            _previousOrientation = Input.deviceOrientation;
+            _cachedDeviceOrientation = Input.deviceOrientation;
             yield return new WaitForSeconds(0.75f);
             UpdateUI();
+        }
+
+        /// <summary>
+        /// Makes World UI lazily follow the camera when it gets too far away from the panel
+        /// </summary>
+        /// <returns></returns>
+        protected IEnumerator FollowCamera()
+        {
+            while (true)
+            {
+                // Reposition in front of camera
+                var cachedTarget = Camera.main.transform.TransformPoint(new Vector3(0, 0, .5f));
+                // Slightly delay the following mechanism to let the camera move freely without aggressively repositioning the panel
+                yield return new WaitForSeconds(.5f);
+                // If camera gets too far from the panel
+                if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
+                {
+                    var cameraFollowVelocity = Vector3.zero;
+                    // Reposition until panel reaches the front of the camera
+                    while (Vector3.Distance(transform.position, cachedTarget) > .05f)
+                    {
+                        transform.position = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .3f);
+                        transform.LookAt(2 * transform.position - Camera.main.transform.position);
+                        yield return new WaitForEndOfFrame();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Makes World UI fade in/out
+        /// </summary>
+        /// <param name="bFadeOut">Whether to make the panel fade out</param>
+        /// <returns></returns>
+        protected IEnumerator FadeWorldPanel(bool bFadeOut = true)
+        {
+            // Disable collider if fading out
+            GetComponent<MeshCollider>().enabled = !bFadeOut;
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            Color color = meshRenderer.materials[0].color;
+
+            while (bFadeOut ? color.a > 0 : color.a < 1)
+            {
+                if (!bFadeOut) color.a = 0;
+                color.a += bFadeOut? -.05f : .05f;
+                meshRenderer.materials[0].color = color;
+                yield return new WaitForEndOfFrame();
+            }
+            // End when alpha reaches 0 or 1
+            yield return new WaitUntil(() => bFadeOut ? meshRenderer.materials[0].color.a <= 0f : meshRenderer.materials[0].color.a >= 1f);
         }
 
         /// <summary>
@@ -194,15 +252,17 @@ namespace com.chwar.xrui.UIElements
     [Serializable]
     public struct WorldUIParameters
     {
-        [Tooltip("Alters the VR panel by slightly bending it")]
+        [Tooltip("Alters the VR panel geometry by slightly bending it")]
         public bool bendPanel;
         [Tooltip("Defines if the VR Panel will be anchored to the camera or not")]
         public bool anchorPanelToCamera;
+        [Tooltip("Defines the distance that the camera needs to travel away from the panel before the panel starts following it.")]
+        public float cameraFollowThreshold;
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
         public Vector2 customPanelDimensions;
         [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
         public Vector3 customPanelPosition;
         [Tooltip("Alters the scale of the VR Panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
-        public int PanelScale;
+        public int panelScale;
     }
 }

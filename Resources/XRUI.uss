@@ -41,27 +41,27 @@
     background-color: var(--xrui-info);
 }
 
-.xrui .xrui-background--primary:hover {
+.xrui .xrui-background--primary:hover, .xrui-alert.primary:hover {
     background-color: var(--xrui-primary-hover);
 }
 
-.xrui .xrui-background--secondary:hover {
+.xrui .xrui-background--secondary:hover, .xrui-alert.secondary:hover {
     background-color: var(--xrui-secondary-hover);
 }
 
-.xrui .xrui-background--warning:hover {
+.xrui .xrui-background--warning:hover, .xrui-alert.warning:hover {
     background-color: var(--xrui-warning-hover);
 }
 
-.xrui .xrui-background--success:hover {
+.xrui .xrui-background--success:hover, .xrui-alert.success:hover {
     background-color: var(--xrui-success-hover);
 }
 
-.xrui .xrui-background--danger:hover {
+.xrui .xrui-background--danger:hover, .xrui-alert.danger:hover {
     background-color: var(--xrui-danger-hover);
 }
 
-.xrui .xrui-background--info:hover {
+.xrui .xrui-background--info:hover, .xrui-alert.info:hover {
     background-color: var(--xrui-info-hover);
 }
 

@@ -4,6 +4,7 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using com.chwar.xrui.UIElements;
 using UnityEngine;
@@ -193,9 +194,13 @@ namespace com.chwar.xrui
             xrui.Content.text = text;
             
             // World UI parameters
+            var camPos = Camera.main.transform.position;
+            xrui.worldUIParameters.customPanelPosition = new Vector3(camPos.x,
+                camPos.y - .2f, camPos.z + .3f);
             xrui.worldUIParameters.anchorPanelToCamera = true;
-            xrui.worldUIParameters.customPanelPosition = new Vector3(0, -1f, 0);
             xrui.worldUIParameters.bendPanel = false;
+            xrui.worldUIParameters.panelScale = 20;
+            xrui.worldUIParameters.cameraFollowThreshold = .1f;
             
             if(countdown > 0)
                 xrui.DisposeAlert();
@@ -337,7 +342,7 @@ namespace com.chwar.xrui
 
             if (dimensions.width == 0 || dimensions.height == 0)
             {
-                throw new ArgumentException($"The UI {uiDocument.name} has invalid dimensions. Make sure to add a corresponding VR USS rule.");
+                throw new ArgumentException($"The UI {uiDocument.name} has invalid dimensions. Make sure to add a corresponding Three-Dimensional USS rule.");
             }
 
             var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
@@ -346,11 +351,11 @@ namespace com.chwar.xrui
             
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
-                name = uiDocument.name
+                name = uiDocument.name,
+                useDynamicScale = true
             };
-            rt.vrUsage = VRTextureUsage.TwoEyes;
-            rt.useDynamicScale = true;
             rt.Create();
+            
             PanelSettings ps = uiDocument.panelSettings.targetTexture == null ? 
                 Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings")) : uiDocument.panelSettings;
             ps.targetTexture = rt;
@@ -359,37 +364,26 @@ namespace com.chwar.xrui
             ps.referenceDpi = uiDocument.panelSettings.referenceDpi;
             ps.fallbackDpi = uiDocument.panelSettings.fallbackDpi;
             ps.match = uiDocument.panelSettings.match;
-            
-            try
-            {
-                uiDocument.panelSettings = ps;
-            }
-            catch (Exception)
-            {
-                // do nothing
-            }
-            
+            uiDocument.panelSettings = ps;
+
             o.AddComponent<XRUIWorldSpaceInteraction>();
             var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
-            if (xrui.worldUIParameters.PanelScale.Equals(0))
-                xrui.worldUIParameters.PanelScale = 1;
+            if (xrui.worldUIParameters.panelScale.Equals(0))
+                xrui.worldUIParameters.panelScale = 1;
             plane.numSegments = 512;
-            plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.worldUIParameters.PanelScale : xrui.worldUIParameters.customPanelDimensions.y;
-            plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.worldUIParameters.PanelScale : xrui.worldUIParameters.customPanelDimensions.x;
+            plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
+            plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
             plane.useArc = xrui.worldUIParameters.bendPanel;
             plane.curvatureDegrees = xrui.worldUIParameters.bendPanel ? 60 : 0;
             plane.Generate(rt);
-            if (xrui.worldUIParameters.anchorPanelToCamera)
-            {
-                o.transform.parent = Camera.main.transform;
-                o.transform.localRotation = Quaternion.identity;
-            } 
-            o.transform.localPosition = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? new Vector3(0, 0, .1f) : xrui.worldUIParameters.customPanelPosition;
+            o.transform.position = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? Camera.main.transform.forward : xrui.worldUIParameters.customPanelPosition;
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
-            o.GetComponent<MeshRenderer>().material.shader = Shader.Find("Unlit/Texture");
+            var meshRenderer =  o.GetComponent<MeshRenderer>();
+            // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
         }
+        
 
         private static int GetGreatestCommonDivisor(int a, int b) {
             return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
