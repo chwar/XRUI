@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using com.chwar.xrui.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace com.chwar.xrui
 {
@@ -378,8 +379,11 @@ namespace com.chwar.xrui
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
-            var meshRenderer =  o.GetComponent<MeshRenderer>();
+            // var meshRenderer =  o.GetComponent<MeshRenderer>();
             // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
+            
+            // Add Physics Raycaster to enable XRI interactions
+            o.AddComponent<TrackedDevicePhysicsRaycaster>();
         }
         
 

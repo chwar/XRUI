@@ -4,7 +4,6 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -74,13 +73,6 @@ namespace com.chwar.xrui
             }
             
             var targetTexture = targetPanel.targetTexture;
-            MeshRenderer rend = hit.transform.GetComponent<MeshRenderer>();
-            
-            if (rend == null || rend.sharedMaterial.mainTexture != targetTexture)
-            {
-                return invalidPosition;
-            }
-            
             Vector2 pixelUV = hit.textureCoord;
             //since y screen coordinates are usually inverted, we need to flip them
             pixelUV.y = 1 - pixelUV.y;
@@ -136,7 +128,7 @@ namespace com.chwar.xrui
 
         public void OnDrag (PointerEventData eventData)
         {
-                OnPointerMove(eventData);
+            OnPointerMove(eventData);
         }
 
     }
