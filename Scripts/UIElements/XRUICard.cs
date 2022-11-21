@@ -29,7 +29,7 @@ namespace com.chwar.xrui.UIElements
         {
             _title = RootElement.Q<Label>(null,"xrui-card__title");
             _subtitle = RootElement.Q<Label>(null, "xrui-card__subtitle");
-            _closeButton = RootElement.Q<Button>(null, "xrui-card__close");
+            _closeButton = RootElement.Q<Button>(null, "xrui-card__close-btn");
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace com.chwar.xrui.UIElements
         {
             if (UIDocument != null && cardDimensions != dimensions)
             {
-                RootElement.ElementAt(0).style.width = dimensions.x;
-                RootElement.ElementAt(0).style.height = dimensions.y;
+                RootElement.style.width = dimensions.x;
+                RootElement.style.height = dimensions.y;
             }
         }
 

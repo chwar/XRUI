@@ -102,7 +102,7 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         public void RemoveAllElements()
         {
-            _container.Query(null, "xrui-list-item").ForEach(i => i.RemoveFromHierarchy());
+            _container.Query(null, "xrui-list-item").ForEach(i => i.parent.RemoveFromHierarchy());
         }
 
         public int GetListCount()

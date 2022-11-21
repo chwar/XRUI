@@ -20,8 +20,9 @@ namespace com.chwar.xrui
 
         [HideInInspector] public XRUIGridController xruiGridController;
         // Used to define the nature of UIs.
-        [Tooltip("Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
-        public XRUIFormat xruiFormat = XRUIFormat.TwoDimensional;
+        [SerializeField, Tooltip(
+            "Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
+        internal XRUIFormat xruiFormat = XRUIFormat.TwoDimensional;
 
         [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in Play mode in the Unity Editor. This forces 2D Portrait USS styles.")]
         public bool setTwoDimensionalFormatToPortraitInEditor;
@@ -51,14 +52,14 @@ namespace com.chwar.xrui
                     // For Editor mode
                     Instance = FindObjectOfType<XRUI>();
 
-                    // Set the reality given in the scene
+                // Set the format given in the inspector
                 SetCurrentXRUIFormat(xruiFormat);
-                this.InitializeElements();
+                InitializeElements();
             }
             else
             {
                 Debug.LogWarning("Found another XRUI Instance, destroying this one.");
-                Destroy(gameObject);
+                DestroyImmediate(gameObject);
             }
         }
 
@@ -95,26 +96,32 @@ namespace com.chwar.xrui
         }
 
         /// <summary>
-        /// Returns the current reality based on the running platform.
+        /// Returns the current XRUI format based on the format defined in the inspector.
         /// </summary>
         /// <returns>The current reality.</returns>
-        public static string GetCurrentXRUIFormat()
+        public string GetCurrentXRUIFormat()
         {
             return PlayerPrefs.GetString("XRUIFormat");
         }
 
-        public static bool IsCurrentXRUIFormat(XRUIFormat format)
+        /// <summary>
+        /// Returns true if format matches the current XRUI format.
+        /// </summary>
+        /// <param name="format">The XRUI format to compare.</param>
+        /// <returns></returns>
+        public bool IsCurrentXRUIFormat(XRUIFormat format)
         {
             return GetCurrentXRUIFormat().Equals(format.ToString().ToLower());
         }
-        
+
         /// <summary>
-        /// Editor method to set the current reality.
-        /// Since the runtime platform is set to Editor, this sets the correct reality in the PlayerPrefs.
+        /// Set the current XRUI format.
         /// </summary>
-        /// <param name="type"></param>
-        public static void SetCurrentXRUIFormat(XRUIFormat format)
+        /// <param name="format">The XRUI Format to use.</param>
+        public void SetCurrentXRUIFormat(XRUIFormat format)
         {
+            // Update inspector value if called from API
+            xruiFormat = format;
             PlayerPrefs.SetString("XRUIFormat", format.ToString().ToLower());
             PlayerPrefs.Save();
         }
@@ -153,13 +160,8 @@ namespace com.chwar.xrui
         public XRUIAlert ShowAlert(AlertType type, string title, string text, Action onClick)
         {
             return ShowAlert(null, type, title, text, 0, onClick);
-        }        
-        
-        public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown, Action onClick)
-        {
-            return ShowAlert(null, type, title, text, countdown, onClick);
         }
-        
+
         public XRUIAlert ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, int countdown, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);

@@ -94,11 +94,11 @@ namespace com.chwar.xrui.UIElements
         }
         
         /// <summary>
-        /// Deletes all elements from the list
+        /// Deletes all elements from the menu
         /// </summary>
         public void RemoveAllElements()
         {
-            _container.Query(null, "xrui-menu-item").ForEach(i => i.RemoveFromHierarchy());
+            _container.Query(null, "xrui-menu-item").ForEach(i => i.parent.RemoveFromHierarchy());
         }
     }
 }

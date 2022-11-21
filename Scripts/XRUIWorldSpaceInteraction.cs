@@ -74,7 +74,7 @@ namespace com.chwar.xrui
             
             var targetTexture = targetPanel.targetTexture;
             Vector2 pixelUV = hit.textureCoord;
-            //since y screen coordinates are usually inverted, we need to flip them
+
             pixelUV.y = 1 - pixelUV.y;
             pixelUV.x *= targetTexture.width;
             pixelUV.y *= targetTexture.height;

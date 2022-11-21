@@ -17,16 +17,14 @@ namespace com.chwar.xrui.Tests
     public class XRUIElementsTest
     {
         private bool _clicked;
-        private XRUI _xrui;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Init()
         {
-            var go = new GameObject() {name = "XRUI"};
-            _xrui = go.AddComponent<XRUI>();
-            _xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
-            go.AddComponent<Camera>();
-            _clicked = false;
+            var go = new GameObject() { name = "XRUI" };
+            go.AddComponent<XRUI>();
+            go.AddComponent<Camera>().tag = "MainCamera";
+            XRUI.Instance.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
             Debug.Log("XRUI Initialized");
         }
 
@@ -38,19 +36,22 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void XRUIElementTestMenu()
         {
-            XRUIEditor.AddMenu();
-            _xrui.InitializeElements();
-            var menu = GameObject.FindObjectOfType<XRUIMenu>();
+            GameObject menuGo = XRUIEditor.AddXRUIElement("XRUI Menu", XRUIEditor.GetXRUIConfiguration().defaultMenuTemplate);
+            var menu = menuGo.AddComponent<XRUIMenu>();
+            XRUI.Instance.InitializeElements();
             menu.menuElementTemplate = Resources.Load<VisualTreeAsset>("TestUIElement");
             var e = menu.AddElement();
             Assert.NotNull(e);
+            menu.RemoveAllElements();
+            Assert.Catch<ArgumentOutOfRangeException>(() => 
+                menu.RootElement.Q(null, "xrui-menu__container").ElementAt(0));
         }
         
         [Test]
         public void XRUIElementTestList()
         {
             XRUIEditor.AddList();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var list = GameObject.FindObjectOfType<XRUIList>();
             list.listElementTemplate = Resources.Load<VisualTreeAsset>("TestUIElement");
             var e = list.AddElement(true);
@@ -59,14 +60,41 @@ namespace com.chwar.xrui.Tests
         }
         
         [Test]
-        public void XRUIElementTestCardDimensions()
+        public void XRUIElementTestListCount()
+        {
+            XRUIEditor.AddList();
+            XRUI.Instance.InitializeElements();
+            var list = GameObject.FindObjectOfType<XRUIList>();
+            list.listElementTemplate = Resources.Load<VisualTreeAsset>("TestUIElement");
+            list.AddElement(true);
+            list.AddElement(false);
+            Assert.True(list.GetListCount().Equals(2));
+            list.RemoveAllElements();
+            Assert.True(list.GetListCount().Equals(0));
+        }
+        
+        [UnityTest]
+        public IEnumerator XRUIElementTestListWithCallback()
+        {
+            _clicked = false;
+            XRUIEditor.AddList();
+            XRUI.Instance.InitializeElements();
+            var list = GameObject.FindObjectOfType<XRUIList>();
+            list.listElementTemplate = Resources.Load<VisualTreeAsset>("TestUIElement");
+            list.UpdateTitle("Click inside the blue zone");
+            var e = list.AddElement(true, (_) => XRUIElementClicked());
+            yield return new WaitUntil(() => _clicked);
+        }
+        
+        [UnityTest]
+        public IEnumerator XRUIElementTestCardDimensions()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             card.UpdateDimensions(new Vector2(0, 500));
-            Assert.True(card.GetComponent<UIDocument>().rootVisualElement.Q("Card")
-                .style.height.Equals(new StyleLength(500)));
+            yield return new WaitForEndOfFrame();
+            Assert.True(card.RootElement.style.height.Equals(new StyleLength(500)));
         }
         
         [UnityTest]
@@ -74,7 +102,7 @@ namespace com.chwar.xrui.Tests
         {
             XRUIEditor.AddCard();
             var card = GameObject.FindObjectOfType<XRUICard>();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             yield return new WaitForSeconds(1);
             card.UpdateTitle("Click on the close button");
             card.SetCloseButtonAction(XRUIElementClicked);
@@ -87,27 +115,28 @@ namespace com.chwar.xrui.Tests
         public void XRUIElementTestCardShow()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             card.Show(false);
-            Assert.True(card.GetComponent<UIDocument>().rootVisualElement.style.display.value.Equals(DisplayStyle.None));
+            Assert.True(card.RootElement.style.display.value.Equals(DisplayStyle.None));
         }
         
         [Test]
         public void XRUIElementTestXRUIElementAddUIElement()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
+            Assert.Catch<ArgumentOutOfRangeException>(()=> card.RootElement.Q(null, "xrui-card__container").ElementAt(0));
             card.AddUIElement(Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate(), "MainContainer");
-            Assert.NotNull(card.GetComponent<UIDocument>().rootVisualElement.Q("MainContainer").ElementAt(0));
+            Assert.NotNull(card.RootElement.Q(null, "xrui-card__container").ElementAt(0));
         }
         
         [Test]
         public void XRUIElementTestXRUIElementAddUIElementInNonExistingContainer()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             Assert.Throws<ArgumentException>(() => card.AddUIElement(Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate(), "NonExistingContainer"));
         }
@@ -116,7 +145,7 @@ namespace com.chwar.xrui.Tests
         public void XRUIElementTestXRUIElementRemoveUIElement()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             var element = Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate();
             card.AddUIElement(element, "MainContainer");
@@ -128,7 +157,7 @@ namespace com.chwar.xrui.Tests
         public void XRUIElementTestXRUIElementEnableEmptyElement()
         {
             XRUIEditor.AddCard();
-            _xrui.InitializeElements();
+            XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             var ui = card.GetComponent<UIDocument>().rootVisualElement;
 

@@ -54,7 +54,7 @@ namespace com.chwar.xrui
         // Start is called before the first frame update
         public void AdaptGrid()
         {
-            var vr = XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
+            var vr = XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
             
             // TODO Custom Editor that fills the list of elements automatically from the hierarchy
             var i = 0;

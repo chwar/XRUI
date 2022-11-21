@@ -98,7 +98,7 @@ namespace com.chwar.xrui.UIElements
         {
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
             // Hide the panel if in 3D
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
             {
                 GetComponent<MeshRenderer>().enabled = bShow;
                 GetComponent<MeshCollider>().enabled = bShow;
@@ -148,7 +148,7 @@ namespace com.chwar.xrui.UIElements
                 return;
             }
 
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
                 // Check for device orientation to refine Mobile AR USS styles
                 bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft 
@@ -158,13 +158,13 @@ namespace com.chwar.xrui.UIElements
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
             }
-            else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
+            else if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
             {
-                // Create a runtime VR panel after the layout pass
+                // Create a world UI panel after the layout pass
                 RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
             }
 
-            RootElement.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
+            RootElement.EnableInClassList(XRUI.Instance.GetCurrentXRUIFormat(), true);
         }
         
         /// <summary>
@@ -187,19 +187,22 @@ namespace com.chwar.xrui.UIElements
             while (true)
             {
                 // Reposition in front of camera
-                var cachedTarget = Camera.main.transform.TransformPoint(new Vector3(0, 0, .5f));
-                // Slightly delay the following mechanism to let the camera move freely without aggressively repositioning the panel
-                yield return new WaitForSeconds(.5f);
-                // If camera gets too far from the panel
-                if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
+                if (Camera.main != null)
                 {
-                    var cameraFollowVelocity = Vector3.zero;
-                    // Reposition until panel reaches the front of the camera
-                    while (Vector3.Distance(transform.position, cachedTarget) > .05f)
+                    var cachedTarget = Camera.main.transform.TransformPoint(new Vector3(0, 0, .5f));
+                    // Slightly delay the following mechanism to let the camera move freely without aggressively repositioning the panel
+                    yield return new WaitForSeconds(.5f);
+                    // If camera gets too far from the panel
+                    if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
                     {
-                        transform.position = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .3f);
-                        transform.LookAt(2 * transform.position - Camera.main.transform.position);
-                        yield return new WaitForEndOfFrame();
+                        var cameraFollowVelocity = Vector3.zero;
+                        // Reposition until panel reaches the front of the camera
+                        while (Vector3.Distance(transform.position, cachedTarget) > .05f)
+                        {
+                            transform.position = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .3f);
+                            transform.LookAt(2 * transform.position - Camera.main.transform.position);
+                            yield return new WaitForEndOfFrame();
+                        }
                     }
                 }
             }

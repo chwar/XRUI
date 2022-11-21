@@ -1,13 +1,13 @@
 # XRUI Framework
 [![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
-[![Coverage](https://flat.badgen.net/badge/coverage/85%25/green)](./Tests)
+[![Coverage](https://flat.badgen.net/badge/coverage/83%25/green)](./Tests)
 
-XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can automatically adjust depending on the deployed platform and the environment's reality, supporting regular PC environment as well as AR and VR environments. This way, users only need to design and develop their UI once for all platforms, resulting in a great saving of time.   
+XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
 
 XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html). Internally, it uses UXML and USS, so a basic knowledge and understanding of these technologies are required to use this framework. 
 
-## Installation
+## Getting started
 
 1. In the package manager, click on `Add package from git URL` and insert the repository's URL: [https://github.com/chwar/XRUI.git](https://github.com/chwar/XRUI.git)
   * Alternatively, you can unzip and import the package manually.
@@ -21,7 +21,7 @@ void Start(){
 }
 ```
 3. The package uses a default configuration that references the default UXML templates for UI elements. You can create your own by navigating to `Assets > Create > XRUI > Create XRUI Configuration asset`. You can then override the default templates for UI elements with your own (see [Custom UI Elements](#custom-ui-elements)). Don't forget to reference your own XRUI configuration asset to the XRUI controller.
-
+4. You can have a look at the provided Demo scene to get a better idea of how XRUI works.
 ## UI Elements
 
 ![Screenshot from 2021-08-03 18-43-15](https://user-images.githubusercontent.com/25299178/128054028-87a27934-1dad-4377-9b35-4ded3e8855d2.png)
@@ -51,14 +51,15 @@ To add or remove visual elements from the UI element, call these methods:
 VisualElement myElement = someVisualTreeAsset.Instantiate();
 XRUICard card = GetComponent<XRUICard>();
 
+// Appends a visual element inside a parent element
 card.AddUIElement(myElement, "MyCardContainer");
 card.RemoveUIElement(myElement); 
 ```
 
 You can also show or hide XRUI elements at any time:
 ```csharp
-card.Show(true);    // Display.Flex
-card.Show(false);   // Display.None
+card.Show(true);    // Display.Flex, enables MeshRenderer and Collider for world UI
+card.Show(false);   // Display.None, disables MeshRenderer and Collider for world UI
 
 card.Show(myElement, false); // Hides some of the content  
 ``` 
@@ -82,9 +83,9 @@ card.Show(myElement, false); // Hides some of the content
 		<td><img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="vr" width = 360px></td>
 	</tr> 
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR</td>
-		<td align="center">VR</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
+		<td align="center">3D</td>
 	</tr>
 </table>
 
@@ -112,9 +113,9 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 		<td><img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="vr" width = 360px></td>
 	</tr> 
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR</td>
-		<td align="center">VR</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
+		<td align="center">3D</td>
 	</tr>
 </table>
 
@@ -138,9 +139,9 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 		<td><img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="vr" width = 360px></td>
 	</tr> 
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR</td>
-		<td align="center">VR</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
+		<td align="center">3D</td>
 	</tr>
 </table>
 	
@@ -158,9 +159,9 @@ The provided navbar is a very simple dark top bar. Since XRUI does not provide a
 		<td><img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="vr" width = 360px></td>
 	</tr> 	
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR</td>
-		<td align="center">VR</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
+		<td align="center">3D</td>
 	</tr>
 </table>
 
@@ -178,9 +179,9 @@ The XRUI Card is floating on the right corner by default, and sticks to the bott
 		<td><img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="vr" width = 360px></td>
 	</tr> 	
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR</td>
-		<td align="center">VR</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
+		<td align="center">3D</td>
 	</tr>
 </table>
 
@@ -288,16 +289,16 @@ _xruiModal.SetFieldError(_fieldWithError);
 		<td><img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="vr" width = 360px></td>
 	</tr> 
 	<tr>
-		<td align="center">PC - Primary</td>
-		<td align="center">AR - Success</td>
-		<td align="center">VR - Warning</td>
+		<td align="center">2D Landscape - Primary</td>
+		<td align="center">2D Portrait - Success</td>
+		<td align="center">3D - Warning</td>
 	</tr>
 </table>
 	
 ![Peek 2021-08-03 00-03](https://user-images.githubusercontent.com/25299178/127934108-1784dc2d-36d3-4452-8119-3f910f9a258a.gif)
 ![Peek 2021-08-03 00-05](https://user-images.githubusercontent.com/25299178/127934111-57e1859b-5900-4487-995f-9d3f55e8da68.gif)
 
-The provided alert template sets them as floating cards in the right corner of the screen when in PC and VR mode, and as notifications at the top of the screen in AR mode. They also come with animations to attract the attention of users. You can show alerts for different purposes; the types of alerts are inspired from [Bootstrap](https://getbootstrap.com/docs/5.0/components/alerts/).   
+The provided alert template creates floating cards in 2D landscape and 3D formats, and as notifications at the top of the screen in 2D portrait mode. They also come with animations to attract the attention of users. You can show alerts for different purposes; the types of alerts are inspired from [Bootstrap](https://getbootstrap.com/docs/5.0/components/alerts/).   
 
 
 Show alerts using the `ShowAlert` method:
@@ -321,6 +322,12 @@ You can also give a callback, which will be triggered upon clicking the alert:
 ```csharp
  XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!", "Click to trigger callback", () => MyCallback());
 ```
+
+Or, you can set a countdown after which the alert will disappear:
+
+```csharp
+ XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title", "This alert will disappear in 5 seconds", 5);
+```
 </details>
 	
 	
@@ -333,12 +340,12 @@ You can also give a callback, which will be triggered upon clicking the alert:
 		<td><img src="https://user-images.githubusercontent.com/25299178/150390183-61c38a42-88f2-4ef3-90d4-ac5586272fd8.png" alt="ar" width = 360px></td>
 	</tr> 
 	<tr>
-		<td align="center">PC</td>
-		<td align="center">AR (identical)</td>
+		<td align="center">2D Landscape</td>
+		<td align="center">2D Portrait</td>
 	</tr>
 </table>
 	
-XRUI can create contextual menus dynamically. Here, PC and AR styles are identical: the contextual menu is shown as a floating list. VR is currently not supported for this template. Similarly to the menu and list templates, a menu element template is also given to create entries in the contextual menu. Because the entries are context-dependent, they need to be generated dynamically at runtime.
+XRUI can create contextual menus dynamically. The contextual menu is shown as a floating list. World UI is currently not supported for this template. Similarly to the menu and list templates, a menu element template is also given to create entries in the contextual menu. Because the entries are context-dependent, they need to be generated dynamically at runtime.
 	
 The `ShowContextualMenu` method needs at least the x and y coordinates of the parent element (i.e. the element that was interacted which caused the contextual menu to appear), and a boolean to indicate whether or not the styling should include an arrow pointing at the parent element. A first overload gives the possibility to provide a custom template. A second overload lets developers provide left and right offsets for finer tuning of the menu’s position. The method returns a `XRUIContextualMenu` instance, which is required to add entries to the menu.
 	
@@ -377,18 +384,18 @@ In addition, the contextual menu considers the available space on screen. By def
 	
 </details>
 	
-## Automatic XR adaptation
-XRUI's main functionality is to provide responsiveness for different build targets and XR variants. This is done by adapting all XRUI elements automatically when the build target is changed, by triggering XRUI related USS classes at runtime and in the Unity Editor.
+## XR adaptation
+XRUI's main functionality is to provide responsiveness for different XR variants. This is done by setting the chosen XRUI format during the app's initialization, which all XRUI Elements (both static and dynamic) adopt thanks to USS styles.
 
-To change the XR variant, change the reality value in the XRUI controller:
+To change the XRUI format, change the related value in the XRUI controller:
 
 ![image](https://user-images.githubusercontent.com/25299178/150392381-514b08ec-335f-4762-a3e8-70f6752b1b7b.png)
 
 The XRUI API provides a method to assess the current XR variant. You can use it to do target-specific manipulations like so:
 
 ```csharp
-if(XRUI.IsCurrentReality(XRUI.RealityType.AR)) {
-    // AR specific code here
+if(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional)) {
+    // MR/VR specific code here
 }
 ``` 
 
@@ -424,4 +431,14 @@ XRUI comes with its own set of styles that are imported just after Unity's in UI
 |Alert|`.xrui-alert`|
 |Modal|`.xrui-modal`|
 |Contextual Menu|`.xrui-contextual-menu `|
-	
+
+## XR Interactions
+
+## Acknowledgement
+
+## Roadmap
+- Animation mechanism for all XRUI Elements
+- Custom inspectors for ease of use
+- Allow real time XR adaptation when in Editor
+- Add XRUIFormat override for XRUIElements, so that the app can have both 2D and 3D UI at once in the same scene (e.g., for mobile AR)
+
