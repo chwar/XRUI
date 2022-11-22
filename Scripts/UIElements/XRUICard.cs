@@ -66,8 +66,8 @@ namespace com.chwar.xrui.UIElements
 
         public void UpdateDimensions(Vector2 dimensions)
         {
-            RootElement.style.width = dimensions.x;
-            RootElement.style.height = dimensions.y;
+            RootElement.style.width = dimensions.x == 0 ? new StyleLength(StyleKeyword.Auto) : dimensions.x;
+            RootElement.style.height = dimensions.y == 0 ? new StyleLength(StyleKeyword.Auto) :dimensions.y;
         }
 
         public void SetCloseButtonAction(Action closeButtonAction)

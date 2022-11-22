@@ -2,7 +2,7 @@
     position: absolute;
     right: 20px;
     top: 20px;
-    width: 25%;
+    min-width: 25%;
     height: 40%;
     margin: 20px;
     margin-left: 0;

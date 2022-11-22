@@ -15,42 +15,65 @@ namespace com.chwar.xrui
     {
         private XRUIMenu _menu;
         private XRUICard _card;
+        private XRUIList _list;
         
         IEnumerator Start()
         { 
+            /* Find XRUI Elements in the scene */
             _menu = FindObjectOfType<XRUIMenu>();
             _card = FindObjectOfType<XRUICard>();
+            _list = FindObjectOfType<XRUIList>();
 
-            /* XRUI Menu */
-            var btn = _menu.GetXRUIVisualElement<Button>("xrui-menu__main-btn");
-            btn.clicked += () => ShowEntryContextualMenu(btn);
-            for (int i = 0; i < 10; i++)
+            /* ========== XRUI Menu ========== */
+            
+            // Find the default menu template's main button and add a callback
+            var mainBtn = _menu.GetXRUIVisualElement<Button>("xrui-menu__main-btn");
+            mainBtn.clicked += () => ShowEntryContextualMenu(mainBtn);
+            
+            // Add lots of entries to trigger scrollview
+            for (int i = 1; i <= 15; i++)
             {
-                _menu.AddElement();
+                // AddElement returns the instantiated VisualElement template, which contains a UXML node called "MenuEntry"
+                // Configure each button by changing its text and giving it a callback
+                var menuEntry = _menu.AddElement().Q<Button>("MenuEntry");
+                menuEntry.text = $"Menu entry {i}";
+                // When clicking on the menu entry, the UI Element referenced in the inspector of the XRUI controller will be appended to the card
+                menuEntry.clicked += () => _card.AddUIElement(XRUI.Instance.GetUIElement("TestUIElement").Instantiate(), "MainContainer");
             }
 
-            /* XRUI Alerts */
+            /* ========== XRUI Alerts ========== */
+            
+            // Here are various examples for showing alerts with title, text, callbacks, and countdowns
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning","Clicking this turns the card green!", () =>
             {
+                // Find the default card template's header and make it green
                 _card.GetXRUIVisualElement("xrui-card__header").AddToClassList("xrui-background--success");
             });
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, 	"Error", "Error with a title and message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "This will disappear in 3 seconds", "Info message.", 5);
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "Info", "This message will disappear automatically", 5);
 
-            /* XRUI List */
-            var list = FindObjectOfType<XRUIList>();
-            var addBtn = list.GetXRUIVisualElement<Button>("xrui-list__add-btn");
-            addBtn.clicked += () => 
-                list.AddElement(true).Q<Label>("Text").text = $"List element {list.GetListCount()}";
-            list.AddElement(false).Q<Label>("Text").text = "List element";
-            list.AddElement(true).Q<Label>("Text").text = "Selected element";
-            list.AddElement(false).Q<Label>("Text").text = "List element";
+            /* ========== XRUI List ========== */
+            
+            // Find the default list template's add button and add a callback
+            var addBtn = _list.GetXRUIVisualElement<Button>("xrui-list__add-btn");
+            addBtn.clicked += () => _list.AddElement(true).Q<Label>("Text").text = $"List element {_list.GetListCount()}";
+            
+            // Add a few entries to the list
+            _list.AddElement(false).Q<Label>("Text").text = "List element";
+            _list.AddElement(true).Q<Label>("Text").text = "Selected element";
+            _list.AddElement(false).Q<Label>("Text").text = "List element";
+            
+            /* ========== XRUI Card ========== */
+            
+            // Find the default card template's close button and add a callback
+            var closeBtn = _card.GetXRUIVisualElement<Button>("xrui-card__close-btn");
+            closeBtn.clicked += () => _card.Show(false);
         }
         
         private void ShowEntryContextualMenu(VisualElement parentElement)
@@ -60,15 +83,21 @@ namespace com.chwar.xrui
                 true, 50, 100);
         
             // Add class to identify currently selected visual element
+            // TODO this could be done internally
             parentElement.panel.visualTree.Q(null, "xrui-menu-item--selected")?.ToggleInClassList("xrui-menu-item--selected");
             parentElement.parent.parent.parent.AddToClassList("xrui-menu-item--selected");
 
+            // Add a few entries to the contextual menu
+            
             var el = contextualMenu.AddMenuElement();
             el.Q<Label>("Text").text = "Open Modal";
+            // Clicking on this entry will open a modal that is referenced in the inspector of the XRUI controller
+            // The behaviour of the modal is defined by an additional script whose type we give to the API since it is outside of the XRUI package
             el.RegisterCallback<PointerDownEvent>((e) => XRUI.Instance.CreateModal("MyModal", Type.GetType("com.chwar.xrui.MyModalContent")));
             
             var el2 = contextualMenu.AddMenuElement();
             el2.Q<Label>("Text").text = "Close Menu";
+            // Clicking on this entry will hide the menu
             el2.RegisterCallback<PointerDownEvent>((e) => _menu.Show(false));
         }
     }
