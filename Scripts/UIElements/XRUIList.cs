@@ -12,8 +12,6 @@ namespace com.chwar.xrui.UIElements
     public class XRUIList : XRUIElement
     {
         // UXML Attributes
-        public Button AddButton;
-        
         private Label _title;
         private ScrollView _container;
 
@@ -22,20 +20,15 @@ namespace com.chwar.xrui.UIElements
         private string titleText;
         [Tooltip("Template used to add elements to the list")]
         public VisualTreeAsset listElementTemplate;
-        [Tooltip("Texture used for the Add button")]
-        public Texture2D addButtonTexture;
-        
 
         /// <summary>
         /// Initializes the UI Elements of the List.
         /// </summary>
         protected internal override void Init()
         {
-            _title = RootElement.Q<Label>(null,"xrui-list__title");
-            _container = RootElement.Q<ScrollView>(null,"xrui-list__container");
-            
-            AddButton = RootElement.Q<Button>(null,"xrui-list__add-btn");
-            AddButton.style.backgroundImage = addButtonTexture;
+            base.Init();
+            _title = GetXRUIVisualElement<Label>("xrui-list__title");
+            _container = GetXRUIVisualElement<ScrollView>("xrui-list__container");
         }
         
         /// <summary>
@@ -58,27 +51,6 @@ namespace com.chwar.xrui.UIElements
                 titleText = text;
             }
         }
-        
-        /// <summary>
-        /// Adds template element to the list
-        /// </summary>
-        /// <param name="bSelect">Selects the added element in the list</param>
-        /// <returns>The added element</returns>
-        public VisualElement AddElement(bool bSelect)
-        {
-            if (listElementTemplate is null)
-            {
-                throw new MissingReferenceException($"The list element template of {this.gameObject.name} is missing!");
-            }
-            
-            VisualElement el = listElementTemplate.Instantiate();
-            if (bSelect)
-                SelectElement(el.ElementAt(0));
-            
-            el.ElementAt(0).AddToClassList("xrui-list-item");
-            _container.Add(el);
-            return el;
-        }
 
         /// <summary>
         /// Adds template element to the list
@@ -86,25 +58,40 @@ namespace com.chwar.xrui.UIElements
         /// <param name="bSelect">Selects the added element in the list</param>
         /// <param name="itemSelectedCallback">The callback to trigger when the element is selected</param>
         /// <returns>The added element</returns>
-        public VisualElement AddElement(bool bSelect, Action<PointerDownEvent> itemSelectedCallback)
+        public VisualElement AddElement(bool bSelect, Action<PointerDownEvent> itemSelectedCallback = null)
         {
-            var el = AddElement(bSelect);
+            if (listElementTemplate is null)
+            {
+                throw new MissingReferenceException($"The list element template of {gameObject.name} is missing!");
+            }
+            
+            VisualElement el = listElementTemplate.Instantiate();
+            if (bSelect)
+                SelectElement(el.ElementAt(0));
+            
             el.RegisterCallback<PointerDownEvent>(e =>
             {
                 SelectElement(el.ElementAt(0));
                 itemSelectedCallback?.Invoke(e);
             });
+            
+            el.ElementAt(0).AddToClassList("xrui-list-item");
+            _container.Add(el);
             return el;
         }
 
         /// <summary>
-        /// Deletes all elements from the list
+        /// Deletes all items from the list
         /// </summary>
         public void RemoveAllElements()
         {
             _container.Query(null, "xrui-list-item").ForEach(i => i.parent.RemoveFromHierarchy());
         }
 
+        /// <summary>
+        /// Returns the number of items in the list
+        /// </summary>
+        /// <returns></returns>
         public int GetListCount()
         {
             return  _container.Query(null, "xrui-list-item").ToList().Count;
@@ -114,7 +101,7 @@ namespace com.chwar.xrui.UIElements
         /// Visually selects an element of the list
         /// </summary>
         /// <param name="el"></param>
-        public void SelectElement(VisualElement el)
+        private void SelectElement(VisualElement el)
         {
             var previousSelection = _container.Q(null, "xrui-list-item--selected");
             previousSelection?.ToggleInClassList("xrui-list-item--selected");

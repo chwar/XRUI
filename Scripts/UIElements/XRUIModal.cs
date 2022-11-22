@@ -19,8 +19,6 @@ namespace com.chwar.xrui.UIElements
         public Label ModalTitle { get; private set; }
         public Button ValidateButton { get; private set; }
         public Button CancelButton { get; private set; }
-
-        public Texture2D closeButtonTexture;
         
         private Button _closeButton;
         private VisualElement _buttonsContainer;
@@ -30,13 +28,13 @@ namespace com.chwar.xrui.UIElements
 
         protected internal override void Init()
         {
-            ModalTitle = RootElement.Q<Label>(null, "xrui-modal__title");
-            ValidateButton = RootElement.Q<Button>(null, "xrui-modal__validate-btn");
-            CancelButton = RootElement.Q<Button>(null, "xrui-modal__cancel-btn");
-            _closeButton = RootElement.Q<Button>(null, "xrui-modal__close-btn");
-            _closeButton.style.backgroundImage = closeButtonTexture;
+            base.Init();
+            ModalTitle = GetXRUIVisualElement<Label>("xrui-modal__title");
+            ValidateButton = GetXRUIVisualElement<Button>("xrui-modal__validate-btn");
+            CancelButton = GetXRUIVisualElement<Button>("xrui-modal__cancel-btn");
+            _closeButton = GetXRUIVisualElement<Button>("xrui-modal__close-btn");
+            _buttonsContainer = GetXRUIVisualElement<VisualElement>("xrui-modal__btn-container");
             _closeButton.clicked += () => Destroy(this.gameObject);
-            _buttonsContainer = RootElement.Q<VisualElement>(null, "xrui-modal__btn-container");
         }
 
         /// <summary>

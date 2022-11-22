@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using com.chwar.xrui.UIElements;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit.UI;
@@ -53,7 +54,7 @@ namespace com.chwar.xrui
                     Instance = FindObjectOfType<XRUI>();
 
                 // Set the format given in the inspector
-                SetCurrentXRUIFormat(xruiFormat);
+                SetCurrentXRUIFormat(xruiFormat,setTwoDimensionalFormatToPortraitInEditor);
                 InitializeElements();
             }
             else
@@ -63,10 +64,15 @@ namespace com.chwar.xrui
             }
         }
 
+        #if UNITY_EDITOR
         public void OnValidate()
         {
-            SetCurrentXRUIFormat(xruiFormat);
+            // This only runs in Editor mode
+            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+            SetCurrentXRUIFormat(xruiFormat,setTwoDimensionalFormatToPortraitInEditor);
+            InitializeElements();
         }
+        #endif
 
 
         internal void Reset()
@@ -99,7 +105,7 @@ namespace com.chwar.xrui
         /// Returns the current XRUI format based on the format defined in the inspector.
         /// </summary>
         /// <returns>The current reality.</returns>
-        public string GetCurrentXRUIFormat()
+        public static string GetCurrentXRUIFormat()
         {
             return PlayerPrefs.GetString("XRUIFormat");
         }
@@ -109,7 +115,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="format">The XRUI format to compare.</param>
         /// <returns></returns>
-        public bool IsCurrentXRUIFormat(XRUIFormat format)
+        public static bool IsCurrentXRUIFormat(XRUIFormat format)
         {
             return GetCurrentXRUIFormat().Equals(format.ToString().ToLower());
         }
@@ -118,11 +124,13 @@ namespace com.chwar.xrui
         /// Set the current XRUI format.
         /// </summary>
         /// <param name="format">The XRUI Format to use.</param>
-        public void SetCurrentXRUIFormat(XRUIFormat format)
+        /// <param name="setOrientationPortrait">Whether to use Portrait orientation mode.</param>
+        public void SetCurrentXRUIFormat(XRUIFormat format, bool setOrientationPortrait = false)
         {
             // Update inspector value if called from API
             xruiFormat = format;
             PlayerPrefs.SetString("XRUIFormat", format.ToString().ToLower());
+            PlayerPrefs.SetInt("XRUIFormatOrientationPortrait", Convert.ToInt32(setOrientationPortrait));
             PlayerPrefs.Save();
         }
         
@@ -166,18 +174,12 @@ namespace com.chwar.xrui
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
             var uiDocument = container.GetComponent<UIDocument>();
-            uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
-            uiDocument.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
-            uiDocument.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
-            uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
-            
+
             // Instantiate template
             VisualElement alertContainer = template == null ? xruiConfigurationAsset.defaultAlertTemplate.Instantiate() : template.Instantiate();
-            alertContainer.style.position = new StyleEnum<Position>(Position.Absolute);
-            alertContainer.style.bottom = new StyleLength(0f);
-            alertContainer.style.top = new StyleLength(0f);
-            alertContainer.style.left = new StyleLength(0f);
-            alertContainer.style.right = new StyleLength(0f);
+            AdaptFloatingTemplateContainer(ref alertContainer);
+            // Let the pointer hover over the rest of the elements
+            alertContainer.pickingMode = PickingMode.Ignore;
             uiDocument.rootVisualElement.Add(alertContainer);
 
             // Style the alert accordingly
@@ -228,17 +230,10 @@ namespace com.chwar.xrui
             
             var container = GetXRUIFloatingElementContainer("XRUIModal", true);
             var uiDocument = container.GetComponent<UIDocument>();
-            uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
-            uiDocument.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
-            uiDocument.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
-            uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
-            
+
             // Instantiate main template
             VisualElement modalContainer = m.mainTemplateOverride is null ? xruiConfigurationAsset.defaultModalTemplate.Instantiate() : m.mainTemplateOverride.Instantiate();
-            modalContainer.style.width = new StyleLength(Length.Percent(100));
-            modalContainer.style.height = new StyleLength(Length.Percent(100));
-            modalContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
-            modalContainer.style.alignItems = new StyleEnum<Align>(Align.Center);
+            AdaptFloatingTemplateContainer(ref modalContainer);
             uiDocument.rootVisualElement.Add(modalContainer);
             
             var xruiModal = container.AddComponent<XRUIModal>();
@@ -280,19 +275,14 @@ namespace com.chwar.xrui
         {
             var container = GetXRUIFloatingElementContainer("ContextualMenu", false);
             var uiDocument = container.GetComponent<UIDocument>();
-            uiDocument.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
-            uiDocument.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
-            uiDocument.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
-            uiDocument.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
-            uiDocument.rootVisualElement.pickingMode = PickingMode.Position;
-            
+
             // Instantiate template
             VisualElement contextualMenuContainer = template == null ? xruiConfigurationAsset.defaultContextualMenuTemplate.Instantiate() : template.Instantiate();
-            var contextualMenu = contextualMenuContainer.ElementAt(0);
-            uiDocument.rootVisualElement.Add(contextualMenu);
+            AdaptFloatingTemplateContainer(ref contextualMenuContainer);
+            uiDocument.rootVisualElement.Add(contextualMenuContainer);
 
             // Style and position the contextual menu accordingly
-            contextualMenu.AddToClassList(GetCurrentXRUIFormat());
+            contextualMenuContainer.ElementAt(0).AddToClassList(GetCurrentXRUIFormat());
             var xrui = container.AddComponent<XRUIContextualMenu>();
             // Use default element template, can be overriden
             xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
@@ -322,9 +312,21 @@ namespace com.chwar.xrui
                 ui.rootVisualElement.style.bottom = 0;
                 ui.rootVisualElement.style.left = 0;
                 ui.rootVisualElement.style.right = 0;
+                ui.rootVisualElement.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
+                ui.rootVisualElement.style.alignItems = new StyleEnum<Align>(Align.Center);
+                ui.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
+                ui.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
                 ui.rootVisualElement.EnableInClassList("xrui-background--dark", bDarkenBackground);
             }
             return containerGO;
+        }
+
+        private void AdaptFloatingTemplateContainer(ref VisualElement templateContainer)
+        {
+            templateContainer.style.width = new StyleLength(Length.Percent(100));
+            templateContainer.style.height = new StyleLength(Length.Percent(100));
+            templateContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
+            templateContainer.style.alignItems = new StyleEnum<Align>(Align.Center);
         }
         
         
@@ -368,7 +370,7 @@ namespace com.chwar.xrui
             uiDocument.panelSettings = ps;
 
             o.AddComponent<XRUIWorldSpaceInteraction>();
-            var plane = o.GetComponent<CurvedPlane>() ? o.GetComponent<CurvedPlane>() : o.AddComponent<CurvedPlane>();
+            var plane = o.GetComponent<XRUIPanel>() ? o.GetComponent<XRUIPanel>() : o.AddComponent<XRUIPanel>();
             if (xrui.worldUIParameters.panelScale.Equals(0))
                 xrui.worldUIParameters.panelScale = 1;
             plane.numSegments = 512;

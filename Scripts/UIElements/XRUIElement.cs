@@ -5,6 +5,7 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,14 +25,13 @@ namespace com.chwar.xrui.UIElements
         protected internal virtual void Init()
         {
             // To override
+            UIDocument = GetComponent<UIDocument>();
+            RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
+            _cachedDeviceOrientation = Input.deviceOrientation;
         }
 
         public void Awake()
         {
-            UIDocument = GetComponent<UIDocument>();
-            RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
-            _cachedDeviceOrientation = Input.deviceOrientation;
-            
             // The element is not initialized at this moment, but only during the app's lifetime if it has been re-enabled.
             // During the initial run, all XRUIElement are initialized by the XRUI Instance to make sure that the instance is running first.
             if (XRUI.Instance is null) return;
@@ -40,6 +40,16 @@ namespace com.chwar.xrui.UIElements
             UpdateUI();
         }
 
+        #if UNITY_EDITOR
+        private void OnValidate()
+        {
+            // This method is only used for updating the elements in the Editor
+            if(EditorApplication.isPlayingOrWillChangePlaymode) return;
+            Init();
+            UpdateUI();
+        }
+        #endif
+        
         protected void OnEnable()
         {
             if (RootElement is null) return;
@@ -77,7 +87,7 @@ namespace com.chwar.xrui.UIElements
         }
         
         /*
-         * XR UI Methods
+         * XRUI Methods
          */
         
         /// <summary>
@@ -91,6 +101,7 @@ namespace com.chwar.xrui.UIElements
 
         /// <summary>
         /// Changes the visibility of the UIDocument with the USS `display` property.
+        /// For World UI, the MeshRenderer and MeshCollider are enabled/disabled.
         /// </summary>
         /// <param name="element">Element to change the visibility of</param>
         /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
@@ -98,7 +109,7 @@ namespace com.chwar.xrui.UIElements
         {
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
             // Hide the panel if in 3D
-            if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
             {
                 GetComponent<MeshRenderer>().enabled = bShow;
                 GetComponent<MeshCollider>().enabled = bShow;
@@ -126,12 +137,33 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Removes an UIElement
+        /// Removes a UIElement
         /// </summary>
         /// <param name="uiElement"></param>
         public void RemoveUIElement(VisualElement uiElement)
         {
             uiElement.RemoveFromHierarchy();
+        }
+
+        /// <summary>
+        /// Returns a Visual Element from the Visual Tree Asset. 
+        /// </summary>
+        /// <param name="xruiClass">The name of the XRUI USS class that matches the element to get.</param>
+        /// <typeparam name="T">The type of the Visual Element</typeparam>
+        /// <returns>The wanted XRUI Visual Element</returns>
+        public T GetXRUIVisualElement<T>(string xruiClass) where T : VisualElement
+        {
+            return RootElement?.Q<T>(null, xruiClass);
+        }
+        
+        /// <summary>
+        /// Returns a Visual Element from the Visual Tree Asset. 
+        /// </summary>
+        /// <param name="xruiClass">The name of the XRUI USS class that matches the element to get.</param>
+        /// <returns>The wanted XRUI Visual Element</returns>
+        public VisualElement GetXRUIVisualElement(string xruiClass) 
+        {
+            return RootElement?.Q(null, xruiClass);
         }
         
         /// <summary>
@@ -148,23 +180,33 @@ namespace com.chwar.xrui.UIElements
                 return;
             }
 
-            if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            RootElement.RemoveFromClassList(XRUI.XRUIFormat.TwoDimensional.ToString().ToLower());
+            RootElement.RemoveFromClassList(XRUI.XRUIFormat.ThreeDimensional.ToString().ToLower());
+            RootElement.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
+
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
                 // Check for device orientation to refine Mobile AR USS styles
                 bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft 
                                    || Input.deviceOrientation == DeviceOrientation.LandscapeRight 
-                                   || (Application.isEditor && XRUI.Instance != null && !XRUI.Instance.setTwoDimensionalFormatToPortraitInEditor);
+                                   || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")));
 
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
+                Show(true);
             }
-            else if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
+            else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
             {
-                // Create a world UI panel after the layout pass
-                RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
+                if (Application.isPlaying)
+                {
+                    // Create a world UI panel after the layout pass
+                    RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
+                }
+                else
+                {
+                    Show(false);
+                }
             }
-
-            RootElement.EnableInClassList(XRUI.Instance.GetCurrentXRUIFormat(), true);
         }
         
         /// <summary>

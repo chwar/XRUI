@@ -63,7 +63,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.InitializeElements();
 
             yield return new WaitForSeconds(1);
-            var panel = GameObject.FindObjectOfType<CurvedPlane>();
+            var panel = GameObject.FindObjectOfType<XRUIPanel>();
             Assert.NotNull(panel);
         }
 
@@ -71,8 +71,8 @@ namespace com.chwar.xrui.Tests
         public void XRUITestFormat()
         {
             XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
-            Assert.True(XRUI.Instance.GetCurrentXRUIFormat().Equals(XRUI.Instance.xruiFormat.ToString().ToLower()));
-            Assert.True(XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
+            Assert.True(XRUI.GetCurrentXRUIFormat().Equals(XRUI.Instance.xruiFormat.ToString().ToLower()));
+            Assert.True(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace com.chwar.xrui
 {
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
-    public class CurvedPlane : MonoBehaviour
+    public class XRUIPanel : MonoBehaviour
     {
         private class MeshData
         {

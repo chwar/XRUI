@@ -36,7 +36,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// UXML representation of the contextual menu.
         /// </summary>
-        private VisualElement _menu;
+        private VisualElement _contextualMenu;
         /// <summary>
         /// UXML representation of the contextual menu's arrow.
         /// </summary>
@@ -47,12 +47,13 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         protected internal override void Init()
         {
-            _menu = RootElement.Q(null, "xrui-contextual-menu");
-            _contextualArrow = _menu.Q(null, "xrui-contextual-menu__arrow");
+            base.Init();
+            _contextualMenu = GetXRUIVisualElement("xrui-contextual-menu");
+            _contextualArrow = _contextualMenu.Q(null, "xrui-contextual-menu__arrow");
             
             // Set handler on click to dispose of the contextual menu
-            RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
-            _menu.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
+            RootElement.parent.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
+            _contextualMenu.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
         }
 
         /// <summary>
@@ -61,18 +62,18 @@ namespace com.chwar.xrui.UIElements
         /// <param name="evt"></param>
         internal void PositionRelativeToParent(GeometryChangedEvent evt)
         {
-            _menu.style.position = new StyleEnum<Position>(Position.Absolute);
-            _menu.style.top = parentCoordinates.y;
+            _contextualMenu.style.position = new StyleEnum<Position>(Position.Absolute);
+            _contextualMenu.style.top = parentCoordinates.y;
             // If there's not enough space to display the contextual menu on the right of the target, display on the left instead
-            if (_menu.parent.worldBound.width - parentCoordinates.x < _menu.resolvedStyle.width)
+            if (_contextualMenu.parent.worldBound.width - parentCoordinates.x < _contextualMenu.resolvedStyle.width)
             {
-                _menu.style.left = StyleKeyword.Auto;
-                _menu.style.right = _menu.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
+                _contextualMenu.style.left = StyleKeyword.Auto;
+                _contextualMenu.style.right = _contextualMenu.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
                 _contextualArrow.style.left =  StyleKeyword.Auto;
                 _contextualArrow.style.right = -5;
             } 
             else
-                _menu.style.left = parentCoordinates.x + positionOffsetRight;
+                _contextualMenu.style.left = parentCoordinates.x + positionOffsetRight;
 
             if (!showArrow)
             {
@@ -107,7 +108,7 @@ namespace com.chwar.xrui.UIElements
             el.style.flexShrink = 0;
             el.style.flexGrow = 1;
             el.ElementAt(0).AddToClassList("xrui-contextual-menu__item");
-            _menu.Q("MainContainer").Add(el);
+            _contextualMenu.Q("MainContainer").Add(el);
             
             // Destroy the menu when the element is clicked
             el.RegisterCallback<PointerDownEvent>(_ => Destroy(this.gameObject));

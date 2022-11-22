@@ -24,8 +24,9 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         protected internal override void Init()
         {
-            Title = RootElement.Q<Label>(null, "xrui-alert__title");
-            Content = RootElement.Q<Label>(null, "xrui-alert__content");
+            base.Init();
+            Title = GetXRUIVisualElement<Label>("xrui-alert__title");
+            Content = GetXRUIVisualElement<Label>("xrui-alert__content");
             
             // Set handler on click to dispose of the alert
             RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert(true));
@@ -53,7 +54,7 @@ namespace com.chwar.xrui.UIElements
         {
             yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);
             RootElement.ToggleInClassList("animate");
-            if (XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
                 StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
         }
     }

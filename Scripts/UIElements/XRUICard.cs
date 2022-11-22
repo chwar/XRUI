@@ -27,9 +27,10 @@ namespace com.chwar.xrui.UIElements
         
         protected internal override void Init()
         {
-            _title = RootElement.Q<Label>(null,"xrui-card__title");
-            _subtitle = RootElement.Q<Label>(null, "xrui-card__subtitle");
-            _closeButton = RootElement.Q<Button>(null, "xrui-card__close-btn");
+            base.Init();
+            _title = GetXRUIVisualElement<Label>("xrui-card__title");
+            _subtitle = GetXRUIVisualElement<Label>("xrui-card__subtitle");
+            _closeButton = GetXRUIVisualElement<Button>("xrui-card__close-btn");
         }
 
         /// <summary>
@@ -65,11 +66,8 @@ namespace com.chwar.xrui.UIElements
 
         public void UpdateDimensions(Vector2 dimensions)
         {
-            if (UIDocument != null && cardDimensions != dimensions)
-            {
-                RootElement.style.width = dimensions.x;
-                RootElement.style.height = dimensions.y;
-            }
+            RootElement.style.width = dimensions.x;
+            RootElement.style.height = dimensions.y;
         }
 
         public void SetCloseButtonAction(Action closeButtonAction)

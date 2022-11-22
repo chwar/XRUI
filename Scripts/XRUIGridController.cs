@@ -54,20 +54,20 @@ namespace com.chwar.xrui
         // Start is called before the first frame update
         public void AdaptGrid()
         {
-            var vr = XRUI.Instance.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
+            var worldUI = XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
             
             // TODO Custom Editor that fills the list of elements automatically from the hierarchy
             var i = 0;
             foreach (var gridElement in gridElementsList)
             {
                 var ui = gridElement.row.GetComponent<UIDocument>();
-                if (!vr && ui == null)
+                if (!worldUI && ui == null)
                 {
                     throw new MissingComponentException(
                         $"There is no UIDocument attached on the following XRUI row: {gridElement.row.name}");
                 }
 
-                if (!vr)
+                if (!worldUI)
                 {
                     var row = ui.rootVisualElement;
                     if(row is null) return;

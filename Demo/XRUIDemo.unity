@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08596048, g: 0.13642637, b: 0.32298774, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -223,14 +223,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b638efb99a37e179a19c2d5eb8477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 1, y: 1}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 4}
-  cardDimensions: {x: 0, y: 0}
-  titleText: 
-  subtitleText: 
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
+  cardDimensions: {x: 300, y: 400}
+  titleText: XRUI Card
+  subtitleText: This is the default card
 --- !u!114 &410655639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1765315701}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &555882574
 GameObject:
@@ -292,11 +294,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43e2faa06c94cc282692fa4349938b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 1
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
 --- !u!114 &555882576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,14 +589,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a8319a5cb94f4fbe979445cffcd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
   titleText: XRUI List
   listElementTemplate: {fileID: 9197481963319205126, guid: d23a0e1836e6e918bafffe0b1eb757e8, type: 3}
-  addButtonTexture: {fileID: 0}
 --- !u!114 &1504209365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,16 +659,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bb1c75fe7b421caf0e22acecfa117d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
   titleText: XRUI Menu
-  subText: Subtitle
-  listElementTemplate: {fileID: 9197481963319205126, guid: f0a1324a934192f0bb4d94f8b61a07f1, type: 3}
-  closeButtonTexture: {fileID: 0}
-  mainButtonTexture: {fileID: 0}
+  subtitleText: 
+  menuElementTemplate: {fileID: 9197481963319205126, guid: 2dadee764299b942281a055856ce0fda, type: 3}
 --- !u!114 &1594399925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +684,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 1e56d56428c545e79309860adf7f0207, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 67c1c9d1ba298f6d891001f97ed79e76, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 5
 --- !u!4 &1594399926
 Transform:
   m_ObjectHideFlags: 0
@@ -725,18 +730,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a8f2f1abdbf906cae39f9df48a0b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xruiGridController: {fileID: 0}
-  realityType: 1
+  xruiGridController: {fileID: 224704475}
+  xruiFormat: 0
+  setTwoDimensionalFormatToPortraitInEditor: 0
   xruiConfigurationAsset: {fileID: 11400000, guid: 0fdf877da6f7498e6b0038e4a8f94ceb, type: 2}
   uiElements:
-  - {fileID: 0}
+  - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   modals:
   - modalName: MyModal
     mainTemplateOverride: {fileID: 0}
     modalFlowList:
-    - {fileID: 9197481963319205126, guid: 3e421f15cf7707da194fed51aa5042d4, type: 3}
+    - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
 --- !u!4 &1602110631
 Transform:
   m_ObjectHideFlags: 0
@@ -809,8 +815,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1504209366}
   - {fileID: 410655640}
+  - {fileID: 1504209366}
   m_Father: {fileID: 224704476}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

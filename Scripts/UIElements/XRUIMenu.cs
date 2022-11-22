@@ -11,9 +11,6 @@ namespace com.chwar.xrui.UIElements
     public class XRUIMenu : XRUIElement
     {
         // UXML Attributes
-        public Button MainButton;
-        public Button CloseButton;
-        
         private Label _title;
         private Label _subtitle;
         private ScrollView _container;
@@ -26,25 +23,17 @@ namespace com.chwar.xrui.UIElements
         private string subtitleText;
         [Tooltip("Template used to add elements to the menu")]
         public VisualTreeAsset menuElementTemplate;
-        [Tooltip("Texture used for the close button")]
-        public Texture2D closeButtonTexture;
-        [Tooltip("Texture used for the main button")]
-        public Texture2D mainButtonTexture;
+
 
         /// <summary>
         /// Initializes the UI Elements of the List.
         /// </summary>
         protected internal override void Init()
         {
-            _title = RootElement.Q<Label>(null,"xrui-menu__title");
-            _subtitle = RootElement.Q<Label>(null,"xrui-menu__subtitle");
-            _container = RootElement.Q<ScrollView>(null,"xrui-menu__container");
-            
-            MainButton = RootElement.Q<Button>(null,"xrui-menu__main-btn");
-            MainButton.style.backgroundImage = mainButtonTexture;
-            
-            CloseButton = RootElement.Q<Button>(null,"xrui-menu__close-btn");
-            CloseButton.style.backgroundImage = closeButtonTexture;
+            base.Init();
+            _title = GetXRUIVisualElement<Label>("xrui-menu__title");
+            _subtitle = GetXRUIVisualElement<Label>("xrui-menu__subtitle");
+            _container = GetXRUIVisualElement<ScrollView>("xrui-menu__container");
         }
         
         /// <summary>
