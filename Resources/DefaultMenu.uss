@@ -15,4 +15,56 @@
 
 .xrui-menu {
     background-color: var(--xrui-dark);
+    padding: 20px;
+}
+
+.xrui-menu__container {
+    margin-bottom: 10px;
+    flex: 1 1;
+    width: 100%;
+}
+
+.xrui-menu__btn-container {
+    flex: 0 0;
+    min-height: 75px;
+    align-items: flex-end;
+}
+
+.xrui-menu__title {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    color: white;
+}
+
+.xrui-menu__subtitle {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    font-size: 24px;
+    color: white;
+    white-space: normal;
+}
+
+.xrui-menu__close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.xrui Button.xrui-menu__main-btn {
+    flex: 1 1;
+    margin: 0;
+    padding: 0;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border-width: 0;
+    -unity-text-align: lower-center;
+    font-size: 70px;
 }

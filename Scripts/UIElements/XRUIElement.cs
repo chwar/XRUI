@@ -310,6 +310,6 @@ namespace com.chwar.xrui.UIElements
         [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
         public Vector3 customPanelPosition;
         [Tooltip("Alters the scale of the VR Panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
-        public int panelScale;
+        public float panelScale;
     }
 }

@@ -26,7 +26,7 @@ MonoBehaviour:
     cameraFollowThreshold: 0
     customPanelDimensions: {x: 0, y: 0}
     customPanelPosition: {x: 0, y: 0, z: 0}
-    panelScale: 1
+    panelScale: 0.5
   defaultContextualMenuWorldUIParameters:
     bendPanel: 0
     anchorPanelToCamera: 0

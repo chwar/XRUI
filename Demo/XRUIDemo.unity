@@ -172,7 +172,7 @@ MonoBehaviour:
   gridElementsList:
   - row: {fileID: 763657460}
     weight: 0
-    minHeight: 75
+    minHeight: 60
   - row: {fileID: 1765315699}
     weight: 1
     minHeight: 0
@@ -743,7 +743,7 @@ MonoBehaviour:
     customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0
   titleText: XRUI Menu
-  subtitleText: 
+  subtitleText: This is the default menu
   menuElementTemplate: {fileID: 9197481963319205126, guid: 2dadee764299b942281a055856ce0fda, type: 3}
 --- !u!114 &1594399925
 MonoBehaviour:
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xruiGridController: {fileID: 224704475}
   xruiFormat: 0
-  setTwoDimensionalFormatToPortraitInEditor: 1
+  setTwoDimensionalFormatToPortraitInEditor: 0
   xruiConfigurationAsset: {fileID: 11400000, guid: 5c81f767ce39c4a1f81f4631ca30706a, type: 2}
   uiElements:
   - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}

@@ -47,7 +47,7 @@ namespace com.chwar.xrui
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.", "This is like a really super long message I can'' even begin lmao what is even the meaning of this thing ahaha am I right or whuuuttttttt we knooooowwwwwwwww it's never gonna be this loooonnnngggg but we gotta tryyyyyyyyyy");
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning","Clicking this turns the card green!", () =>
             {

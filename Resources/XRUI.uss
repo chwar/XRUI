@@ -41,6 +41,10 @@
     background-color: var(--xrui-info);
 }
 
+.xrui .xrui-background--light-grey {
+    background-color: var(--xrui-light-grey);
+}
+
 .xrui .xrui-background--primary:hover, .xrui-alert.primary:hover {
     background-color: var(--xrui-primary-hover);
 }

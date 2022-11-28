@@ -21,7 +21,7 @@ void Start(){
 }
 ```
 3. The package uses a default configuration that references the default UXML templates for UI elements. You can create your own by navigating to `Assets > Create > XRUI > Create XRUI Configuration asset`. You can then override the default templates for UI elements with your own (see [Custom UI Elements](#custom-ui-elements)). Don't forget to reference your own XRUI configuration asset to the XRUI controller.
-4. You can have a look at the provided Demo scene to get a better idea of how XRUI works.
+4. You can have a look at the provided Demo scenes to get a better idea of how XRUI works.
 ## UI Elements
 
 ![Screenshot from 2021-08-03 18-43-15](https://user-images.githubusercontent.com/25299178/128054028-87a27934-1dad-4377-9b35-4ded3e8855d2.png)
@@ -449,14 +449,13 @@ Your controllers need:
 
 XRUI automatically adds the `Tracked Device Physics Raycaster` component to World UI game objects.
 
-## Acknowledgement
+## Acknowledgements
 - Thanks to [katas94](https://gist.github.com/katas94/7b220a591215efc36110860a0b1125eb) for the inspiration on interfacing XRUI with Unity Event Handlers and the XR Interaction package.
 - Also thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
 
 ## Roadmap
 - Grid system for World UI
 - Implement Contextual menu in World UI format
-- Update UXML templates so that all XRUI Elements have cohesive scaling by default
 - Animation mechanism for all XRUI Elements
 - Add XRUIFormat override for XRUIElements, so that the app can have both 2D and 3D UI at once in the same scene (e.g., for mobile AR)
 - Custom inspectors for ease of use
