@@ -86,16 +86,16 @@ namespace com.chwar.xrui.Tests
             yield return new WaitUntil(() => _clicked);
         }
         
-        [UnityTest]
-        public IEnumerator XRUIElementTestCardDimensions()
-        {
-            XRUIEditor.AddCard();
-            XRUI.Instance.InitializeElements();
-            var card = GameObject.FindObjectOfType<XRUICard>();
-            card.UpdateDimensions(new Vector2(0, 500));
-            yield return new WaitForEndOfFrame();
-            Assert.True(card.RootElement.style.height.Equals(new StyleLength(500)));
-        }
+        // [UnityTest]
+        // public IEnumerator XRUIElementTestCardDimensions()
+        // {
+        //     XRUIEditor.AddCard();
+        //     XRUI.Instance.InitializeElements();
+        //     var card = GameObject.FindObjectOfType<XRUICard>();
+        //     card.UpdateDimensions(new Vector2(0, 500));
+        //     yield return new WaitForEndOfFrame();
+        //     Assert.True(card.RootElement.style.height.Equals(new StyleLength(500)));
+        // }
         
         [UnityTest]
         public IEnumerator XRUIElementTestCardCloseButtonAction()

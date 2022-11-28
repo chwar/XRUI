@@ -8,7 +8,6 @@
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 0;
-    padding: 2%;
     
     position: absolute;
 
@@ -25,6 +24,7 @@
 .xrui-alert.twodimensional.landscape {
     right: 2%;
     bottom: 2%;
+    padding: 2%;
     max-width: 50%;
     min-width: 20%;
 }
@@ -45,19 +45,48 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    width: 300px;
-    height: 100px;
+    padding: 10px;
+    font-size: 24px;
+    width: 500px;
+    min-height: 100px;
 }
 
-.xrui-alert__title {
+.xrui-alert__title.twodimensional {
     font-size: 200%;
-    display: flex;
 }
 
 .xrui-alert__content {
-    font-size: 150%;
     flex-grow: 1;
+    white-space: normal;
 }
+
+.xrui-alert__content.twodimensional {
+    font-size: 150%;
+}
+
+.xrui-alert.twodimensional.landscape.animate {
+    bottom: -20%;
+    transition-property: bottom, top;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s;
+}
+
+.xrui-alert.twodimensional.portrait.animate {
+    top: -20%;
+    transition-property: bottom, top;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s;
+}
+
+.xrui-alert.threedimensional.animate {
+    transition-property: bottom, top, opacity;
+    transition-timing-function: ease-in-out, ease-in-out;
+    transition-delay: 0.1s, 0.1s, 0.1s;
+    transition-duration: 0.5s, 0.5s, 0.5s;
+}
+
 
 .primary {
     background-color: var(--xrui-primary);
@@ -85,27 +114,4 @@
 
 .info > Label {
     color: rgba(0, 0, 0, 255);
-}
-
-.xrui-alert.twodimensional.landscape.animate {
-    bottom: -15%;
-    transition-property: bottom, top;
-    transition-timing-function: ease-in-out, ease-in-out;
-    transition-delay: 0.1s, 0.1s;
-    transition-duration: 0.5s, 0.5s;
-}
-
-.xrui-alert.twodimensional.portrait.animate {
-    top: -15%;
-    transition-property: bottom, top;
-    transition-timing-function: ease-in-out, ease-in-out;
-    transition-delay: 0.1s, 0.1s;
-    transition-duration: 0.5s, 0.5s;
-}
-
-.xrui-alert.threedimensional.animate {
-    transition-property: bottom, top, opacity;
-    transition-timing-function: ease-in-out, ease-in-out;
-    transition-delay: 0.1s, 0.1s, 0.1s;
-    transition-duration: 0.5s, 0.5s, 0.5s;
 }

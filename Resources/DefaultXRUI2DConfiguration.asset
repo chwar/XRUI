@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c1bbb45cc4b43d99d98e95bf35482d3, type: 3}
-  m_Name: DefaultXRUIConfiguration
+  m_Name: DefaultXRUI2DConfiguration
   m_EditorClassIdentifier: 
   panelSettings: {fileID: 11400000, guid: 1e56d56428c545e79309860adf7f0207, type: 2}
   defaultModalTemplate: {fileID: 9197481963319205126, guid: 62037ff7f3841c25283f18f1bb6f3861, type: 3}

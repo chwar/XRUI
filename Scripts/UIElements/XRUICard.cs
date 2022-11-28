@@ -15,9 +15,7 @@ namespace com.chwar.xrui.UIElements
         private Label _title;
         private Label _subtitle;
         private Button _closeButton;
-        
-        [Tooltip("Dimensions of the card")]
-        public Vector2 cardDimensions;
+
         [Tooltip("Title of the card")]
         [SerializeField]
         private string titleText;
@@ -41,7 +39,6 @@ namespace com.chwar.xrui.UIElements
             base.UpdateUI();
             UpdateTitle(titleText);
             UpdateSubtitle(subtitleText);
-            UpdateDimensions(cardDimensions);
         }
         
         /*Update Methods*/
@@ -62,12 +59,6 @@ namespace com.chwar.xrui.UIElements
                 // Also update inspector value to keep only one value in case the field is updated from code 
                 subtitleText = text;
             }
-        }
-
-        public void UpdateDimensions(Vector2 dimensions)
-        {
-            RootElement.style.width = dimensions.x == 0 ? new StyleLength(StyleKeyword.Auto) : dimensions.x;
-            RootElement.style.height = dimensions.y == 0 ? new StyleLength(StyleKeyword.Auto) :dimensions.y;
         }
 
         public void SetCloseButtonAction(Action closeButtonAction)

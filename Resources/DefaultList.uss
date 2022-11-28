@@ -10,5 +10,11 @@
 
 .xrui-list.threedimensional {
     width: 300px;
-    height: 800px;
+    height: 600px;
+}
+
+.xrui-list__container {
+    width: 100%;
+    height: auto;
+    max-height: 85%;
 }

@@ -96,10 +96,12 @@ namespace com.chwar.xrui
                     // Each XRUI Element needs its own PanelSettings to have its own render texture to be displayed within the world
                     if (ui != null)
                     {
-                        _listGridElements.AddRange(gridElement.row.transform.GetComponentsInChildren<Transform>()
-                            .ToList()
-                            .GetRange(1,gridElement.row.transform.childCount));
-                        DestroyImmediate(ui);
+                        gridElement.row.transform.GetComponentsInChildren<Transform>().ToList().ForEach(t => t.parent = null);
+                        this.gameObject.SetActive(false);
+                        // _listGridElements.AddRange(gridElement.row.transform.GetComponentsInChildren<Transform>()
+                        //     .ToList()
+                        //     .GetRange(1,gridElement.row.transform.childCount));
+                        // DestroyImmediate(ui);
                     }
                 }
             }

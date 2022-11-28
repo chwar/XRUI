@@ -25,9 +25,7 @@
 
 .xrui-card.threedimensional {
     height: 500px;
-    width: 500px;
-    align-items: stretch;
-    flex-shrink: 0;
+    width: 400px;
 }
 
 .xrui-card__header {

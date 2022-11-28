@@ -202,7 +202,7 @@ namespace com.chwar.xrui
                 camPos.y - .2f, camPos.z + .3f);
             xrui.worldUIParameters.anchorPanelToCamera = true;
             xrui.worldUIParameters.bendPanel = false;
-            xrui.worldUIParameters.panelScale = 20;
+            xrui.worldUIParameters = xruiConfigurationAsset.defaultAlertWorldUIParameters;
             xrui.worldUIParameters.cameraFollowThreshold = .1f;
             
             if(countdown > 0)
@@ -219,7 +219,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="modalName">Name of the modal.</param>
         /// <param name="additionalScript">User script to attach to the modal for user-defined behaviour.</param>
-        public void CreateModal(string modalName, Type additionalScript)
+        public XRUIModal ShowModal(string modalName, Type additionalScript)
         {
             InspectorModal m = XRUI.Instance.modals.Find(modal => modal.modalName.Equals(modalName));
             if (m.modalName is null)
@@ -237,9 +237,12 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(modalContainer);
             
             var xruiModal = container.AddComponent<XRUIModal>();
+            xruiModal.worldUIParameters = xruiConfigurationAsset.defaultModalWorldUIParameters;
             xruiModal.modalFlowList = m.modalFlowList;
             container.AddComponent(additionalScript);
             container.transform.SetParent(container.transform);
+
+            return xruiModal;
         }
         
         /// <summary>
@@ -247,20 +250,9 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
         /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
-        public void ShowContextualMenu(Vector2 parentCoordinates, bool showArrow)
+        public XRUIContextualMenu ShowContextualMenu(Vector2 parentCoordinates, bool showArrow)
         {
-            ShowContextualMenu(null, parentCoordinates, showArrow);
-        }
-
-        /// <summary>
-        /// Generates a contextual menu displayed with respect to the position of the clicked element.
-        /// </summary>
-        /// <param name="template">Custom contextual menu template to use, set to null to use default.</param>
-        /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
-        /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
-        public void ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow)
-        {
-            ShowContextualMenu(template, parentCoordinates, showArrow, Single.NaN, Single.NaN);
+            return ShowContextualMenu(null, parentCoordinates, showArrow);
         }
 
         /// <summary>
@@ -271,7 +263,7 @@ namespace com.chwar.xrui
         /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
         /// <param name="leftOffset">Adds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.</param>
         /// <param name="rightOffset">Adds an offset in pixels used when the contextual menu is positioned on the right of the parent coordinates.</param>
-        public XRUIContextualMenu ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow, float leftOffset, float rightOffset)
+        public XRUIContextualMenu ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow, float leftOffset = Single.NaN, float rightOffset = Single.NaN)
         {
             var container = GetXRUIFloatingElementContainer("ContextualMenu", false);
             var uiDocument = container.GetComponent<UIDocument>();
@@ -288,6 +280,8 @@ namespace com.chwar.xrui
             xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
             xrui.parentCoordinates = parentCoordinates;
             xrui.showArrow = showArrow;
+            xrui.worldUIParameters = xruiConfigurationAsset.defaultContextualMenuWorldUIParameters;
+            xrui.worldUIParameters.customPanelDimensions = parentCoordinates;
             if (!float.IsNaN(leftOffset)) xrui.positionOffsetLeft = leftOffset;
             if (!float.IsNaN(rightOffset)) xrui.positionOffsetRight = rightOffset;
 
@@ -321,6 +315,10 @@ namespace com.chwar.xrui
             return containerGO;
         }
 
+        /// <summary>
+        /// Helper to format a Template Container so that it it is scaled to the entire screen
+        /// </summary>
+        /// <param name="templateContainer"></param>
         private void AdaptFloatingTemplateContainer(ref VisualElement templateContainer)
         {
             templateContainer.style.width = new StyleLength(Length.Percent(100));
@@ -328,8 +326,7 @@ namespace com.chwar.xrui
             templateContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
             templateContainer.style.alignItems = new StyleEnum<Align>(Align.Center);
         }
-        
-        
+
         /// <summary>
         /// Generates a mesh on which a render texture is created. The render texture renders the XRUI element.
         /// </summary>
@@ -341,7 +338,7 @@ namespace com.chwar.xrui
 
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
-            var dimensions = uiDocument.rootVisualElement.Q(null, "xrui").resolvedStyle;
+            var dimensions = xrui.RootElement.resolvedStyle;
 
             if (dimensions.width == 0 || dimensions.height == 0)
             {
@@ -349,33 +346,24 @@ namespace com.chwar.xrui
             }
 
             var ratio = GetGreatestCommonDivisor((int) dimensions.width, (int) dimensions.height);
-            // If the ratio is 1:1, the GCD will be the same value as the height/width, making the ratio value too high
-            if (ratio == (int) dimensions.width) ratio /= 10;
-            
+            // Make the world UI panel dimensions tend towards one unity unit
+            var scale = 1 / (dimensions.width / ratio);
+
             RenderTexture rt = new RenderTexture((int) dimensions.width, (int) dimensions.height, 24)
             {
                 name = uiDocument.name,
                 useDynamicScale = true
             };
             rt.Create();
-            
-            PanelSettings ps = uiDocument.panelSettings.targetTexture == null ? 
-                Instantiate(Resources.Load<PanelSettings>("DefaultPanelSettings")) : uiDocument.panelSettings;
-            ps.targetTexture = rt;
-            ps.scaleMode = uiDocument.panelSettings.scaleMode;
-            ps.referenceResolution = uiDocument.panelSettings.referenceResolution;
-            ps.referenceDpi = uiDocument.panelSettings.referenceDpi;
-            ps.fallbackDpi = uiDocument.panelSettings.fallbackDpi;
-            ps.match = uiDocument.panelSettings.match;
-            uiDocument.panelSettings = ps;
+            uiDocument.panelSettings.targetTexture = rt;
 
             o.AddComponent<XRUIWorldSpaceInteraction>();
             var plane = o.GetComponent<XRUIPanel>() ? o.GetComponent<XRUIPanel>() : o.AddComponent<XRUIPanel>();
             if (xrui.worldUIParameters.panelScale.Equals(0))
                 xrui.worldUIParameters.panelScale = 1;
             plane.numSegments = 512;
-            plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.height / ratio) / xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
-            plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (dimensions.width / ratio) / xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
+            plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.height / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
+            plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.width / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
             plane.useArc = xrui.worldUIParameters.bendPanel;
             plane.curvatureDegrees = xrui.worldUIParameters.bendPanel ? 60 : 0;
             plane.Generate(rt);
@@ -397,14 +385,14 @@ namespace com.chwar.xrui
 
         internal void InitializeElements()
         {
+            xruiGridController = FindObjectOfType<XRUIGridController>();
+            if(xruiGridController is not null) 
+                xruiGridController.AdaptGrid();
             foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
             {
                 xruiElement.Init();
                 xruiElement.UpdateUI();
             }
-            xruiGridController = FindObjectOfType<XRUIGridController>();
-            if(xruiGridController is not null) 
-                xruiGridController.AdaptGrid();
         }
     }
 

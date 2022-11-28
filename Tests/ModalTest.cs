@@ -38,7 +38,7 @@ namespace com.chwar.xrui.Tests
                 modalFlowList = new List<VisualTreeAsset>(){Resources.Load<VisualTreeAsset>("TestUIElement")}
             };
             XRUI.Instance.modals.Add(m);
-            XRUI.Instance.CreateModal("TestModal", null);
+            XRUI.Instance.ShowModal("TestModal", null);
             _modal = Object.FindObjectOfType<XRUIModal>();
             _ui = _modal.GetComponent<UIDocument>();
             _clicked = false;
@@ -66,7 +66,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestAddModalWithNonExistingTemplate()
         {
-            Assert.Throws<ArgumentException>(() => XRUI.Instance.CreateModal("NonExistingModal", null));
+            Assert.Throws<ArgumentException>(() => XRUI.Instance.ShowModal("NonExistingModal", null));
         }
 
         [Test]

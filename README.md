@@ -409,7 +409,7 @@ For example, a top navbar can be setup in one row, with a weight of 0, i.e., it 
 <img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width = 500px>
 	
 <!-- ![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png) -->
-    
+
 > Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obtain the expected behaviour.
 
 </details>
@@ -433,12 +433,36 @@ XRUI comes with its own set of styles that are imported just after Unity's in UI
 |Contextual Menu|`.xrui-contextual-menu `|
 
 ## XR Interactions
+See the `XRUIDemoInteraction` scene in the Demo folder. 
+To enable interactions with world UI (i.e., make your UI react to MR/VR pointers), you need to add a few objects from the XR Interaction package in your scene:
+
+- An `Event Handler` component
+- The `Input Action Manager` component from the XRI package
+- The `XR Interaction Manager` from the XRI package
+- The `XR UI Input Module` from the XRI package
+
+Your controllers need:
+
+- The `XR Controller` component from the XRI package (preferably with the XRI input actions configured)
+- The `XR Ray Interactor` component from the XRI package
+  - You must check the "Enable Interaction with UI GameObjects" checkbox
+
+XRUI automatically adds the `Tracked Device Physics Raycaster` component to World UI game objects.
 
 ## Acknowledgement
+- Thanks to [katas94](https://gist.github.com/katas94/7b220a591215efc36110860a0b1125eb) for the inspiration on interfacing XRUI with Unity Event Handlers and the XR Interaction package.
+- Also thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
 
 ## Roadmap
+- Grid system for World UI
+- Implement Contextual menu in World UI format
+- Update UXML templates so that all XRUI Elements have cohesive scaling by default
 - Animation mechanism for all XRUI Elements
-- Custom inspectors for ease of use
-- Allow real time XR adaptation when in Editor
 - Add XRUIFormat override for XRUIElements, so that the app can have both 2D and 3D UI at once in the same scene (e.g., for mobile AR)
+- Custom inspectors for ease of use
 
+## Known bugs
+- On mobile (Android), the UI will update when a rotation is detected if the project has Auto Rotation enabled, but this also happens if the rotation is locked in Android.
+- On mobile (Android), rotations show UI elements that had been previously hidden
+- Raycasts on World UI Interactions do not entirely match the visuals shown to the users when using the Oculus SDK. Collisions are detected on the left of panels although they should not, and they stop too early before the right border of the panel.
+- When scripts are recompiled in the Editor, 2D UI Elements will sometimes not update properly. This is not really problematic as going into play mode re-renders all UI Elements correctly.

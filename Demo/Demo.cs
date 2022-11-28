@@ -44,9 +44,10 @@ namespace com.chwar.xrui
             /* ========== XRUI Alerts ========== */
             
             // Here are various examples for showing alerts with title, text, callbacks, and countdowns
+            yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.", "This is like a really super long message I can'' even begin lmao what is even the meaning of this thing ahaha am I right or whuuuttttttt we knooooowwwwwwwww it's never gonna be this loooonnnngggg but we gotta tryyyyyyyyyy");
             yield return new WaitForSeconds(1);
             XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning","Clicking this turns the card green!", () =>
             {
@@ -93,7 +94,7 @@ namespace com.chwar.xrui
             el.Q<Label>("Text").text = "Open Modal";
             // Clicking on this entry will open a modal that is referenced in the inspector of the XRUI controller
             // The behaviour of the modal is defined by an additional script whose type we give to the API since it is outside of the XRUI package
-            el.RegisterCallback<PointerDownEvent>((e) => XRUI.Instance.CreateModal("MyModal", Type.GetType("com.chwar.xrui.MyModalContent")));
+            el.RegisterCallback<PointerDownEvent>((e) => XRUI.Instance.ShowModal("MyModal", Type.GetType("com.chwar.xrui.MyModalContent")));
             
             var el2 = contextualMenu.AddMenuElement();
             el2.Q<Label>("Text").text = "Close Menu";

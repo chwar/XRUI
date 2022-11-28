@@ -10,10 +10,10 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    #if UNITY_EDITOR
     [InitializeOnLoad]
     public class XRUIEditor : MonoBehaviour
     {
-        #if UNITY_EDITOR
         // Registers an event handler when the class is initialized
         static XRUIEditor()
         {
@@ -95,7 +95,6 @@ namespace com.chwar.xrui
             GameObject element = AddXRUIElement("XRUI Element");
             element.AddComponent<XRUIElement>();
         }
-        #endif
 
         /// <summary>
         /// Adds a XRUI Element.
@@ -125,4 +124,5 @@ namespace com.chwar.xrui
             }
         }
     }
+    #endif
 }

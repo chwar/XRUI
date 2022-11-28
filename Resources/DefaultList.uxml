@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="List" class="xrui-list xrui" style="background-color: rgb(238, 238, 238); height: 100%;">
+    <ui:VisualElement name="List" class="xrui-list xrui" style="background-color: rgb(238, 238, 238);">
         <ui:Label text="Label" display-tooltip-when-elided="true" name="Title" class="xrui-list__title" style="color: rgb(0, 0, 0); font-size: 24px; -unity-text-align: middle-center; width: 100%; height: 50px; -unity-font-style: bold; -unity-font: resource(&apos;Roboto-Regular&apos;);" />
-        <ui:ScrollView name="MainContainer" horizontal-scroller-visibility="Hidden" class="xrui-list__container" style="width: 100%; height: auto; max-height: 87%;" />
+        <ui:ScrollView name="MainContainer" horizontal-scroller-visibility="Hidden" class="xrui-list__container" />
         <ui:Button display-tooltip-when-elided="true" name="AddItem" text="+" class="xrui-list__add-btn" style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 50px; height: 50px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 50px; border-bottom-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; position: absolute; right: 0; bottom: 0; font-size: 46px; -unity-text-align: lower-center;" />
     </ui:VisualElement>
 </ui:UXML>
