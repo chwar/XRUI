@@ -77,7 +77,7 @@ namespace com.chwar.xrui
 
         internal void Reset()
         {
-            xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
         
         /// <summary>

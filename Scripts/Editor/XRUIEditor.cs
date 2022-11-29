@@ -30,7 +30,7 @@ namespace com.chwar.xrui
             if (FindObjectOfType<XRUI>() is not null) return;
             GameObject xruiGo = new GameObject() {name = "XRUI"};
             var xrui = xruiGo.AddComponent<XRUI>();
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
         
         /// <summary>
@@ -113,7 +113,7 @@ namespace com.chwar.xrui
 
         internal static XRUIConfiguration GetXRUIConfiguration()
         {
-            return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
 
         private static void AdaptXRUI()

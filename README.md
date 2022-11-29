@@ -1,7 +1,7 @@
 # XRUI Framework
 [![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
-[![Coverage](https://flat.badgen.net/badge/coverage/83%25/green)](./Tests)
+[![Coverage](https://flat.badgen.net/badge/coverage/90%25/green)](./Tests)
 
 XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
 
@@ -61,7 +61,7 @@ You can also show or hide XRUI elements at any time:
 card.Show(true);    // Display.Flex, enables MeshRenderer and Collider for world UI
 card.Show(false);   // Display.None, disables MeshRenderer and Collider for world UI
 
-card.Show(myElement, false); // Hides some of the content  
+card.Show(myElement, false); // Hides myElement
 ``` 
 
 > Note: Keep in mind that hidden elements will not be found with a regular QML query, as they are hidden. You can still find them by either keeping a reference to the visual element in your code, or by querying it like this: 
@@ -96,9 +96,14 @@ The list element template is the UXML template that is used to create entries. Y
 Add entries to your menu:
 ```csharp
 var menu = GetComponent<XRUIMenu>();
+
 // The menu returns the created entry to be configured
 var element = menu.AddElement();
 element.Q<Label>("MyElementLabel").text = "myLabelTitle";
+
+// Access the UXML nodes from the template
+var menuTitle = _menu.GetXRUIVisualElement<Label>("xrui-menu__title");
+
 ```
 </details>
 
@@ -122,6 +127,7 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 The XRUI List works in the same way as the menu:
 ```csharp
 var list = GetComponent<XRUIList>();
+
 // The list returns the created entry to be configured
 var element = list.AddElement();
 element.Q<Label>("MyElementLabel").text = "myLabelTitle";
@@ -165,7 +171,8 @@ The provided navbar is a very simple dark top bar. Since XRUI does not provide a
 	</tr>
 </table>
 
-The XRUI Card is floating on the right corner by default, and sticks to the bottom of the screen in AR mode. You can specify custom dimensions from the inspector. Use the `AddUIElement` method (see [XRUI Element](#xrui-element)) to fill the card with content. The template's default container is named `"MainContainer"`. 
+The XRUI Card is floating on the right corner in the 2D landscape format, and sticks to the bottom of the screen in portrait format. Use the `AddUIElement` method (see [XRUI Element](#xrui-element)) to fill the card with content.
+
 </details>
 	
 ### XRUI Modals
@@ -187,7 +194,7 @@ The XRUI Card is floating on the right corner by default, and sticks to the bott
 
 XRUI creates modals at runtime rather than requiring you to create all of them in the editor in order to save resources.
 
-Given the hierarchic nature of UXML, modals are easy to reproduce. XRUI provides one XR Modal template, which consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can use this template and fill its container dynamically at runtime.
+Given the hierarchic nature of UXML, modals are easy to reproduce. XRUI provides a modal template, which consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can use this template and fill its container dynamically at runtime.
 
 In Unity, you can reference your modals in the intended list:
 
@@ -198,7 +205,7 @@ The name given to each modal entry can be used to find the matching template and
 ```csharp
 // Adapt the namespace to your own
 Type t = Type.GetType("myModalScript");
-XRUI.Instance.CreateModal("DemoModal", t);
+XRUI.Instance.ShowModal("DemoModal", t);
 ```
 > Note: The user script type has to be passed outside of the XRUI package, because Unity packages can't access the Assembly-CSharp assembly, i.e. can't find user namespaces, and hence, can't find user scripts located in the Assets automatically. It's also not possible to reference it through the inspector, as it only accepts instances of a script and not the script itself.
 
@@ -234,7 +241,7 @@ void MyPage() {
 ```
 
 ### Using the default modal template
-You can use the default modal template that comes with the package and fill it with your own content. It consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can add your content to the container by referencing it by name (`MainContainer`) to the `UpdateModalFlow` method, as per the example above. You can manipulate the buttons and change the title through the `XRUIModal` API.
+You can use the default modal template that comes with the package and fill it with your own content. It consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can add your content to the container by referencing it by its USS class (`xrui-modal__container`) to the `UpdateModalFlow` method, as per the example above. You can manipulate the buttons and change the title through the `XRUIModal` API.
 
 Access the modal's public fields to change the title of the modal, the text of the buttons, or to set the icon of the top right close button:
 ```csharp
@@ -391,13 +398,16 @@ To change the XRUI format, change the related value in the XRUI controller:
 
 ![image](https://user-images.githubusercontent.com/25299178/150392381-514b08ec-335f-4762-a3e8-70f6752b1b7b.png)
 
-The XRUI API provides a method to assess the current XR variant. You can use it to do target-specific manipulations like so:
+The XRUI API provides a method to assess the current XRUI format. You can use it to do target-specific manipulations like so:
 
 ```csharp
 if(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional)) {
     // MR/VR specific code here
 }
 ``` 
+
+For 2D UI, additional USS styles are provided to adapt for both landscape and portrait orientations. These classes are automatically added when the device (i.e., a smartphone) changes orientation.
+For ease of use, you can force the portrait mode while working in the Unity editor by checking the `Set Two Dimensional Format to Portrait in Editor` checkbox in the XRUI controller.
 
 ## XRUI Grid System
 In order to organize easily and efficiently UI elements on screen, XRUI makes use of a grid system. You can use it by navigating to `XRUI > Add XRUI Grid`. In the Unity editor, you can group UI components inside rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows you to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
@@ -415,22 +425,30 @@ For example, a top navbar can be setup in one row, with a weight of 0, i.e., it 
 </details>
 
 ## Custom UI Elements
-You can create your own UXML templates and refer them in the XRUI Configuration asset. You should however be careful in naming your elements, should you want to inherit the functionalities provided by the default UI elements. You can check them with Unity's UI Builder, or you can simply duplicate the UXML files and start working from here.
+You can create your own UXML templates and refer them in the XRUI Configuration asset. You should however be careful in naming your elements, should you want to inherit the functionalities provided by the default UI elements. You can check them with Unity's UI Builder, or you can simply duplicate the UXML files and start working from here. 
+
+Also, the root visual element of your custom templates must have the `.xrui` USS class.
 
 ### USS styles
-XRUI comes with its own set of styles that are imported just after Unity's in UI Toolkit's pipeline. They are imported through a theme file which is used in the provided Panel Settings asset (also linked in the XRUI Configuration asset). You can add your own root styles to this theme file, override the root XRUI styles, or remove some of the imported assets if you don't need them. Should you want to inherit some of the XRUI styles for your own UI elements, you can add the USS class `.xrui` to the desired root visual elements. Additionally, each XRUI component has its own class that uses the BEM methodology, as per Unity's recommendation. They are the following:
+XRUI comes with its own set of styles that are imported just after Unity's in UI Toolkit's pipeline. They are imported through a theme file which is used in the provided Panel Settings assets (also linked in the XRUI Configuration asset). You can add your own root styles to this theme file, override the root XRUI styles, or remove some of the imported assets if you don't need them. Should you want to inherit some of the XRUI styles for your own UI elements, you can add the related USS classes to the desired visual elements. 
 
-|XRUI Element|USS Class|
-|:---:|:---:|
-|Menu|`.xrui-menu`|
-|Menu item|`.xrui-menu-item`|
-|List|`.xrui-list`|
-|List item|`.xrui-list-item`|
-|Navbar|`.xrui-navbar`|
-|Card|`.xrui-card`|
-|Alert|`.xrui-alert`|
-|Modal|`.xrui-modal`|
-|Contextual Menu|`.xrui-contextual-menu `|
+Additionally, when creating your custom elements based on existing ones, it is recommended that you add the following USS classes to keep the XRUI functionalities (e.g., updating the title from the inspector). They are the following:
+
+|      XRUI Element       |          Root USS Class          | Sub USS Classes                                                                                                                                                                                                                                           |
+|:-----------------------:|:--------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|          Menu           |           `.xrui-menu`           | `.xrui-menu__title`<br/>`.xrui-menu__subtitle`<br/>`.xrui-menu__container`<br/>`.xrui-menu__btn-container`<br/>`.xrui-menu__close-btn`<br/>`.xrui-menu__main-btn`                                                                                         |
+|        Menu item        |        `.xrui-menu-item`         |                                                                                                                                                                                                                                                           |
+|          List           |           `.xrui-list`           | `.xrui-list__title`<br/>`.xrui-list__add-btn`<br/>`.xrui-list__container`                                                                                                                                                                                 |
+|        List item        |        `.xrui-list-item`         | `.xrui-list-item__icon`<br/>`.xrui-list-item__text`                                                                                                                                                                                                       |
+|         Navbar          |          `.xrui-navbar`          |                                                                                                                                                                                                                                                           |
+|          Card           |           `.xrui-card`           | `.xrui-card__title`<br/>`.xrui-card__subtitle`<br/>`.xrui-card__container`<br/>`.xrui-card__close-btn`<br/>                                                                                                                                               |
+|          Alert          |          `.xrui-alert`           | `.xrui-alert__title`<br/>`.xrui-alert__content`                                                                                                                                                                                                           |
+|          Modal          |          `.xrui-modal`           | `.xrui-modal__title`<br/>`.xrui-modal__close-btn`<br/>`.xrui-modal__container`<br/>`.xrui-modal__btn-container`<br/>`.xrui-modal__cancel-btn`<br/>`.xrui-modal__validate-btn`                                                                             |
+|     Contextual Menu     |     `.xrui-contextual-menu `     | `.xrui-contextual-menu__arrow`<br/>`.xrui-contextual-menu__container`                                                                                                                                                                                     |
+| Contextual Menu Element | `.xrui-contextual-menu-element ` | `.xrui-contextual-menu-element__text`                                                                                                                                                                                                                     |                 
+|          Icons          |           `.xrui-icon`           | `.xrui-icon--white`<br/>`.xrui-icon--black`                                                                                                                                                                                                               | 
+|        Templates        |                                  | `.xrui-templates__btn`<br/>`.xrui-templates__separator`<br/>`.xrui-templates__textfield`                                                                                                                                                                  | 
+|       Backgrounds       |                                  | `.xrui-background--primary`<br/>`.xrui-background--secondary`<br/>`.xrui-background--warning`<br/>`.xrui-background--success`<br/>`.xrui-background--danger`<br/>`.xrui-background--info`<br/>`.xrui-background--light-grey`<br/>`.xrui-background--dark` | 
 
 ## XR Interactions
 See the `XRUIDemoInteraction` scene in the Demo folder. 

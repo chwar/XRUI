@@ -27,7 +27,7 @@ namespace com.chwar.xrui
 
         internal void Reset()
         {
-            panelSettings = Resources.Load<PanelSettings>("DefaultPanelSettings");
+            panelSettings = Resources.Load<PanelSettings>("Default2DPanelSettings");
             defaultModalTemplate = Resources.Load<VisualTreeAsset>("DefaultModal");
             defaultAlertTemplate = Resources.Load<VisualTreeAsset>("DefaultAlert");
             defaultCardTemplate = Resources.Load<VisualTreeAsset>("DefaultCard");

@@ -21,7 +21,7 @@ namespace com.chwar.xrui
 
         private void StartPage()
         {
-            _xruiModal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _xruiModal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 _xruiModal.SetCancelButtonAction(() => Destroy(_xruiModal.gameObject));
                 _xruiModal.SetValidateButtonAction(Validate);

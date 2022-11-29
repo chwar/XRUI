@@ -23,7 +23,7 @@ namespace com.chwar.xrui.Tests
             if (GameObject.FindObjectOfType<XRUI>() is not null) return;
             _xrui = new GameObject() {name = "XRUI"}.AddComponent<XRUI>();
             _xrui.gameObject.AddComponent<Camera>().tag = "MainCamera";
-            _xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            _xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
         

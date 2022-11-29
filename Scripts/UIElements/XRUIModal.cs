@@ -72,10 +72,10 @@ namespace com.chwar.xrui.UIElements
         /// Updates the content of the modal with the desired content. Creates content if it is non existing, otherwise makes it visible.
         /// </summary>
         /// <param name="contentAssetName">The name of the Visual Tree Asset to instantiate or use. Must be a part of the modal flow list.</param>
-        /// <param name="parent">Name of the container in which to put the content.</param>
+        /// <param name="parentClass">USS class matching the container in which to put the content.</param>
         /// <param name="onCreate">Callback that is triggered only once, upon the content's instantiation.</param>
         /// <exception cref="ArgumentException">Content asset name or parent not found.</exception>
-        public void UpdateModalFlow(string contentAssetName, string parent, Action onCreate)
+        public void UpdateModalFlow(string contentAssetName, string parentClass, Action onCreate)
         {
             // Fetch content UXML from modal flow list
             var content = modalFlowList.Find(c => c.name.Equals(contentAssetName));
@@ -85,10 +85,10 @@ namespace com.chwar.xrui.UIElements
             }
             
             // Find the container
-            var main = RootElement.Q(parent);
+            var main = RootElement.Q(null, parentClass);
             if (main is null)
             {
-                throw new ArgumentException($"There is no Visual Element called \"{parent}\" in the Modal. " +
+                throw new ArgumentException($"There is no Visual Element matching the \"{parentClass}\" USS class in the Modal. " +
                                             "Please add one in order to append content inside");
             }
             
@@ -110,7 +110,7 @@ namespace com.chwar.xrui.UIElements
                 // Make content take all container space
                 ui.style.flexGrow = 1;
                 ui.name = contentAssetName;
-                AddUIElement(ui, parent);
+                AddUIElement(ui, parentClass);
 
                 // Fire callback for user-defined behaviour on content creation
                 onCreate();

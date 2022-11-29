@@ -24,7 +24,7 @@ namespace com.chwar.xrui.Tests
             var go = new GameObject() { name = "XRUI" };
             go.AddComponent<XRUI>();
             go.AddComponent<Camera>().tag = "MainCamera";
-            XRUI.Instance.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            XRUI.Instance.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
 
@@ -128,7 +128,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             Assert.Catch<ArgumentOutOfRangeException>(()=> card.RootElement.Q(null, "xrui-card__container").ElementAt(0));
-            card.AddUIElement(Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate(), "MainContainer");
+            card.AddUIElement(Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate(), "xrui-card__container");
             Assert.NotNull(card.RootElement.Q(null, "xrui-card__container").ElementAt(0));
         }
         
@@ -148,9 +148,9 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             var element = Resources.Load<VisualTreeAsset>("TestUIElement").Instantiate();
-            card.AddUIElement(element, "MainContainer");
+            card.AddUIElement(element, "xrui-card__container");
             card.RemoveUIElement(element);
-            Assert.True(card.GetComponent<UIDocument>().rootVisualElement.Q("MainContainer").childCount == 0);
+            Assert.True(card.GetXRUIVisualElement("xrui-card__container").childCount == 0);
         }
         
         [Test]

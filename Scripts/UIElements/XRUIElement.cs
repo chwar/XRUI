@@ -119,12 +119,12 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Adds a UI Element as a child of given parent.
         /// </summary>
-        /// <param name="uiParent"></param>
+        /// <param name="uiParentClass"></param>
         /// <param name="uiElement"></param>
         /// <exception cref="ArgumentException"></exception>
-        public void AddUIElement(VisualElement uiElement, string uiParent)
+        public void AddUIElement(VisualElement uiElement, string uiParentClass)
         {
-            VisualElement parent = RootElement.Q(uiParent);
+            VisualElement parent = RootElement.Q(null, uiParentClass);
             if (parent != null)
             {
                 parent.Add(uiElement);
@@ -132,7 +132,7 @@ namespace com.chwar.xrui.UIElements
             else
             {
                 throw new ArgumentException(
-                    $"There is no Visual Element matching the name \"{uiParent}\" to attach something to");
+                    $"There is no Visual Element matching the USS class \"{uiParentClass}\" to attach something to");
             }
         }
 

@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
-    public class Demo : MonoBehaviour
+    public class XRUIDemo : MonoBehaviour
     {
         private XRUIMenu _menu;
         private XRUICard _card;
@@ -38,7 +38,7 @@ namespace com.chwar.xrui
                 var menuEntry = _menu.AddElement().Q<Button>("MenuEntry");
                 menuEntry.text = $"Menu entry {i}";
                 // When clicking on the menu entry, the UI Element referenced in the inspector of the XRUI controller will be appended to the card
-                menuEntry.clicked += () => _card.AddUIElement(XRUI.Instance.GetUIElement("TestUIElement").Instantiate(), "MainContainer");
+                menuEntry.clicked += () => _card.AddUIElement(XRUI.Instance.GetUIElement("TestUIElement").Instantiate(), "xrui-card__container");
             }
 
             /* ========== XRUI Alerts ========== */

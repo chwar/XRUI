@@ -25,7 +25,7 @@ namespace com.chwar.xrui.Tests
             var xrui = _go.AddComponent<XRUI>();
             _go.AddComponent<Camera>().tag = "MainCamera";
             _clicked = false;
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
 
