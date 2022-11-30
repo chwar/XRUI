@@ -7,16 +7,22 @@
 
 
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/204878936-b19b3868-d6c5-428f-ba99-86f1ec389af9.gif"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/204878941-13a1b723-58aa-44e1-aabf-a497c9f72178.gif" alt="2dportrait" height = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/204878943-f608c09f-de33-474b-bea8-9264198734b7.gif" alt="3d" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape (PC)</td>
-		<td align="center">2D Portrait (Android)</td>
-		<td align="center">World Space (Meta Quest 2)</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204878936-b19b3868-d6c5-428f-ba99-86f1ec389af9.gif"  alt="2dlandscape" width ="300">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204878941-13a1b723-58aa-44e1-aabf-a497c9f72178.gif" alt="2dportrait" width ="150">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204878943-f608c09f-de33-474b-bea8-9264198734b7.gif" alt="3d" width ="300">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape (PC)</td>
+<td align="center">2D Portrait (Android)</td>
+<td align="center">World Space (Meta Quest 2)</td>
+</tr>
 </table>
 
 XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (i.e., rendered in world space, required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
@@ -29,6 +35,7 @@ XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Ma
   * Alternatively, you can unzip and import the package manually.
 
 2. Add the XRUI controller to your scene by navigating to `XRUI > Add XRUI Controller`. You can also create an empty game object and attach the main XRUI script (`XRUI.cs`). This script is a singleton flagged as `DontDestroyOnLoad`. It contains the main API that can be easily accessed through the instance:
+
 ```csharp
 using com.chwar.xrui;
 
@@ -36,10 +43,27 @@ void Start(){
     // XRUI.Instance...
 }
 ```
+
 3. The package uses a default configuration that references the default UXML templates for UI elements. You can create your own by navigating to `Assets > Create > XRUI > Create XRUI Configuration asset`. You can then override the default templates for UI elements with your own (see [Custom UI Elements](#custom-ui-elements)). Don't forget to reference your own XRUI configuration asset to the XRUI controller.
 4. You can have a look at the provided Demo scenes to get a better idea of how XRUI works.
 
 ## UI Elements
+
+<table>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204884997-2311b94e-e644-4d79-8fe8-50d8a61fdbf6.png"  alt="2dlandscape" width ="400">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204885001-9618fb5e-d31a-4a72-b7e1-d3dd310dfb4d.png" alt="3d" width ="400">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape Overview</td>
+<td align="center">3D (World Space) Overview</td>
+</tr>
+</table>
+
 
 XRUI provides a few UI Elements. The style is minimalistic and inspired from [Bootstrap](https://getbootstrap.com). You can add them in your project by navigating from the Unity menu to `XRUI > Add XRUI Element`. This creates a game object containing a `UIDocument` (which contains the UXML template and USS styles) and an XRUI script that matches the element. Add your own scripts to this object with a reference to the XRUI script to define the behaviour of the UI. 
 
@@ -49,18 +73,20 @@ XRUI elements are thought as basic containers for user content. Given the hierar
 
 
 The list of UI elements is accessible within the XRUI controller's instance. Use the `GetUIElement` method for easy access:
+
 ```csharp
 // Use the name of the VisualTreeAsset you put in the inspector list 
 VisualTreeAsset myElement = XRUI.Instance.GetUIElement("MyElement");
 ```
 
 ### XRUI Element
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 
 When adding UI Elements through the XRUI menu in Unity, the system uses the template referenced in the XRUI Configuration asset (see [Installation](#installation)). Each XRUI element script inherits from the `XRUIElement` class, which comes with some useful generic methods.
 
 To add or remove visual elements from the UI element, call these methods:
+
 ```csharp
 VisualElement myElement = someVisualTreeAsset.Instantiate();
 XRUICard card = GetComponent<XRUICard>();
@@ -71,6 +97,7 @@ card.RemoveUIElement(myElement);
 ```
 
 Get an XRUI related visual element from the UI element:
+
 ```csharp
 XRUICard card = FindObjectOfType<XRUICard>();
 XRUIMenu menu = FindObjectOfType<XRUIMenu>();
@@ -83,6 +110,7 @@ var menuTitle = menu.GetXRUIVisualElement<Label>("xrui-menu__title");
 ```
 
 You can also show or hide XRUI elements at any time:
+
 ```csharp
 card.Show(true);    // Display.Flex, enables MeshRenderer and Collider for world UI
 card.Show(false);   // Display.None, disables MeshRenderer and Collider for world UI
@@ -96,23 +124,29 @@ card.Show(myElement, false); // Hides myElement
 > card.Query<TemplateContainer>().Where(ve => 
 >	ve.style.display.value.Equals(DisplayStyle.None)).First();
 > ```
-</details>
+<!-- </details> -->
 	
 ### XRUI Menu
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 	
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="3d" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-		<td align="center">World Space</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="3d" width ="360">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+<td align="center">World Space</td>
+</tr>
 </table>
 
 The provided XRUI Menu template is designed as a side menu that collapses out of the view frustum. It can be configured in the inspector (see screenshot above).
@@ -120,6 +154,7 @@ The provided XRUI Menu template is designed as a side menu that collapses out of
 The list element template is the UXML template that is used to create entries. You can provide a template with a simple button, or more complex compositions with images, text, buttons, etc. to suit your needs.
 	
 Add entries to your menu:
+
 ```csharp
 var menu = GetComponent<XRUIMenu>();
 
@@ -127,26 +162,34 @@ var menu = GetComponent<XRUIMenu>();
 var element = menu.AddElement();
 element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 ```
-</details>
+
+<!-- </details> -->
 
 ### XRUI List
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="3d" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-		<td align="center">World Space</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="3d" width ="360">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+<td align="center">World Space</td>
+</tr>
 </table>
 
 The XRUI List works in the same way as the menu:
+
 ```csharp
 var list = GetComponent<XRUIList>();
 
@@ -154,64 +197,83 @@ var list = GetComponent<XRUIList>();
 var element = list.AddElement();
 element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 ```
-</details>
+
+<!-- </details> -->
 
 ### XRUI Navbar
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 	
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="3d" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-		<td align="center">World Space</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="3d" width ="360">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+<td align="center">World Space</td>
+</tr>
 </table>
 	
 The provided navbar is a very simple dark top bar. Since XRUI does not provide any third-party assets, it is provided empty. However, the default template contains a row of buttons (three justified on the left side, one justified on the right side) to get you started. Since navbar designs can be very different, the adopted solution was to propose a very generic template to fit the most users. You could use the template as a base to add your own elements (buttons, dropdowns, labels) to tailor the navbar to your needs.
-</details>
+<!-- </details> -->
 
 ### XRUI Card
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="3d" width = 360px></td>
-	</tr> 	
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-		<td align="center">World Space</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="3d" width ="360">
+</td>
+</tr> 	
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+<td align="center">World Space</td>
+</tr>
 </table>
 
 The XRUI Card is floating on the right corner in the 2D landscape format, and sticks to the bottom of the screen in portrait format. Use the `AddUIElement` method (see [XRUI Element](#xrui-element)) to fill the card with content.
 
-</details>
+<!-- </details> -->
 	
 ### XRUI Modals
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
 
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="3d" width = 360px></td>
-	</tr> 	
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-		<td align="center">World Space</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="3d" width ="360">
+</td>
+</tr> 	
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+<td align="center">World Space</td>
+</tr>
 </table>
 
 XRUI creates modals at runtime rather than requiring you to create all of them in the editor in order to save resources.
@@ -229,6 +291,7 @@ The name given to each modal entry can be used to find the matching template and
 Type t = Type.GetType("myModalScript");
 XRUI.Instance.ShowModal("DemoModal", t);
 ```
+
 > Note: The user script type has to be passed outside of the XRUI package, because Unity packages can't access the Assembly-CSharp assembly, i.e. can't find user namespaces, and hence, can't find user scripts located in the Assets automatically. It's also not possible to reference it through the inspector, as it only accepts instances of a script and not the script itself.
 
 This creates a modal game object on which the `XRUIModal` script is attached, as well as a `UIDocument` script that contains the main template. You can access the modal system's API through the `XRUIModal` script.
@@ -266,6 +329,7 @@ void MyPage() {
 You can use the default modal template that comes with the package and fill it with your own content. It consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can add your content to the container by referencing it by its USS class (`xrui-modal__container`) to the `UpdateModalFlow` method, as per the example above. You can manipulate the buttons and change the title through the `XRUIModal` API.
 
 Access the modal's public fields to change the title of the modal, the text of the buttons, or to set the icon of the top right close button:
+
 ```csharp
 _xruiModal.ModalTitle.text = "Create a new project";
 _xruiModal.CancelButton.text = "Cancel";
@@ -286,13 +350,14 @@ Set the action of the cancel and validation buttons:
 _xruiModal.SetCancelButtonAction(XRUIModal.Destroy);
 _xruiModal.SetValidateButtonAction(CreateProject);
 ```
+
 > Note: prefer these methods to the direct access to `ValidationButton.clicked` or `CancelButton.clicked`, as the methods replace any other event subscription with the provided action. This means that a click on either button can have only one action on a given page. 
 
 Destroy the modal:
+
 ```csharp
 _xruiModal.Destroy();
 ```
-
 
 #### Form validation
 XRUI supports basic form validation by letting you define required fields. For now, only text fields are supported, i.e. XRUI determines if required text fields are empty or not.
@@ -306,22 +371,30 @@ You can pass as many fields as you want in one call. Internally, XRUI checks the
 ```csharp
 _xruiModal.SetFieldError(_fieldWithError);
 ```
-</details>
+
+<!-- </details> -->
 	
 ### XRUI Alerts
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
+
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="2dportrait" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="3d" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape - Primary</td>
-		<td align="center">2D Portrait - Success</td>
-		<td align="center">World Space - Warning</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="2dportrait" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="3d" width ="360">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape - Primary</td>
+<td align="center">2D Portrait - Success</td>
+<td align="center">World Space - Warning</td>
+</tr>
 </table>
 	
 ![Peek 2021-08-03 00-03](https://user-images.githubusercontent.com/25299178/127934108-1784dc2d-36d3-4452-8119-3f910f9a258a.gif)
@@ -357,25 +430,30 @@ Or, you can set a countdown after which the alert will disappear:
 ```csharp
  XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title", "This alert will disappear in 5 seconds", 5);
 ```
-</details>
+<!-- </details> -->
 	
 	
 ### XRUI Contextual Menu
-<details>
+<!-- <details> -->
 <summary>Click to expand!</summary>
+
 <table>
-	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/204881019-bd7f6b52-6ef2-47b6-87a0-62e1133a6929.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/204881022-69287d12-8763-416a-907d-1e390f619211.png" alt="2portrait" width = 360px></td>
-	</tr> 
-	<tr>
-		<td align="center">2D Landscape</td>
-		<td align="center">2D Portrait</td>
-	</tr>
+<tr>	
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204881019-bd7f6b52-6ef2-47b6-87a0-62e1133a6929.png"  alt="2dlandscape" width ="360">
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/25299178/204881022-69287d12-8763-416a-907d-1e390f619211.png" alt="2portrait" width ="360">
+</td>
+</tr> 
+<tr>
+<td align="center">2D Landscape</td>
+<td align="center">2D Portrait</td>
+</tr>
 
 </table>
 	
-XRUI can create contextual menus dynamically. The contextual menu is shown as a floating list. World UI is currently not supported for this template. Similarly to the menu and list templates, a menu element template is also given to create entries in the contextual menu. Because the entries are context-dependent, they need to be generated dynamically at runtime.
+XRUI can create contextual menus dynamically. The contextual menu is shown as a floating list. Similarly to the menu and list templates, a menu element template is also given to create entries in the contextual menu. Because the entries are context-dependent, they need to be generated dynamically at runtime.
 	
 The `ShowContextualMenu` method needs at least the x and y coordinates of the parent element (i.e. the element that was interacted which caused the contextual menu to appear), and a boolean to indicate whether or not the styling should include an arrow pointing at the parent element. A first overload gives the possibility to provide a custom template. A second overload lets developers provide left and right offsets for finer tuning of the menu’s position. The method returns a `XRUIContextualMenu` instance, which is required to add entries to the menu.
 	
@@ -410,9 +488,10 @@ menu.menuElementTemplate = Resources.Load<VisualTreeAsset>("myEntryTemplate");
 // Add entries to the contextual menu
 var entry = contextualMenu.AddMenuElement();
 ```
+
 In addition, the contextual menu considers the available space on screen. By default, contextual menus will attempt to display on the right of the parent element. However, if there is no available space, they are displayed on the left instead.
 	
-</details>
+<!-- </details> -->
 	
 ## XR adaptation
 XRUI's main functionality is to provide responsiveness for different XR variants. This is done by setting the chosen XRUI format during the app's initialization, which all XRUI Elements (both static and dynamic) adopt thanks to USS styles.
@@ -448,15 +527,12 @@ In order to organize easily and efficiently UI elements on screen, XRUI makes us
 
 For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the on-screen UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
 
-<!-- ![Peek 2021-08-04 17-08](https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif) -->
-<img src="https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif"  alt="pc" width = 700px>
-<img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width = 500px>
+<img src="https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif"  alt="pc" width ="700">
+<img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width ="500">
 	
-<!-- ![Screenshot from 2021-08-03 17-54-43](https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png) -->
-
 > Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obtain the expected behaviour.
 
-</details>
+<!-- </details> -->
 
 ## Custom UI Elements
 You can create your own UXML templates and refer them in the XRUI Configuration asset. You should however be careful in naming your elements, should you want to inherit the functionalities provided by the default UI elements. You can check them with Unity's UI Builder, or you can simply duplicate the UXML files and start working from here. 
