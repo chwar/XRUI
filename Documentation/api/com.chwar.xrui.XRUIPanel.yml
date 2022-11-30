@@ -1,0 +1,289 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUIPanel
+  commentId: T:com.chwar.xrui.XRUIPanel
+  id: XRUIPanel
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUIPanel.curvatureDegrees
+  - com.chwar.xrui.XRUIPanel.Generate(RenderTexture)
+  - com.chwar.xrui.XRUIPanel.height
+  - com.chwar.xrui.XRUIPanel.mesh
+  - com.chwar.xrui.XRUIPanel.numSegments
+  - com.chwar.xrui.XRUIPanel.radius
+  - com.chwar.xrui.XRUIPanel.useArc
+  langs:
+  - csharp
+  - vb
+  name: XRUIPanel
+  nameWithType: XRUIPanel
+  fullName: com.chwar.xrui.XRUIPanel
+  type: Class
+  source:
+    id: XRUIPanel
+    path: ''
+    startLine: 600
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: 'public class XRUIPanel : MonoBehaviour'
+    content.vb: >-
+      Public Class XRUIPanel
+          Inherits MonoBehaviour
+  inheritance:
+  - System.Object
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: com.chwar.xrui.XRUIPanel.height
+  commentId: F:com.chwar.xrui.XRUIPanel.height
+  id: height
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: height
+  nameWithType: XRUIPanel.height
+  fullName: com.chwar.xrui.XRUIPanel.height
+  type: Field
+  source:
+    id: height
+    path: ''
+    startLine: 611
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public float height
+    return:
+      type: System.Single
+    content.vb: Public height As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.radius
+  commentId: F:com.chwar.xrui.XRUIPanel.radius
+  id: radius
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: radius
+  nameWithType: XRUIPanel.radius
+  fullName: com.chwar.xrui.XRUIPanel.radius
+  type: Field
+  source:
+    id: radius
+    path: ''
+    startLine: 612
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public float radius
+    return:
+      type: System.Single
+    content.vb: Public radius As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.numSegments
+  commentId: F:com.chwar.xrui.XRUIPanel.numSegments
+  id: numSegments
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: numSegments
+  nameWithType: XRUIPanel.numSegments
+  fullName: com.chwar.xrui.XRUIPanel.numSegments
+  type: Field
+  source:
+    id: numSegments
+    path: ''
+    startLine: 613
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public int numSegments
+    return:
+      type: System.Int32
+    content.vb: Public numSegments As Integer
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.curvatureDegrees
+  commentId: F:com.chwar.xrui.XRUIPanel.curvatureDegrees
+  id: curvatureDegrees
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: curvatureDegrees
+  nameWithType: XRUIPanel.curvatureDegrees
+  fullName: com.chwar.xrui.XRUIPanel.curvatureDegrees
+  type: Field
+  source:
+    id: curvatureDegrees
+    path: ''
+    startLine: 614
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public float curvatureDegrees
+    return:
+      type: System.Single
+    content.vb: Public curvatureDegrees As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.useArc
+  commentId: F:com.chwar.xrui.XRUIPanel.useArc
+  id: useArc
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: useArc
+  nameWithType: XRUIPanel.useArc
+  fullName: com.chwar.xrui.XRUIPanel.useArc
+  type: Field
+  source:
+    id: useArc
+    path: ''
+    startLine: 615
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public bool useArc
+    return:
+      type: System.Boolean
+    content.vb: Public useArc As Boolean
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.mesh
+  commentId: F:com.chwar.xrui.XRUIPanel.mesh
+  id: mesh
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: mesh
+  nameWithType: XRUIPanel.mesh
+  fullName: com.chwar.xrui.XRUIPanel.mesh
+  type: Field
+  source:
+    id: mesh
+    path: ''
+    startLine: 616
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public Mesh mesh
+    return:
+      type: Global.Mesh
+    content.vb: Public mesh As Mesh
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIPanel.Generate(RenderTexture)
+  commentId: M:com.chwar.xrui.XRUIPanel.Generate(RenderTexture)
+  id: Generate(RenderTexture)
+  parent: com.chwar.xrui.XRUIPanel
+  langs:
+  - csharp
+  - vb
+  name: Generate(RenderTexture)
+  nameWithType: XRUIPanel.Generate(RenderTexture)
+  fullName: com.chwar.xrui.XRUIPanel.Generate(RenderTexture)
+  type: Method
+  source:
+    id: Generate
+    path: ''
+    startLine: 620
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void Generate(RenderTexture rt)
+    parameters:
+    - id: rt
+      type: Global.RenderTexture
+    content.vb: Public Sub Generate(rt As RenderTexture)
+  overload: com.chwar.xrui.XRUIPanel.Generate*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  name: Single
+  nameWithType: Single
+  fullName: System.Single
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Global.Mesh
+  commentId: '!:Global.Mesh'
+  isExternal: true
+  name: Mesh
+  nameWithType: Mesh
+  fullName: Mesh
+- uid: com.chwar.xrui.XRUIPanel.Generate*
+  commentId: Overload:com.chwar.xrui.XRUIPanel.Generate
+  name: Generate
+  nameWithType: XRUIPanel.Generate
+  fullName: com.chwar.xrui.XRUIPanel.Generate
+- uid: Global.RenderTexture
+  commentId: '!:Global.RenderTexture'
+  isExternal: true
+  name: RenderTexture
+  nameWithType: RenderTexture
+  fullName: RenderTexture

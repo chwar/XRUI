@@ -1,0 +1,233 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUIGridController
+  commentId: T:com.chwar.xrui.XRUIGridController
+  id: XRUIGridController
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUIGridController.AdaptGrid
+  - com.chwar.xrui.XRUIGridController.gridElementsList
+  - com.chwar.xrui.XRUIGridController.XruiRoot
+  langs:
+  - csharp
+  - vb
+  name: XRUIGridController
+  nameWithType: XRUIGridController
+  fullName: com.chwar.xrui.XRUIGridController
+  type: Class
+  source:
+    id: XRUIGridController
+    path: ''
+    startLine: 465
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: 'public class XRUIGridController : MonoBehaviour'
+    content.vb: >-
+      Public Class XRUIGridController
+          Inherits MonoBehaviour
+  inheritance:
+  - System.Object
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: com.chwar.xrui.XRUIGridController.XruiRoot
+  commentId: F:com.chwar.xrui.XRUIGridController.XruiRoot
+  id: XruiRoot
+  parent: com.chwar.xrui.XRUIGridController
+  langs:
+  - csharp
+  - vb
+  name: XruiRoot
+  nameWithType: XRUIGridController.XruiRoot
+  fullName: com.chwar.xrui.XRUIGridController.XruiRoot
+  type: Field
+  source:
+    id: XruiRoot
+    path: ''
+    startLine: 468
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualElement XruiRoot
+    return:
+      type: Global.VisualElement
+    content.vb: Public XruiRoot As VisualElement
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIGridController.gridElementsList
+  commentId: F:com.chwar.xrui.XRUIGridController.gridElementsList
+  id: gridElementsList
+  parent: com.chwar.xrui.XRUIGridController
+  langs:
+  - csharp
+  - vb
+  name: gridElementsList
+  nameWithType: XRUIGridController.gridElementsList
+  fullName: com.chwar.xrui.XRUIGridController.gridElementsList
+  type: Field
+  source:
+    id: gridElementsList
+    path: ''
+    startLine: 469
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public List<XRUIGridController.XRUIGrid> gridElementsList
+    return:
+      type: System.Collections.Generic.List{com.chwar.xrui.XRUIGridController.XRUIGrid}
+    content.vb: Public gridElementsList As List(Of XRUIGridController.XRUIGrid)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIGridController.AdaptGrid
+  commentId: M:com.chwar.xrui.XRUIGridController.AdaptGrid
+  id: AdaptGrid
+  parent: com.chwar.xrui.XRUIGridController
+  langs:
+  - csharp
+  - vb
+  name: AdaptGrid()
+  nameWithType: XRUIGridController.AdaptGrid()
+  fullName: com.chwar.xrui.XRUIGridController.AdaptGrid()
+  type: Method
+  source:
+    id: AdaptGrid
+    path: ''
+    startLine: 506
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void AdaptGrid()
+    content.vb: Public Sub AdaptGrid
+  overload: com.chwar.xrui.XRUIGridController.AdaptGrid*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Global.VisualElement
+  isExternal: true
+  name: VisualElement
+  nameWithType: VisualElement
+  fullName: VisualElement
+- uid: System.Collections.Generic.List{com.chwar.xrui.XRUIGridController.XRUIGrid}
+  commentId: T:System.Collections.Generic.List{com.chwar.xrui.XRUIGridController.XRUIGrid}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<XRUIGridController.XRUIGrid>
+  nameWithType: List<XRUIGridController.XRUIGrid>
+  fullName: System.Collections.Generic.List<com.chwar.xrui.XRUIGridController.XRUIGrid>
+  nameWithType.vb: List(Of XRUIGridController.XRUIGrid)
+  fullName.vb: System.Collections.Generic.List(Of com.chwar.xrui.XRUIGridController.XRUIGrid)
+  name.vb: List(Of XRUIGridController.XRUIGrid)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: com.chwar.xrui.XRUIGridController.XRUIGrid
+    name: XRUIGridController.XRUIGrid
+    nameWithType: XRUIGridController.XRUIGrid
+    fullName: com.chwar.xrui.XRUIGridController.XRUIGrid
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: com.chwar.xrui.XRUIGridController.XRUIGrid
+    name: XRUIGridController.XRUIGrid
+    nameWithType: XRUIGridController.XRUIGrid
+    fullName: com.chwar.xrui.XRUIGridController.XRUIGrid
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: com.chwar.xrui.XRUIGridController.AdaptGrid*
+  commentId: Overload:com.chwar.xrui.XRUIGridController.AdaptGrid
+  name: AdaptGrid
+  nameWithType: XRUIGridController.AdaptGrid
+  fullName: com.chwar.xrui.XRUIGridController.AdaptGrid

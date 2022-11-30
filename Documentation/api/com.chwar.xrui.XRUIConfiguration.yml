@@ -1,0 +1,382 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUIConfiguration
+  commentId: T:com.chwar.xrui.XRUIConfiguration
+  id: XRUIConfiguration
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUIConfiguration.defaultAlertTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultAlertWorldUIParameters
+  - com.chwar.xrui.XRUIConfiguration.defaultCardTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultContextualMenuTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultContextualMenuWorldUIParameters
+  - com.chwar.xrui.XRUIConfiguration.defaultListTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultMenuTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultModalTemplate
+  - com.chwar.xrui.XRUIConfiguration.defaultModalWorldUIParameters
+  - com.chwar.xrui.XRUIConfiguration.defaultNavbarTemplate
+  - com.chwar.xrui.XRUIConfiguration.panelSettings
+  langs:
+  - csharp
+  - vb
+  name: XRUIConfiguration
+  nameWithType: XRUIConfiguration
+  fullName: com.chwar.xrui.XRUIConfiguration
+  type: Class
+  source:
+    id: XRUIConfiguration
+    path: ''
+    startLine: 421
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: 'public class XRUIConfiguration : ScriptableObject'
+    content.vb: >-
+      Public Class XRUIConfiguration
+          Inherits ScriptableObject
+  inheritance:
+  - System.Object
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: com.chwar.xrui.XRUIConfiguration.panelSettings
+  commentId: F:com.chwar.xrui.XRUIConfiguration.panelSettings
+  id: panelSettings
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: panelSettings
+  nameWithType: XRUIConfiguration.panelSettings
+  fullName: com.chwar.xrui.XRUIConfiguration.panelSettings
+  type: Field
+  source:
+    id: panelSettings
+    path: ''
+    startLine: 424
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public PanelSettings panelSettings
+    return:
+      type: Global.PanelSettings
+    content.vb: Public panelSettings As PanelSettings
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultModalTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultModalTemplate
+  id: defaultModalTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultModalTemplate
+  nameWithType: XRUIConfiguration.defaultModalTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultModalTemplate
+  type: Field
+  source:
+    id: defaultModalTemplate
+    path: ''
+    startLine: 425
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultModalTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultModalTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultAlertTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultAlertTemplate
+  id: defaultAlertTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultAlertTemplate
+  nameWithType: XRUIConfiguration.defaultAlertTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultAlertTemplate
+  type: Field
+  source:
+    id: defaultAlertTemplate
+    path: ''
+    startLine: 426
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultAlertTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultAlertTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultCardTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultCardTemplate
+  id: defaultCardTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultCardTemplate
+  nameWithType: XRUIConfiguration.defaultCardTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultCardTemplate
+  type: Field
+  source:
+    id: defaultCardTemplate
+    path: ''
+    startLine: 427
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultCardTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultCardTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultListTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultListTemplate
+  id: defaultListTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultListTemplate
+  nameWithType: XRUIConfiguration.defaultListTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultListTemplate
+  type: Field
+  source:
+    id: defaultListTemplate
+    path: ''
+    startLine: 428
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultListTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultListTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultMenuTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultMenuTemplate
+  id: defaultMenuTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultMenuTemplate
+  nameWithType: XRUIConfiguration.defaultMenuTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultMenuTemplate
+  type: Field
+  source:
+    id: defaultMenuTemplate
+    path: ''
+    startLine: 429
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultMenuTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultMenuTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultNavbarTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultNavbarTemplate
+  id: defaultNavbarTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultNavbarTemplate
+  nameWithType: XRUIConfiguration.defaultNavbarTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultNavbarTemplate
+  type: Field
+  source:
+    id: defaultNavbarTemplate
+    path: ''
+    startLine: 430
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultNavbarTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultNavbarTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultContextualMenuTemplate
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultContextualMenuTemplate
+  id: defaultContextualMenuTemplate
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultContextualMenuTemplate
+  nameWithType: XRUIConfiguration.defaultContextualMenuTemplate
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultContextualMenuTemplate
+  type: Field
+  source:
+    id: defaultContextualMenuTemplate
+    path: ''
+    startLine: 431
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public VisualTreeAsset defaultContextualMenuTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public defaultContextualMenuTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultAlertWorldUIParameters
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultAlertWorldUIParameters
+  id: defaultAlertWorldUIParameters
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultAlertWorldUIParameters
+  nameWithType: XRUIConfiguration.defaultAlertWorldUIParameters
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultAlertWorldUIParameters
+  type: Field
+  source:
+    id: defaultAlertWorldUIParameters
+    path: ''
+    startLine: 432
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public WorldUIParameters defaultAlertWorldUIParameters
+    return:
+      type: com.chwar.xrui.UIElements.WorldUIParameters
+    content.vb: Public defaultAlertWorldUIParameters As WorldUIParameters
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultContextualMenuWorldUIParameters
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultContextualMenuWorldUIParameters
+  id: defaultContextualMenuWorldUIParameters
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultContextualMenuWorldUIParameters
+  nameWithType: XRUIConfiguration.defaultContextualMenuWorldUIParameters
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultContextualMenuWorldUIParameters
+  type: Field
+  source:
+    id: defaultContextualMenuWorldUIParameters
+    path: ''
+    startLine: 433
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public WorldUIParameters defaultContextualMenuWorldUIParameters
+    return:
+      type: com.chwar.xrui.UIElements.WorldUIParameters
+    content.vb: Public defaultContextualMenuWorldUIParameters As WorldUIParameters
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIConfiguration.defaultModalWorldUIParameters
+  commentId: F:com.chwar.xrui.XRUIConfiguration.defaultModalWorldUIParameters
+  id: defaultModalWorldUIParameters
+  parent: com.chwar.xrui.XRUIConfiguration
+  langs:
+  - csharp
+  - vb
+  name: defaultModalWorldUIParameters
+  nameWithType: XRUIConfiguration.defaultModalWorldUIParameters
+  fullName: com.chwar.xrui.XRUIConfiguration.defaultModalWorldUIParameters
+  type: Field
+  source:
+    id: defaultModalWorldUIParameters
+    path: ''
+    startLine: 434
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public WorldUIParameters defaultModalWorldUIParameters
+    return:
+      type: com.chwar.xrui.UIElements.WorldUIParameters
+    content.vb: Public defaultModalWorldUIParameters As WorldUIParameters
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Global.PanelSettings
+  isExternal: true
+  name: PanelSettings
+  nameWithType: PanelSettings
+  fullName: PanelSettings
+- uid: Global.VisualTreeAsset
+  isExternal: true
+  name: VisualTreeAsset
+  nameWithType: VisualTreeAsset
+  fullName: VisualTreeAsset
+- uid: com.chwar.xrui.UIElements.WorldUIParameters
+  commentId: T:com.chwar.xrui.UIElements.WorldUIParameters
+  parent: com.chwar.xrui.UIElements
+  name: WorldUIParameters
+  nameWithType: WorldUIParameters
+  fullName: com.chwar.xrui.UIElements.WorldUIParameters
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements

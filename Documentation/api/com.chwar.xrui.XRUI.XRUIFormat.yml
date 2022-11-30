@@ -1,0 +1,102 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUI.XRUIFormat
+  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
+  id: XRUI.XRUIFormat
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUI.XRUIFormat.ThreeDimensional
+  - com.chwar.xrui.XRUI.XRUIFormat.TwoDimensional
+  langs:
+  - csharp
+  - vb
+  name: XRUI.XRUIFormat
+  nameWithType: XRUI.XRUIFormat
+  fullName: com.chwar.xrui.XRUI.XRUIFormat
+  type: Enum
+  source:
+    id: XRUIFormat
+    path: ''
+    startLine: 85
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nDefines the nature of the UI in order to fit the desired XR device as best as possible\n"
+  example: []
+  syntax:
+    content: public enum XRUIFormat
+    content.vb: Public Enum XRUIFormat
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: com.chwar.xrui.XRUI.XRUIFormat.TwoDimensional
+  commentId: F:com.chwar.xrui.XRUI.XRUIFormat.TwoDimensional
+  id: TwoDimensional
+  parent: com.chwar.xrui.XRUI.XRUIFormat
+  langs:
+  - csharp
+  - vb
+  name: TwoDimensional
+  nameWithType: XRUI.XRUIFormat.TwoDimensional
+  fullName: com.chwar.xrui.XRUI.XRUIFormat.TwoDimensional
+  type: Field
+  source:
+    id: TwoDimensional
+    path: ''
+    startLine: 87
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: TwoDimensional = 0
+    return:
+      type: com.chwar.xrui.XRUI.XRUIFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.XRUI.XRUIFormat.ThreeDimensional
+  commentId: F:com.chwar.xrui.XRUI.XRUIFormat.ThreeDimensional
+  id: ThreeDimensional
+  parent: com.chwar.xrui.XRUI.XRUIFormat
+  langs:
+  - csharp
+  - vb
+  name: ThreeDimensional
+  nameWithType: XRUI.XRUIFormat.ThreeDimensional
+  fullName: com.chwar.xrui.XRUI.XRUIFormat.ThreeDimensional
+  type: Field
+  source:
+    id: ThreeDimensional
+    path: ''
+    startLine: 88
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: ThreeDimensional = 1
+    return:
+      type: com.chwar.xrui.XRUI.XRUIFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: com.chwar.xrui.XRUI.XRUIFormat
+  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
+  parent: com.chwar.xrui
+  name: XRUI.XRUIFormat
+  nameWithType: XRUI.XRUIFormat
+  fullName: com.chwar.xrui.XRUI.XRUIFormat

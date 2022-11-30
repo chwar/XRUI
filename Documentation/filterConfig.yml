@@ -1,0 +1,10 @@
+apiRules:
+- include:
+    uidRegex: ^com.chwar.xrui
+    type: Namespace
+- include:
+    uidRegex: ^com.chwar.xrui.UIElements
+    type: Namespace
+- exclude:
+    uidRegex: .*
+    type: Namespace
