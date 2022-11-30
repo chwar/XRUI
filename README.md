@@ -3,7 +3,7 @@
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
 [![Coverage](https://flat.badgen.net/badge/coverage/90%25/green)](./Tests)
 
-XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
+XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (i.e., rendered in world space, required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
 
 XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html). Internally, it uses UXML and USS, so a basic knowledge and understanding of these technologies are required to use this framework. 
 
@@ -52,8 +52,20 @@ VisualElement myElement = someVisualTreeAsset.Instantiate();
 XRUICard card = GetComponent<XRUICard>();
 
 // Appends a visual element inside a parent element
-card.AddUIElement(myElement, "MyCardContainer");
+card.AddUIElement(myElement, "xrui-card__container");
 card.RemoveUIElement(myElement); 
+```
+
+Get an XRUI related visual element from the UI element:
+```csharp
+XRUICard card = FindObjectOfType<XRUICard>();
+XRUIMenu menu = FindObjectOfType<XRUIMenu>();
+        
+// Get a generic Visual Element from the card
+var cardHeader = card.GetXRUIVisualElement("xrui-card__header");
+
+// Get the title Label from the menu 
+var menuTitle = menu.GetXRUIVisualElement<Label>("xrui-menu__title");
 ```
 
 You can also show or hide XRUI elements at any time:
@@ -85,7 +97,7 @@ card.Show(myElement, false); // Hides myElement
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
-		<td align="center">3D</td>
+		<td align="center">World Space</td>
 	</tr>
 </table>
 
@@ -100,10 +112,6 @@ var menu = GetComponent<XRUIMenu>();
 // The menu returns the created entry to be configured
 var element = menu.AddElement();
 element.Q<Label>("MyElementLabel").text = "myLabelTitle";
-
-// Access the UXML nodes from the template
-var menuTitle = _menu.GetXRUIVisualElement<Label>("xrui-menu__title");
-
 ```
 </details>
 
@@ -120,7 +128,7 @@ var menuTitle = _menu.GetXRUIVisualElement<Label>("xrui-menu__title");
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
-		<td align="center">3D</td>
+		<td align="center">World Space</td>
 	</tr>
 </table>
 
@@ -147,7 +155,7 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
-		<td align="center">3D</td>
+		<td align="center">World Space</td>
 	</tr>
 </table>
 	
@@ -167,7 +175,7 @@ The provided navbar is a very simple dark top bar. Since XRUI does not provide a
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
-		<td align="center">3D</td>
+		<td align="center">World Space</td>
 	</tr>
 </table>
 
@@ -188,7 +196,7 @@ The XRUI Card is floating on the right corner in the 2D landscape format, and st
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
-		<td align="center">3D</td>
+		<td align="center">World Space</td>
 	</tr>
 </table>
 
@@ -298,7 +306,7 @@ _xruiModal.SetFieldError(_fieldWithError);
 	<tr>
 		<td align="center">2D Landscape - Primary</td>
 		<td align="center">2D Portrait - Success</td>
-		<td align="center">3D - Warning</td>
+		<td align="center">World Space - Warning</td>
 	</tr>
 </table>
 	
@@ -406,8 +414,14 @@ if(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional)) {
 }
 ``` 
 
+### Two Dimensional Format
 For 2D UI, additional USS styles are provided to adapt for both landscape and portrait orientations. These classes are automatically added when the device (i.e., a smartphone) changes orientation.
 For ease of use, you can force the portrait mode while working in the Unity editor by checking the `Set Two Dimensional Format to Portrait in Editor` checkbox in the XRUI controller.
+
+### Three Dimensional Format (World Space UI)
+When XRUI is set to Three Dimensional format, UI is rendered on panels in world space. Each XRUI Element contains a set of `World UI Parameters` which can alter the way it is rendered in world space.
+
+
 
 ## XRUI Grid System
 In order to organize easily and efficiently UI elements on screen, XRUI makes use of a grid system. You can use it by navigating to `XRUI > Add XRUI Grid`. In the Unity editor, you can group UI components inside rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows you to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
@@ -469,7 +483,8 @@ XRUI automatically adds the `Tracked Device Physics Raycaster` component to Worl
 
 ## Acknowledgements
 - Thanks to [katas94](https://gist.github.com/katas94/7b220a591215efc36110860a0b1125eb) for the inspiration on interfacing XRUI with Unity Event Handlers and the XR Interaction package.
-- Also thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
+- Thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
+- Thanks to [swifter14](https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/) for the fix on Android auto-rotation lock.
 
 ## Roadmap
 - Grid system for World UI
@@ -479,7 +494,6 @@ XRUI automatically adds the `Tracked Device Physics Raycaster` component to Worl
 - Custom inspectors for ease of use
 
 ## Known bugs
-- On mobile (Android), the UI will update when a rotation is detected if the project has Auto Rotation enabled, but this also happens if the rotation is locked in Android.
 - On mobile (Android), rotations show UI elements that had been previously hidden
 - Raycasts on World UI Interactions do not entirely match the visuals shown to the users when using the Oculus SDK. Collisions are detected on the left of panels although they should not, and they stop too early before the right border of the panel.
 - When scripts are recompiled in the Editor, 2D UI Elements will sometimes not update properly. This is not really problematic as going into play mode re-renders all UI Elements correctly.

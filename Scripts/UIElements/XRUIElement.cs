@@ -82,7 +82,7 @@ namespace com.chwar.xrui.UIElements
 
         private void Update()
         {
-            if (!Input.deviceOrientation.Equals(_cachedDeviceOrientation))
+            if (DeviceAutoRotationIsOn() && !Input.deviceOrientation.Equals(_cachedDeviceOrientation))
                 StartCoroutine(UpdateUIOnRotation());
         }
         
@@ -220,8 +220,23 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator UpdateUIOnRotation()
         {
             _cachedDeviceOrientation = Input.deviceOrientation;
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.5f);
             UpdateUI();
+        }
+        
+        static bool DeviceAutoRotationIsOn()
+        {
+            // Thanks to swifter14: https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/
+            #if UNITY_ANDROID && !UNITY_EDITOR
+                using (var actClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+                {
+                    var context = actClass.GetStatic<AndroidJavaObject>("currentActivity");
+                    AndroidJavaClass systemGlobal = new AndroidJavaClass("android.provider.Settings$System");
+                    var rotationOn = systemGlobal.CallStatic<int>("getInt", context.Call<AndroidJavaObject>("getContentResolver"), "accelerometer_rotation");
+                    return rotationOn == 1;
+                }
+            #endif
+            return true;
         }
 
         /// <summary>
