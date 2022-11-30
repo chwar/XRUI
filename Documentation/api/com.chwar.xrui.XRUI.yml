@@ -467,7 +467,7 @@ items:
   source:
     id: ShowModal
     path: ''
-    startLine: 221
+    startLine: 218
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -504,7 +504,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 252
+    startLine: 249
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -541,7 +541,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 265
+    startLine: 262
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

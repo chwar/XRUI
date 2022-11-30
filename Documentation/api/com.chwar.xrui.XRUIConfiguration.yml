@@ -26,7 +26,7 @@ items:
   source:
     id: XRUIConfiguration
     path: ''
-    startLine: 421
+    startLine: 420
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -57,7 +57,7 @@ items:
   source:
     id: panelSettings
     path: ''
-    startLine: 424
+    startLine: 423
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -84,7 +84,7 @@ items:
   source:
     id: defaultModalTemplate
     path: ''
-    startLine: 425
+    startLine: 424
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -111,7 +111,7 @@ items:
   source:
     id: defaultAlertTemplate
     path: ''
-    startLine: 426
+    startLine: 425
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -138,7 +138,7 @@ items:
   source:
     id: defaultCardTemplate
     path: ''
-    startLine: 427
+    startLine: 426
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -165,7 +165,7 @@ items:
   source:
     id: defaultListTemplate
     path: ''
-    startLine: 428
+    startLine: 427
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -192,7 +192,7 @@ items:
   source:
     id: defaultMenuTemplate
     path: ''
-    startLine: 429
+    startLine: 428
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -219,7 +219,7 @@ items:
   source:
     id: defaultNavbarTemplate
     path: ''
-    startLine: 430
+    startLine: 429
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -246,7 +246,7 @@ items:
   source:
     id: defaultContextualMenuTemplate
     path: ''
-    startLine: 431
+    startLine: 430
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -273,7 +273,7 @@ items:
   source:
     id: defaultAlertWorldUIParameters
     path: ''
-    startLine: 432
+    startLine: 431
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -300,7 +300,7 @@ items:
   source:
     id: defaultContextualMenuWorldUIParameters
     path: ''
-    startLine: 433
+    startLine: 432
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -327,7 +327,7 @@ items:
   source:
     id: defaultModalWorldUIParameters
     path: ''
-    startLine: 434
+    startLine: 433
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

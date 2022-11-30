@@ -22,7 +22,7 @@ items:
   source:
     id: XRUIPanel
     path: ''
-    startLine: 600
+    startLine: 599
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -53,7 +53,7 @@ items:
   source:
     id: height
     path: ''
-    startLine: 611
+    startLine: 610
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -80,7 +80,7 @@ items:
   source:
     id: radius
     path: ''
-    startLine: 612
+    startLine: 611
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -107,7 +107,7 @@ items:
   source:
     id: numSegments
     path: ''
-    startLine: 613
+    startLine: 612
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -134,7 +134,7 @@ items:
   source:
     id: curvatureDegrees
     path: ''
-    startLine: 614
+    startLine: 613
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -161,7 +161,7 @@ items:
   source:
     id: useArc
     path: ''
-    startLine: 615
+    startLine: 614
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -188,7 +188,7 @@ items:
   source:
     id: mesh
     path: ''
-    startLine: 616
+    startLine: 615
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -215,7 +215,7 @@ items:
   source:
     id: Generate
     path: ''
-    startLine: 620
+    startLine: 619
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

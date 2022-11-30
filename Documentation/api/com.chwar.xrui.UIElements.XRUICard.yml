@@ -19,7 +19,7 @@ items:
   source:
     id: XRUICard
     path: ''
-    startLine: 1037
+    startLine: 1035
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -68,7 +68,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1051
+    startLine: 1049
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -97,7 +97,7 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1071
+    startLine: 1069
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -126,7 +126,7 @@ items:
   source:
     id: UpdateSubtitle
     path: ''
-    startLine: 1080
+    startLine: 1078
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -155,7 +155,7 @@ items:
   source:
     id: SetCloseButtonAction
     path: ''
-    startLine: 1089
+    startLine: 1087
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

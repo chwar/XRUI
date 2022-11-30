@@ -21,7 +21,7 @@ items:
   source:
     id: WorldUIParameters
     path: ''
-    startLine: 1530
+    startLine: 1536
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -58,7 +58,7 @@ items:
   source:
     id: bendPanel
     path: ''
-    startLine: 1534
+    startLine: 1540
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -85,7 +85,7 @@ items:
   source:
     id: anchorPanelToCamera
     path: ''
-    startLine: 1536
+    startLine: 1542
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -112,7 +112,7 @@ items:
   source:
     id: cameraFollowThreshold
     path: ''
-    startLine: 1538
+    startLine: 1544
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -139,7 +139,7 @@ items:
   source:
     id: customPanelDimensions
     path: ''
-    startLine: 1540
+    startLine: 1546
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -166,7 +166,7 @@ items:
   source:
     id: customPanelPosition
     path: ''
-    startLine: 1542
+    startLine: 1548
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -193,7 +193,7 @@ items:
   source:
     id: panelScale
     path: ''
-    startLine: 1544
+    startLine: 1550
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -238,7 +238,6 @@ references:
   nameWithType: Vector2
   fullName: Vector2
 - uid: Global.Vector3
-  commentId: '!:Global.Vector3'
   isExternal: true
   name: Vector3
   nameWithType: Vector3

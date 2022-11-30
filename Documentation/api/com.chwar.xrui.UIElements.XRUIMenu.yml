@@ -21,7 +21,7 @@ items:
   source:
     id: XRUIMenu
     path: ''
-    startLine: 1668
+    startLine: 1674
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -70,7 +70,7 @@ items:
   source:
     id: menuElementTemplate
     path: ''
-    startLine: 1682
+    startLine: 1688
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -97,7 +97,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1688
+    startLine: 1694
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -128,7 +128,7 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1708
+    startLine: 1714
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -157,7 +157,7 @@ items:
   source:
     id: UpdateSubtext
     path: ''
-    startLine: 1717
+    startLine: 1723
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -186,7 +186,7 @@ items:
   source:
     id: AddElement
     path: ''
-    startLine: 1730
+    startLine: 1736
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -217,7 +217,7 @@ items:
   source:
     id: RemoveAllElements
     path: ''
-    startLine: 1745
+    startLine: 1751
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

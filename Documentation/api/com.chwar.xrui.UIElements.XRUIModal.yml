@@ -26,7 +26,7 @@ items:
   source:
     id: XRUIModal
     path: ''
-    startLine: 1766
+    startLine: 1772
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -75,7 +75,7 @@ items:
   source:
     id: modalFlowList
     path: ''
-    startLine: 1768
+    startLine: 1774
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -102,7 +102,7 @@ items:
   source:
     id: ModalTitle
     path: ''
-    startLine: 1769
+    startLine: 1775
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -133,7 +133,7 @@ items:
   source:
     id: ValidateButton
     path: ''
-    startLine: 1770
+    startLine: 1776
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -164,7 +164,7 @@ items:
   source:
     id: CancelButton
     path: ''
-    startLine: 1771
+    startLine: 1777
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -195,7 +195,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1779
+    startLine: 1785
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -224,7 +224,7 @@ items:
   source:
     id: SetButtonsPlacement
     path: ''
-    startLine: 1794
+    startLine: 1800
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -256,7 +256,7 @@ items:
   source:
     id: SetCancelButtonAction
     path: ''
-    startLine: 1803
+    startLine: 1809
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -288,7 +288,7 @@ items:
   source:
     id: SetValidateButtonAction
     path: ''
-    startLine: 1814
+    startLine: 1820
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -320,7 +320,7 @@ items:
   source:
     id: UpdateModalFlow
     path: ''
-    startLine: 1828
+    startLine: 1834
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -362,7 +362,7 @@ items:
   source:
     id: SetRequiredFields
     path: ''
-    startLine: 1876
+    startLine: 1882
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -397,7 +397,7 @@ items:
   source:
     id: SetFieldError
     path: ''
-    startLine: 1896
+    startLine: 1902
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

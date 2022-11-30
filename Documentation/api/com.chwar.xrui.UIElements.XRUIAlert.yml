@@ -21,7 +21,7 @@ items:
   source:
     id: XRUIAlert
     path: ''
-    startLine: 977
+    startLine: 976
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -70,7 +70,7 @@ items:
   source:
     id: Title
     path: ''
-    startLine: 979
+    startLine: 978
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -101,7 +101,7 @@ items:
   source:
     id: Content
     path: ''
-    startLine: 980
+    startLine: 979
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -132,7 +132,7 @@ items:
   source:
     id: ClickCallback
     path: ''
-    startLine: 982
+    startLine: 981
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -159,7 +159,7 @@ items:
   source:
     id: countdown
     path: ''
-    startLine: 984
+    startLine: 983
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -186,7 +186,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 989
+    startLine: 988
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -217,7 +217,7 @@ items:
   source:
     id: DisposeAlert
     path: ''
-    startLine: 1001
+    startLine: 999
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

@@ -26,7 +26,7 @@ items:
   source:
     id: XRUIWorldSpaceInteraction
     path: ''
-    startLine: 713
+    startLine: 712
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -57,7 +57,7 @@ items:
   source:
     id: targetPanel
     path: ''
-    startLine: 716
+    startLine: 715
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -84,7 +84,7 @@ items:
   source:
     id: OnPointerMove
     path: ''
-    startLine: 784
+    startLine: 783
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -113,7 +113,7 @@ items:
   source:
     id: OnPointerDown
     path: ''
-    startLine: 789
+    startLine: 788
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -142,7 +142,7 @@ items:
   source:
     id: OnPointerUp
     path: ''
-    startLine: 794
+    startLine: 793
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -171,7 +171,7 @@ items:
   source:
     id: OnSubmit
     path: ''
-    startLine: 799
+    startLine: 798
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -200,7 +200,7 @@ items:
   source:
     id: OnCancel
     path: ''
-    startLine: 804
+    startLine: 803
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -229,7 +229,7 @@ items:
   source:
     id: OnMove
     path: ''
-    startLine: 809
+    startLine: 808
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -258,7 +258,7 @@ items:
   source:
     id: OnScroll
     path: ''
-    startLine: 814
+    startLine: 813
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -287,7 +287,7 @@ items:
   source:
     id: OnSelect
     path: ''
-    startLine: 819
+    startLine: 818
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -316,7 +316,7 @@ items:
   source:
     id: OnDeselect
     path: ''
-    startLine: 824
+    startLine: 823
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -345,7 +345,7 @@ items:
   source:
     id: OnDrag
     path: ''
-    startLine: 829
+    startLine: 828
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

@@ -47,7 +47,7 @@
             {
                 "src": "..",
                 "files": [
-                    "Assets/Scripts/**/*.md"
+                    "Scripts/**/*.md"
                 ]
             }
         ],
@@ -73,6 +73,6 @@
         "xrefService": [
             "https://xref.docs.microsoft.com/query?uid={uid}"
         ],
-        "dest": "../_site"
+        "dest": "../xrui"
     }
 }

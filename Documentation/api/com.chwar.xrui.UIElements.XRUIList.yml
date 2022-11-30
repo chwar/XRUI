@@ -21,7 +21,7 @@ items:
   source:
     id: XRUIList
     path: ''
-    startLine: 1558
+    startLine: 1564
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -70,7 +70,7 @@ items:
   source:
     id: listElementTemplate
     path: ''
-    startLine: 1568
+    startLine: 1574
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -97,7 +97,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1573
+    startLine: 1579
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -128,7 +128,7 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1591
+    startLine: 1597
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -157,7 +157,7 @@ items:
   source:
     id: AddElement
     path: ''
-    startLine: 1607
+    startLine: 1613
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -198,7 +198,7 @@ items:
   source:
     id: RemoveAllElements
     path: ''
-    startLine: 1632
+    startLine: 1638
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -226,7 +226,7 @@ items:
   source:
     id: GetListCount
     path: ''
-    startLine: 1641
+    startLine: 1647
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

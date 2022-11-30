@@ -32,7 +32,7 @@ items:
   source:
     id: XRUIElement
     path: ''
-    startLine: 1229
+    startLine: 1227
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -71,7 +71,7 @@ items:
   source:
     id: PointerOverUI
     path: ''
-    startLine: 1232
+    startLine: 1230
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -102,7 +102,7 @@ items:
   source:
     id: worldUIParameters
     path: ''
-    startLine: 1233
+    startLine: 1231
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -129,7 +129,7 @@ items:
   source:
     id: RootElement
     path: ''
-    startLine: 1236
+    startLine: 1234
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -156,7 +156,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1240
+    startLine: 1238
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -184,7 +184,7 @@ items:
   source:
     id: Awake
     path: ''
-    startLine: 1248
+    startLine: 1246
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -210,7 +210,7 @@ items:
   source:
     id: OnEnable
     path: ''
-    startLine: 1268
+    startLine: 1266
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -236,7 +236,7 @@ items:
   source:
     id: OnDisable
     path: ''
-    startLine: 1285
+    startLine: 1283
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -264,7 +264,7 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1312
+    startLine: 1310
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -296,7 +296,7 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1323
+    startLine: 1321
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -331,7 +331,7 @@ items:
   source:
     id: AddUIElement
     path: ''
-    startLine: 1340
+    startLine: 1338
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -369,7 +369,7 @@ items:
   source:
     id: RemoveUIElement
     path: ''
-    startLine: 1358
+    startLine: 1356
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -401,7 +401,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1369
+    startLine: 1367
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -444,7 +444,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1379
+    startLine: 1377
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -479,7 +479,7 @@ items:
   source:
     id: FollowCamera
     path: ''
-    startLine: 1462
+    startLine: 1445
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -510,7 +510,7 @@ items:
   source:
     id: FadeWorldPanel
     path: ''
-    startLine: 1493
+    startLine: 1476
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -545,7 +545,7 @@ items:
   source:
     id: OnPointerEnter
     path: ''
-    startLine: 1515
+    startLine: 1498
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -577,7 +577,7 @@ items:
   source:
     id: OnPointerLeave
     path: ''
-    startLine: 1524
+    startLine: 1507
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

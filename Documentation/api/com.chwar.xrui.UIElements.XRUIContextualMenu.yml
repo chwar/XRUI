@@ -22,7 +22,7 @@ items:
   source:
     id: XRUIContextualMenu
     path: ''
-    startLine: 1110
+    startLine: 1108
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -71,7 +71,7 @@ items:
   source:
     id: menuElementTemplate
     path: ''
-    startLine: 1115
+    startLine: 1113
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -100,17 +100,17 @@ items:
   source:
     id: parentCoordinates
     path: ''
-    startLine: 1119
+    startLine: 1117
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
   summary: "\nThe coordinates of the clicked element that triggered this contextual menu.\n"
   example: []
   syntax:
-    content: public Vector2 parentCoordinates
+    content: public Vector3 parentCoordinates
     return:
-      type: Global.Vector2
-    content.vb: Public parentCoordinates As Vector2
+      type: Global.Vector3
+    content.vb: Public parentCoordinates As Vector3
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -129,7 +129,7 @@ items:
   source:
     id: positionOffsetLeft
     path: ''
-    startLine: 1123
+    startLine: 1121
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -158,7 +158,7 @@ items:
   source:
     id: positionOffsetRight
     path: ''
-    startLine: 1127
+    startLine: 1125
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -187,7 +187,7 @@ items:
   source:
     id: showArrow
     path: ''
-    startLine: 1131
+    startLine: 1129
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -216,7 +216,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1144
+    startLine: 1142
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -247,7 +247,7 @@ items:
   source:
     id: AddMenuElement
     path: ''
-    startLine: 1195
+    startLine: 1193
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -810,11 +810,11 @@ references:
   name: VisualTreeAsset
   nameWithType: VisualTreeAsset
   fullName: VisualTreeAsset
-- uid: Global.Vector2
+- uid: Global.Vector3
   isExternal: true
-  name: Vector2
-  nameWithType: Vector2
-  fullName: Vector2
+  name: Vector3
+  nameWithType: Vector3
+  fullName: Vector3
 - uid: System.Single
   commentId: T:System.Single
   parent: System
