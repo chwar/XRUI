@@ -93,10 +93,10 @@
     -unity-background-image-tint-color: var(--xrui-secondary);
 }
 
-.xrui Button.xrui-modal-cancel {
+.xrui Button.xrui-modal__cancel-btn {
     background-color: var(--xrui-secondary);
 }
 
-.xrui Button.xrui-modal-cancel:hover {
+.xrui Button.xrui-modal__cancel-btn:hover {
     background-color: var(--xrui-dark);
 }

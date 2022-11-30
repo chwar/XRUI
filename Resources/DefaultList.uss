@@ -1,11 +1,6 @@
-.xrui-list.twodimensional.landscape {
+.xrui-list.twodimensional.landscape, .xrui-list.twodimensional.portrait {
     width: 300px;
-    height: 800px;
-}
-
-.xrui-list.twodimensional.portrait {
-    width: 300px;
-    height: 800px;
+    flex-grow: 1;
 }
 
 .xrui-list.threedimensional {

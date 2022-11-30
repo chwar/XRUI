@@ -46,7 +46,7 @@
 }
 
 .xrui-alert.twodimensional.landscape.animate {
-    bottom: -20%;
+    bottom: -30%;
     transition-property: bottom, top;
     transition-timing-function: ease-in-out, ease-in-out;
     transition-delay: 0.1s, 0.1s;
@@ -54,7 +54,7 @@
 }
 
 .xrui-alert.twodimensional.portrait.animate {
-    top: -20%;
+    top: -30%;
     transition-property: bottom, top;
     transition-timing-function: ease-in-out, ease-in-out;
     transition-delay: 0.1s, 0.1s;

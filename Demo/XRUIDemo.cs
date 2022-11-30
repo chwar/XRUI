@@ -80,8 +80,8 @@ namespace com.chwar.xrui
         private void ShowEntryContextualMenu(VisualElement parentElement)
         {
             // Get the coordinates of the menu button and add an offset to its coordinates so that the contextual menu is displayed at the correct height
-            var contextualMenu = XRUI.Instance.ShowContextualMenu(null, parentElement.worldBound.position + new Vector2(25,25),
-                true, 50, 100);
+            var contextualMenu = XRUI.Instance.ShowContextualMenu(null, parentElement.worldBound.center + new Vector2(0,-25),
+                true, 50, 50);
         
             // Add class to identify currently selected visual element
             // TODO this could be done internally

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="ContextualMenu" class="xrui xrui-contextual-menu" style="flex-shrink: 0; min-width: 200px; min-height: 50px;">
         <ui:VisualElement name="Arrow" class="xrui-contextual-menu__arrow" style="width: 15px; height: 15px; translate: 0 0; position: absolute; left: -5px; top: 17.5px;" />
-        <ui:VisualElement name="MainContainer" class="xrui-contextual-menu__container" style="flex-grow: 1; flex-shrink: 0; width: 100%; height: 100%;" />
+        <ui:VisualElement name="MainContainer" class="xrui-contextual-menu__container"/>
     </ui:VisualElement>
 </ui:UXML>

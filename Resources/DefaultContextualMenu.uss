@@ -1,9 +1,17 @@
-.xrui-contextual-menu {
+.xrui-contextual-menu, .xrui-contextual-menu__container {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: rgb(255, 255, 255);
+}
+
+.xrui-contextual-menu__container {
+    overflow: hidden;
+    flex: 0 0;
+    flex-basis: 102%;
+    width: 100%;
+    height: 100%;
 }
 
 .xrui-contextual-menu__arrow {
