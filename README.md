@@ -24,14 +24,15 @@ void Start(){
 4. You can have a look at the provided Demo scenes to get a better idea of how XRUI works.
 ## UI Elements
 
-![Screenshot from 2021-08-03 18-43-15](https://user-images.githubusercontent.com/25299178/128054028-87a27934-1dad-4377-9b35-4ded3e8855d2.png)
+![xruiOverview](https://user-images.githubusercontent.com/25299178/204763318-87186a7c-2f9e-4f7d-a609-9bef5e018738.png)
+![xruiWorldUIOverview](https://user-images.githubusercontent.com/25299178/204763516-2ffd7a6a-5300-4ded-999d-b74922c7dbb8.png)
 
 
 XRUI provides a few UI Elements. The style is minimalistic and inspired from [Bootstrap](https://getbootstrap.com). You can add them in your project by navigating from the Unity menu to `XRUI > Add XRUI Element`. This creates a game object containing a `UIDocument` (which contains the UXML template and USS styles) and an XRUI script that matches the element. Add your own scripts to this object with a reference to the XRUI script to define the behaviour of the UI. 
 
 XRUI elements are thought as basic containers for user content. Given the hierarchic nature of UXML, it is easy to append content within the UI elements at runtime. To easily access your UXML contents and append them into various XRUI elements, reference them in the intended UI Elements list within the XRUI controller:
 
-![image](https://user-images.githubusercontent.com/25299178/150392915-51de8296-3522-4635-b419-bf2fed487808.png)
+![xruiController](https://user-images.githubusercontent.com/25299178/204763743-bbb68101-10be-4258-8bd4-05d675a42fca.png)
 
 
 The list of UI elements is accessible within the XRUI controller's instance. Use the `GetUIElement` method for easy access:
@@ -90,9 +91,9 @@ card.Show(myElement, false); // Hides myElement
 	
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="3d" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -121,9 +122,9 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="3d" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -148,9 +149,9 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 	
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="3d" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -168,9 +169,9 @@ The provided navbar is a very simple dark top bar. Since XRUI does not provide a
 
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="3d" width = 360px></td>
 	</tr> 	
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -189,9 +190,9 @@ The XRUI Card is floating on the right corner in the 2D landscape format, and st
 
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="3d" width = 360px></td>
 	</tr> 	
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -206,7 +207,7 @@ Given the hierarchic nature of UXML, modals are easy to reproduce. XRUI provides
 
 In Unity, you can reference your modals in the intended list:
 
-![Screenshot from 2021-08-03 17-35-39](https://user-images.githubusercontent.com/25299178/128054683-9a34f51f-f440-40a1-b6e5-f213e6a204dd.png)
+<img width="661" alt="modals" src="https://user-images.githubusercontent.com/25299178/204764369-4be62c79-0ac5-4130-947d-ae77155afa7e.png">
 
 The name given to each modal entry can be used to find the matching template and create a modal from it, with the `CreateModal` method:
 
@@ -299,9 +300,9 @@ _xruiModal.SetFieldError(_fieldWithError);
 <summary>Click to expand!</summary>
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="ar" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="vr" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="2dportrait" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="3d" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape - Primary</td>
@@ -351,8 +352,8 @@ Or, you can set a countdown after which the alert will disappear:
 <summary>Click to expand!</summary>
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150390186-af38fbfb-efa2-4bd0-bf69-d17e69835674.png"  alt="pc" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150390183-61c38a42-88f2-4ef3-90d4-ac5586272fd8.png" alt="ar" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150390186-af38fbfb-efa2-4bd0-bf69-d17e69835674.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/150390183-61c38a42-88f2-4ef3-90d4-ac5586272fd8.png" alt="2dlandscape" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape</td>
@@ -421,7 +422,14 @@ For ease of use, you can force the portrait mode while working in the Unity edit
 ### Three Dimensional Format (World Space UI)
 When XRUI is set to Three Dimensional format, UI is rendered on panels in world space. Each XRUI Element contains a set of `World UI Parameters` which can alter the way it is rendered in world space.
 
+<img width="672" alt="worlduiparameters" src="https://user-images.githubusercontent.com/25299178/204764750-744cacd2-5dcb-4211-8f5c-b6424bec5e35.png">
 
+- The `Bend Panel` property will slightly bend the panel, which is a common practice in VR apps.
+- The `Anchor Panel To Camera` property makes the panel follow the gaze of the camera, with a slight delay.
+- The `Camera Follow Threshold` property defines the minimum distance that needs to be between the panel and the camera gaze before the panel recenters itself.
+- The `Custom Panel Dimensions` overrides the size of the panel, which is otherwise calculated from the ratio of the width and height of the UI element defined in the USS sheet.
+- The `Custom Panel Position` property sets the panel to the specified position in world coordinates. This is overriden if the `Anchor Panel To Camera` checkbox is checked.
+- The `Panel Scale` property lets you alter the scale of the panel. By default, the size of panels tend towards one world space unit.
 
 ## XRUI Grid System
 In order to organize easily and efficiently UI elements on screen, XRUI makes use of a grid system. You can use it by navigating to `XRUI > Add XRUI Grid`. In the Unity editor, you can group UI components inside rows through the scene hierarchy. The `XRUIGridController` component is attached to the root of the grid, and contains the list of all rows. A weighting system allows you to define which rows should take which amount of space (this uses the `flex-grow` attribute of CSS/USS Flexbox). 
