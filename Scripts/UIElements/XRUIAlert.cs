@@ -30,7 +30,6 @@ namespace com.chwar.xrui.UIElements
             
             // Set handler on click to dispose of the alert
             RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert(true));
-            StartCoroutine(FollowCamera());
             StartCoroutine(Animate());
         }
 

@@ -22,22 +22,22 @@ MonoBehaviour:
   defaultContextualMenuTemplate: {fileID: 9197481963319205126, guid: 6dba8ade0d049ed0c99ad1b4b9cdb80e, type: 3}
   defaultAlertWorldUIParameters:
     bendPanel: 0
-    anchorPanelToCamera: 0
-    cameraFollowThreshold: 0
+    anchorPanelToCamera: 1
+    cameraFollowThreshold: 0.2
     customPanelDimensions: {x: 0, y: 0}
     customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0.5
   defaultContextualMenuWorldUIParameters:
     bendPanel: 0
-    anchorPanelToCamera: 0
-    cameraFollowThreshold: 0
+    anchorPanelToCamera: 1
+    cameraFollowThreshold: 0.2
     customPanelDimensions: {x: 0, y: 0}
     customPanelPosition: {x: 0, y: 0, z: 0}
-    panelScale: 1
+    panelScale: 0.5
   defaultModalWorldUIParameters:
-    bendPanel: 0
-    anchorPanelToCamera: 0
-    cameraFollowThreshold: 0
+    bendPanel: 1
+    anchorPanelToCamera: 1
+    cameraFollowThreshold: 0.2
     customPanelDimensions: {x: 0, y: 0}
     customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 1

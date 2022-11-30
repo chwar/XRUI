@@ -223,21 +223,6 @@ namespace com.chwar.xrui.UIElements
             yield return new WaitForSeconds(0.5f);
             UpdateUI();
         }
-        
-        static bool DeviceAutoRotationIsOn()
-        {
-            // Thanks to swifter14: https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/
-            #if UNITY_ANDROID && !UNITY_EDITOR
-                using (var actClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-                {
-                    var context = actClass.GetStatic<AndroidJavaObject>("currentActivity");
-                    AndroidJavaClass systemGlobal = new AndroidJavaClass("android.provider.Settings$System");
-                    var rotationOn = systemGlobal.CallStatic<int>("getInt", context.Call<AndroidJavaObject>("getContentResolver"), "accelerometer_rotation");
-                    return rotationOn == 1;
-                }
-            #endif
-            return true;
-        }
 
         /// <summary>
         /// Makes World UI lazily follow the camera when it gets too far away from the panel
@@ -308,6 +293,29 @@ namespace com.chwar.xrui.UIElements
         protected void OnPointerLeave(PointerLeaveEvent evt)
         {
             PointerOverUI = false;
+        }
+        
+        private bool DeviceAutoRotationIsOn()
+        {
+            // Thanks to swifter14: https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/
+            #if UNITY_ANDROID && !UNITY_EDITOR
+                using (var actClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+                {
+                    var context = actClass.GetStatic<AndroidJavaObject>("currentActivity");
+                    AndroidJavaClass systemGlobal = new AndroidJavaClass("android.provider.Settings$System");
+                    var rotationOn = systemGlobal.CallStatic<int>("getInt", context.Call<AndroidJavaObject>("getContentResolver"), "accelerometer_rotation");
+                    return rotationOn == 1;
+                }
+            #endif
+            return true;
+        }
+
+        /// <summary>
+        /// Helper to activate Camera following when the 3D panel is first created
+        /// </summary>
+        internal void StartFollowingCamera()
+        {
+            StartCoroutine(FollowCamera());
         }
     }
 

@@ -14,6 +14,12 @@
     height: 100%;
 }
 
+.xrui-contextual-menu.threedimensional {
+    position: relative;
+    width: 200px;
+    height: auto;
+}
+
 .xrui-contextual-menu__arrow {
     background-color: rgb(255, 255, 255);
     transform-origin: center;
