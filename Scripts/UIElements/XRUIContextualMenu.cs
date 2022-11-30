@@ -20,7 +20,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// The coordinates of the clicked element that triggered this contextual menu.
         /// </summary>
-        public Vector2 parentCoordinates;
+        public Vector3 parentCoordinates;
         /// <summary>
         /// Adds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.
         /// </summary>
@@ -62,23 +62,23 @@ namespace com.chwar.xrui.UIElements
         /// <param name="evt"></param>
         internal void PositionRelativeToParent(GeometryChangedEvent evt)
         {
-            _contextualMenu.style.position = new StyleEnum<Position>(Position.Absolute);
-            _contextualMenu.style.top = parentCoordinates.y;
-            // If there's not enough space to display the contextual menu on the right of the target, display on the left instead
-            if (_contextualMenu.parent.worldBound.width - parentCoordinates.x < _contextualMenu.resolvedStyle.width)
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
-                _contextualMenu.style.left = StyleKeyword.Auto;
-                _contextualMenu.style.right = _contextualMenu.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
-                _contextualArrow.style.left =  StyleKeyword.Auto;
-                _contextualArrow.style.right = -5;
-            } 
-            else
-                _contextualMenu.style.left = parentCoordinates.x + positionOffsetRight;
-
-            if (!showArrow)
-            {
-                _contextualArrow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                _contextualMenu.style.position = new StyleEnum<Position>(Position.Absolute);
+                _contextualMenu.style.top = parentCoordinates.y;
+                // If there's not enough space to display the contextual menu on the right of the target, display on the left instead
+                if (_contextualMenu.parent.worldBound.width - parentCoordinates.x < _contextualMenu.resolvedStyle.width)
+                {
+                    _contextualMenu.style.left = StyleKeyword.Auto;
+                    _contextualMenu.style.right = _contextualMenu.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
+                    _contextualArrow.style.left =  StyleKeyword.Auto;
+                    _contextualArrow.style.right = -5;
+                } 
+                else
+                    _contextualMenu.style.left = parentCoordinates.x + positionOffsetRight;
             }
+
+            _contextualArrow.style.display = new StyleEnum<DisplayStyle>(showArrow ? DisplayStyle.Flex: DisplayStyle.None);
         }
 
         /// <summary>

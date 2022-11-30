@@ -187,6 +187,7 @@ namespace com.chwar.xrui
             alertContainer.ElementAt(0).AddToClassList(type.ToString().ToLower());
 
             var xrui = container.AddComponent<XRUIAlert>();
+            xrui.worldUIParameters = xruiConfigurationAsset.defaultAlertWorldUIParameters;
             if (title is null)
             {
                 xrui.Title.style.display = DisplayStyle.None;
@@ -196,15 +197,11 @@ namespace com.chwar.xrui
             xrui.Content.text = text;
             xrui.countdown = countdown;
             
-            // World UI parameters
+            // Alter camera position in World UI parameters
             var camPos = Camera.main.transform.position;
             xrui.worldUIParameters.customPanelPosition = new Vector3(camPos.x,
                 camPos.y - .2f, camPos.z + .3f);
-            xrui.worldUIParameters.anchorPanelToCamera = true;
-            xrui.worldUIParameters.bendPanel = false;
-            xrui.worldUIParameters = xruiConfigurationAsset.defaultAlertWorldUIParameters;
-            xrui.worldUIParameters.cameraFollowThreshold = .1f;
-            
+
             if(countdown > 0)
                 xrui.DisposeAlert(false,false);
             
@@ -278,10 +275,10 @@ namespace com.chwar.xrui
             var xrui = container.AddComponent<XRUIContextualMenu>();
             // Use default element template, can be overriden
             xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
-            xrui.parentCoordinates = parentCoordinates;
-            xrui.showArrow = showArrow;
             xrui.worldUIParameters = xruiConfigurationAsset.defaultContextualMenuWorldUIParameters;
-            xrui.worldUIParameters.customPanelDimensions = parentCoordinates;
+            xrui.parentCoordinates = parentCoordinates;
+            xrui.showArrow = showArrow && !IsCurrentXRUIFormat(XRUIFormat.ThreeDimensional);
+ 
             if (!float.IsNaN(leftOffset)) xrui.positionOffsetLeft = leftOffset;
             if (!float.IsNaN(rightOffset)) xrui.positionOffsetRight = rightOffset;
 
@@ -361,6 +358,8 @@ namespace com.chwar.xrui
             var plane = o.GetComponent<XRUIPanel>() ? o.GetComponent<XRUIPanel>() : o.AddComponent<XRUIPanel>();
             if (xrui.worldUIParameters.panelScale.Equals(0))
                 xrui.worldUIParameters.panelScale = 1;
+            if (xrui.worldUIParameters.anchorPanelToCamera) 
+                xrui.StartFollowingCamera();
             plane.numSegments = 512;
             plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.height / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
             plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.width / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
