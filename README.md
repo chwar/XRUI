@@ -1,7 +1,23 @@
 # XRUI Framework
+
+[![release](https://flat.badgen.net/github/release/chwar/xrui)](https://github.com/chwar/xrui)
 [![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
 [![Coverage](https://flat.badgen.net/badge/coverage/90%25/green)](./Tests)
+
+
+<table>
+	<tr>	
+		<td><img src="https://user-images.githubusercontent.com/25299178/204878936-b19b3868-d6c5-428f-ba99-86f1ec389af9.gif"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/204878941-13a1b723-58aa-44e1-aabf-a497c9f72178.gif" alt="2dportrait" height = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/204878943-f608c09f-de33-474b-bea8-9264198734b7.gif" alt="3d" width = 360px></td>
+	</tr> 
+	<tr>
+		<td align="center">2D Landscape (PC)</td>
+		<td align="center">2D Portrait (Android)</td>
+		<td align="center">World Space (Meta Quest 2)</td>
+	</tr>
+</table>
 
 XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (i.e., rendered in world space, required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
 
@@ -22,11 +38,8 @@ void Start(){
 ```
 3. The package uses a default configuration that references the default UXML templates for UI elements. You can create your own by navigating to `Assets > Create > XRUI > Create XRUI Configuration asset`. You can then override the default templates for UI elements with your own (see [Custom UI Elements](#custom-ui-elements)). Don't forget to reference your own XRUI configuration asset to the XRUI controller.
 4. You can have a look at the provided Demo scenes to get a better idea of how XRUI works.
+
 ## UI Elements
-
-![xruiOverview](https://user-images.githubusercontent.com/25299178/204763318-87186a7c-2f9e-4f7d-a609-9bef5e018738.png)
-![xruiWorldUIOverview](https://user-images.githubusercontent.com/25299178/204763516-2ffd7a6a-5300-4ded-999d-b74922c7dbb8.png)
-
 
 XRUI provides a few UI Elements. The style is minimalistic and inspired from [Bootstrap](https://getbootstrap.com). You can add them in your project by navigating from the Unity menu to `XRUI > Add XRUI Element`. This creates a game object containing a `UIDocument` (which contains the UXML template and USS styles) and an XRUI script that matches the element. Add your own scripts to this object with a reference to the XRUI script to define the behaviour of the UI. 
 
@@ -352,13 +365,14 @@ Or, you can set a countdown after which the alert will disappear:
 <summary>Click to expand!</summary>
 <table>
 	<tr>	
-		<td><img src="https://user-images.githubusercontent.com/25299178/150390186-af38fbfb-efa2-4bd0-bf69-d17e69835674.png"  alt="2dlandscape" width = 360px></td>
-		<td><img src="https://user-images.githubusercontent.com/25299178/150390183-61c38a42-88f2-4ef3-90d4-ac5586272fd8.png" alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/204881019-bd7f6b52-6ef2-47b6-87a0-62e1133a6929.png"  alt="2dlandscape" width = 360px></td>
+		<td><img src="https://user-images.githubusercontent.com/25299178/204881022-69287d12-8763-416a-907d-1e390f619211.png" alt="2portrait" width = 360px></td>
 	</tr> 
 	<tr>
 		<td align="center">2D Landscape</td>
 		<td align="center">2D Portrait</td>
 	</tr>
+
 </table>
 	
 XRUI can create contextual menus dynamically. The contextual menu is shown as a floating list. World UI is currently not supported for this template. Similarly to the menu and list templates, a menu element template is also given to create entries in the contextual menu. Because the entries are context-dependent, they need to be generated dynamically at runtime.
@@ -404,8 +418,6 @@ In addition, the contextual menu considers the available space on screen. By def
 XRUI's main functionality is to provide responsiveness for different XR variants. This is done by setting the chosen XRUI format during the app's initialization, which all XRUI Elements (both static and dynamic) adopt thanks to USS styles.
 
 To change the XRUI format, change the related value in the XRUI controller:
-
-![image](https://user-images.githubusercontent.com/25299178/150392381-514b08ec-335f-4762-a3e8-70f6752b1b7b.png)
 
 The XRUI API provides a method to assess the current XRUI format. You can use it to do target-specific manipulations like so:
 
@@ -493,10 +505,11 @@ XRUI automatically adds the `Tracked Device Physics Raycaster` component to Worl
 - Thanks to [katas94](https://gist.github.com/katas94/7b220a591215efc36110860a0b1125eb) for the inspiration on interfacing XRUI with Unity Event Handlers and the XR Interaction package.
 - Thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
 - Thanks to [swifter14](https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/) for the fix on Android auto-rotation lock.
+- Thanks to [NormandErwan](https://github.com/NormandErwan/DocFxForUnity) for DocFxForUnity.
 
 ## Roadmap
 - Grid system for World UI
-- Implement Contextual menu in World UI format
+- Implement keyboard support in MR/VR
 - Animation mechanism for all XRUI Elements
 - Add XRUIFormat override for XRUIElements, so that the app can have both 2D and 3D UI at once in the same scene (e.g., for mobile AR)
 - Custom inspectors for ease of use
