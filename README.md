@@ -9,13 +9,13 @@
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204878936-b19b3868-d6c5-428f-ba99-86f1ec389af9.gif"  alt="2dlandscape" width = 300px>
+<img src="https://user-images.githubusercontent.com/25299178/204878936-b19b3868-d6c5-428f-ba99-86f1ec389af9.gif"  alt="2dlandscape" width ="300">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204878941-13a1b723-58aa-44e1-aabf-a497c9f72178.gif" alt="2dportrait" width = 150px>
+<img src="https://user-images.githubusercontent.com/25299178/204878941-13a1b723-58aa-44e1-aabf-a497c9f72178.gif" alt="2dportrait" width ="150">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204878943-f608c09f-de33-474b-bea8-9264198734b7.gif" alt="3d" width = 300px>
+<img src="https://user-images.githubusercontent.com/25299178/204878943-f608c09f-de33-474b-bea8-9264198734b7.gif" alt="3d" width ="300">
 </td>
 </tr> 
 <tr>
@@ -52,10 +52,10 @@ void Start(){
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204884997-2311b94e-e644-4d79-8fe8-50d8a61fdbf6.png"  alt="2dlandscape" width = 400px>
+<img src="https://user-images.githubusercontent.com/25299178/204884997-2311b94e-e644-4d79-8fe8-50d8a61fdbf6.png"  alt="2dlandscape" width ="400">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204885001-9618fb5e-d31a-4a72-b7e1-d3dd310dfb4d.png" alt="3d" width = 400px>
+<img src="https://user-images.githubusercontent.com/25299178/204885001-9618fb5e-d31a-4a72-b7e1-d3dd310dfb4d.png" alt="3d" width ="400">
 </td>
 </tr> 
 <tr>
@@ -133,13 +133,13 @@ card.Show(myElement, false); // Hides myElement
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150380152-620c7abc-c9ed-4f59-a5c9-1c290cb188da.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150380261-88113fc8-5787-45be-891e-c3c63884a5f4.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150380451-dcdd3686-2f91-40c5-99da-9114d3119784.png" alt="3d" width ="360">
 </td>
 </tr> 
 <tr>
@@ -172,13 +172,13 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150381681-5008c5e6-8656-436d-ad37-5673c88eaf9f.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150381664-4cf1bd87-ec84-429e-9d75-035f361b3aed.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150381684-7843e2c5-fd60-4149-b9ad-2e21ea66c5db.png" alt="3d" width ="360">
 </td>
 </tr> 
 <tr>
@@ -207,13 +207,13 @@ element.Q<Label>("MyElementLabel").text = "myLabelTitle";
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150387236-07cf2ba4-d59a-47fa-b10d-1d7f2270b4aa.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150387230-8ae337ba-cc53-4e56-aba8-61972b07cef9.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150387239-d4f12053-72e1-444c-8666-074dc7cda6ad.png" alt="3d" width ="360">
 </td>
 </tr> 
 <tr>
@@ -233,13 +233,13 @@ The provided navbar is a very simple dark top bar. Since XRUI does not provide a
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150382706-dfcca9f6-28d4-49a6-b104-1f13476e86b3.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150382701-ea5b0e55-4bbe-4cac-9db5-7ed07fb47afa.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150382708-57b80239-35e1-483d-a11d-77f1f93865ab.png" alt="3d" width ="360">
 </td>
 </tr> 	
 <tr>
@@ -260,13 +260,13 @@ The XRUI Card is floating on the right corner in the 2D landscape format, and st
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383323-b82a2a4d-3565-4d58-8695-9fef29920ffb.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383320-c52537d2-c74a-4c9d-8dd8-bc7a5955f92d.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383326-c13b93d2-bbfc-4286-83c7-2361fbfea257.png" alt="3d" width ="360">
 </td>
 </tr> 	
 <tr>
@@ -381,13 +381,13 @@ _xruiModal.SetFieldError(_fieldWithError);
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383854-a98bc873-a574-4285-bc93-c38c4833fadf.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="2dportrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383853-723ba5af-312f-428d-9734-a3ad430b3411.png" alt="2dportrait" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="3d" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/150383857-6adaa27b-23f6-4f33-a472-21eb9511af78.png" alt="3d" width ="360">
 </td>
 </tr> 
 <tr>
@@ -440,10 +440,10 @@ Or, you can set a countdown after which the alert will disappear:
 <table>
 <tr>	
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204881019-bd7f6b52-6ef2-47b6-87a0-62e1133a6929.png"  alt="2dlandscape" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/204881019-bd7f6b52-6ef2-47b6-87a0-62e1133a6929.png"  alt="2dlandscape" width ="360">
 </td>
 <td>
-<img src="https://user-images.githubusercontent.com/25299178/204881022-69287d12-8763-416a-907d-1e390f619211.png" alt="2portrait" width = 360px>
+<img src="https://user-images.githubusercontent.com/25299178/204881022-69287d12-8763-416a-907d-1e390f619211.png" alt="2portrait" width ="360">
 </td>
 </tr> 
 <tr>
@@ -527,8 +527,8 @@ In order to organize easily and efficiently UI elements on screen, XRUI makes us
 
 For example, a top navbar can be setup in one row, with a weight of 0, i.e., it should not "grow"--as in, take space--more than its initial size. A second row containing the rest of the on-screen UI can have a weight of 1, i.e. it should take more of the available space than what its initial size requires. Since there are two rows and the first row has a weight of 0, this results in the second row using all remaining screen space. Horizontally, elements are contained in absolute containers, which mean they all take the entire horizontal space and can therefore overlap. 
 
-<img src="https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif"  alt="pc" width = 700px>
-<img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width = 500px>
+<img src="https://user-images.githubusercontent.com/25299178/128205987-c9fcad0c-9639-4de9-902b-1a7141320a38.gif"  alt="pc" width ="700">
+<img src="https://user-images.githubusercontent.com/25299178/128047151-b90c0e4f-0a09-4a64-b54b-8d011ccba3ac.png"  alt="pc" width ="500">
 	
 > Note: In case all UI elements within a row are absolute, the row's height becomes zero, because its USS property is set to `height: auto`. You should then indicate a minimum height in the indicated field to obtain the expected behaviour.
 
