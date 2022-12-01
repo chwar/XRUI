@@ -10,13 +10,28 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// This class interfaces with Unity <see cref="EventHandler"/> and makes XRUI react to world space interactions (e.g., MR/VR pointers). 
+    /// </summary>
     public class XRUIWorldSpaceInteraction : MonoBehaviour, IPointerMoveHandler, IPointerUpHandler, IPointerDownHandler,
     ISubmitHandler, ICancelHandler, IMoveHandler, IScrollHandler, ISelectHandler, IDeselectHandler, IDragHandler
     {
+        /// <summary>
+        /// The <see cref="PanelSettings"/> of the UI that is pointed at.
+        /// </summary>
         public PanelSettings targetPanel;
+        /// <summary>
+        /// <see cref="PanelEventHandler"/> of the targeted panel.
+        /// </summary>
         private PanelEventHandler _panelEventHandler; 
+        /// <summary>
+        /// Method that translates 3D coordinates of the world space raycast to 2D texture coordinates.
+        /// </summary>
         private Func<Vector2, Vector2> _renderTextureScreenTranslation;
 
+        /// <summary>
+        /// Unity method.
+        /// </summary>
         void OnEnable()
         {
             targetPanel = GetComponent<UIDocument>().panelSettings;
@@ -46,6 +61,9 @@ namespace com.chwar.xrui
             }
         }
 
+        /// <summary>
+        /// Unity method.
+        /// </summary>
         void OnDisable()
         {
             //we reset it back to the default behavior

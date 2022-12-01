@@ -13,33 +13,54 @@ using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// Main controller of the XRUI Framework.
+    /// </summary>
     [ExecuteAlways]
     public class XRUI : MonoBehaviour
     {
-        // Singleton
+
+        /// <summary>
+        /// Instance of this class (singleton).
+        /// </summary>
         public static XRUI Instance;
 
         [HideInInspector] public XRUIGridController xruiGridController;
-        // Used to define the nature of UIs.
+        /// <summary>
+        /// Defines the <see cref="XRUIFormat"/> which sets the UI to 2D or 3D.
+        /// </summary>
         [SerializeField, Tooltip(
             "Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
         internal XRUIFormat xruiFormat = XRUIFormat.TwoDimensional;
 
-        [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in Play mode in the Unity Editor. This forces 2D Portrait USS styles.")]
+        /// <summary>
+        /// Forces 2D Portrait USS styles when in the Unity Editor.
+        /// </summary>
+        [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in the Unity Editor. This forces 2D Portrait USS styles.")]
         public bool setTwoDimensionalFormatToPortraitInEditor;
 
+        /// <summary>
+        /// The <see cref="XRUIConfiguration"/> to use for XRUI.
+        /// </summary>
         [SerializeField]
         internal XRUIConfiguration xruiConfigurationAsset;
         
-        // List of UI Elements
+        /// <summary>
+        /// List of UI Elements to be referenced in the Inspector.
+        /// </summary>
         [SerializeField]
         internal List<VisualTreeAsset> uiElements = new();
 
-        // List of Modals
+        /// <summary>
+        /// List of Modals to be referenced in the Inspector.
+        /// </summary>
         [SerializeField]
         internal List<InspectorModal> modals = new();
 
         
+        /// <summary>
+        /// Unity method which instantiates the Singleton design pattern.
+        /// </summary>
         private void Awake()
         {
             if(Instance == null)
@@ -64,6 +85,9 @@ namespace com.chwar.xrui
             }
         }
 
+        /// <summary>
+        /// Editor method that enables real time UI updating while in the Editor.
+        /// </summary>
         #if UNITY_EDITOR
         public void OnValidate()
         {
@@ -75,46 +99,72 @@ namespace com.chwar.xrui
         #endif
 
 
+        /// <summary>
+        /// Unity method that puts default values to the XRUI Instance in the Inspector.
+        /// Reverts the <see cref="XRUIFormat"/> to <see cref="XRUIFormat.TwoDimensional"/> and <see cref="xruiConfigurationAsset"/> to the default 2D configuration.
+        /// </summary>
         internal void Reset()
         {
+            xruiFormat = XRUIFormat.TwoDimensional;
             xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
         
         /// <summary>
-        /// Defines the nature of the UI in order to fit the desired XR device as best as possible
+        /// Defines the nature of the UI in order to fit the desired XR device as best as possible.
         /// </summary>
         public enum XRUIFormat
         {
+            /// <summary>
+            /// Two Dimensional UI, for use on traditional screens, e.g. PC, smartphones, tablets, etc.
+            /// </summary>
             TwoDimensional,
+            /// <summary>
+            /// Three Dimensional or World Space UI. Needed for displaying UI for MR/VR applications (can also be used for AR).
+            /// </summary>
             ThreeDimensional
     }
         
         /// <summary>
-        /// Defines the different alert types
+        /// Defines the different alert types. Default styles are inspired by Bootstrap.
         /// </summary>
         public enum AlertType
         {
+            /// <summary>
+            /// Primary alert type, by default in blue
+            /// </summary>
             Primary,
+            /// <summary>
+            /// Success alert type, by default in green
+            /// </summary>
             Success,
+            /// <summary>
+            /// Warning alert type, by default in yellow
+            /// </summary>
             Warning,
+            /// <summary>
+            /// Danger alert type, by default in red
+            /// </summary>
             Danger,
+            /// <summary>
+            /// Info alert type, by default in light blue
+            /// </summary>
             Info
         }
 
         /// <summary>
-        /// Returns the current XRUI format based on the format defined in the inspector.
+        /// Returns the current <see cref="XRUIFormat"/>t based on the format defined in the inspector.
         /// </summary>
-        /// <returns>The current reality.</returns>
+        /// <returns>The current <see cref="XRUIFormat"/>.</returns>
         public static string GetCurrentXRUIFormat()
         {
             return PlayerPrefs.GetString("XRUIFormat");
         }
 
         /// <summary>
-        /// Returns true if format matches the current XRUI format.
+        /// Compares an <see cref="XRUIFormat"/> to the current one. .
         /// </summary>
-        /// <param name="format">The XRUI format to compare.</param>
-        /// <returns></returns>
+        /// <param name="format">The <see cref="XRUIFormat"/> to compare.</param>
+        /// <returns>True if <paramref name="format"/> matches the current <see cref="XRUIFormat"/></returns>
         public static bool IsCurrentXRUIFormat(XRUIFormat format)
         {
             return GetCurrentXRUIFormat().Equals(format.ToString().ToLower());
@@ -123,7 +173,7 @@ namespace com.chwar.xrui
         /// <summary>
         /// Set the current XRUI format.
         /// </summary>
-        /// <param name="format">The XRUI Format to use.</param>
+        /// <param name="format">The <see cref="XRUIFormat"/> to use.</param>
         /// <param name="setOrientationPortrait">Whether to use Portrait orientation mode.</param>
         public void SetCurrentXRUIFormat(XRUIFormat format, bool setOrientationPortrait = false)
         {
@@ -135,10 +185,10 @@ namespace com.chwar.xrui
         }
         
         /// <summary>
-        /// Returns a VisualTreeAsset of the given name from the templates list defined in the inspector. 
+        /// Returns a <see cref="VisualTreeAsset"/> of the given name from the templates list defined in the inspector. 
         /// </summary>
-        /// <param name="elementName"></param>
-        /// <returns>VisualTreeAsset of the given name from the templates list defined in the inspector.</returns>
+        /// <param name="elementName">The <see cref="VisualTreeAsset"/> to find.</param>
+        /// <returns><see cref="VisualTreeAsset"/> of the given name from the templates list defined in the inspector.</returns>
         public VisualTreeAsset GetUIElement(string elementName)
         {
             var asset = uiElements.Find(ui => ui.name.Equals(elementName));
@@ -151,25 +201,61 @@ namespace com.chwar.xrui
             return asset;
         }
         
+        /// <summary>
+        /// Shows an alert to the end-user.
+        /// </summary>
+        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="text">The body of the alert.</param>
         public XRUIAlert ShowAlert(AlertType type, string text)
         {
             return ShowAlert(type, null, text);     
         }
         
+        /// <summary>
+        /// Shows an alert to the end-user.
+        /// </summary>
+        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="title">The title of the alert.</param>
+        /// <param name="text">The body of the alert.</param>
         public XRUIAlert ShowAlert(AlertType type, string title, string text)
         {
             return ShowAlert(null, type, title, text, 0, null);
         }
         
+        /// <summary>
+        /// Shows an alert to the end-user.
+        /// </summary>
+        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="title">The title of the alert.</param>
+        /// <param name="text">The body of the alert.</param>
+        /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
         public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown)
         {
             return ShowAlert(null, type, title, text, countdown, null);
         }               
+        
+        /// <summary>
+        /// Shows an alert to the end-user.
+        /// </summary>
+        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="title">The title of the alert.</param>
+        /// <param name="text">The body of the alert.</param>
+        /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
         public XRUIAlert ShowAlert(AlertType type, string title, string text, Action onClick)
         {
             return ShowAlert(null, type, title, text, 0, onClick);
         }
 
+        /// <summary>
+        /// Shows an alert to the end-user.
+        /// </summary>
+        /// <param name="template">Custom alert template to use, set it to null to use the default.</param>
+        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="title">The title of the alert.</param>
+        /// <param name="text">The body of the alert.</param>
+        /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
+        /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
+        /// <returns></returns>
         public XRUIAlert ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, int countdown, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
@@ -198,15 +284,15 @@ namespace com.chwar.xrui
             xrui.countdown = countdown;
             
             // Alter camera position in World UI parameters
-            var camPos = Camera.main.transform.position;
-            xrui.worldUIParameters.customPanelPosition = new Vector3(camPos.x,
-                camPos.y - .2f, camPos.z + .3f);
+            // var camPos = Camera.main.transform.position;
+            // xrui.worldUIParameters.customPanelPosition = new Vector3(camPos.x,
+            //     camPos.y - .2f, camPos.z + .3f);
 
             if(countdown > 0)
                 xrui.DisposeAlert(false,false);
             
             if (onClick != null)
-                xrui.ClickCallback = onClick;
+                xrui.clickCallback = onClick;
 
             return xrui;
         }
@@ -313,9 +399,9 @@ namespace com.chwar.xrui
         }
 
         /// <summary>
-        /// Helper to format a Template Container so that it it is scaled to the entire screen
+        /// Helper to format a Template Container so that it it is scaled to the entire screen.
         /// </summary>
-        /// <param name="templateContainer"></param>
+        /// <param name="templateContainer">The template container to format.</param>
         private void AdaptFloatingTemplateContainer(ref VisualElement templateContainer)
         {
             templateContainer.style.width = new StyleLength(Length.Percent(100));
@@ -327,7 +413,8 @@ namespace com.chwar.xrui
         /// <summary>
         /// Generates a mesh on which a render texture is created. The render texture renders the XRUI element.
         /// </summary>
-        /// <param name="uiDocument"></param>
+        /// <param name="evt">The GeometryChangedEvent that triggered the layout pass.</param>
+        /// <param name="uiDocument">The UI Document of the XRUI Element.</param>
         internal static void GetWorldUIPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
             ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetWorldUIPanel);
@@ -370,6 +457,8 @@ namespace com.chwar.xrui
 
             var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
             collider.sharedMesh = plane.mesh;
+            
+            // TODO Find a shader that can fade out (transparent) but that culls rays from MR/VR controllers
             // var meshRenderer =  o.GetComponent<MeshRenderer>();
             // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
             
@@ -378,15 +467,24 @@ namespace com.chwar.xrui
         }
         
 
+        /// <summary>
+        /// Helper that returns the greatest common divisor of two numbers. Used to calculate the ratio of a world UI panel.
+        /// </summary>
+        /// <param name="a">First number to compare</param>
+        /// <param name="b">Second number to compare</param>
+        /// <returns>The GCD between a and b.</returns>
         private static int GetGreatestCommonDivisor(int a, int b) {
             return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
         }
 
+        /// <summary>
+        /// When the XRUI Instance is initialised, all XRUI Elements are initialised by this method.
+        /// </summary>
         internal void InitializeElements()
         {
             xruiGridController = FindObjectOfType<XRUIGridController>();
             if(xruiGridController is not null) 
-                xruiGridController.AdaptGrid();
+                xruiGridController.RefreshGrid();
             foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
             {
                 xruiElement.Init();
@@ -395,14 +493,26 @@ namespace com.chwar.xrui
         }
     }
 
+    /// <summary>
+    /// Lets users reference modals in the Unity Inspector for ease of access.
+    /// </summary>
     [Serializable]
     struct InspectorModal
     {
+        /// <summary>
+        /// Name of the modal
+        /// </summary>
         [Tooltip("Name of the modal")]
         public string modalName;
+        /// <summary>
+        /// Main template used as root content for the modal
+        /// </summary>
         [Tooltip("Main template used as root content for the modal")]
         public VisualTreeAsset mainTemplateOverride;
-        [Tooltip("List of contents that appear in this modal in order of navigation")]
+        /// <summary>
+        /// List of contents that appear in this modal
+        /// </summary>
+        [Tooltip("List of contents that appear in this modal")]
         public List<VisualTreeAsset> modalFlowList;
     }
 }

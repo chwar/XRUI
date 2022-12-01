@@ -11,17 +11,36 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Element class. Inherited by all XRUI elements.
+    /// </summary>
     [ExecuteAlways]
     public class XRUIElement : MonoBehaviour
     {
+        /// <summary>
+        /// True if the pointer is hovering the current element.
+        /// </summary>
         public bool PointerOverUI { get; private set; }
+        /// <summary>
+        /// Set of <see cref="worldUIParameters"/> that define the behaviour of the UI when rendered in world space.
+        /// </summary>
         public WorldUIParameters worldUIParameters;
-
+        /// <summary>
+        /// <see cref="UIDocument"/> of the element.
+        /// </summary>
         internal UIDocument UIDocument;
+        /// <summary>
+        /// Root <see cref="VisualElement"/> that contains the `.xrui` USS class.
+        /// </summary>
         public VisualElement RootElement;
-
+        /// <summary>
+        /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
+        /// </summary>
         private DeviceOrientation _cachedDeviceOrientation;
         
+        /// <summary>
+        /// Initializes the UI Element. 
+        /// </summary>
         protected internal virtual void Init()
         {
             // To override
@@ -30,6 +49,9 @@ namespace com.chwar.xrui.UIElements
             _cachedDeviceOrientation = Input.deviceOrientation;
         }
 
+        /// <summary>
+        /// Unity method. Checks if the <see cref="XRUI"/> instance is running yet before initialising elements. 
+        /// </summary>
         public void Awake()
         {
             // The element is not initialized at this moment, but only during the app's lifetime if it has been re-enabled.
@@ -40,6 +62,9 @@ namespace com.chwar.xrui.UIElements
             UpdateUI();
         }
 
+        /// <summary>
+        /// Unity Editor method. Updates UI when scripts are reloaded.
+        /// </summary>
         #if UNITY_EDITOR
         private void OnValidate()
         {
@@ -50,6 +75,10 @@ namespace com.chwar.xrui.UIElements
         }
         #endif
         
+        /// <summary>
+        /// Unity method. Subscribes UI element to <see cref="OnPointerEnter"/> and <see cref="OnPointerLeave"/>.
+        /// </summary>
+        /// <exception cref="NullReferenceException">Fired when <see cref="RootElement"/> has no children.</exception>
         protected void OnEnable()
         {
             if (RootElement is null) return;
@@ -67,6 +96,9 @@ namespace com.chwar.xrui.UIElements
                 StartCoroutine(FollowCamera());
         }
 
+        /// <summary>
+        /// Unity method. Unsubscribes UI element from <see cref="OnPointerEnter"/> and <see cref="OnPointerLeave"/>.
+        /// </summary>
         protected virtual void OnDisable()
         {
             // When Destroying, Visual Element is null, and no need to unregister the callbacks
@@ -80,10 +112,24 @@ namespace com.chwar.xrui.UIElements
                 StopCoroutine(FollowCamera());
         }
 
+        /// <summary>
+        /// Unity method. Checks for device rotation.
+        /// </summary>
         private void Update()
         {
-            if (DeviceAutoRotationIsOn() && !Input.deviceOrientation.Equals(_cachedDeviceOrientation))
-                StartCoroutine(UpdateUIOnRotation());
+            if (!Input.deviceOrientation.Equals(_cachedDeviceOrientation))
+            {
+                bool allowedToRotate = true;
+                // For Android, also check if the OS rotation lock is on.
+                if (Application.platform == RuntimePlatform.Android) 
+                    allowedToRotate = IsAndroidAutoRotateOn();
+                if (allowedToRotate &&
+                    Screen.autorotateToLandscapeLeft && Screen.autorotateToLandscapeRight &&
+                    Screen.autorotateToPortrait && Screen.autorotateToPortraitUpsideDown)
+                {
+                    StartCoroutine(UpdateUIOnRotation());
+                }
+            }
         }
         
         /*
@@ -119,9 +165,9 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Adds a UI Element as a child of given parent.
         /// </summary>
-        /// <param name="uiParentClass"></param>
-        /// <param name="uiElement"></param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name="uiParentClass">The USS class of the container in which to append the element.</param>
+        /// <param name="uiElement">The <see cref="VisualElement"/> to add.</param>
+        /// <exception cref="ArgumentException">Fired when the parent container is not found.</exception>
         public void AddUIElement(VisualElement uiElement, string uiParentClass)
         {
             VisualElement parent = RootElement.Q(null, uiParentClass);
@@ -137,9 +183,9 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Removes a UIElement
+        /// Removes a UI Element.
         /// </summary>
-        /// <param name="uiElement"></param>
+        /// <param name="uiElement">The <see cref="VisualElement"/> to remove.</param>
         public void RemoveUIElement(VisualElement uiElement)
         {
             uiElement.RemoveFromHierarchy();
@@ -187,9 +233,10 @@ namespace com.chwar.xrui.UIElements
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
                 // Check for device orientation to refine Mobile AR USS styles
-                bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft 
-                                   || Input.deviceOrientation == DeviceOrientation.LandscapeRight 
-                                   || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")));
+                bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft
+                                   || Input.deviceOrientation == DeviceOrientation.LandscapeRight
+                                   || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")) 
+                                   || ((Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
 
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
@@ -295,9 +342,12 @@ namespace com.chwar.xrui.UIElements
             PointerOverUI = false;
         }
         
-        private bool DeviceAutoRotationIsOn()
+        /// <summary>
+        /// Checks if the auto rotation on Android devices is on.
+        /// </summary>
+        /// <returns>True if the auto rotation is on.</returns>
+        private bool IsAndroidAutoRotateOn()
         {
-            // Thanks to swifter14: https://forum.unity.com/threads/lock-auto-rotation-on-android-doesnt-work.842893/
             #if UNITY_ANDROID && !UNITY_EDITOR
                 using (var actClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
                 {
@@ -319,20 +369,41 @@ namespace com.chwar.xrui.UIElements
         }
     }
 
+    /// <summary>
+    /// Set of parameters to alter the rendering of UI in world space.
+    /// </summary>
     [Serializable]
     public struct WorldUIParameters
     {
-        [Tooltip("Alters the VR panel geometry by slightly bending it")]
+        /// <summary>
+        /// Bends the panel. Common practice in VR apps.
+        /// </summary>
+        [Tooltip("Alters the panel geometry by slightly bending it")]
         public bool bendPanel;
-        [Tooltip("Defines if the VR Panel will be anchored to the camera or not")]
+        /// <summary>
+        /// Makes the panel follow the gaze of the camera, with a slight delay.
+        /// </summary>
+        [Tooltip("Defines if the panel will be anchored to the camera or not")]
         public bool anchorPanelToCamera;
+        /// <summary>
+        /// Defines the minimum distance that needs to be between the panel and the camera gaze before the panel recenters itself.
+        /// </summary>
         [Tooltip("Defines the distance that the camera needs to travel away from the panel before the panel starts following it.")]
         public float cameraFollowThreshold;
+        /// <summary>
+        /// Overrides the size of the panel, which is otherwise calculated from the ratio of the width and height of the UI element defined in the USS sheet.
+        /// </summary>
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
         public Vector2 customPanelDimensions;
+        /// <summary>
+        /// Sets the panel to the specified position in world coordinates. This is overriden if <see cref="anchorPanelToCamera"/> is true.
+        /// </summary>
         [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
         public Vector3 customPanelPosition;
-        [Tooltip("Alters the scale of the VR Panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
+        /// <summary>
+        /// Alters the scale of the panel. By default, the size of panels tend towards one world space unit (one meter).
+        /// </summary>
+        [Tooltip("Alters the scale of the panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
         public float panelScale;
     }
 }

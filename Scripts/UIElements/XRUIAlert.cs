@@ -10,17 +10,32 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Alert class.
+    /// </summary>
     public class XRUIAlert : XRUIElement
     {
+        /// <summary>
+        /// The title UXML node of the alert.
+        /// </summary>
         public Label Title { get; private set; }
+        /// <summary>
+        /// The content (body text) UXML node of the alert.
+        /// </summary>
         public Label Content { get; private set; }
 
-        public Action ClickCallback;
+        /// <summary>
+        /// The optional callback to trigger when the alert is clicked.
+        /// </summary>
+        public Action clickCallback;
         
+        /// <summary>
+        /// The optional countdown after which the alert is destroyed.
+        /// </summary>
         public int countdown = 0;
         
         /// <summary>
-        /// Initializes the UI Elements of the Alert.
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
@@ -33,22 +48,37 @@ namespace com.chwar.xrui.UIElements
             StartCoroutine(Animate());
         }
 
+        /// <summary>
+        /// Destroys the Alert with optional requirements.
+        /// </summary>
+        /// <param name="requirePointerOverUI">If true, will only destroy the alert when the pointer is on it.</param>
+        /// <param name="destroyImmediate">If false, waits for the <see cref="countdown"> before destroying.</see></param>
         public void DisposeAlert(bool requirePointerOverUI = false, bool destroyImmediate = true)
         {
             if ((requirePointerOverUI && PointerOverUI) || !requirePointerOverUI)
             {
                 StartCoroutine(Animate(destroyImmediate));
                 StartCoroutine(Dispose(destroyImmediate));
-                ClickCallback?.Invoke();
+                clickCallback?.Invoke();
             }
         }
 
+        /// <summary>
+        /// Destroys the Alert Game Object.
+        /// </summary>
+        /// <param name="destroyImmediate">If false, waits for the <see cref="countdown"/> before destroying.</param>
+        /// <returns></returns>
         private IEnumerator Dispose(bool destroyImmediate = true)
         {
             yield return new WaitForSeconds(destroyImmediate ? 1 : countdown == 0 ? 1 : countdown);
             Destroy(this.gameObject);
         }
         
+        /// <summary>
+        /// Animates the alert by triggering an USS class.
+        /// </summary>
+        /// <param name="animateImmediate">If false, waits for the <see cref="countdown"/> before animating.</param>
+        /// <returns></returns>
         private IEnumerator Animate(bool animateImmediate = true)
         {
             yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);

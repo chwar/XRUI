@@ -11,25 +11,45 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// Controller which creates a grid to organise UI elements on screen.
+    /// </summary>
     [ExecuteAlways]
     public class XRUIGridController : MonoBehaviour
     {
-        public VisualElement XruiRoot;  
+        /// <summary>
+        /// List of <see cref="XRUIGrid"/> that are in the grid.
+        /// </summary>
         public List<XRUIGrid> gridElementsList = new();
+        /// <summary>
+        /// List of the children <see cref="Transform"/>.
+        /// </summary>
         private List<Transform> _listGridElements;
+        /// <summary>
+        /// Checks if the grid has been initialised yet at runtime.
+        /// </summary>
         private bool _isInitialized;
         
+        /// <summary>
+        /// Unity method. 
+        /// </summary>
         private void Awake()
         {
             _listGridElements = new List<Transform>();
         }
         
+        /// <summary>
+        /// Unity method. Refreshes the grid in the Editor.
+        /// </summary>
         private void OnValidate()
         {
             if(_isInitialized || !Application.isPlaying)
-                AdaptGrid();
+                RefreshGrid();
         }
 
+        /// <summary>
+        /// Unity method. Enables all children of the grid. 
+        /// </summary>
         private void OnEnable()
         {
             if(_listGridElements != null)
@@ -39,11 +59,13 @@ namespace com.chwar.xrui
             // During the initial run, the XRIGrid is initialized by the XRUI Instance to make sure that the instance is running first.
             if (_isInitialized || !Application.isPlaying)
             {
-                XruiRoot = GetComponent<UIDocument>().rootVisualElement?.panel.visualTree;
-                AdaptGrid();
+                RefreshGrid();
             }
         }
 
+        /// <summary>
+        /// Unity method. Disables all children of the grid.
+        /// </summary>
         private void OnDisable()
         {
             if(Application.isPlaying)
@@ -51,8 +73,11 @@ namespace com.chwar.xrui
             //_isInitialized = false;
         }
 
-        // Start is called before the first frame update
-        public void AdaptGrid()
+        /// <summary>
+        /// Refreshes the grid according to the settings defined in the Inspector. 
+        /// </summary>
+        /// <exception cref="MissingComponentException">Fired if a <see cref="UIDocument"/> is missing on a row.</exception>
+        public void RefreshGrid()
         {
             var worldUI = XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
             
@@ -108,11 +133,23 @@ namespace com.chwar.xrui
             _isInitialized = true;
         }
 
+        /// <summary>
+        /// Used to reference rows in the Inspector.
+        /// </summary>
         [Serializable]
         public struct XRUIGrid
         {
+            /// <summary>
+            /// The row in which <see cref="UIElements.XRUIElement"/> are contained.
+            /// </summary>
             public GameObject row;
+            /// <summary>
+            /// The weight that this row has in comparison to other rows. This defines the space that this row is allowed to take.
+            /// </summary>
             public float weight;
+            /// <summary>
+            /// The minimal height of this row in pixels. Useful when the elements inside are using absolute positioning.
+            /// </summary>
             public float minHeight;
         }
     }

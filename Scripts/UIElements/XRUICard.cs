@@ -9,20 +9,40 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Card class.
+    /// </summary>
     public class XRUICard : XRUIElement
     {
-        // UXML Attributes
+        /// <summary>
+        /// The title UXML node of the card.
+        /// </summary>
         private Label _title;
+        /// <summary>
+        /// The subtitle UXML node of the card.
+        /// </summary>
         private Label _subtitle;
+        /// <summary>
+        /// The close button UXML node of the card.
+        /// </summary>
         private Button _closeButton;
 
+        /// <summary>
+        /// The title property in the Inspector.
+        /// </summary>
         [Tooltip("Title of the card")]
         [SerializeField]
         private string titleText;
+        /// <summary>
+        /// The subtitle property in the Inspector.
+        /// </summary>
         [Tooltip("Subtitle of the card")]
         [SerializeField]
         private string subtitleText;
         
+        /// <summary>
+        /// Initializes the UI Element.
+        /// </summary>
         protected internal override void Init()
         {
             base.Init();
@@ -43,6 +63,10 @@ namespace com.chwar.xrui.UIElements
         
         /*Update Methods*/
 
+        /// <summary>
+        /// Updates the title.
+        /// </summary>
+        /// <param name="text">The new text to replace the title with.</param>
         public void UpdateTitle(string text)
         {
             if(_title != null && _title.text != text) {
@@ -52,6 +76,10 @@ namespace com.chwar.xrui.UIElements
             }
         }
         
+        /// <summary>
+        /// Updates the subtitle.
+        /// </summary>
+        /// <param name="text">The new text to replace the subtitle with.</param>
         public void UpdateSubtitle(string text)
         {
             if(_subtitle != null && _subtitle.text != text) {
@@ -61,6 +89,10 @@ namespace com.chwar.xrui.UIElements
             }
         }
 
+        /// <summary>
+        /// Adds a callback to the close button.
+        /// </summary>
+        /// <param name="closeButtonAction">The <see cref="Action"/> to trigger upon clicking.</param>
         public void SetCloseButtonAction(Action closeButtonAction)
         {
             if(_closeButton != null)

@@ -15,32 +15,65 @@ namespace com.chwar.xrui.UIElements
 {
     public class XRUIModal : XRUIElement
     {
+        /// <summary>
+        /// The list of contents (i.e., pages) that can be navigated when using the modal.
+        /// </summary>
         public List<VisualTreeAsset> modalFlowList;
+        /// <summary>
+        /// The title UXML node of the modal.
+        /// </summary>
         public Label ModalTitle { get; private set; }
+        /// <summary>
+        /// The validate button UXML node of the modal.
+        /// </summary>
         public Button ValidateButton { get; private set; }
+        /// <summary>
+        /// The cancel button UXML node of the modal.
+        /// </summary>
         public Button CancelButton { get; private set; }
-        
-        private Button _closeButton;
+        /// <summary>
+        /// The close button UXML node of the modal.
+        /// </summary>
+        public Button CloseButton  { get; private set; }
+        /// <summary>
+        /// The button container UXML node of the modal.
+        /// </summary>
         private VisualElement _buttonsContainer;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the cancel button.
+        /// </summary>
         private Action _cancelButtonAction;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the validate button.
+        /// </summary>
         private Action _validateButtonAction;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the close button.
+        /// </summary>
+        private Action _closeButtonAction;
+        /// <summary>
+        /// The required fields of the modal.
+        /// </summary>
         private readonly Dictionary<string, List<TextField>> _requiredFields = new();
 
+        /// <summary>
+        /// Initializes the UI Element.
+        /// </summary>
         protected internal override void Init()
         {
             base.Init();
             ModalTitle = GetXRUIVisualElement<Label>("xrui-modal__title");
             ValidateButton = GetXRUIVisualElement<Button>("xrui-modal__validate-btn");
             CancelButton = GetXRUIVisualElement<Button>("xrui-modal__cancel-btn");
-            _closeButton = GetXRUIVisualElement<Button>("xrui-modal__close-btn");
+            CloseButton = GetXRUIVisualElement<Button>("xrui-modal__close-btn");
             _buttonsContainer = GetXRUIVisualElement<VisualElement>("xrui-modal__btn-container");
-            _closeButton.clicked += () => Destroy(this.gameObject);
+            CloseButton.clicked += () => Destroy(this.gameObject);
         }
 
         /// <summary>
         /// Determines the placement of the main buttons.
         /// </summary>
-        /// <param name="placement">USS property to define placement.</param>
+        /// <param name="placement"><see cref="Justify"/> USS property to define placement.</param>
         public void SetButtonsPlacement(Justify placement)
         {
             _buttonsContainer.style.justifyContent = new StyleEnum<Justify>(placement);
@@ -49,7 +82,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Subscribes an action to the cancel button and replaces any other previously subscribed action.
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
         public void SetCancelButtonAction(Action action)
         {
             CancelButton.clicked -= _cancelButtonAction;
@@ -60,12 +93,23 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Subscribes an action to the validate button and replaces any other previously subscribed action.
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
         public void SetValidateButtonAction(Action action)
         {
             ValidateButton.clicked -= _validateButtonAction;
             _validateButtonAction = action;
             ValidateButton.clicked += _validateButtonAction;
+        }
+        
+        /// <summary>
+        /// Subscribes an action to the close button and replaces any other previously subscribed action.
+        /// </summary>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
+        public void SetCloseButtonAction(Action action)
+        {
+            CloseButton.clicked -= _cancelButtonAction;
+            _closeButtonAction = action;
+            CloseButton.clicked += _cancelButtonAction;
         }
 
         /// <summary>
@@ -133,7 +177,7 @@ namespace com.chwar.xrui.UIElements
             }
             foreach (var el in fields)
             {
-                el.RegisterCallback<ChangeEvent<string>>(CheckFormValidity);
+                el.RegisterCallback<ChangeEvent<string>>((_) => CheckFormValidity());
                 _requiredFields[page].Add(el);
             }
             CheckFormValidity();
@@ -149,6 +193,10 @@ namespace com.chwar.xrui.UIElements
             field.RegisterValueChangedCallback(_ => ClickOnError(field));
         }
 
+        /// <summary>
+        /// Removes the error USS style when the value of the field changes.
+        /// </summary>
+        /// <param name="field">The field to unflag.</param>
         private void ClickOnError(TextField field)
         {
             field.RemoveFromClassList("error");
@@ -171,11 +219,6 @@ namespace com.chwar.xrui.UIElements
             {
                 ValidateButton.SetEnabled(true);
             }
-        }
-        
-        private void CheckFormValidity<T>(ChangeEvent<T> evt)
-        {
-            CheckFormValidity();
         }
     }
 }

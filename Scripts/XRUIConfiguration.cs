@@ -10,21 +10,61 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// Configuration assets are created from this class. The generated assets can be used as a configuration for XRUI.
+    /// A configuration asset needs to be referenced in the <see cref="XRUI"/> controller.
+    /// </summary>
     [CreateAssetMenu(fileName = "XRUIConfiguration", menuName = "XRUI/Create XRUI Configuration Asset", order = 1)]
     public class XRUIConfiguration : ScriptableObject
     {
+        /// <summary>
+        /// The <see cref="PanelSettings"/> used by this configuration.
+        /// </summary>
         public PanelSettings panelSettings;
+        /// <summary>
+        /// The default Modal template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultModalTemplate;
+        /// <summary>
+        /// The default Alert template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultAlertTemplate;
+        /// <summary>
+        /// The default Card template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultCardTemplate;
+        /// <summary>
+        /// The default List template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultListTemplate;
+        /// <summary>
+        /// The default Menu template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultMenuTemplate;
+        /// <summary>
+        /// The default Navbar template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultNavbarTemplate;
+        /// <summary>
+        /// The default Contextual Menu template used by this configuration. 
+        /// </summary>
         public VisualTreeAsset defaultContextualMenuTemplate;
+        /// <summary>
+        /// The default World UI configuration for alerts.
+        /// </summary>
         public WorldUIParameters defaultAlertWorldUIParameters;
+        /// <summary>
+        /// The default World UI configuration for contextual menus.
+        /// </summary>
         public WorldUIParameters defaultContextualMenuWorldUIParameters;
+        /// <summary>
+        /// The default World UI configuration for modals.
+        /// </summary>
         public WorldUIParameters defaultModalWorldUIParameters;
 
+        /// <summary>
+        /// Unity method which resets the configuration asset to default values.
+        /// </summary>
         internal void Reset()
         {
             panelSettings = Resources.Load<PanelSettings>("Default2DPanelSettings");

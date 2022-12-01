@@ -8,25 +8,45 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Menu class.
+    /// </summary>
     public class XRUIMenu : XRUIElement
     {
-        // UXML Attributes
+        /// <summary>
+        /// The title UXML node of the menu.
+        /// </summary>
         private Label _title;
+        /// <summary>
+        /// The subtitle UXML node of the menu.
+        /// </summary>
         private Label _subtitle;
+        /// <summary>
+        /// The container UXML node of the menu.
+        /// </summary>
         private ScrollView _container;
 
+        /// <summary>
+        /// The title property in the Inspector.
+        /// </summary>
         [Tooltip("Title of the menu")]
         [SerializeField]
         private string titleText;
+        /// <summary>
+        /// The subtitle property in the Inspector.
+        /// </summary>
         [Tooltip("Subtitle of the menu")]
         [SerializeField]
         private string subtitleText;
+        /// <summary>
+        /// The template to add elements to the menu.
+        /// </summary>
         [Tooltip("Template used to add elements to the menu")]
         public VisualTreeAsset menuElementTemplate;
 
 
         /// <summary>
-        /// Initializes the UI Elements of the List.
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
@@ -43,11 +63,15 @@ namespace com.chwar.xrui.UIElements
         {
             base.UpdateUI();
             UpdateTitle(titleText);
-            UpdateSubtext(subtitleText);
+            UpdateSubtitle(subtitleText);
         }
         
         /*Update Methods*/
 
+        /// <summary>
+        /// Updates the title.
+        /// </summary>
+        /// <param name="text">The new text to replace the title with.</param>
         public void UpdateTitle(string text)
         {
             if(_title != null && _title.text != text) {
@@ -57,7 +81,11 @@ namespace com.chwar.xrui.UIElements
             }
         }
         
-        public void UpdateSubtext(string text)
+        /// <summary>
+        /// Updates the subtitle.
+        /// </summary>
+        /// <param name="text">The new text to replace the subtitle with.</param>
+        public void UpdateSubtitle(string text)
         {
             if(_subtitle != null && _subtitle.text != text) {
                 _subtitle.text = text;

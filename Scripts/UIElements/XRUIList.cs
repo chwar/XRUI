@@ -9,20 +9,34 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI List class.
+    /// </summary>
     public class XRUIList : XRUIElement
     {
-        // UXML Attributes
+        /// <summary>
+        /// The title UXML node of the list.
+        /// </summary>
         private Label _title;
+        /// <summary>
+        /// The container UXML node of the list.
+        /// </summary>
         private ScrollView _container;
 
+        /// <summary>
+        /// The title property in the Inspector.
+        /// </summary>
         [Tooltip("Title of the list")]
         [SerializeField]
         private string titleText;
+        /// <summary>
+        /// The template to add elements to the list.
+        /// </summary>
         [Tooltip("Template used to add elements to the list")]
         public VisualTreeAsset listElementTemplate;
 
         /// <summary>
-        /// Initializes the UI Elements of the List.
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
@@ -42,6 +56,10 @@ namespace com.chwar.xrui.UIElements
         
         /*Update Methods*/
 
+        /// <summary>
+        /// Updates the title.
+        /// </summary>
+        /// <param name="text">The new text to replace the title with.</param>
         public void UpdateTitle(string text)
         {
             if (_title != null && _title.text != text)
@@ -53,11 +71,11 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Adds template element to the list
+        /// Adds template element to the list.
         /// </summary>
-        /// <param name="bSelect">Selects the added element in the list</param>
-        /// <param name="itemSelectedCallback">The callback to trigger when the element is selected</param>
-        /// <returns>The added element</returns>
+        /// <param name="bSelect">Selects the added element in the list.</param>
+        /// <param name="itemSelectedCallback">The callback to trigger when the element is selected.</param>
+        /// <returns>The added element.</returns>
         public VisualElement AddElement(bool bSelect, Action<PointerDownEvent> itemSelectedCallback = null)
         {
             if (listElementTemplate is null)
@@ -81,7 +99,7 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Deletes all items from the list
+        /// Deletes all items from the list.
         /// </summary>
         public void RemoveAllElements()
         {
@@ -89,18 +107,18 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Returns the number of items in the list
+        /// Returns the number of items in the list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The count of items in the list.</returns>
         public int GetListCount()
         {
-            return  _container.Query(null, "xrui-list-item").ToList().Count;
+            return _container.Query(null, "xrui-list-item").ToList().Count;
         }
 
         /// <summary>
-        /// Visually selects an element of the list
+        /// Visually selects an element of the list.
         /// </summary>
-        /// <param name="el"></param>
+        /// <param name="el">The element to select.</param>
         private void SelectElement(VisualElement el)
         {
             var previousSelection = _container.Q(null, "xrui-list-item--selected");

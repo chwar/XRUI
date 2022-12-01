@@ -10,11 +10,16 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// Editor class that adds XRUI entries in the Unity menu.
+    /// </summary>
     #if UNITY_EDITOR
     [InitializeOnLoad]
     public class XRUIEditor : MonoBehaviour
     {
-        // Registers an event handler when the class is initialized
+        /// <summary>
+        /// Registers an event handler when the class is initialized
+        /// </summary>
         static XRUIEditor()
         {
             // Allows Editor UI Update
@@ -111,11 +116,18 @@ namespace com.chwar.xrui
             return uiElement;
         }
 
+        /// <summary>
+        /// Gets the current <see cref="XRUIConfiguration"/> from the <see cref="XRUI"/> instance.
+        /// </summary>
+        /// <returns>The current <see cref="XRUIConfiguration"/>.</returns>
         internal static XRUIConfiguration GetXRUIConfiguration()
         {
             return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
 
+        /// <summary>
+        /// Refreshed the UI when the project is updated in the Editor.
+        /// </summary>
         private static void AdaptXRUI()
         {
             foreach (var uiDocument in FindObjectsOfType<XRUIElement>())
