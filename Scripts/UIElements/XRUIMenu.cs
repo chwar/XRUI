@@ -8,44 +8,52 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Menu class.
+    /// </summary>
     public class XRUIMenu : XRUIElement
     {
-        // UXML Attributes
-        public Button MainButton;
-        public VisualElement Menu;
-        public Button CloseButton;
-        
+        /// <summary>
+        /// The title UXML node of the menu.
+        /// </summary>
         private Label _title;
+        /// <summary>
+        /// The subtitle UXML node of the menu.
+        /// </summary>
         private Label _subtitle;
+        /// <summary>
+        /// The container UXML node of the menu.
+        /// </summary>
         private ScrollView _container;
 
+        /// <summary>
+        /// The title property in the Inspector.
+        /// </summary>
         [Tooltip("Title of the menu")]
         [SerializeField]
         private string titleText;
+        /// <summary>
+        /// The subtitle property in the Inspector.
+        /// </summary>
         [Tooltip("Subtitle of the menu")]
         [SerializeField]
         private string subtitleText;
+        /// <summary>
+        /// The template to add elements to the menu.
+        /// </summary>
         [Tooltip("Template used to add elements to the menu")]
         public VisualTreeAsset menuElementTemplate;
-        [Tooltip("Texture used for the close button")]
-        public Texture2D closeButtonTexture;
-        [Tooltip("Texture used for the main button")]
-        public Texture2D mainButtonTexture;
+
 
         /// <summary>
-        /// Initializes the UI Elements of the List.
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
             base.Init();
-            _title = UIDocument.rootVisualElement.Q<Label>("AppName");
-            _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtext");
-            _container = UIDocument.rootVisualElement.Q<ScrollView>("MainContainer");
-            Menu = UIDocument.rootVisualElement.Q("Menu");
-            MainButton = UIDocument.rootVisualElement.Q<Button>("MainButton");
-            MainButton.style.backgroundImage = mainButtonTexture;
-            CloseButton = UIDocument.rootVisualElement.Q<Button>("Close");
-            CloseButton.style.backgroundImage = closeButtonTexture;
+            _title = GetXRUIVisualElement<Label>("xrui-menu__title");
+            _subtitle = GetXRUIVisualElement<Label>("xrui-menu__subtitle");
+            _container = GetXRUIVisualElement<ScrollView>("xrui-menu__container");
         }
         
         /// <summary>
@@ -55,11 +63,15 @@ namespace com.chwar.xrui.UIElements
         {
             base.UpdateUI();
             UpdateTitle(titleText);
-            UpdateSubtext(subtitleText);
+            UpdateSubtitle(subtitleText);
         }
         
         /*Update Methods*/
 
+        /// <summary>
+        /// Updates the title.
+        /// </summary>
+        /// <param name="text">The new text to replace the title with.</param>
         public void UpdateTitle(string text)
         {
             if(_title != null && _title.text != text) {
@@ -69,7 +81,11 @@ namespace com.chwar.xrui.UIElements
             }
         }
         
-        public void UpdateSubtext(string text)
+        /// <summary>
+        /// Updates the subtitle.
+        /// </summary>
+        /// <param name="text">The new text to replace the subtitle with.</param>
+        public void UpdateSubtitle(string text)
         {
             if(_subtitle != null && _subtitle.text != text) {
                 _subtitle.text = text;
@@ -89,17 +105,17 @@ namespace com.chwar.xrui.UIElements
                 throw new MissingReferenceException($"The menu element template of {this.gameObject.name} is missing!");
             }
             VisualElement el = menuElementTemplate.Instantiate();
-            el.ElementAt(0).AddToClassList("xrui__menu__item");
+            el.ElementAt(0).AddToClassList("xrui-menu-item");
             _container.Add(el);
             return el;
         }
         
         /// <summary>
-        /// Deletes all elements from the list
+        /// Deletes all elements from the menu
         /// </summary>
         public void RemoveAllElements()
         {
-            _container.Query(null, "xrui__menu__item").ForEach(i => i.RemoveFromHierarchy());
+            _container.Query(null, "xrui-menu-item").ForEach(i => i.parent.RemoveFromHierarchy());
         }
     }
 }

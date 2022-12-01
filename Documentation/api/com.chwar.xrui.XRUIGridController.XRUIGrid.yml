@@ -1,0 +1,168 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid
+  commentId: T:com.chwar.xrui.XRUIGridController.XRUIGrid
+  id: XRUIGridController.XRUIGrid
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUIGridController.XRUIGrid.minHeight
+  - com.chwar.xrui.XRUIGridController.XRUIGrid.row
+  - com.chwar.xrui.XRUIGridController.XRUIGrid.weight
+  langs:
+  - csharp
+  - vb
+  name: XRUIGridController.XRUIGrid
+  nameWithType: XRUIGridController.XRUIGrid
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid
+  type: Struct
+  source:
+    id: XRUIGrid
+    path: ''
+    startLine: 749
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nUsed to reference rows in the Inspector.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public struct XRUIGrid
+    content.vb: >-
+      <Serializable>
+
+      Public Structure XRUIGrid
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - struct
+  modifiers.vb:
+  - Public
+  - Structure
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid.row
+  commentId: F:com.chwar.xrui.XRUIGridController.XRUIGrid.row
+  id: row
+  parent: com.chwar.xrui.XRUIGridController.XRUIGrid
+  langs:
+  - csharp
+  - vb
+  name: row
+  nameWithType: XRUIGridController.XRUIGrid.row
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid.row
+  type: Field
+  source:
+    id: row
+    path: ''
+    startLine: 755
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThe row in which <xref href=\"com.chwar.xrui.UIElements.XRUIElement\" data-throw-if-not-resolved=\"false\"></xref> are contained.\n"
+  example: []
+  syntax:
+    content: public GameObject row
+    return:
+      type: Global.GameObject
+    content.vb: Public row As GameObject
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid.weight
+  commentId: F:com.chwar.xrui.XRUIGridController.XRUIGrid.weight
+  id: weight
+  parent: com.chwar.xrui.XRUIGridController.XRUIGrid
+  langs:
+  - csharp
+  - vb
+  name: weight
+  nameWithType: XRUIGridController.XRUIGrid.weight
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid.weight
+  type: Field
+  source:
+    id: weight
+    path: ''
+    startLine: 759
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThe weight that this row has in comparison to other rows. This defines the space that this row is allowed to take.\n"
+  example: []
+  syntax:
+    content: public float weight
+    return:
+      type: System.Single
+    content.vb: Public weight As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid.minHeight
+  commentId: F:com.chwar.xrui.XRUIGridController.XRUIGrid.minHeight
+  id: minHeight
+  parent: com.chwar.xrui.XRUIGridController.XRUIGrid
+  langs:
+  - csharp
+  - vb
+  name: minHeight
+  nameWithType: XRUIGridController.XRUIGrid.minHeight
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid.minHeight
+  type: Field
+  source:
+    id: minHeight
+    path: ''
+    startLine: 763
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThe minimal height of this row in pixels. Useful when the elements inside are using absolute positioning.\n"
+  example: []
+  syntax:
+    content: public float minHeight
+    return:
+      type: System.Single
+    content.vb: Public minHeight As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: com.chwar.xrui.UIElements.XRUIElement
+  commentId: T:com.chwar.xrui.UIElements.XRUIElement
+  parent: com.chwar.xrui.UIElements
+  name: XRUIElement
+  nameWithType: XRUIElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement
+- uid: Global.GameObject
+  commentId: '!:Global.GameObject'
+  isExternal: true
+  name: GameObject
+  nameWithType: GameObject
+  fullName: GameObject
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  name: Single
+  nameWithType: Single
+  fullName: System.Single
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

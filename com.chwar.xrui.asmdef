@@ -1,7 +1,9 @@
 {
     "name": "com.chwar.xrui",
     "rootNamespace": "com.chwar.xrui",
-    "references": [],
+    "references": [
+        "Unity.XR.Interaction.Toolkit"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,

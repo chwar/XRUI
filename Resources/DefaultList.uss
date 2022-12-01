@@ -1,14 +1,15 @@
-.xrui__list.pc {
+.xrui-list.twodimensional.landscape, .xrui-list.twodimensional.portrait {
     width: 300px;
-    height: 800px;
+    flex-grow: 1;
 }
 
-.xrui__list.ar {
+.xrui-list.threedimensional {
     width: 300px;
-    height: 800px;
+    height: 500px;
 }
 
-.xrui__list.vr {
-    width: 300px;
-    height: 800px;
+.xrui-list__container {
+    width: 100%;
+    height: auto;
+    max-height: 85%;
 }

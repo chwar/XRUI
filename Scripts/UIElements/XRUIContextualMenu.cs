@@ -4,15 +4,20 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
-using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIContextualMenu : XRUIFloatingElement
+    /// <summary>
+    /// XRUI Contextual Menu class.
+    /// </summary>
+    public class XRUIContextualMenu : XRUIElement
     {
+        /// <summary>
+        /// The  arrow UXML node of the contextual menu.
+        /// </summary>
+        private VisualElement _contextualArrow;
         /// <summary>
         /// Template used to generate entries.
         /// </summary>
@@ -20,7 +25,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// The coordinates of the clicked element that triggered this contextual menu.
         /// </summary>
-        public Vector2 parentCoordinates;
+        public Vector3 parentCoordinates;
         /// <summary>
         /// Adds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.
         /// </summary>
@@ -33,27 +38,18 @@ namespace com.chwar.xrui.UIElements
         /// Display an arrow pointing at the parent coordinates (clicked element).
         /// </summary>
         public bool showArrow;
-        /// <summary>
-        /// UXML representation of the contextual menu.
-        /// </summary>
-        private VisualElement _menu;
-        /// <summary>
-        /// UXML representation of the contextual menu's arrow.
-        /// </summary>
-        private VisualElement _contextualArrow;
         
         /// <summary>
-        /// Initializes the UI Elements of the List.
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
             base.Init();
-            _menu = UIDocument.rootVisualElement.Q(null, "xrui__contextual-menu");
-            _contextualArrow = _menu.Q(null, "xrui__contextual-menu__arrow");
+            _contextualArrow = RootElement.Q(null, "xrui-contextual-menu__arrow");
             
             // Set handler on click to dispose of the contextual menu
-            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
-            _menu.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
+            RootElement.parent.RegisterCallback<PointerDownEvent>(_ => DisposeMenu());
+            RootElement.RegisterCallback<GeometryChangedEvent>(PositionRelativeToParent);
         }
 
         /// <summary>
@@ -62,23 +58,23 @@ namespace com.chwar.xrui.UIElements
         /// <param name="evt"></param>
         internal void PositionRelativeToParent(GeometryChangedEvent evt)
         {
-            _menu.style.position = new StyleEnum<Position>(Position.Absolute);
-            _menu.style.top = parentCoordinates.y;
-            // If there's not enough space to display the contextual menu on the right of the target, display on the left instead
-            if (_menu.parent.worldBound.width - parentCoordinates.x < _menu.resolvedStyle.width)
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
-                _menu.style.left = StyleKeyword.Auto;
-                _menu.style.right = _menu.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
-                _contextualArrow.style.left =  StyleKeyword.Auto;
-                _contextualArrow.style.right = -5;
-            } 
-            else
-                _menu.style.left = parentCoordinates.x + positionOffsetRight;
-
-            if (!showArrow)
-            {
-                _contextualArrow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                RootElement.style.position = new StyleEnum<Position>(Position.Absolute);
+                RootElement.style.top = parentCoordinates.y;
+                // If there's not enough space to display the contextual menu on the right of the target, display on the left instead
+                if (RootElement.parent.worldBound.width - parentCoordinates.x < RootElement.resolvedStyle.width)
+                {
+                    RootElement.style.left = StyleKeyword.Auto;
+                    RootElement.style.right = RootElement.parent.worldBound.width - parentCoordinates.x + positionOffsetLeft;
+                    _contextualArrow.style.left =  StyleKeyword.Auto;
+                    _contextualArrow.style.right = -5;
+                } 
+                else
+                    RootElement.style.left = parentCoordinates.x + positionOffsetRight;
             }
+
+            _contextualArrow.style.display = new StyleEnum<DisplayStyle>(showArrow ? DisplayStyle.Flex: DisplayStyle.None);
         }
 
         /// <summary>
@@ -107,8 +103,8 @@ namespace com.chwar.xrui.UIElements
             var el = menuElementTemplate.Instantiate();
             el.style.flexShrink = 0;
             el.style.flexGrow = 1;
-            el.ElementAt(0).AddToClassList("xrui__contextual-menu__item");
-            _menu.Q("MainContainer").Add(el);
+            el.ElementAt(0).AddToClassList("xrui-contextual-menu__item");
+            RootElement.Q("MainContainer").Add(el);
             
             // Destroy the menu when the element is clicked
             el.RegisterCallback<PointerDownEvent>(_ => Destroy(this.gameObject));

@@ -10,50 +10,81 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIAlert : XRUIFloatingElement
+    /// <summary>
+    /// XRUI Alert class.
+    /// </summary>
+    public class XRUIAlert : XRUIElement
     {
+        /// <summary>
+        /// The title UXML node of the alert.
+        /// </summary>
         public Label Title { get; private set; }
+        /// <summary>
+        /// The content (body text) UXML node of the alert.
+        /// </summary>
         public Label Content { get; private set; }
 
-        public Action ClickCallback;
-
-        internal VisualElement Alert;
+        /// <summary>
+        /// The optional callback to trigger when the alert is clicked.
+        /// </summary>
+        public Action clickCallback;
         
         /// <summary>
-        /// Initializes the UI Elements of the Alert.
+        /// The optional countdown after which the alert is destroyed.
+        /// </summary>
+        public int countdown = 0;
+        
+        /// <summary>
+        /// Initializes the UI Element.
         /// </summary>
         protected internal override void Init()
         {
             base.Init();
-            Title = UIDocument.rootVisualElement.Q<Label>("AlertTitle");
-            Content = UIDocument.rootVisualElement.Q<Label>("AlertContent");
+            Title = GetXRUIVisualElement<Label>("xrui-alert__title");
+            Content = GetXRUIVisualElement<Label>("xrui-alert__content");
             
             // Set handler on click to dispose of the alert
-            UIDocument.rootVisualElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert());
-            Alert = UIDocument.rootVisualElement.Q(null, "xrui__alert");
+            RootElement.RegisterCallback<PointerDownEvent>(_ => DisposeAlert(true));
             StartCoroutine(Animate());
         }
 
-        internal void DisposeAlert()
+        /// <summary>
+        /// Destroys the Alert with optional requirements.
+        /// </summary>
+        /// <param name="requirePointerOverUI">If true, will only destroy the alert when the pointer is on it.</param>
+        /// <param name="destroyImmediate">If false, waits for the <see cref="countdown"> before destroying.</see></param>
+        public void DisposeAlert(bool requirePointerOverUI = false, bool destroyImmediate = true)
         {
-            if (PointerOverUI)
+            if ((requirePointerOverUI && PointerOverUI) || !requirePointerOverUI)
             {
-                StartCoroutine(Animate());
-                StartCoroutine(Dispose());
-                ClickCallback?.Invoke();
+                StartCoroutine(Animate(destroyImmediate));
+                StartCoroutine(Dispose(destroyImmediate));
+                clickCallback?.Invoke();
             }
         }
 
-        private IEnumerator Dispose()
+        /// <summary>
+        /// Destroys the Alert Game Object.
+        /// </summary>
+        /// <param name="destroyImmediate">If false, waits for the <see cref="countdown"/> before destroying.</param>
+        /// <returns></returns>
+        private IEnumerator Dispose(bool destroyImmediate = true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(destroyImmediate ? 1 : countdown == 0 ? 1 : countdown);
             Destroy(this.gameObject);
         }
         
-        private IEnumerator Animate()
+        /// <summary>
+        /// Animates the alert by triggering an USS class.
+        /// </summary>
+        /// <param name="animateImmediate">If false, waits for the <see cref="countdown"/> before animating.</param>
+        /// <returns></returns>
+        private IEnumerator Animate(bool animateImmediate = true)
         {
-            yield return new WaitForFixedUpdate();
-            Alert.ToggleInClassList("animate");
+            yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);
+            RootElement.ToggleInClassList("animate");
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+                StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
         }
     }
 }

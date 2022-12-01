@@ -29,7 +29,7 @@ namespace com.chwar.xrui.Tests
             _go = new GameObject() {name = "XRUI"};
             var xrui = _go.AddComponent<XRUI>();
             _go.AddComponent<Camera>();
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
 
             InspectorModal m = new InspectorModal
@@ -38,7 +38,7 @@ namespace com.chwar.xrui.Tests
                 modalFlowList = new List<VisualTreeAsset>(){Resources.Load<VisualTreeAsset>("TestUIElement")}
             };
             XRUI.Instance.modals.Add(m);
-            XRUI.Instance.CreateModal("TestModal", null);
+            XRUI.Instance.ShowModal("TestModal", null);
             _modal = Object.FindObjectOfType<XRUIModal>();
             _ui = _modal.GetComponent<UIDocument>();
             _clicked = false;
@@ -66,7 +66,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestAddModalWithNonExistingTemplate()
         {
-            Assert.Throws<ArgumentException>(() => XRUI.Instance.CreateModal("NonExistingModal", null));
+            Assert.Throws<ArgumentException>(() => XRUI.Instance.ShowModal("NonExistingModal", null));
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestUpdateModalFlow()
         {
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 
             });
@@ -111,11 +111,11 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestUpdateModalFlowTwice()
         {
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 _modal.ModalTitle.text = "Page One";
             });
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 _modal.ModalTitle.text = "Page Two";
             });
@@ -124,7 +124,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestUpdateModalFlowWithNonExistingContent()
         {
-            Assert.Throws<ArgumentException>(() => _modal.UpdateModalFlow("NonExistingPage", "MainContainer", null));
+            Assert.Throws<ArgumentException>(() => _modal.UpdateModalFlow("NonExistingPage", "xrui-modal__container", null));
         }
         
         [Test]
@@ -136,7 +136,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void ModalTestSetRequiredFields()
         {
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 var field = _ui.rootVisualElement.Q<TextField>();
                 field.value = "";
@@ -148,7 +148,7 @@ namespace com.chwar.xrui.Tests
         [UnityTest]
         public IEnumerator ModalTestSetRequiredFieldsWithUserCheck()
         {
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 _modal.ModalTitle.text = "Change the value of the required field.";
                 var field = _ui.rootVisualElement.Q<TextField>();
@@ -164,7 +164,7 @@ namespace com.chwar.xrui.Tests
         public void ModalTestSetFieldError()
         {
             TextField field = null;
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 field = _ui.rootVisualElement.Q<TextField>();
                 _modal.SetFieldError(field);
@@ -176,7 +176,7 @@ namespace com.chwar.xrui.Tests
         public IEnumerator ModalTestClickOnErrorField()
         {
             TextField field = null;
-            _modal.UpdateModalFlow("TestUIElement", "MainContainer", () =>
+            _modal.UpdateModalFlow("TestUIElement", "xrui-modal__container", () =>
             {
                 _modal.ModalTitle.text = "Change the value on the field marked as error.";
                 field = _ui.rootVisualElement.Q<TextField>();

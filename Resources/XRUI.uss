@@ -17,54 +17,58 @@
     --xrui-dark: rgb(33, 37, 41);
 }
 
-.xrui .xrui__background--primary {
+.xrui .xrui-background--primary {
     background-color: var(--xrui-primary);
 }
 
-.xrui .xrui__background--secondary {
+.xrui .xrui-background--secondary {
     background-color: var(--xrui-secondary);
 }
 
-.xrui .xrui__background--warning {
+.xrui .xrui-background--warning {
     background-color: var(--xrui-warning);
 }
 
-.xrui .xrui__background--success {
+.xrui .xrui-background--success {
     background-color: var(--xrui-success);
 }
 
-.xrui .xrui__background--danger {
+.xrui .xrui-background--danger {
     background-color: var(--xrui-danger);
 }
 
-.xrui .xrui__background--info {
+.xrui .xrui-background--info {
     background-color: var(--xrui-info);
 }
 
-.xrui .xrui__background--primary:hover {
+.xrui .xrui-background--light-grey {
+    background-color: var(--xrui-light-grey);
+}
+
+.xrui .xrui-background--primary:hover, .xrui-alert.primary:hover {
     background-color: var(--xrui-primary-hover);
 }
 
-.xrui .xrui__background--secondary:hover {
+.xrui .xrui-background--secondary:hover, .xrui-alert.secondary:hover {
     background-color: var(--xrui-secondary-hover);
 }
 
-.xrui .xrui__background--warning:hover {
+.xrui .xrui-background--warning:hover, .xrui-alert.warning:hover {
     background-color: var(--xrui-warning-hover);
 }
 
-.xrui .xrui__background--success:hover {
+.xrui .xrui-background--success:hover, .xrui-alert.success:hover {
     background-color: var(--xrui-success-hover);
 }
 
-.xrui .xrui__background--danger:hover {
+.xrui .xrui-background--danger:hover, .xrui-alert.danger:hover {
     background-color: var(--xrui-danger-hover);
 }
 
-.xrui .xrui__background--info:hover {
+.xrui .xrui-background--info:hover, .xrui-alert.info:hover {
     background-color: var(--xrui-info-hover);
 }
 
-.xrui__background--dark {
+.xrui-background--dark {
     background-color: rgba(0, 0, 0, 0.5);
 }

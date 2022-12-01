@@ -10,11 +10,16 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui
 {
+    /// <summary>
+    /// Editor class that adds XRUI entries in the Unity menu.
+    /// </summary>
     #if UNITY_EDITOR
     [InitializeOnLoad]
     public class XRUIEditor : MonoBehaviour
     {
-        // Registers an event handler when the class is initialized
+        /// <summary>
+        /// Registers an event handler when the class is initialized
+        /// </summary>
         static XRUIEditor()
         {
             // Allows Editor UI Update
@@ -27,9 +32,10 @@ namespace com.chwar.xrui
         [MenuItem("XRUI/Add XRUI Controller", false, 1)]
         public static void AddController()
         {
+            if (FindObjectOfType<XRUI>() is not null) return;
             GameObject xruiGo = new GameObject() {name = "XRUI"};
             var xrui = xruiGo.AddComponent<XRUI>();
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
         
         /// <summary>
@@ -94,48 +100,13 @@ namespace com.chwar.xrui
             GameObject element = AddXRUIElement("XRUI Element");
             element.AddComponent<XRUIElement>();
         }
-        
-        /*[MenuItem("XRUI/Switch Reality.../PC")]
-        internal static void SwitchToPC()
-        {
-            // Switch to Windows/Linux/Mac standalone build.
-            if(Application.platform == RuntimePlatform.WindowsEditor)
-                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
-            else if(Application.platform == RuntimePlatform.LinuxEditor)
-                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneLinux64);
-            XRUI.SetCurrentReality(XRUI.RealityType.PC);
-        }
-        
-        [MenuItem("XRUI/Switch Reality.../AR (Android)")]
-        internal static void SwitchToARAndroid()
-        {
-            // Switch to Android build.
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
-            XRUI.SetCurrentReality(XRUI.RealityType.AR);
-        }
-        
-        [MenuItem("XRUI/Switch Reality.../AR (iOS)")]
-        internal static void SwitchToARiOS()
-        {
-            // Switch to iOS build.
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS); 
-            XRUI.SetCurrentReality(XRUI.RealityType.AR);
-        }
-        
-        [MenuItem("XRUI/Switch Reality.../VR")]
-        internal static void SwitchToVR()
-        {
-            // Switch to Windows VR build.
-            SwitchToPC();
-            XRUI.SetCurrentReality(XRUI.RealityType.VR);
-        }*/
-        
+
         /// <summary>
         /// Adds a XRUI Element.
         /// <param name="name">The name of the created Game Object</param>
         /// <param name="template">The UI template to use</param>
         /// </summary>
-        private static GameObject AddXRUIElement(string name, VisualTreeAsset template = null)
+        internal static GameObject AddXRUIElement(string name, VisualTreeAsset template = null)
         {
             // TODO Check if root XRUI GO exists and add the element there
             GameObject uiElement = new GameObject {name = name};
@@ -145,18 +116,22 @@ namespace com.chwar.xrui
             return uiElement;
         }
 
-        private static XRUIConfiguration GetXRUIConfiguration()
+        /// <summary>
+        /// Gets the current <see cref="XRUIConfiguration"/> from the <see cref="XRUI"/> instance.
+        /// </summary>
+        /// <returns>The current <see cref="XRUIConfiguration"/>.</returns>
+        internal static XRUIConfiguration GetXRUIConfiguration()
         {
-            return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            return FindObjectOfType<XRUI>() ? FindObjectOfType<XRUI>().xruiConfigurationAsset : Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
 
+        /// <summary>
+        /// Refreshed the UI when the project is updated in the Editor.
+        /// </summary>
         private static void AdaptXRUI()
         {
             foreach (var uiDocument in FindObjectsOfType<XRUIElement>())
             {
-                // Update USS
-                //XRUI.UpdateDocumentUI(uiDocument.GetComponent<UIDocument>());
-                // Update Editor values
                 uiDocument.UpdateUI();
             }
         }

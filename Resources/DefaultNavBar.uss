@@ -1,17 +1,13 @@
-.xrui__navbar {
+.xrui-navbar {
     background-color: var(--xrui-dark);
 }
 
-.xrui__navbar.play-mode {
-    background-color: var(--xrui-primary);
-}
-
-.xrui__navbar.pc .xrui__navbar.ar{
+.xrui-navbar.twodimensional.landscape .xrui-navbar.twodimensional.portrait{
     width: 100%;
     height: 50px;
 }
 
-.xrui__navbar.vr {
-    width: 500px;
+.xrui-navbar.threedimensional {
+    width: 300px;
     height: 50px;
 }

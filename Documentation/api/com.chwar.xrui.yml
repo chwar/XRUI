@@ -1,0 +1,73 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  id: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUI
+  - com.chwar.xrui.XRUI.AlertType
+  - com.chwar.xrui.XRUI.XRUIFormat
+  - com.chwar.xrui.XRUIConfiguration
+  - com.chwar.xrui.XRUIGridController
+  - com.chwar.xrui.XRUIGridController.XRUIGrid
+  - com.chwar.xrui.XRUIPanel
+  - com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+  type: Namespace
+  assemblies:
+  - cs.temp.dll
+references:
+- uid: com.chwar.xrui.XRUI
+  commentId: T:com.chwar.xrui.XRUI
+  parent: com.chwar.xrui
+  name: XRUI
+  nameWithType: XRUI
+  fullName: com.chwar.xrui.XRUI
+- uid: com.chwar.xrui.XRUI.XRUIFormat
+  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
+  parent: com.chwar.xrui
+  name: XRUI.XRUIFormat
+  nameWithType: XRUI.XRUIFormat
+  fullName: com.chwar.xrui.XRUI.XRUIFormat
+- uid: com.chwar.xrui.XRUI.AlertType
+  commentId: T:com.chwar.xrui.XRUI.AlertType
+  parent: com.chwar.xrui
+  name: XRUI.AlertType
+  nameWithType: XRUI.AlertType
+  fullName: com.chwar.xrui.XRUI.AlertType
+- uid: com.chwar.xrui.XRUIConfiguration
+  commentId: T:com.chwar.xrui.XRUIConfiguration
+  name: XRUIConfiguration
+  nameWithType: XRUIConfiguration
+  fullName: com.chwar.xrui.XRUIConfiguration
+- uid: com.chwar.xrui.XRUIGridController
+  commentId: T:com.chwar.xrui.XRUIGridController
+  parent: com.chwar.xrui
+  name: XRUIGridController
+  nameWithType: XRUIGridController
+  fullName: com.chwar.xrui.XRUIGridController
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid
+  commentId: T:com.chwar.xrui.XRUIGridController.XRUIGrid
+  name: XRUIGridController.XRUIGrid
+  nameWithType: XRUIGridController.XRUIGrid
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid
+- uid: com.chwar.xrui.XRUIPanel
+  commentId: T:com.chwar.xrui.XRUIPanel
+  name: XRUIPanel
+  nameWithType: XRUIPanel
+  fullName: com.chwar.xrui.XRUIPanel
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction
+  commentId: T:com.chwar.xrui.XRUIWorldSpaceInteraction
+  name: XRUIWorldSpaceInteraction
+  nameWithType: XRUIWorldSpaceInteraction
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui

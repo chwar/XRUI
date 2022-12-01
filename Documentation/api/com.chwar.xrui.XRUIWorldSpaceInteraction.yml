@@ -1,0 +1,459 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction
+  commentId: T:com.chwar.xrui.XRUIWorldSpaceInteraction
+  id: XRUIWorldSpaceInteraction
+  parent: com.chwar.xrui
+  children:
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel(BaseEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect(BaseEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag(PointerEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove(AxisEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown(PointerEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove(PointerEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp(PointerEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll(PointerEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect(BaseEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit(BaseEventData)
+  - com.chwar.xrui.XRUIWorldSpaceInteraction.targetPanel
+  langs:
+  - csharp
+  - vb
+  name: XRUIWorldSpaceInteraction
+  nameWithType: XRUIWorldSpaceInteraction
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction
+  type: Class
+  source:
+    id: XRUIWorldSpaceInteraction
+    path: ''
+    startLine: 912
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThis class interfaces with Unity <xref href=\"System.EventHandler\" data-throw-if-not-resolved=\"false\"></xref> and makes XRUI react to world space interactions (e.g., MR/VR pointers). \n"
+  example: []
+  syntax:
+    content: 'public class XRUIWorldSpaceInteraction : MonoBehaviour'
+    content.vb: >-
+      Public Class XRUIWorldSpaceInteraction
+          Inherits MonoBehaviour
+  inheritance:
+  - System.Object
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.targetPanel
+  commentId: F:com.chwar.xrui.XRUIWorldSpaceInteraction.targetPanel
+  id: targetPanel
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: targetPanel
+  nameWithType: XRUIWorldSpaceInteraction.targetPanel
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.targetPanel
+  type: Field
+  source:
+    id: targetPanel
+    path: ''
+    startLine: 918
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThe <see cref=\"!:PanelSettings\"></see> of the UI that is pointed at.\n"
+  example: []
+  syntax:
+    content: public PanelSettings targetPanel
+    return:
+      type: Global.PanelSettings
+    content.vb: Public targetPanel As PanelSettings
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove(PointerEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove(PointerEventData)
+  id: OnPointerMove(PointerEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnPointerMove(PointerEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerMove(PointerEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove(PointerEventData)
+  type: Method
+  source:
+    id: OnPointerMove
+    path: ''
+    startLine: 998
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnPointerMove(PointerEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.PointerEventData
+    content.vb: Public Sub OnPointerMove(eventData As PointerEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown(PointerEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown(PointerEventData)
+  id: OnPointerDown(PointerEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnPointerDown(PointerEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerDown(PointerEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown(PointerEventData)
+  type: Method
+  source:
+    id: OnPointerDown
+    path: ''
+    startLine: 1003
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnPointerDown(PointerEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.PointerEventData
+    content.vb: Public Sub OnPointerDown(eventData As PointerEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp(PointerEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp(PointerEventData)
+  id: OnPointerUp(PointerEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnPointerUp(PointerEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerUp(PointerEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp(PointerEventData)
+  type: Method
+  source:
+    id: OnPointerUp
+    path: ''
+    startLine: 1008
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnPointerUp(PointerEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.PointerEventData
+    content.vb: Public Sub OnPointerUp(eventData As PointerEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit(BaseEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit(BaseEventData)
+  id: OnSubmit(BaseEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnSubmit(BaseEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnSubmit(BaseEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit(BaseEventData)
+  type: Method
+  source:
+    id: OnSubmit
+    path: ''
+    startLine: 1013
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnSubmit(BaseEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.BaseEventData
+    content.vb: Public Sub OnSubmit(eventData As BaseEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel(BaseEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel(BaseEventData)
+  id: OnCancel(BaseEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnCancel(BaseEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnCancel(BaseEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel(BaseEventData)
+  type: Method
+  source:
+    id: OnCancel
+    path: ''
+    startLine: 1018
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnCancel(BaseEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.BaseEventData
+    content.vb: Public Sub OnCancel(eventData As BaseEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove(AxisEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove(AxisEventData)
+  id: OnMove(AxisEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnMove(AxisEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnMove(AxisEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove(AxisEventData)
+  type: Method
+  source:
+    id: OnMove
+    path: ''
+    startLine: 1023
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnMove(AxisEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.AxisEventData
+    content.vb: Public Sub OnMove(eventData As AxisEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll(PointerEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll(PointerEventData)
+  id: OnScroll(PointerEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnScroll(PointerEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnScroll(PointerEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll(PointerEventData)
+  type: Method
+  source:
+    id: OnScroll
+    path: ''
+    startLine: 1028
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnScroll(PointerEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.PointerEventData
+    content.vb: Public Sub OnScroll(eventData As PointerEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect(BaseEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect(BaseEventData)
+  id: OnSelect(BaseEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnSelect(BaseEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnSelect(BaseEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect(BaseEventData)
+  type: Method
+  source:
+    id: OnSelect
+    path: ''
+    startLine: 1033
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnSelect(BaseEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.BaseEventData
+    content.vb: Public Sub OnSelect(eventData As BaseEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect(BaseEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect(BaseEventData)
+  id: OnDeselect(BaseEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnDeselect(BaseEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnDeselect(BaseEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect(BaseEventData)
+  type: Method
+  source:
+    id: OnDeselect
+    path: ''
+    startLine: 1038
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnDeselect(BaseEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.BaseEventData
+    content.vb: Public Sub OnDeselect(eventData As BaseEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag(PointerEventData)
+  commentId: M:com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag(PointerEventData)
+  id: OnDrag(PointerEventData)
+  parent: com.chwar.xrui.XRUIWorldSpaceInteraction
+  langs:
+  - csharp
+  - vb
+  name: OnDrag(PointerEventData)
+  nameWithType: XRUIWorldSpaceInteraction.OnDrag(PointerEventData)
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag(PointerEventData)
+  type: Method
+  source:
+    id: OnDrag
+    path: ''
+    startLine: 1043
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  syntax:
+    content: public void OnDrag(PointerEventData eventData)
+    parameters:
+    - id: eventData
+      type: Global.PointerEventData
+    content.vb: Public Sub OnDrag(eventData As PointerEventData)
+  overload: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  isExternal: true
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Global.PanelSettings
+  isExternal: true
+  name: PanelSettings
+  nameWithType: PanelSettings
+  fullName: PanelSettings
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove
+  name: OnPointerMove
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerMove
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerMove
+- uid: Global.PointerEventData
+  isExternal: true
+  name: PointerEventData
+  nameWithType: PointerEventData
+  fullName: PointerEventData
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown
+  name: OnPointerDown
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerDown
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerDown
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp
+  name: OnPointerUp
+  nameWithType: XRUIWorldSpaceInteraction.OnPointerUp
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnPointerUp
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit
+  name: OnSubmit
+  nameWithType: XRUIWorldSpaceInteraction.OnSubmit
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSubmit
+- uid: Global.BaseEventData
+  isExternal: true
+  name: BaseEventData
+  nameWithType: BaseEventData
+  fullName: BaseEventData
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel
+  name: OnCancel
+  nameWithType: XRUIWorldSpaceInteraction.OnCancel
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnCancel
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove
+  name: OnMove
+  nameWithType: XRUIWorldSpaceInteraction.OnMove
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnMove
+- uid: Global.AxisEventData
+  commentId: '!:Global.AxisEventData'
+  isExternal: true
+  name: AxisEventData
+  nameWithType: AxisEventData
+  fullName: AxisEventData
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll
+  name: OnScroll
+  nameWithType: XRUIWorldSpaceInteraction.OnScroll
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnScroll
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect
+  name: OnSelect
+  nameWithType: XRUIWorldSpaceInteraction.OnSelect
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnSelect
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect
+  name: OnDeselect
+  nameWithType: XRUIWorldSpaceInteraction.OnDeselect
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDeselect
+- uid: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag*
+  commentId: Overload:com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag
+  name: OnDrag
+  nameWithType: XRUIWorldSpaceInteraction.OnDrag
+  fullName: com.chwar.xrui.XRUIWorldSpaceInteraction.OnDrag

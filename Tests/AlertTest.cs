@@ -23,9 +23,9 @@ namespace com.chwar.xrui.Tests
         {
             _go = new GameObject() {name = "XRUI"};
             var xrui = _go.AddComponent<XRUI>();
-            _go.AddComponent<Camera>();
+            _go.AddComponent<Camera>().tag = "MainCamera";
             _clicked = false;
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
 
@@ -33,6 +33,7 @@ namespace com.chwar.xrui.Tests
         public void Cleanup()
         {
             GameObject.DestroyImmediate(_go);
+            _clicked = false;
             var alert = GameObject.FindObjectOfType<XRUIAlert>();
             // Already deleted when clicked upon
             if(alert is not null)
@@ -45,7 +46,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("primary"));
+            Assert.True(alert.RootElement.ClassListContains("primary"));
         }
         
         [Test]
@@ -54,7 +55,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("warning"));
+            Assert.True(alert.RootElement.ClassListContains("warning"));
         }
         
         [Test]
@@ -63,7 +64,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("success"));
+            Assert.True(alert.RootElement.ClassListContains("success"));
         }
         
         [Test]
@@ -72,7 +73,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("info"));
+            Assert.True(alert.RootElement.ClassListContains("info"));
         }
         
         [Test]
@@ -81,7 +82,7 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
-            Assert.True(alert.Alert.ClassListContains("danger"));
+            Assert.True(alert.RootElement.ClassListContains("danger"));
         }
 
         [Test]
@@ -94,11 +95,9 @@ namespace com.chwar.xrui.Tests
         }
 
         [UnityTest]
-        public IEnumerator AlertTestDestroyAlert()
+        public IEnumerator AlertTestWithCallback()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!");
-            var alert = Object.FindObjectOfType<XRUIAlert>();
-            alert.Alert.RegisterCallback<PointerDownEvent>(AlertClick);
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!", "Click to trigger callback", ()=> AlertClick());
             yield return new WaitUntil(() => _clicked);
             // Wait for animation
             yield return new WaitForSeconds(1.5f);
@@ -106,12 +105,19 @@ namespace com.chwar.xrui.Tests
         }
 
         [UnityTest]
-        public IEnumerator AlertTestWithCallback()
+        public IEnumerator AlertTestWithCountdown()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!", "Click to trigger callback", ()=> AlertClick());
-            yield return new WaitUntil(() => _clicked);
-            // Wait for animation
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, null, "This will disappear in one second", 1);
             yield return new WaitForSeconds(1.5f);
+            Assert.Null(GameObject.Find("PrimaryAlert"));
+        }
+        
+        [UnityTest]
+        public IEnumerator WorldAlertTestWithCountdown()
+        {
+            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, null, "This will disappear in one second", 1);
+            yield return new WaitForSeconds(2f);
             Assert.Null(GameObject.Find("PrimaryAlert"));
         }
         

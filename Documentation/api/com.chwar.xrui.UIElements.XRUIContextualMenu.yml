@@ -1,0 +1,876 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu
+  commentId: T:com.chwar.xrui.UIElements.XRUIContextualMenu
+  id: XRUIContextualMenu
+  parent: com.chwar.xrui.UIElements
+  children:
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.Init
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.menuElementTemplate
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.parentCoordinates
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetLeft
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetRight
+  - com.chwar.xrui.UIElements.XRUIContextualMenu.showArrow
+  langs:
+  - csharp
+  - vb
+  name: XRUIContextualMenu
+  nameWithType: XRUIContextualMenu
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu
+  type: Class
+  source:
+    id: XRUIContextualMenu
+    path: ''
+    startLine: 1398
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Contextual Menu class.\n"
+  example: []
+  syntax:
+    content: 'public class XRUIContextualMenu : XRUIElement'
+    content.vb: >-
+      Public Class XRUIContextualMenu
+          Inherits XRUIElement
+  inheritance:
+  - System.Object
+  - com.chwar.xrui.UIElements.XRUIElement
+  inheritedMembers:
+  - com.chwar.xrui.UIElements.XRUIElement.PointerOverUI
+  - com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+  - com.chwar.xrui.UIElements.XRUIElement.RootElement
+  - com.chwar.xrui.UIElements.XRUIElement.Awake
+  - com.chwar.xrui.UIElements.XRUIElement.OnEnable
+  - com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  - com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+  - com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
+  - com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
+  - com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+  - com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
+  - com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+  - com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  - com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+  - com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  - com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.menuElementTemplate
+  commentId: F:com.chwar.xrui.UIElements.XRUIContextualMenu.menuElementTemplate
+  id: menuElementTemplate
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: menuElementTemplate
+  nameWithType: XRUIContextualMenu.menuElementTemplate
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.menuElementTemplate
+  type: Field
+  source:
+    id: menuElementTemplate
+    path: ''
+    startLine: 1407
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nTemplate used to generate entries.\n"
+  example: []
+  syntax:
+    content: public VisualTreeAsset menuElementTemplate
+    return:
+      type: Global.VisualTreeAsset
+    content.vb: Public menuElementTemplate As VisualTreeAsset
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.parentCoordinates
+  commentId: F:com.chwar.xrui.UIElements.XRUIContextualMenu.parentCoordinates
+  id: parentCoordinates
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: parentCoordinates
+  nameWithType: XRUIContextualMenu.parentCoordinates
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.parentCoordinates
+  type: Field
+  source:
+    id: parentCoordinates
+    path: ''
+    startLine: 1411
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nThe coordinates of the clicked element that triggered this contextual menu.\n"
+  example: []
+  syntax:
+    content: public Vector3 parentCoordinates
+    return:
+      type: Global.Vector3
+    content.vb: Public parentCoordinates As Vector3
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetLeft
+  commentId: F:com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetLeft
+  id: positionOffsetLeft
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: positionOffsetLeft
+  nameWithType: XRUIContextualMenu.positionOffsetLeft
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetLeft
+  type: Field
+  source:
+    id: positionOffsetLeft
+    path: ''
+    startLine: 1415
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nAdds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.\n"
+  example: []
+  syntax:
+    content: public float positionOffsetLeft
+    return:
+      type: System.Single
+    content.vb: Public positionOffsetLeft As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetRight
+  commentId: F:com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetRight
+  id: positionOffsetRight
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: positionOffsetRight
+  nameWithType: XRUIContextualMenu.positionOffsetRight
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.positionOffsetRight
+  type: Field
+  source:
+    id: positionOffsetRight
+    path: ''
+    startLine: 1419
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nAdds an offset in pixels used when the contextual menu is positioned on the right of the parent coordinates.\n"
+  example: []
+  syntax:
+    content: public float positionOffsetRight
+    return:
+      type: System.Single
+    content.vb: Public positionOffsetRight As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.showArrow
+  commentId: F:com.chwar.xrui.UIElements.XRUIContextualMenu.showArrow
+  id: showArrow
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: showArrow
+  nameWithType: XRUIContextualMenu.showArrow
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.showArrow
+  type: Field
+  source:
+    id: showArrow
+    path: ''
+    startLine: 1423
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nDisplay an arrow pointing at the parent coordinates (clicked element).\n"
+  example: []
+  syntax:
+    content: public bool showArrow
+    return:
+      type: System.Boolean
+    content.vb: Public showArrow As Boolean
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.Init
+  commentId: M:com.chwar.xrui.UIElements.XRUIContextualMenu.Init
+  id: Init
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: Init()
+  nameWithType: XRUIContextualMenu.Init()
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.Init()
+  type: Method
+  source:
+    id: Init
+    path: ''
+    startLine: 1428
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nInitializes the UI Element.\n"
+  example: []
+  syntax:
+    content: protected override void Init()
+    content.vb: Protected Overrides Sub Init
+  overridden: com.chwar.xrui.UIElements.XRUIElement.Init
+  overload: com.chwar.xrui.UIElements.XRUIContextualMenu.Init*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement
+  commentId: M:com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement
+  id: AddMenuElement
+  parent: com.chwar.xrui.UIElements.XRUIContextualMenu
+  langs:
+  - csharp
+  - vb
+  name: AddMenuElement()
+  nameWithType: XRUIContextualMenu.AddMenuElement()
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement()
+  type: Method
+  source:
+    id: AddMenuElement
+    path: ''
+    startLine: 1478
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nAdds an element to the contextual menu using the provided menuElementTemplate.\n"
+  example: []
+  syntax:
+    content: public VisualElement AddMenuElement()
+    return:
+      type: Global.VisualElement
+      description: The created element.
+    content.vb: Public Function AddMenuElement As VisualElement
+  overload: com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: com.chwar.xrui.UIElements.XRUIElement
+  commentId: T:com.chwar.xrui.UIElements.XRUIElement
+  parent: com.chwar.xrui.UIElements
+  name: XRUIElement
+  nameWithType: XRUIElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement
+- uid: com.chwar.xrui.UIElements.XRUIElement.PointerOverUI
+  commentId: P:com.chwar.xrui.UIElements.XRUIElement.PointerOverUI
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: PointerOverUI
+  nameWithType: XRUIElement.PointerOverUI
+  fullName: com.chwar.xrui.UIElements.XRUIElement.PointerOverUI
+- uid: com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+  commentId: F:com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: worldUIParameters
+  nameWithType: XRUIElement.worldUIParameters
+  fullName: com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+- uid: com.chwar.xrui.UIElements.XRUIElement.RootElement
+  commentId: F:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: RootElement
+  nameWithType: XRUIElement.RootElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement.RootElement
+- uid: com.chwar.xrui.UIElements.XRUIElement.Awake
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.Awake
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: Awake()
+  nameWithType: XRUIElement.Awake()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.Awake()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Awake
+    name: Awake
+    nameWithType: XRUIElement.Awake
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Awake
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Awake
+    name: Awake
+    nameWithType: XRUIElement.Awake
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Awake
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnEnable
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnEnable
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: OnEnable()
+  nameWithType: XRUIElement.OnEnable()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnEnable()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnEnable
+    name: OnEnable
+    nameWithType: XRUIElement.OnEnable
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnEnable
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnEnable
+    name: OnEnable
+    nameWithType: XRUIElement.OnEnable
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnEnable
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: OnDisable()
+  nameWithType: XRUIElement.OnDisable()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnDisable()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+    name: OnDisable
+    nameWithType: XRUIElement.OnDisable
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+    name: OnDisable
+    nameWithType: XRUIElement.OnDisable
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: Show(Boolean)
+  nameWithType: XRUIElement.Show(Boolean)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+    name: Show
+    nameWithType: XRUIElement.Show
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Show
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
+    name: Show
+    nameWithType: XRUIElement.Show
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Show
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: Show(VisualElement, Boolean)
+  nameWithType: XRUIElement.Show(VisualElement, Boolean)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement, System.Boolean)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
+    name: Show
+    nameWithType: XRUIElement.Show
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Show
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
+    name: Show
+    nameWithType: XRUIElement.Show
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Show
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: AddUIElement(VisualElement, String)
+  nameWithType: XRUIElement.AddUIElement(VisualElement, String)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement, System.String)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
+    name: AddUIElement
+    nameWithType: XRUIElement.AddUIElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.AddUIElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
+    name: AddUIElement
+    nameWithType: XRUIElement.AddUIElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.AddUIElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: RemoveUIElement(VisualElement)
+  nameWithType: XRUIElement.RemoveUIElement(VisualElement)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+    name: RemoveUIElement
+    nameWithType: XRUIElement.RemoveUIElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement(VisualElement)
+    name: RemoveUIElement
+    nameWithType: XRUIElement.RemoveUIElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.VisualElement
+    name: VisualElement
+    nameWithType: VisualElement
+    fullName: VisualElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: GetXRUIVisualElement<T>(String)
+  nameWithType: XRUIElement.GetXRUIVisualElement<T>(String)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement<T>(System.String)
+  nameWithType.vb: XRUIElement.GetXRUIVisualElement(Of T)(String)
+  fullName.vb: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(Of T)(System.String)
+  name.vb: GetXRUIVisualElement(Of T)(String)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
+    name: GetXRUIVisualElement<T>
+    nameWithType: XRUIElement.GetXRUIVisualElement<T>
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
+    name: GetXRUIVisualElement(Of T)
+    nameWithType: XRUIElement.GetXRUIVisualElement(Of T)
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: GetXRUIVisualElement(String)
+  nameWithType: XRUIElement.GetXRUIVisualElement(String)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+    name: GetXRUIVisualElement
+    nameWithType: XRUIElement.GetXRUIVisualElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
+    name: GetXRUIVisualElement
+    nameWithType: XRUIElement.GetXRUIVisualElement
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: FollowCamera()
+  nameWithType: XRUIElement.FollowCamera()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.FollowCamera()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+    name: FollowCamera
+    nameWithType: XRUIElement.FollowCamera
+    fullName: com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+    name: FollowCamera
+    nameWithType: XRUIElement.FollowCamera
+    fullName: com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: FadeWorldPanel(Boolean)
+  nameWithType: XRUIElement.FadeWorldPanel(Boolean)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+    name: FadeWorldPanel
+    nameWithType: XRUIElement.FadeWorldPanel
+    fullName: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
+    name: FadeWorldPanel
+    nameWithType: XRUIElement.FadeWorldPanel
+    fullName: com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: OnPointerEnter(PointerEnterEvent)
+  nameWithType: XRUIElement.OnPointerEnter(PointerEnterEvent)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+    name: OnPointerEnter
+    nameWithType: XRUIElement.OnPointerEnter
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerEnterEvent
+    name: PointerEnterEvent
+    nameWithType: PointerEnterEvent
+    fullName: PointerEnterEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+    name: OnPointerEnter
+    nameWithType: XRUIElement.OnPointerEnter
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerEnterEvent
+    name: PointerEnterEvent
+    nameWithType: PointerEnterEvent
+    fullName: PointerEnterEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: OnPointerLeave(PointerLeaveEvent)
+  nameWithType: XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+    name: OnPointerLeave
+    nameWithType: XRUIElement.OnPointerLeave
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerLeaveEvent
+    name: PointerLeaveEvent
+    nameWithType: PointerLeaveEvent
+    fullName: PointerLeaveEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+    name: OnPointerLeave
+    nameWithType: XRUIElement.OnPointerLeave
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerLeaveEvent
+    name: PointerLeaveEvent
+    nameWithType: PointerLeaveEvent
+    fullName: PointerLeaveEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Global.VisualTreeAsset
+  isExternal: true
+  name: VisualTreeAsset
+  nameWithType: VisualTreeAsset
+  fullName: VisualTreeAsset
+- uid: Global.Vector3
+  isExternal: true
+  name: Vector3
+  nameWithType: Vector3
+  fullName: Vector3
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  name: Single
+  nameWithType: Single
+  fullName: System.Single
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: com.chwar.xrui.UIElements.XRUIElement.Init
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.Init
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: Init()
+  nameWithType: XRUIElement.Init()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.Init()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Init
+    name: Init
+    nameWithType: XRUIElement.Init
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Init
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.Init
+    name: Init
+    nameWithType: XRUIElement.Init
+    fullName: com.chwar.xrui.UIElements.XRUIElement.Init
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.Init*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIContextualMenu.Init
+  name: Init
+  nameWithType: XRUIContextualMenu.Init
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.Init
+- uid: com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement
+  name: AddMenuElement
+  nameWithType: XRUIContextualMenu.AddMenuElement
+  fullName: com.chwar.xrui.UIElements.XRUIContextualMenu.AddMenuElement
+- uid: Global.VisualElement
+  isExternal: true
+  name: VisualElement
+  nameWithType: VisualElement
+  fullName: VisualElement

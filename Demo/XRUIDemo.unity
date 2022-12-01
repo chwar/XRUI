@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08596048, g: 0.13642637, b: 0.32298774, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,7 +172,7 @@ MonoBehaviour:
   gridElementsList:
   - row: {fileID: 763657460}
     weight: 0
-    minHeight: 75
+    minHeight: 60
   - row: {fileID: 1765315699}
     weight: 1
     minHeight: 0
@@ -223,14 +223,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b638efb99a37e179a19c2d5eb8477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 1, y: 1}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 4}
-  cardDimensions: {x: 0, y: 0}
-  titleText: 
-  subtitleText: 
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
+  titleText: XRUI Card
+  subtitleText: This is the default card
 --- !u!114 &410655639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 1e56d56428c545e79309860adf7f0207, type: 2}
   m_ParentUI: {fileID: 1765315700}
   sourceAsset: {fileID: 9197481963319205126, guid: b98a165502e4faaffb5e5ce2b8e00adb, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!4 &410655640
 Transform:
   m_ObjectHideFlags: 0
@@ -260,7 +261,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1765315701}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &555882574
 GameObject:
@@ -292,11 +293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43e2faa06c94cc282692fa4349938b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 1
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
 --- !u!114 &555882576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,14 +588,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a8319a5cb94f4fbe979445cffcd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
   titleText: XRUI List
   listElementTemplate: {fileID: 9197481963319205126, guid: d23a0e1836e6e918bafffe0b1eb757e8, type: 3}
-  addButtonTexture: {fileID: 0}
 --- !u!114 &1504209365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +628,83 @@ Transform:
   m_Father: {fileID: 1765315701}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1571585215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571585218}
+  - component: {fileID: 1571585217}
+  - component: {fileID: 1571585216}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1571585216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571585215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+--- !u!114 &1571585217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571585215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1571585218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571585215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594399923
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,16 +735,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bb1c75fe7b421caf0e22acecfa117d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vrParameters:
-    bendVRPanel: 1
-    anchorVRPanelToCamera: 0
-    customVRPanelDimensions: {x: 0, y: 0}
-    customVRPanelAnchorPosition: {x: 0, y: 0, z: 0}
+  worldUIParameters:
+    bendPanel: 0
+    anchorPanelToCamera: 0
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    customPanelPosition: {x: 0, y: 0, z: 0}
+    panelScale: 0
   titleText: XRUI Menu
-  subText: Subtitle
-  listElementTemplate: {fileID: 9197481963319205126, guid: f0a1324a934192f0bb4d94f8b61a07f1, type: 3}
-  closeButtonTexture: {fileID: 0}
-  mainButtonTexture: {fileID: 0}
+  subtitleText: This is the default menu
+  menuElementTemplate: {fileID: 9197481963319205126, guid: 2dadee764299b942281a055856ce0fda, type: 3}
 --- !u!114 &1594399925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +760,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 1e56d56428c545e79309860adf7f0207, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 67c1c9d1ba298f6d891001f97ed79e76, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 5
 --- !u!4 &1594399926
 Transform:
   m_ObjectHideFlags: 0
@@ -725,18 +806,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a8f2f1abdbf906cae39f9df48a0b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xruiGridController: {fileID: 0}
-  realityType: 1
-  xruiConfigurationAsset: {fileID: 11400000, guid: 0fdf877da6f7498e6b0038e4a8f94ceb, type: 2}
+  xruiGridController: {fileID: 224704475}
+  xruiFormat: 0
+  setTwoDimensionalFormatToPortraitInEditor: 0
+  xruiConfigurationAsset: {fileID: 11400000, guid: 5c81f767ce39c4a1f81f4631ca30706a, type: 2}
   uiElements:
-  - {fileID: 0}
+  - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   modals:
   - modalName: MyModal
     mainTemplateOverride: {fileID: 0}
     modalFlowList:
-    - {fileID: 9197481963319205126, guid: 3e421f15cf7707da194fed51aa5042d4, type: 3}
+    - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
 --- !u!4 &1602110631
 Transform:
   m_ObjectHideFlags: 0

@@ -9,28 +9,46 @@ using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
 {
+    /// <summary>
+    /// XRUI Card class.
+    /// </summary>
     public class XRUICard : XRUIElement
     {
-        // UXML Attributes
+        /// <summary>
+        /// The title UXML node of the card.
+        /// </summary>
         private Label _title;
+        /// <summary>
+        /// The subtitle UXML node of the card.
+        /// </summary>
         private Label _subtitle;
+        /// <summary>
+        /// The close button UXML node of the card.
+        /// </summary>
         private Button _closeButton;
-        
-        [Tooltip("Dimensions of the card")]
-        public Vector2 cardDimensions;
+
+        /// <summary>
+        /// The title property in the Inspector.
+        /// </summary>
         [Tooltip("Title of the card")]
         [SerializeField]
         private string titleText;
+        /// <summary>
+        /// The subtitle property in the Inspector.
+        /// </summary>
         [Tooltip("Subtitle of the card")]
         [SerializeField]
         private string subtitleText;
         
+        /// <summary>
+        /// Initializes the UI Element.
+        /// </summary>
         protected internal override void Init()
         {
             base.Init();
-            _title = UIDocument.rootVisualElement.Q<Label>("Title");
-            _subtitle = UIDocument.rootVisualElement.Q<Label>("Subtitle");
-            _closeButton = UIDocument.rootVisualElement.Q<Button>("Close");
+            _title = GetXRUIVisualElement<Label>("xrui-card__title");
+            _subtitle = GetXRUIVisualElement<Label>("xrui-card__subtitle");
+            _closeButton = GetXRUIVisualElement<Button>("xrui-card__close-btn");
         }
 
         /// <summary>
@@ -41,11 +59,14 @@ namespace com.chwar.xrui.UIElements
             base.UpdateUI();
             UpdateTitle(titleText);
             UpdateSubtitle(subtitleText);
-            UpdateDimensions(cardDimensions);
         }
         
         /*Update Methods*/
 
+        /// <summary>
+        /// Updates the title.
+        /// </summary>
+        /// <param name="text">The new text to replace the title with.</param>
         public void UpdateTitle(string text)
         {
             if(_title != null && _title.text != text) {
@@ -55,6 +76,10 @@ namespace com.chwar.xrui.UIElements
             }
         }
         
+        /// <summary>
+        /// Updates the subtitle.
+        /// </summary>
+        /// <param name="text">The new text to replace the subtitle with.</param>
         public void UpdateSubtitle(string text)
         {
             if(_subtitle != null && _subtitle.text != text) {
@@ -64,15 +89,10 @@ namespace com.chwar.xrui.UIElements
             }
         }
 
-        public void UpdateDimensions(Vector2 dimensions)
-        {
-            if (UIDocument != null && cardDimensions != dimensions)
-            {
-                UIDocument.rootVisualElement.ElementAt(0).style.width = dimensions.x;
-                UIDocument.rootVisualElement.ElementAt(0).style.height = dimensions.y;
-            }
-        }
-
+        /// <summary>
+        /// Adds a callback to the close button.
+        /// </summary>
+        /// <param name="closeButtonAction">The <see cref="Action"/> to trigger upon clicking.</param>
         public void SetCloseButtonAction(Action closeButtonAction)
         {
             if(_closeButton != null)

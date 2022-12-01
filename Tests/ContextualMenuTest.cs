@@ -24,7 +24,7 @@ namespace com.chwar.xrui.Tests
             _go = new GameObject() {name = "XRUI"};
             var xrui = _go.AddComponent<XRUI>();
             _go.AddComponent<Camera>().tag = "MainCamera";
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
 
@@ -70,7 +70,7 @@ namespace com.chwar.xrui.Tests
             var context = Object.FindObjectOfType<XRUIContextualMenu>();
             var entry = context.AddMenuElement();
             entry.Q<Label>("Text").text = "Test";
-            Assert.True(context.UIDocument.rootVisualElement.Contains(entry));
+            Assert.True(context.RootElement.Contains(entry));
         }
 
         [Test]

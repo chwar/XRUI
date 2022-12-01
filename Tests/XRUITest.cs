@@ -5,7 +5,6 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
-using com.chwar.xrui.UIElements;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -16,13 +15,15 @@ namespace com.chwar.xrui.Tests
     [TestFixture]
     public class XRUITest
     {
-        [SetUp]
+        private XRUI _xrui;
+        
+        [OneTimeSetUp]
         public void Init()
         {
-            var go = new GameObject() {name = "Modal"};
-            var xrui = go.AddComponent<XRUI>();
-            go.AddComponent<Camera>().tag = "MainCamera";
-            xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUIConfiguration");
+            if (GameObject.FindObjectOfType<XRUI>() is not null) return;
+            _xrui = new GameObject() {name = "XRUI"}.AddComponent<XRUI>();
+            _xrui.gameObject.AddComponent<Camera>().tag = "MainCamera";
+            _xrui.xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
             Debug.Log("XRUI Initialized");
         }
         
@@ -55,33 +56,23 @@ namespace com.chwar.xrui.Tests
         }
 
         [UnityTest]
-        public IEnumerator XRUITestVRPanel()
+        public IEnumerator XRUITestWorldUIPanel()
         {
-            // Create Card
-            GameObject uiElement = new GameObject();
-            var uiDocument = uiElement.AddComponent<UIDocument>();
-            XRUIConfiguration c = ScriptableObject.CreateInstance<XRUIConfiguration>();
-            c.Reset();
-            uiDocument.panelSettings = c.panelSettings;
-            uiDocument.visualTreeAsset = c.defaultCardTemplate;
-            uiElement.AddComponent<XRUICard>();
+            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            XRUIEditor.AddCard();
+            XRUI.Instance.InitializeElements();
 
-            // Set Reality to VR to trigger VRPanel method
-            var xrui = uiDocument.rootVisualElement.Q(null, "xrui");
-            GeometryChangedEvent evt = new GeometryChangedEvent();
-            evt.target = xrui;
             yield return new WaitForSeconds(1);
-            try
-            {
-                XRUI.GetVRPanel(evt, uiDocument);
-            }
-            catch (Exception)
-            {
-                // Avoid internal UI Toolkit error when applying Panel Settings
-            }
-
-            var panel = GameObject.FindObjectOfType<CurvedPlane>();
+            var panel = GameObject.FindObjectOfType<XRUIPanel>();
             Assert.NotNull(panel);
+        }
+
+        [Test]
+        public void XRUITestFormat()
+        {
+            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            Assert.True(XRUI.GetCurrentXRUIFormat().Equals(XRUI.Instance.xruiFormat.ToString().ToLower()));
+            Assert.True(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
         }
     }
 }

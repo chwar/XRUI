@@ -13,37 +13,67 @@ using Label = UnityEngine.UIElements.Label;
 
 namespace com.chwar.xrui.UIElements
 {
-    public class XRUIModal : XRUIFloatingElement
+    public class XRUIModal : XRUIElement
     {
+        /// <summary>
+        /// The list of contents (i.e., pages) that can be navigated when using the modal.
+        /// </summary>
         public List<VisualTreeAsset> modalFlowList;
+        /// <summary>
+        /// The title UXML node of the modal.
+        /// </summary>
         public Label ModalTitle { get; private set; }
+        /// <summary>
+        /// The validate button UXML node of the modal.
+        /// </summary>
         public Button ValidateButton { get; private set; }
+        /// <summary>
+        /// The cancel button UXML node of the modal.
+        /// </summary>
         public Button CancelButton { get; private set; }
-
-        public Texture2D closeButtonTexture;
-        
-        private Button _closeButton;
+        /// <summary>
+        /// The close button UXML node of the modal.
+        /// </summary>
+        public Button CloseButton  { get; private set; }
+        /// <summary>
+        /// The button container UXML node of the modal.
+        /// </summary>
         private VisualElement _buttonsContainer;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the cancel button.
+        /// </summary>
         private Action _cancelButtonAction;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the validate button.
+        /// </summary>
         private Action _validateButtonAction;
+        /// <summary>
+        /// The current <see cref="Action"/> that is triggered when clicking the close button.
+        /// </summary>
+        private Action _closeButtonAction;
+        /// <summary>
+        /// The required fields of the modal.
+        /// </summary>
         private readonly Dictionary<string, List<TextField>> _requiredFields = new();
 
+        /// <summary>
+        /// Initializes the UI Element.
+        /// </summary>
         protected internal override void Init()
         {
             base.Init();
-            ModalTitle = UIDocument.rootVisualElement.Q<Label>("ModalTitle");
-            ValidateButton = UIDocument.rootVisualElement.Q<Button>("Validate");
-            CancelButton = UIDocument.rootVisualElement.Q<Button>("Cancel");
-            _closeButton = UIDocument.rootVisualElement.Q<Button>("CloseButton");
-            _closeButton.style.backgroundImage = closeButtonTexture;
-            _closeButton.clicked += () => Destroy(this.gameObject);
-            _buttonsContainer = UIDocument.rootVisualElement.Q<VisualElement>("ButtonsContainer");
+            ModalTitle = GetXRUIVisualElement<Label>("xrui-modal__title");
+            ValidateButton = GetXRUIVisualElement<Button>("xrui-modal__validate-btn");
+            CancelButton = GetXRUIVisualElement<Button>("xrui-modal__cancel-btn");
+            CloseButton = GetXRUIVisualElement<Button>("xrui-modal__close-btn");
+            _buttonsContainer = GetXRUIVisualElement<VisualElement>("xrui-modal__btn-container");
+            CloseButton.clicked += () => Destroy(this.gameObject);
         }
 
         /// <summary>
         /// Determines the placement of the main buttons.
         /// </summary>
-        /// <param name="placement">USS property to define placement.</param>
+        /// <param name="placement"><see cref="Justify"/> USS property to define placement.</param>
         public void SetButtonsPlacement(Justify placement)
         {
             _buttonsContainer.style.justifyContent = new StyleEnum<Justify>(placement);
@@ -52,7 +82,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Subscribes an action to the cancel button and replaces any other previously subscribed action.
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
         public void SetCancelButtonAction(Action action)
         {
             CancelButton.clicked -= _cancelButtonAction;
@@ -63,22 +93,33 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// Subscribes an action to the validate button and replaces any other previously subscribed action.
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
         public void SetValidateButtonAction(Action action)
         {
             ValidateButton.clicked -= _validateButtonAction;
             _validateButtonAction = action;
             ValidateButton.clicked += _validateButtonAction;
         }
+        
+        /// <summary>
+        /// Subscribes an action to the close button and replaces any other previously subscribed action.
+        /// </summary>
+        /// <param name="action">Callback to trigger when clicking the button.</param>
+        public void SetCloseButtonAction(Action action)
+        {
+            CloseButton.clicked -= _cancelButtonAction;
+            _closeButtonAction = action;
+            CloseButton.clicked += _cancelButtonAction;
+        }
 
         /// <summary>
         /// Updates the content of the modal with the desired content. Creates content if it is non existing, otherwise makes it visible.
         /// </summary>
         /// <param name="contentAssetName">The name of the Visual Tree Asset to instantiate or use. Must be a part of the modal flow list.</param>
-        /// <param name="parent">Name of the container in which to put the content.</param>
+        /// <param name="parentClass">USS class matching the container in which to put the content.</param>
         /// <param name="onCreate">Callback that is triggered only once, upon the content's instantiation.</param>
         /// <exception cref="ArgumentException">Content asset name or parent not found.</exception>
-        public void UpdateModalFlow(string contentAssetName, string parent, Action onCreate)
+        public void UpdateModalFlow(string contentAssetName, string parentClass, Action onCreate)
         {
             // Fetch content UXML from modal flow list
             var content = modalFlowList.Find(c => c.name.Equals(contentAssetName));
@@ -88,10 +129,10 @@ namespace com.chwar.xrui.UIElements
             }
             
             // Find the container
-            var main = UIDocument.rootVisualElement.Q(parent);
+            var main = RootElement.Q(null, parentClass);
             if (main is null)
             {
-                throw new ArgumentException($"There is no Visual Element called \"{parent}\" in the Modal. " +
+                throw new ArgumentException($"There is no Visual Element matching the \"{parentClass}\" USS class in the Modal. " +
                                             "Please add one in order to append content inside");
             }
             
@@ -102,7 +143,7 @@ namespace com.chwar.xrui.UIElements
                 current.style.display = DisplayStyle.None;
             
             // Check if content to add is already existing and hidden
-            var existingContent = UIDocument.rootVisualElement.Q<VisualElement>(contentAssetName);
+            var existingContent = RootElement.Q<VisualElement>(contentAssetName);
             if (existingContent is not null)
             {
                 existingContent.style.display = DisplayStyle.Flex;
@@ -113,7 +154,7 @@ namespace com.chwar.xrui.UIElements
                 // Make content take all container space
                 ui.style.flexGrow = 1;
                 ui.name = contentAssetName;
-                AddUIElement(ui, parent);
+                AddUIElement(ui, parentClass);
 
                 // Fire callback for user-defined behaviour on content creation
                 onCreate();
@@ -128,7 +169,7 @@ namespace com.chwar.xrui.UIElements
         /// <param name="fields">Fields to set as required for the page they are contained in.</param>
         public void SetRequiredFields(params TextField[] fields)
         {
-            var page = UIDocument.rootVisualElement.Query<TemplateContainer>().Where(ve => 
+            var page = RootElement.Query<TemplateContainer>().Where(ve => 
                 ve.style.display.value.Equals(DisplayStyle.Flex)).Last().name;
             if (!_requiredFields.ContainsKey(page))
             {
@@ -136,7 +177,7 @@ namespace com.chwar.xrui.UIElements
             }
             foreach (var el in fields)
             {
-                el.RegisterCallback<ChangeEvent<string>>(CheckFormValidity);
+                el.RegisterCallback<ChangeEvent<string>>((_) => CheckFormValidity());
                 _requiredFields[page].Add(el);
             }
             CheckFormValidity();
@@ -152,6 +193,10 @@ namespace com.chwar.xrui.UIElements
             field.RegisterValueChangedCallback(_ => ClickOnError(field));
         }
 
+        /// <summary>
+        /// Removes the error USS style when the value of the field changes.
+        /// </summary>
+        /// <param name="field">The field to unflag.</param>
         private void ClickOnError(TextField field)
         {
             field.RemoveFromClassList("error");
@@ -163,7 +208,7 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         private void CheckFormValidity()
         {
-            var currentPage = UIDocument.rootVisualElement.Query<TemplateContainer>().Where(ve => 
+            var currentPage = RootElement.Query<TemplateContainer>().Where(ve => 
                 ve.style.display.value.Equals(DisplayStyle.Flex)).Last().name;
             if (_requiredFields.ContainsKey(currentPage))
             {
@@ -174,11 +219,6 @@ namespace com.chwar.xrui.UIElements
             {
                 ValidateButton.SetEnabled(true);
             }
-        }
-        
-        private void CheckFormValidity<T>(ChangeEvent<T> evt)
-        {
-            CheckFormValidity();
         }
     }
 }
