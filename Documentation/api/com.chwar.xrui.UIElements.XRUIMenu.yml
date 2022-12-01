@@ -9,7 +9,7 @@ items:
   - com.chwar.xrui.UIElements.XRUIMenu.Init
   - com.chwar.xrui.UIElements.XRUIMenu.menuElementTemplate
   - com.chwar.xrui.UIElements.XRUIMenu.RemoveAllElements
-  - com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext(System.String)
+  - com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle(System.String)
   - com.chwar.xrui.UIElements.XRUIMenu.UpdateTitle(System.String)
   langs:
   - csharp
@@ -21,10 +21,12 @@ items:
   source:
     id: XRUIMenu
     path: ''
-    startLine: 1674
+    startLine: 2050
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Menu class.\n"
+  example: []
   syntax:
     content: 'public class XRUIMenu : XRUIElement'
     content.vb: >-
@@ -70,10 +72,12 @@ items:
   source:
     id: menuElementTemplate
     path: ''
-    startLine: 1688
+    startLine: 2081
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe template to add elements to the menu.\n"
+  example: []
   syntax:
     content: public VisualTreeAsset menuElementTemplate
     return:
@@ -97,11 +101,11 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1694
+    startLine: 2087
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nInitializes the UI Elements of the List.\n"
+  summary: "\nInitializes the UI Element.\n"
   example: []
   syntax:
     content: protected override void Init()
@@ -128,46 +132,52 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1714
+    startLine: 2111
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUpdates the title.\n"
+  example: []
   syntax:
     content: public void UpdateTitle(string text)
     parameters:
     - id: text
       type: System.String
+      description: The new text to replace the title with.
     content.vb: Public Sub UpdateTitle(text As String)
   overload: com.chwar.xrui.UIElements.XRUIMenu.UpdateTitle*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext(System.String)
-  commentId: M:com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext(System.String)
-  id: UpdateSubtext(System.String)
+- uid: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle(System.String)
+  commentId: M:com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle(System.String)
+  id: UpdateSubtitle(System.String)
   parent: com.chwar.xrui.UIElements.XRUIMenu
   langs:
   - csharp
   - vb
-  name: UpdateSubtext(String)
-  nameWithType: XRUIMenu.UpdateSubtext(String)
-  fullName: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext(System.String)
+  name: UpdateSubtitle(String)
+  nameWithType: XRUIMenu.UpdateSubtitle(String)
+  fullName: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle(System.String)
   type: Method
   source:
-    id: UpdateSubtext
+    id: UpdateSubtitle
     path: ''
-    startLine: 1723
+    startLine: 2124
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUpdates the subtitle.\n"
+  example: []
   syntax:
-    content: public void UpdateSubtext(string text)
+    content: public void UpdateSubtitle(string text)
     parameters:
     - id: text
       type: System.String
-    content.vb: Public Sub UpdateSubtext(text As String)
-  overload: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext*
+      description: The new text to replace the subtitle with.
+    content.vb: Public Sub UpdateSubtitle(text As String)
+  overload: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -186,7 +196,7 @@ items:
   source:
     id: AddElement
     path: ''
-    startLine: 1736
+    startLine: 2137
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -217,7 +227,7 @@ items:
   source:
     id: RemoveAllElements
     path: ''
-    startLine: 1751
+    startLine: 2152
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -822,11 +832,11 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext*
-  commentId: Overload:com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext
-  name: UpdateSubtext
-  nameWithType: XRUIMenu.UpdateSubtext
-  fullName: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtext
+- uid: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle
+  name: UpdateSubtitle
+  nameWithType: XRUIMenu.UpdateSubtitle
+  fullName: com.chwar.xrui.UIElements.XRUIMenu.UpdateSubtitle
 - uid: com.chwar.xrui.UIElements.XRUIMenu.AddElement*
   commentId: Overload:com.chwar.xrui.UIElements.XRUIMenu.AddElement
   name: AddElement

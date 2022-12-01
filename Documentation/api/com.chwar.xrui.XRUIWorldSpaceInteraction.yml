@@ -26,10 +26,12 @@ items:
   source:
     id: XRUIWorldSpaceInteraction
     path: ''
-    startLine: 712
+    startLine: 912
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThis class interfaces with Unity <xref href=\"System.EventHandler\" data-throw-if-not-resolved=\"false\"></xref> and makes XRUI react to world space interactions (e.g., MR/VR pointers). \n"
+  example: []
   syntax:
     content: 'public class XRUIWorldSpaceInteraction : MonoBehaviour'
     content.vb: >-
@@ -57,10 +59,12 @@ items:
   source:
     id: targetPanel
     path: ''
-    startLine: 715
+    startLine: 918
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe <see cref=\"!:PanelSettings\"></see> of the UI that is pointed at.\n"
+  example: []
   syntax:
     content: public PanelSettings targetPanel
     return:
@@ -84,7 +88,7 @@ items:
   source:
     id: OnPointerMove
     path: ''
-    startLine: 783
+    startLine: 998
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -113,7 +117,7 @@ items:
   source:
     id: OnPointerDown
     path: ''
-    startLine: 788
+    startLine: 1003
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -142,7 +146,7 @@ items:
   source:
     id: OnPointerUp
     path: ''
-    startLine: 793
+    startLine: 1008
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -171,7 +175,7 @@ items:
   source:
     id: OnSubmit
     path: ''
-    startLine: 798
+    startLine: 1013
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -200,7 +204,7 @@ items:
   source:
     id: OnCancel
     path: ''
-    startLine: 803
+    startLine: 1018
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -229,7 +233,7 @@ items:
   source:
     id: OnMove
     path: ''
-    startLine: 808
+    startLine: 1023
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -258,7 +262,7 @@ items:
   source:
     id: OnScroll
     path: ''
-    startLine: 813
+    startLine: 1028
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -287,7 +291,7 @@ items:
   source:
     id: OnSelect
     path: ''
-    startLine: 818
+    startLine: 1033
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -316,7 +320,7 @@ items:
   source:
     id: OnDeselect
     path: ''
-    startLine: 823
+    startLine: 1038
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -345,7 +349,7 @@ items:
   source:
     id: OnDrag
     path: ''
-    startLine: 828
+    startLine: 1043
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -361,6 +365,9 @@ items:
   modifiers.vb:
   - Public
 references:
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  isExternal: true
 - uid: com.chwar.xrui
   commentId: N:com.chwar.xrui
   name: com.chwar.xrui

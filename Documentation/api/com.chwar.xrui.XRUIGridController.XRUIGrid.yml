@@ -18,10 +18,12 @@ items:
   source:
     id: XRUIGrid
     path: ''
-    startLine: 561
+    startLine: 749
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nUsed to reference rows in the Inspector.\n"
+  example: []
   syntax:
     content: >-
       [Serializable]
@@ -55,10 +57,12 @@ items:
   source:
     id: row
     path: ''
-    startLine: 564
+    startLine: 755
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe row in which <xref href=\"com.chwar.xrui.UIElements.XRUIElement\" data-throw-if-not-resolved=\"false\"></xref> are contained.\n"
+  example: []
   syntax:
     content: public GameObject row
     return:
@@ -82,10 +86,12 @@ items:
   source:
     id: weight
     path: ''
-    startLine: 565
+    startLine: 759
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe weight that this row has in comparison to other rows. This defines the space that this row is allowed to take.\n"
+  example: []
   syntax:
     content: public float weight
     return:
@@ -109,10 +115,12 @@ items:
   source:
     id: minHeight
     path: ''
-    startLine: 566
+    startLine: 763
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe minimal height of this row in pixels. Useful when the elements inside are using absolute positioning.\n"
+  example: []
   syntax:
     content: public float minHeight
     return:
@@ -128,12 +136,23 @@ references:
   name: com.chwar.xrui
   nameWithType: com.chwar.xrui
   fullName: com.chwar.xrui
+- uid: com.chwar.xrui.UIElements.XRUIElement
+  commentId: T:com.chwar.xrui.UIElements.XRUIElement
+  parent: com.chwar.xrui.UIElements
+  name: XRUIElement
+  nameWithType: XRUIElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement
 - uid: Global.GameObject
   commentId: '!:Global.GameObject'
   isExternal: true
   name: GameObject
   nameWithType: GameObject
   fullName: GameObject
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements
 - uid: System.Single
   commentId: T:System.Single
   parent: System

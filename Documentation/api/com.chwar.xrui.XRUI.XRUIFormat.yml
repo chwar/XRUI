@@ -17,11 +17,11 @@ items:
   source:
     id: XRUIFormat
     path: ''
-    startLine: 85
+    startLine: 117
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
-  summary: "\nDefines the nature of the UI in order to fit the desired XR device as best as possible\n"
+  summary: "\nDefines the nature of the UI in order to fit the desired XR device as best as possible.\n"
   example: []
   syntax:
     content: public enum XRUIFormat
@@ -46,10 +46,12 @@ items:
   source:
     id: TwoDimensional
     path: ''
-    startLine: 87
+    startLine: 122
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nTwo Dimensional UI, for use on traditional screens, e.g. PC, smartphones, tablets, etc.\n"
+  example: []
   syntax:
     content: TwoDimensional = 0
     return:
@@ -74,10 +76,12 @@ items:
   source:
     id: ThreeDimensional
     path: ''
-    startLine: 88
+    startLine: 126
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThree Dimensional or World Space UI. Needed for displaying UI for MR/VR applications (can also be used for AR).\n"
+  example: []
   syntax:
     content: ThreeDimensional = 1
     return:

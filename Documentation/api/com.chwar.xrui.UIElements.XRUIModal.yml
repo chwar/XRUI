@@ -6,11 +6,13 @@ items:
   parent: com.chwar.xrui.UIElements
   children:
   - com.chwar.xrui.UIElements.XRUIModal.CancelButton
+  - com.chwar.xrui.UIElements.XRUIModal.CloseButton
   - com.chwar.xrui.UIElements.XRUIModal.Init
   - com.chwar.xrui.UIElements.XRUIModal.modalFlowList
   - com.chwar.xrui.UIElements.XRUIModal.ModalTitle
   - com.chwar.xrui.UIElements.XRUIModal.SetButtonsPlacement(Justify)
   - com.chwar.xrui.UIElements.XRUIModal.SetCancelButtonAction(System.Action)
+  - com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction(System.Action)
   - com.chwar.xrui.UIElements.XRUIModal.SetFieldError(TextField)
   - com.chwar.xrui.UIElements.XRUIModal.SetRequiredFields(TextField[])
   - com.chwar.xrui.UIElements.XRUIModal.SetValidateButtonAction(System.Action)
@@ -26,7 +28,7 @@ items:
   source:
     id: XRUIModal
     path: ''
-    startLine: 1772
+    startLine: 2173
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -75,10 +77,12 @@ items:
   source:
     id: modalFlowList
     path: ''
-    startLine: 1774
+    startLine: 2178
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe list of contents (i.e., pages) that can be navigated when using the modal.\n"
+  example: []
   syntax:
     content: public List<VisualTreeAsset> modalFlowList
     return:
@@ -102,10 +106,12 @@ items:
   source:
     id: ModalTitle
     path: ''
-    startLine: 1775
+    startLine: 2182
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe title UXML node of the modal.\n"
+  example: []
   syntax:
     content: public Label ModalTitle { get; }
     parameters: []
@@ -133,10 +139,12 @@ items:
   source:
     id: ValidateButton
     path: ''
-    startLine: 1776
+    startLine: 2186
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe validate button UXML node of the modal.\n"
+  example: []
   syntax:
     content: public Button ValidateButton { get; }
     parameters: []
@@ -164,10 +172,12 @@ items:
   source:
     id: CancelButton
     path: ''
-    startLine: 1777
+    startLine: 2190
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe cancel button UXML node of the modal.\n"
+  example: []
   syntax:
     content: public Button CancelButton { get; }
     parameters: []
@@ -175,6 +185,39 @@ items:
       type: Global.Button
     content.vb: Public ReadOnly Property CancelButton As Button
   overload: com.chwar.xrui.UIElements.XRUIModal.CancelButton*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: com.chwar.xrui.UIElements.XRUIModal.CloseButton
+  commentId: P:com.chwar.xrui.UIElements.XRUIModal.CloseButton
+  id: CloseButton
+  parent: com.chwar.xrui.UIElements.XRUIModal
+  langs:
+  - csharp
+  - vb
+  name: CloseButton
+  nameWithType: XRUIModal.CloseButton
+  fullName: com.chwar.xrui.UIElements.XRUIModal.CloseButton
+  type: Property
+  source:
+    id: CloseButton
+    path: ''
+    startLine: 2194
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nThe close button UXML node of the modal.\n"
+  example: []
+  syntax:
+    content: public Button CloseButton { get; }
+    parameters: []
+    return:
+      type: Global.Button
+    content.vb: Public ReadOnly Property CloseButton As Button
+  overload: com.chwar.xrui.UIElements.XRUIModal.CloseButton*
   modifiers.csharp:
   - public
   - get
@@ -195,10 +238,12 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1785
+    startLine: 2219
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nInitializes the UI Element.\n"
+  example: []
   syntax:
     content: protected override void Init()
     content.vb: Protected Overrides Sub Init
@@ -224,7 +269,7 @@ items:
   source:
     id: SetButtonsPlacement
     path: ''
-    startLine: 1800
+    startLine: 2234
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -235,7 +280,7 @@ items:
     parameters:
     - id: placement
       type: Global.Justify
-      description: USS property to define placement.
+      description: <see cref="!:Justify"></see> USS property to define placement.
     content.vb: Public Sub SetButtonsPlacement(placement As Justify)
   overload: com.chwar.xrui.UIElements.XRUIModal.SetButtonsPlacement*
   modifiers.csharp:
@@ -256,7 +301,7 @@ items:
   source:
     id: SetCancelButtonAction
     path: ''
-    startLine: 1809
+    startLine: 2243
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -267,7 +312,7 @@ items:
     parameters:
     - id: action
       type: System.Action
-      description: ''
+      description: Callback to trigger when clicking the button.
     content.vb: Public Sub SetCancelButtonAction(action As Action)
   overload: com.chwar.xrui.UIElements.XRUIModal.SetCancelButtonAction*
   modifiers.csharp:
@@ -288,7 +333,7 @@ items:
   source:
     id: SetValidateButtonAction
     path: ''
-    startLine: 1820
+    startLine: 2254
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -299,9 +344,41 @@ items:
     parameters:
     - id: action
       type: System.Action
-      description: ''
+      description: Callback to trigger when clicking the button.
     content.vb: Public Sub SetValidateButtonAction(action As Action)
   overload: com.chwar.xrui.UIElements.XRUIModal.SetValidateButtonAction*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction(System.Action)
+  commentId: M:com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction(System.Action)
+  id: SetCloseButtonAction(System.Action)
+  parent: com.chwar.xrui.UIElements.XRUIModal
+  langs:
+  - csharp
+  - vb
+  name: SetCloseButtonAction(Action)
+  nameWithType: XRUIModal.SetCloseButtonAction(Action)
+  fullName: com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction(System.Action)
+  type: Method
+  source:
+    id: SetCloseButtonAction
+    path: ''
+    startLine: 2265
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nSubscribes an action to the close button and replaces any other previously subscribed action.\n"
+  example: []
+  syntax:
+    content: public void SetCloseButtonAction(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+      description: Callback to trigger when clicking the button.
+    content.vb: Public Sub SetCloseButtonAction(action As Action)
+  overload: com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -320,7 +397,7 @@ items:
   source:
     id: UpdateModalFlow
     path: ''
-    startLine: 1834
+    startLine: 2279
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -362,7 +439,7 @@ items:
   source:
     id: SetRequiredFields
     path: ''
-    startLine: 1882
+    startLine: 2327
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -397,7 +474,7 @@ items:
   source:
     id: SetFieldError
     path: ''
-    startLine: 1902
+    startLine: 2347
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -1070,6 +1147,11 @@ references:
   name: CancelButton
   nameWithType: XRUIModal.CancelButton
   fullName: com.chwar.xrui.UIElements.XRUIModal.CancelButton
+- uid: com.chwar.xrui.UIElements.XRUIModal.CloseButton*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIModal.CloseButton
+  name: CloseButton
+  nameWithType: XRUIModal.CloseButton
+  fullName: com.chwar.xrui.UIElements.XRUIModal.CloseButton
 - uid: com.chwar.xrui.UIElements.XRUIElement.Init
   commentId: M:com.chwar.xrui.UIElements.XRUIElement.Init
   parent: com.chwar.xrui.UIElements.XRUIElement
@@ -1131,6 +1213,11 @@ references:
   name: SetValidateButtonAction
   nameWithType: XRUIModal.SetValidateButtonAction
   fullName: com.chwar.xrui.UIElements.XRUIModal.SetValidateButtonAction
+- uid: com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction
+  name: SetCloseButtonAction
+  nameWithType: XRUIModal.SetCloseButtonAction
+  fullName: com.chwar.xrui.UIElements.XRUIModal.SetCloseButtonAction
 - uid: System.ArgumentException
   commentId: T:System.ArgumentException
   isExternal: true

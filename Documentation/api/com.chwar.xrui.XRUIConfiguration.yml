@@ -26,10 +26,12 @@ items:
   source:
     id: XRUIConfiguration
     path: ''
-    startLine: 420
+    startLine: 544
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nConfiguration assets are created from this class. The generated assets can be used as a configuration for XRUI.\nA configuration asset needs to be referenced in the <xref href=\"com.chwar.xrui.XRUI\" data-throw-if-not-resolved=\"false\"></xref> controller.\n"
+  example: []
   syntax:
     content: 'public class XRUIConfiguration : ScriptableObject'
     content.vb: >-
@@ -57,10 +59,12 @@ items:
   source:
     id: panelSettings
     path: ''
-    startLine: 423
+    startLine: 550
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe <see cref=\"!:PanelSettings\"></see> used by this configuration.\n"
+  example: []
   syntax:
     content: public PanelSettings panelSettings
     return:
@@ -84,10 +88,12 @@ items:
   source:
     id: defaultModalTemplate
     path: ''
-    startLine: 424
+    startLine: 554
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Modal template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultModalTemplate
     return:
@@ -111,10 +117,12 @@ items:
   source:
     id: defaultAlertTemplate
     path: ''
-    startLine: 425
+    startLine: 558
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Alert template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultAlertTemplate
     return:
@@ -138,10 +146,12 @@ items:
   source:
     id: defaultCardTemplate
     path: ''
-    startLine: 426
+    startLine: 562
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Card template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultCardTemplate
     return:
@@ -165,10 +175,12 @@ items:
   source:
     id: defaultListTemplate
     path: ''
-    startLine: 427
+    startLine: 566
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default List template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultListTemplate
     return:
@@ -192,10 +204,12 @@ items:
   source:
     id: defaultMenuTemplate
     path: ''
-    startLine: 428
+    startLine: 570
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Menu template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultMenuTemplate
     return:
@@ -219,10 +233,12 @@ items:
   source:
     id: defaultNavbarTemplate
     path: ''
-    startLine: 429
+    startLine: 574
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Navbar template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultNavbarTemplate
     return:
@@ -246,10 +262,12 @@ items:
   source:
     id: defaultContextualMenuTemplate
     path: ''
-    startLine: 430
+    startLine: 578
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default Contextual Menu template used by this configuration. \n"
+  example: []
   syntax:
     content: public VisualTreeAsset defaultContextualMenuTemplate
     return:
@@ -273,10 +291,12 @@ items:
   source:
     id: defaultAlertWorldUIParameters
     path: ''
-    startLine: 431
+    startLine: 582
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default World UI configuration for alerts.\n"
+  example: []
   syntax:
     content: public WorldUIParameters defaultAlertWorldUIParameters
     return:
@@ -300,10 +320,12 @@ items:
   source:
     id: defaultContextualMenuWorldUIParameters
     path: ''
-    startLine: 432
+    startLine: 586
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default World UI configuration for contextual menus.\n"
+  example: []
   syntax:
     content: public WorldUIParameters defaultContextualMenuWorldUIParameters
     return:
@@ -327,10 +349,12 @@ items:
   source:
     id: defaultModalWorldUIParameters
     path: ''
-    startLine: 433
+    startLine: 590
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe default World UI configuration for modals.\n"
+  example: []
   syntax:
     content: public WorldUIParameters defaultModalWorldUIParameters
     return:
@@ -341,6 +365,12 @@ items:
   modifiers.vb:
   - Public
 references:
+- uid: com.chwar.xrui.XRUI
+  commentId: T:com.chwar.xrui.XRUI
+  parent: com.chwar.xrui
+  name: XRUI
+  nameWithType: XRUI
+  fullName: com.chwar.xrui.XRUI
 - uid: com.chwar.xrui
   commentId: N:com.chwar.xrui
   name: com.chwar.xrui

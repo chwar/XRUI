@@ -30,10 +30,12 @@ items:
   source:
     id: XRUI
     path: ''
-    startLine: 15
+    startLine: 18
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nMain controller of the XRUI Framework.\n"
+  example: []
   syntax:
     content: 'public class XRUI : MonoBehaviour'
     content.vb: >-
@@ -61,10 +63,12 @@ items:
   source:
     id: Instance
     path: ''
-    startLine: 19
+    startLine: 25
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nInstance of this class (singleton).\n"
+  example: []
   syntax:
     content: public static XRUI Instance
     return:
@@ -90,10 +94,12 @@ items:
   source:
     id: xruiGridController
     path: ''
-    startLine: 21
+    startLine: 30
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nThe <xref href=\"com.chwar.xrui.XRUIGridController\" data-throw-if-not-resolved=\"false\"></xref> used to organise the UI.\n"
+  example: []
   syntax:
     content: public XRUIGridController xruiGridController
     return:
@@ -117,10 +123,12 @@ items:
   source:
     id: setTwoDimensionalFormatToPortraitInEditor
     path: ''
-    startLine: 28
+    startLine: 42
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nForces 2D Portrait USS styles when in the Unity Editor.\n"
+  example: []
   syntax:
     content: public bool setTwoDimensionalFormatToPortraitInEditor
     return:
@@ -144,17 +152,17 @@ items:
   source:
     id: GetCurrentXRUIFormat
     path: ''
-    startLine: 107
+    startLine: 160
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
-  summary: "\nReturns the current XRUI format based on the format defined in the inspector.\n"
+  summary: "\nReturns the current <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> based on the format defined in the inspector.\n"
   example: []
   syntax:
     content: public static string GetCurrentXRUIFormat()
     return:
       type: System.String
-      description: The current reality.
+      description: The current <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Shared Function GetCurrentXRUIFormat As String
   overload: com.chwar.xrui.XRUI.GetCurrentXRUIFormat*
   modifiers.csharp:
@@ -177,21 +185,21 @@ items:
   source:
     id: IsCurrentXRUIFormat
     path: ''
-    startLine: 117
+    startLine: 170
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
-  summary: "\nReturns true if format matches the current XRUI format.\n"
+  summary: "\nCompares an <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> to the current one. .\n"
   example: []
   syntax:
     content: public static bool IsCurrentXRUIFormat(XRUI.XRUIFormat format)
     parameters:
     - id: format
       type: com.chwar.xrui.XRUI.XRUIFormat
-      description: The XRUI format to compare.
+      description: The <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref> to compare.
     return:
       type: System.Boolean
-      description: ''
+      description: True if <code data-dev-comment-type="paramref" class="paramref">format</code> matches the current <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>
     content.vb: Public Shared Function IsCurrentXRUIFormat(format As XRUI.XRUIFormat) As Boolean
   overload: com.chwar.xrui.XRUI.IsCurrentXRUIFormat*
   modifiers.csharp:
@@ -214,7 +222,7 @@ items:
   source:
     id: SetCurrentXRUIFormat
     path: ''
-    startLine: 127
+    startLine: 180
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -225,7 +233,7 @@ items:
     parameters:
     - id: format
       type: com.chwar.xrui.XRUI.XRUIFormat
-      description: The XRUI Format to use.
+      description: The <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref> to use.
     - id: setOrientationPortrait
       type: System.Boolean
       description: Whether to use Portrait orientation mode.
@@ -249,21 +257,21 @@ items:
   source:
     id: GetUIElement
     path: ''
-    startLine: 141
+    startLine: 194
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
-  summary: "\nReturns a VisualTreeAsset of the given name from the templates list defined in the inspector. \n"
+  summary: "\nReturns a <see cref=\"!:VisualTreeAsset\"></see> of the given name from the templates list defined in the inspector. \n"
   example: []
   syntax:
     content: public VisualTreeAsset GetUIElement(string elementName)
     parameters:
     - id: elementName
       type: System.String
-      description: ''
+      description: The <see cref="!:VisualTreeAsset"></see> to find.
     return:
       type: Global.VisualTreeAsset
-      description: VisualTreeAsset of the given name from the templates list defined in the inspector.
+      description: <see cref="!:VisualTreeAsset"></see> of the given name from the templates list defined in the inspector.
     content.vb: Public Function GetUIElement(elementName As String) As VisualTreeAsset
   overload: com.chwar.xrui.XRUI.GetUIElement*
   modifiers.csharp:
@@ -284,19 +292,24 @@ items:
   source:
     id: ShowAlert
     path: ''
-    startLine: 153
+    startLine: 212
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nShows an alert to the end-user.\n"
+  example: []
   syntax:
     content: public XRUIAlert ShowAlert(XRUI.AlertType type, string text)
     parameters:
     - id: type
       type: com.chwar.xrui.XRUI.AlertType
+      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: text
       type: System.String
+      description: The body of the alert.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
+      description: The created alert.
     content.vb: Public Function ShowAlert(type As XRUI.AlertType, text As String) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
@@ -317,21 +330,27 @@ items:
   source:
     id: ShowAlert
     path: ''
-    startLine: 158
+    startLine: 224
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nShows an alert to the end-user.\n"
+  example: []
   syntax:
     content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text)
     parameters:
     - id: type
       type: com.chwar.xrui.XRUI.AlertType
+      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
+      description: The title of the alert.
     - id: text
       type: System.String
+      description: The body of the alert.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
+      description: The created alert.
     content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
@@ -352,23 +371,30 @@ items:
   source:
     id: ShowAlert
     path: ''
-    startLine: 163
+    startLine: 237
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nShows an alert to the end-user.\n"
+  example: []
   syntax:
     content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text, int countdown)
     parameters:
     - id: type
       type: com.chwar.xrui.XRUI.AlertType
+      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
+      description: The title of the alert.
     - id: text
       type: System.String
+      description: The body of the alert.
     - id: countdown
       type: System.Int32
+      description: Optional countdown after which the alert automatically disappears.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
+      description: The created alert.
     content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String, countdown As Integer) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
@@ -389,23 +415,30 @@ items:
   source:
     id: ShowAlert
     path: ''
-    startLine: 167
+    startLine: 250
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nShows an alert to the end-user.\n"
+  example: []
   syntax:
     content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text, Action onClick)
     parameters:
     - id: type
       type: com.chwar.xrui.XRUI.AlertType
+      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
+      description: The title of the alert.
     - id: text
       type: System.String
+      description: The body of the alert.
     - id: onClick
       type: System.Action
+      description: Optional <xref href="System.Action" data-throw-if-not-resolved="false"></xref> that is fired after a click on the alert.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
+      description: The created alert.
     content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String, onClick As Action) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
@@ -426,27 +459,36 @@ items:
   source:
     id: ShowAlert
     path: ''
-    startLine: 172
+    startLine: 265
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nShows an alert to the end-user.\n"
+  example: []
   syntax:
     content: public XRUIAlert ShowAlert(VisualTreeAsset template, XRUI.AlertType type, string title, string text, int countdown, Action onClick)
     parameters:
     - id: template
       type: Global.VisualTreeAsset
+      description: Custom alert template to use, set it to null to use the default.
     - id: type
       type: com.chwar.xrui.XRUI.AlertType
+      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
+      description: The title of the alert.
     - id: text
       type: System.String
+      description: The body of the alert.
     - id: countdown
       type: System.Int32
+      description: Optional countdown after which the alert automatically disappears.
     - id: onClick
       type: System.Action
+      description: Optional <xref href="System.Action" data-throw-if-not-resolved="false"></xref> that is fired after a click on the alert.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
+      description: The created alert.
     content.vb: Public Function ShowAlert(template As VisualTreeAsset, type As XRUI.AlertType, title As String, text As String, countdown As Integer, onClick As Action) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
@@ -467,7 +509,7 @@ items:
   source:
     id: ShowModal
     path: ''
-    startLine: 218
+    startLine: 312
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -484,6 +526,7 @@ items:
       description: User script to attach to the modal for user-defined behaviour.
     return:
       type: com.chwar.xrui.UIElements.XRUIModal
+      description: The created modal.
     content.vb: Public Function ShowModal(modalName As String, additionalScript As Type) As XRUIModal
   overload: com.chwar.xrui.XRUI.ShowModal*
   modifiers.csharp:
@@ -504,7 +547,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 249
+    startLine: 344
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -521,6 +564,7 @@ items:
       description: Displays an arrow pointing at the parent element.
     return:
       type: com.chwar.xrui.UIElements.XRUIContextualMenu
+      description: The created contextual menu.
     content.vb: Public Function ShowContextualMenu(parentCoordinates As Vector2, showArrow As Boolean) As XRUIContextualMenu
   overload: com.chwar.xrui.XRUI.ShowContextualMenu*
   modifiers.csharp:
@@ -541,7 +585,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 262
+    startLine: 358
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -567,6 +611,7 @@ items:
       description: Adds an offset in pixels used when the contextual menu is positioned on the right of the parent coordinates.
     return:
       type: com.chwar.xrui.UIElements.XRUIContextualMenu
+      description: The created contextual menu.
     content.vb: Public Function ShowContextualMenu(template As VisualTreeAsset, parentCoordinates As Vector2, showArrow As Boolean, leftOffset As Single = NaNF, rightOffset As Single = NaNF) As XRUIContextualMenu
   overload: com.chwar.xrui.XRUI.ShowContextualMenu*
   modifiers.csharp:
@@ -611,6 +656,12 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: com.chwar.xrui.XRUI.XRUIFormat
+  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
+  parent: com.chwar.xrui
+  name: XRUI.XRUIFormat
+  nameWithType: XRUI.XRUIFormat
+  fullName: com.chwar.xrui.XRUI.XRUIFormat
 - uid: com.chwar.xrui.XRUI.GetCurrentXRUIFormat*
   commentId: Overload:com.chwar.xrui.XRUI.GetCurrentXRUIFormat
   name: GetCurrentXRUIFormat
@@ -628,12 +679,6 @@ references:
   name: IsCurrentXRUIFormat
   nameWithType: XRUI.IsCurrentXRUIFormat
   fullName: com.chwar.xrui.XRUI.IsCurrentXRUIFormat
-- uid: com.chwar.xrui.XRUI.XRUIFormat
-  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
-  parent: com.chwar.xrui
-  name: XRUI.XRUIFormat
-  nameWithType: XRUI.XRUIFormat
-  fullName: com.chwar.xrui.XRUI.XRUIFormat
 - uid: com.chwar.xrui.XRUI.SetCurrentXRUIFormat*
   commentId: Overload:com.chwar.xrui.XRUI.SetCurrentXRUIFormat
   name: SetCurrentXRUIFormat
@@ -649,17 +694,17 @@ references:
   name: VisualTreeAsset
   nameWithType: VisualTreeAsset
   fullName: VisualTreeAsset
-- uid: com.chwar.xrui.XRUI.ShowAlert*
-  commentId: Overload:com.chwar.xrui.XRUI.ShowAlert
-  name: ShowAlert
-  nameWithType: XRUI.ShowAlert
-  fullName: com.chwar.xrui.XRUI.ShowAlert
 - uid: com.chwar.xrui.XRUI.AlertType
   commentId: T:com.chwar.xrui.XRUI.AlertType
   parent: com.chwar.xrui
   name: XRUI.AlertType
   nameWithType: XRUI.AlertType
   fullName: com.chwar.xrui.XRUI.AlertType
+- uid: com.chwar.xrui.XRUI.ShowAlert*
+  commentId: Overload:com.chwar.xrui.XRUI.ShowAlert
+  name: ShowAlert
+  nameWithType: XRUI.ShowAlert
+  fullName: com.chwar.xrui.XRUI.ShowAlert
 - uid: com.chwar.xrui.UIElements.XRUIAlert
   commentId: T:com.chwar.xrui.UIElements.XRUIAlert
   parent: com.chwar.xrui.UIElements

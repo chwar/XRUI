@@ -21,10 +21,12 @@ items:
   source:
     id: XRUIList
     path: ''
-    startLine: 1564
+    startLine: 1922
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI List class.\n"
+  example: []
   syntax:
     content: 'public class XRUIList : XRUIElement'
     content.vb: >-
@@ -70,10 +72,12 @@ items:
   source:
     id: listElementTemplate
     path: ''
-    startLine: 1574
+    startLine: 1943
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe template to add elements to the list.\n"
+  example: []
   syntax:
     content: public VisualTreeAsset listElementTemplate
     return:
@@ -97,11 +101,11 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1579
+    startLine: 1948
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nInitializes the UI Elements of the List.\n"
+  summary: "\nInitializes the UI Element.\n"
   example: []
   syntax:
     content: protected override void Init()
@@ -128,15 +132,18 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1597
+    startLine: 1970
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUpdates the title.\n"
+  example: []
   syntax:
     content: public void UpdateTitle(string text)
     parameters:
     - id: text
       type: System.String
+      description: The new text to replace the title with.
     content.vb: Public Sub UpdateTitle(text As String)
   overload: com.chwar.xrui.UIElements.XRUIList.UpdateTitle*
   modifiers.csharp:
@@ -157,24 +164,24 @@ items:
   source:
     id: AddElement
     path: ''
-    startLine: 1613
+    startLine: 1986
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nAdds template element to the list\n"
+  summary: "\nAdds template element to the list.\n"
   example: []
   syntax:
     content: public VisualElement AddElement(bool bSelect, Action<PointerDownEvent> itemSelectedCallback = null)
     parameters:
     - id: bSelect
       type: System.Boolean
-      description: Selects the added element in the list
+      description: Selects the added element in the list.
     - id: itemSelectedCallback
       type: System.Action{PointerDownEvent}
-      description: The callback to trigger when the element is selected
+      description: The callback to trigger when the element is selected.
     return:
       type: Global.VisualElement
-      description: The added element
+      description: The added element.
     content.vb: Public Function AddElement(bSelect As Boolean, itemSelectedCallback As Action(Of PointerDownEvent) = Nothing) As VisualElement
   overload: com.chwar.xrui.UIElements.XRUIList.AddElement*
   nameWithType.vb: XRUIList.AddElement(Boolean, Action(Of PointerDownEvent))
@@ -198,11 +205,11 @@ items:
   source:
     id: RemoveAllElements
     path: ''
-    startLine: 1638
+    startLine: 2011
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nDeletes all items from the list\n"
+  summary: "\nDeletes all items from the list.\n"
   example: []
   syntax:
     content: public void RemoveAllElements()
@@ -226,17 +233,17 @@ items:
   source:
     id: GetListCount
     path: ''
-    startLine: 1647
+    startLine: 2020
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nReturns the number of items in the list\n"
+  summary: "\nReturns the number of items in the list.\n"
   example: []
   syntax:
     content: public int GetListCount()
     return:
       type: System.Int32
-      description: ''
+      description: The count of items in the list.
     content.vb: Public Function GetListCount As Integer
   overload: com.chwar.xrui.UIElements.XRUIList.GetListCount*
   modifiers.csharp:

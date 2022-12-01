@@ -22,10 +22,12 @@ items:
   source:
     id: XRUIContextualMenu
     path: ''
-    startLine: 1108
+    startLine: 1398
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Contextual Menu class.\n"
+  example: []
   syntax:
     content: 'public class XRUIContextualMenu : XRUIElement'
     content.vb: >-
@@ -71,7 +73,7 @@ items:
   source:
     id: menuElementTemplate
     path: ''
-    startLine: 1113
+    startLine: 1407
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -100,7 +102,7 @@ items:
   source:
     id: parentCoordinates
     path: ''
-    startLine: 1117
+    startLine: 1411
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -129,7 +131,7 @@ items:
   source:
     id: positionOffsetLeft
     path: ''
-    startLine: 1121
+    startLine: 1415
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -158,7 +160,7 @@ items:
   source:
     id: positionOffsetRight
     path: ''
-    startLine: 1125
+    startLine: 1419
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -187,7 +189,7 @@ items:
   source:
     id: showArrow
     path: ''
-    startLine: 1129
+    startLine: 1423
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -216,11 +218,11 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1142
+    startLine: 1428
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nInitializes the UI Elements of the List.\n"
+  summary: "\nInitializes the UI Element.\n"
   example: []
   syntax:
     content: protected override void Init()
@@ -247,7 +249,7 @@ items:
   source:
     id: AddMenuElement
     path: ''
-    startLine: 1193
+    startLine: 1478
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements

@@ -21,10 +21,12 @@ items:
   source:
     id: WorldUIParameters
     path: ''
-    startLine: 1536
+    startLine: 1873
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nSet of parameters to alter the rendering of UI in world space.\n"
+  example: []
   syntax:
     content: >-
       [Serializable]
@@ -58,10 +60,12 @@ items:
   source:
     id: bendPanel
     path: ''
-    startLine: 1540
+    startLine: 1880
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nBends the panel. Common practice in VR apps.\n"
+  example: []
   syntax:
     content: public bool bendPanel
     return:
@@ -85,10 +89,12 @@ items:
   source:
     id: anchorPanelToCamera
     path: ''
-    startLine: 1542
+    startLine: 1885
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nMakes the panel follow the gaze of the camera, with a slight delay.\n"
+  example: []
   syntax:
     content: public bool anchorPanelToCamera
     return:
@@ -112,10 +118,12 @@ items:
   source:
     id: cameraFollowThreshold
     path: ''
-    startLine: 1544
+    startLine: 1890
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nDefines the minimum distance that needs to be between the panel and the camera gaze before the panel recenters itself.\n"
+  example: []
   syntax:
     content: public float cameraFollowThreshold
     return:
@@ -139,10 +147,12 @@ items:
   source:
     id: customPanelDimensions
     path: ''
-    startLine: 1546
+    startLine: 1895
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nOverrides the size of the panel, which is otherwise calculated from the ratio of the width and height of the UI element defined in the USS sheet.\n"
+  example: []
   syntax:
     content: public Vector2 customPanelDimensions
     return:
@@ -166,10 +176,12 @@ items:
   source:
     id: customPanelPosition
     path: ''
-    startLine: 1548
+    startLine: 1900
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nSets the panel to the specified position in world coordinates. This is overriden if <xref href=\"com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera\" data-throw-if-not-resolved=\"false\"></xref> is true.\n"
+  example: []
   syntax:
     content: public Vector3 customPanelPosition
     return:
@@ -193,10 +205,12 @@ items:
   source:
     id: panelScale
     path: ''
-    startLine: 1550
+    startLine: 1905
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nAlters the scale of the panel. By default, the size of panels tend towards one world space unit (one meter).\n"
+  example: []
   syntax:
     content: public float panelScale
     return:
@@ -237,6 +251,9 @@ references:
   name: Vector2
   nameWithType: Vector2
   fullName: Vector2
+- uid: com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera
+  commentId: F:com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera
+  isExternal: true
 - uid: Global.Vector3
   isExternal: true
   name: Vector3

@@ -32,10 +32,12 @@ items:
   source:
     id: XRUIElement
     path: ''
-    startLine: 1227
+    startLine: 1515
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Element class. Inherited by all XRUI elements.\n"
+  example: []
   syntax:
     content: 'public class XRUIElement : MonoBehaviour'
     content.vb: >-
@@ -71,10 +73,12 @@ items:
   source:
     id: PointerOverUI
     path: ''
-    startLine: 1230
+    startLine: 1521
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nTrue if the pointer is hovering the current element.\n"
+  example: []
   syntax:
     content: public bool PointerOverUI { get; }
     parameters: []
@@ -102,10 +106,12 @@ items:
   source:
     id: worldUIParameters
     path: ''
-    startLine: 1231
+    startLine: 1525
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nSet of <xref href=\"com.chwar.xrui.UIElements.XRUIElement.worldUIParameters\" data-throw-if-not-resolved=\"false\"></xref> that define the behaviour of the UI when rendered in world space.\n"
+  example: []
   syntax:
     content: public WorldUIParameters worldUIParameters
     return:
@@ -129,10 +135,12 @@ items:
   source:
     id: RootElement
     path: ''
-    startLine: 1234
+    startLine: 1533
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nRoot <see cref=\"!:VisualElement\"></see> that contains the `.xrui` USS class.\n"
+  example: []
   syntax:
     content: public VisualElement RootElement
     return:
@@ -156,10 +164,12 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1238
+    startLine: 1542
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nInitializes the UI Element. \n"
+  example: []
   syntax:
     content: protected virtual void Init()
     content.vb: Protected Overridable Sub Init
@@ -184,10 +194,12 @@ items:
   source:
     id: Awake
     path: ''
-    startLine: 1246
+    startLine: 1553
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUnity method. Checks if the <xref href=\"com.chwar.xrui.XRUI\" data-throw-if-not-resolved=\"false\"></xref> instance is running yet before initialising elements. \n"
+  example: []
   syntax:
     content: public void Awake()
     content.vb: Public Sub Awake
@@ -210,14 +222,20 @@ items:
   source:
     id: OnEnable
     path: ''
-    startLine: 1266
+    startLine: 1580
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUnity method. Subscribes UI element to <xref href=\"com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: protected void OnEnable()
     content.vb: Protected Sub OnEnable
   overload: com.chwar.xrui.UIElements.XRUIElement.OnEnable*
+  exceptions:
+  - type: System.NullReferenceException
+    commentId: T:System.NullReferenceException
+    description: Fired when <xref href="com.chwar.xrui.UIElements.XRUIElement.RootElement" data-throw-if-not-resolved="false"></xref> has no children.
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -236,10 +254,12 @@ items:
   source:
     id: OnDisable
     path: ''
-    startLine: 1283
+    startLine: 1600
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUnity method. Unsubscribes UI element from <xref href=\"com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: protected virtual void OnDisable()
     content.vb: Protected Overridable Sub OnDisable
@@ -264,7 +284,7 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1310
+    startLine: 1641
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -296,7 +316,7 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1321
+    startLine: 1652
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -331,7 +351,7 @@ items:
   source:
     id: AddUIElement
     path: ''
-    startLine: 1338
+    startLine: 1669
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -342,15 +362,16 @@ items:
     parameters:
     - id: uiElement
       type: Global.VisualElement
-      description: ''
+      description: The <see cref="!:VisualElement"></see> to add.
     - id: uiParentClass
       type: System.String
-      description: ''
+      description: The USS class of the container in which to append the element.
     content.vb: Public Sub AddUIElement(uiElement As VisualElement, uiParentClass As String)
   overload: com.chwar.xrui.UIElements.XRUIElement.AddUIElement*
   exceptions:
   - type: System.ArgumentException
     commentId: T:System.ArgumentException
+    description: Fired when the parent container is not found.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -369,18 +390,18 @@ items:
   source:
     id: RemoveUIElement
     path: ''
-    startLine: 1356
+    startLine: 1687
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nRemoves a UIElement\n"
+  summary: "\nRemoves a UI Element.\n"
   example: []
   syntax:
     content: public void RemoveUIElement(VisualElement uiElement)
     parameters:
     - id: uiElement
       type: Global.VisualElement
-      description: ''
+      description: The <see cref="!:VisualElement"></see> to remove.
     content.vb: Public Sub RemoveUIElement(uiElement As VisualElement)
   overload: com.chwar.xrui.UIElements.XRUIElement.RemoveUIElement*
   modifiers.csharp:
@@ -401,7 +422,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1367
+    startLine: 1698
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -444,7 +465,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1377
+    startLine: 1708
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -479,7 +500,7 @@ items:
   source:
     id: FollowCamera
     path: ''
-    startLine: 1445
+    startLine: 1776
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -510,7 +531,7 @@ items:
   source:
     id: FadeWorldPanel
     path: ''
-    startLine: 1476
+    startLine: 1807
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -545,7 +566,7 @@ items:
   source:
     id: OnPointerEnter
     path: ''
-    startLine: 1498
+    startLine: 1829
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -577,7 +598,7 @@ items:
   source:
     id: OnPointerLeave
     path: ''
-    startLine: 1507
+    startLine: 1838
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -626,12 +647,24 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+  commentId: F:com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: worldUIParameters
+  nameWithType: XRUIElement.worldUIParameters
+  fullName: com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
 - uid: com.chwar.xrui.UIElements.WorldUIParameters
   commentId: T:com.chwar.xrui.UIElements.WorldUIParameters
   parent: com.chwar.xrui.UIElements
   name: WorldUIParameters
   nameWithType: WorldUIParameters
   fullName: com.chwar.xrui.UIElements.WorldUIParameters
+- uid: com.chwar.xrui.UIElements.XRUIElement
+  commentId: T:com.chwar.xrui.UIElements.XRUIElement
+  parent: com.chwar.xrui.UIElements
+  name: XRUIElement
+  nameWithType: XRUIElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement
 - uid: Global.VisualElement
   isExternal: true
   name: VisualElement
@@ -642,11 +675,109 @@ references:
   name: Init
   nameWithType: XRUIElement.Init
   fullName: com.chwar.xrui.UIElements.XRUIElement.Init
+- uid: com.chwar.xrui.XRUI
+  commentId: T:com.chwar.xrui.XRUI
+  parent: com.chwar.xrui
+  name: XRUI
+  nameWithType: XRUI
+  fullName: com.chwar.xrui.XRUI
 - uid: com.chwar.xrui.UIElements.XRUIElement.Awake*
   commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.Awake
   name: Awake
   nameWithType: XRUIElement.Awake
   fullName: com.chwar.xrui.UIElements.XRUIElement.Awake
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: OnPointerEnter(PointerEnterEvent)
+  nameWithType: XRUIElement.OnPointerEnter(PointerEnterEvent)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+    name: OnPointerEnter
+    nameWithType: XRUIElement.OnPointerEnter
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerEnterEvent
+    name: PointerEnterEvent
+    nameWithType: PointerEnterEvent
+    fullName: PointerEnterEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
+    name: OnPointerEnter
+    nameWithType: XRUIElement.OnPointerEnter
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerEnterEvent
+    name: PointerEnterEvent
+    nameWithType: PointerEnterEvent
+    fullName: PointerEnterEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  isExternal: true
+  name: OnPointerLeave(PointerLeaveEvent)
+  nameWithType: XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+    name: OnPointerLeave
+    nameWithType: XRUIElement.OnPointerLeave
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerLeaveEvent
+    name: PointerLeaveEvent
+    nameWithType: PointerLeaveEvent
+    fullName: PointerLeaveEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave(PointerLeaveEvent)
+    name: OnPointerLeave
+    nameWithType: XRUIElement.OnPointerLeave
+    fullName: com.chwar.xrui.UIElements.XRUIElement.OnPointerLeave
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Global.PointerLeaveEvent
+    name: PointerLeaveEvent
+    nameWithType: PointerLeaveEvent
+    fullName: PointerLeaveEvent
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.RootElement
+  commentId: F:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: RootElement
+  nameWithType: XRUIElement.RootElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement.RootElement
+- uid: System.NullReferenceException
+  commentId: T:System.NullReferenceException
+  isExternal: true
 - uid: com.chwar.xrui.UIElements.XRUIElement.OnEnable*
   commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.OnEnable
   name: OnEnable

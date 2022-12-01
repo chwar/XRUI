@@ -5,7 +5,7 @@ items:
   id: XRUIAlert
   parent: com.chwar.xrui.UIElements
   children:
-  - com.chwar.xrui.UIElements.XRUIAlert.ClickCallback
+  - com.chwar.xrui.UIElements.XRUIAlert.clickCallback
   - com.chwar.xrui.UIElements.XRUIAlert.Content
   - com.chwar.xrui.UIElements.XRUIAlert.countdown
   - com.chwar.xrui.UIElements.XRUIAlert.DisposeAlert(System.Boolean,System.Boolean)
@@ -21,10 +21,12 @@ items:
   source:
     id: XRUIAlert
     path: ''
-    startLine: 976
+    startLine: 1206
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Alert class.\n"
+  example: []
   syntax:
     content: 'public class XRUIAlert : XRUIElement'
     content.vb: >-
@@ -70,10 +72,12 @@ items:
   source:
     id: Title
     path: ''
-    startLine: 978
+    startLine: 1211
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe title UXML node of the alert.\n"
+  example: []
   syntax:
     content: public Label Title { get; }
     parameters: []
@@ -101,10 +105,12 @@ items:
   source:
     id: Content
     path: ''
-    startLine: 979
+    startLine: 1215
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe content (body text) UXML node of the alert.\n"
+  example: []
   syntax:
     content: public Label Content { get; }
     parameters: []
@@ -118,29 +124,31 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: com.chwar.xrui.UIElements.XRUIAlert.ClickCallback
-  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.ClickCallback
-  id: ClickCallback
+- uid: com.chwar.xrui.UIElements.XRUIAlert.clickCallback
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.clickCallback
+  id: clickCallback
   parent: com.chwar.xrui.UIElements.XRUIAlert
   langs:
   - csharp
   - vb
-  name: ClickCallback
-  nameWithType: XRUIAlert.ClickCallback
-  fullName: com.chwar.xrui.UIElements.XRUIAlert.ClickCallback
+  name: clickCallback
+  nameWithType: XRUIAlert.clickCallback
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.clickCallback
   type: Field
   source:
-    id: ClickCallback
+    id: clickCallback
     path: ''
-    startLine: 981
+    startLine: 1220
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe optional callback to trigger when the alert is clicked.\n"
+  example: []
   syntax:
-    content: public Action ClickCallback
+    content: public Action clickCallback
     return:
       type: System.Action
-    content.vb: Public ClickCallback As Action
+    content.vb: Public clickCallback As Action
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -159,10 +167,12 @@ items:
   source:
     id: countdown
     path: ''
-    startLine: 983
+    startLine: 1225
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nThe optional countdown after which the alert is destroyed.\n"
+  example: []
   syntax:
     content: public int countdown
     return:
@@ -186,11 +196,11 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 988
+    startLine: 1230
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nInitializes the UI Elements of the Alert.\n"
+  summary: "\nInitializes the UI Element.\n"
   example: []
   syntax:
     content: protected override void Init()
@@ -217,17 +227,21 @@ items:
   source:
     id: DisposeAlert
     path: ''
-    startLine: 999
+    startLine: 1246
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nDestroys the Alert with optional requirements.\n"
+  example: []
   syntax:
     content: public void DisposeAlert(bool requirePointerOverUI = false, bool destroyImmediate = true)
     parameters:
     - id: requirePointerOverUI
       type: System.Boolean
+      description: If true, will only destroy the alert when the pointer is on it.
     - id: destroyImmediate
       type: System.Boolean
+      description: If false, waits for the <xref href="com.chwar.xrui.UIElements.XRUIAlert.countdown?text=+before+destroying." data-throw-if-not-resolved="false"></xref>
     content.vb: Public Sub DisposeAlert(requirePointerOverUI As Boolean = False, destroyImmediate As Boolean = True)
   overload: com.chwar.xrui.UIElements.XRUIAlert.DisposeAlert*
   modifiers.csharp:
@@ -837,6 +851,9 @@ references:
   name: Init
   nameWithType: XRUIAlert.Init
   fullName: com.chwar.xrui.UIElements.XRUIAlert.Init
+- uid: com.chwar.xrui.UIElements.XRUIAlert.countdown
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.countdown
+  isExternal: true
 - uid: com.chwar.xrui.UIElements.XRUIAlert.DisposeAlert*
   commentId: Overload:com.chwar.xrui.UIElements.XRUIAlert.DisposeAlert
   name: DisposeAlert

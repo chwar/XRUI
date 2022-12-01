@@ -25,6 +25,9 @@ namespace com.chwar.xrui
         /// </summary>
         public static XRUI Instance;
 
+        /// <summary>
+        /// The <see cref="XRUIGridController"/> used to organise the UI.
+        /// </summary>
         [HideInInspector] public XRUIGridController xruiGridController;
         /// <summary>
         /// Defines the <see cref="XRUIFormat"/> which sets the UI to 2D or 3D.
@@ -152,7 +155,7 @@ namespace com.chwar.xrui
         }
 
         /// <summary>
-        /// Returns the current <see cref="XRUIFormat"/>t based on the format defined in the inspector.
+        /// Returns the current <see cref="XRUIFormat"/> based on the format defined in the inspector.
         /// </summary>
         /// <returns>The current <see cref="XRUIFormat"/>.</returns>
         public static string GetCurrentXRUIFormat()
@@ -206,6 +209,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="type">The <see cref="AlertType"/> to use.</param>
         /// <param name="text">The body of the alert.</param>
+        ///         /// <returns>The created alert.</returns>
         public XRUIAlert ShowAlert(AlertType type, string text)
         {
             return ShowAlert(type, null, text);     
@@ -217,6 +221,7 @@ namespace com.chwar.xrui
         /// <param name="type">The <see cref="AlertType"/> to use.</param>
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
+        /// <returns>The created alert.</returns>
         public XRUIAlert ShowAlert(AlertType type, string title, string text)
         {
             return ShowAlert(null, type, title, text, 0, null);
@@ -229,6 +234,7 @@ namespace com.chwar.xrui
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
+        /// <returns>The created alert.</returns>
         public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown)
         {
             return ShowAlert(null, type, title, text, countdown, null);
@@ -241,6 +247,7 @@ namespace com.chwar.xrui
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
+        /// <returns>The created alert.</returns>
         public XRUIAlert ShowAlert(AlertType type, string title, string text, Action onClick)
         {
             return ShowAlert(null, type, title, text, 0, onClick);
@@ -255,7 +262,7 @@ namespace com.chwar.xrui
         /// <param name="text">The body of the alert.</param>
         /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
         /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
-        /// <returns></returns>
+        /// <returns>The created alert.</returns>
         public XRUIAlert ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, int countdown, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
@@ -302,6 +309,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="modalName">Name of the modal.</param>
         /// <param name="additionalScript">User script to attach to the modal for user-defined behaviour.</param>
+        /// <returns>The created modal.</returns>
         public XRUIModal ShowModal(string modalName, Type additionalScript)
         {
             InspectorModal m = XRUI.Instance.modals.Find(modal => modal.modalName.Equals(modalName));
@@ -333,6 +341,7 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="parentCoordinates">The coordinates of the parent element that triggered this menu.</param>
         /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
+        /// <returns>The created contextual menu.</returns>
         public XRUIContextualMenu ShowContextualMenu(Vector2 parentCoordinates, bool showArrow)
         {
             return ShowContextualMenu(null, parentCoordinates, showArrow);
@@ -346,6 +355,7 @@ namespace com.chwar.xrui
         /// <param name="showArrow">Displays an arrow pointing at the parent element.</param>
         /// <param name="leftOffset">Adds an offset in pixels used when the contextual menu is positioned on the left of the parent coordinates.</param>
         /// <param name="rightOffset">Adds an offset in pixels used when the contextual menu is positioned on the right of the parent coordinates.</param>
+        /// <returns>The created contextual menu.</returns>
         public XRUIContextualMenu ShowContextualMenu(VisualTreeAsset template, Vector2 parentCoordinates, bool showArrow, float leftOffset = Single.NaN, float rightOffset = Single.NaN)
         {
             var container = GetXRUIFloatingElementContainer("ContextualMenu", false);
@@ -374,7 +384,7 @@ namespace com.chwar.xrui
         /// <summary>
         /// Gets a Floating Element container or creates it if not existing.
         /// </summary>
-        /// <returns>The Floating Elements container game object.</returns>
+        /// <returns>The Floating Element container game object.</returns>
         private GameObject GetXRUIFloatingElementContainer(string containerName, bool bDarkenBackground)
         {
             var containerGO = GameObject.Find(containerName);

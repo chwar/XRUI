@@ -15,10 +15,12 @@ items:
   source:
     id: XRUINavbar
     path: ''
-    startLine: 1945
+    startLine: 2392
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Navbar class.\n"
+  example: []
   syntax:
     content: 'public class XRUINavbar : XRUIElement'
     content.vb: >-

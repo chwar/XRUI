@@ -19,10 +19,12 @@ items:
   source:
     id: XRUICard
     path: ''
-    startLine: 1035
+    startLine: 1295
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nXRUI Card class.\n"
+  example: []
   syntax:
     content: 'public class XRUICard : XRUIElement'
     content.vb: >-
@@ -68,10 +70,12 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1049
+    startLine: 1326
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nInitializes the UI Element.\n"
+  example: []
   syntax:
     content: protected override void Init()
     content.vb: Protected Overrides Sub Init
@@ -97,15 +101,18 @@ items:
   source:
     id: UpdateTitle
     path: ''
-    startLine: 1069
+    startLine: 1350
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUpdates the title.\n"
+  example: []
   syntax:
     content: public void UpdateTitle(string text)
     parameters:
     - id: text
       type: System.String
+      description: The new text to replace the title with.
     content.vb: Public Sub UpdateTitle(text As String)
   overload: com.chwar.xrui.UIElements.XRUICard.UpdateTitle*
   modifiers.csharp:
@@ -126,15 +133,18 @@ items:
   source:
     id: UpdateSubtitle
     path: ''
-    startLine: 1078
+    startLine: 1363
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nUpdates the subtitle.\n"
+  example: []
   syntax:
     content: public void UpdateSubtitle(string text)
     parameters:
     - id: text
       type: System.String
+      description: The new text to replace the subtitle with.
     content.vb: Public Sub UpdateSubtitle(text As String)
   overload: com.chwar.xrui.UIElements.XRUICard.UpdateSubtitle*
   modifiers.csharp:
@@ -155,15 +165,18 @@ items:
   source:
     id: SetCloseButtonAction
     path: ''
-    startLine: 1087
+    startLine: 1376
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
+  summary: "\nAdds a callback to the close button.\n"
+  example: []
   syntax:
     content: public void SetCloseButtonAction(Action closeButtonAction)
     parameters:
     - id: closeButtonAction
       type: System.Action
+      description: The <xref href="System.Action" data-throw-if-not-resolved="false"></xref> to trigger upon clicking.
     content.vb: Public Sub SetCloseButtonAction(closeButtonAction As Action)
   overload: com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction*
   modifiers.csharp:
@@ -761,11 +774,6 @@ references:
   name: UpdateSubtitle
   nameWithType: XRUICard.UpdateSubtitle
   fullName: com.chwar.xrui.UIElements.XRUICard.UpdateSubtitle
-- uid: com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction*
-  commentId: Overload:com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction
-  name: SetCloseButtonAction
-  nameWithType: XRUICard.SetCloseButtonAction
-  fullName: com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction
 - uid: System.Action
   commentId: T:System.Action
   parent: System
@@ -773,3 +781,8 @@ references:
   name: Action
   nameWithType: Action
   fullName: System.Action
+- uid: com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction
+  name: SetCloseButtonAction
+  nameWithType: XRUICard.SetCloseButtonAction
+  fullName: com.chwar.xrui.UIElements.XRUICard.SetCloseButtonAction

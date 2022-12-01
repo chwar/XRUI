@@ -20,11 +20,11 @@ items:
   source:
     id: AlertType
     path: ''
-    startLine: 94
+    startLine: 132
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
-  summary: "\nDefines the different alert types\n"
+  summary: "\nDefines the different alert types. Default styles are inspired by Bootstrap.\n"
   example: []
   syntax:
     content: public enum AlertType
@@ -49,10 +49,12 @@ items:
   source:
     id: Primary
     path: ''
-    startLine: 96
+    startLine: 137
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nPrimary alert type, by default in blue\n"
+  example: []
   syntax:
     content: Primary = 0
     return:
@@ -77,10 +79,12 @@ items:
   source:
     id: Success
     path: ''
-    startLine: 97
+    startLine: 141
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nSuccess alert type, by default in green\n"
+  example: []
   syntax:
     content: Success = 1
     return:
@@ -105,10 +109,12 @@ items:
   source:
     id: Warning
     path: ''
-    startLine: 98
+    startLine: 145
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nWarning alert type, by default in yellow\n"
+  example: []
   syntax:
     content: Warning = 2
     return:
@@ -133,10 +139,12 @@ items:
   source:
     id: Danger
     path: ''
-    startLine: 99
+    startLine: 149
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nDanger alert type, by default in red\n"
+  example: []
   syntax:
     content: Danger = 3
     return:
@@ -161,10 +169,12 @@ items:
   source:
     id: Info
     path: ''
-    startLine: 100
+    startLine: 153
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nInfo alert type, by default in light blue\n"
+  example: []
   syntax:
     content: Info = 4
     return:

@@ -5,9 +5,8 @@ items:
   id: XRUIGridController
   parent: com.chwar.xrui
   children:
-  - com.chwar.xrui.XRUIGridController.AdaptGrid
   - com.chwar.xrui.XRUIGridController.gridElementsList
-  - com.chwar.xrui.XRUIGridController.XruiRoot
+  - com.chwar.xrui.XRUIGridController.RefreshGrid
   langs:
   - csharp
   - vb
@@ -18,10 +17,12 @@ items:
   source:
     id: XRUIGridController
     path: ''
-    startLine: 464
+    startLine: 627
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nController which creates a grid to organise UI elements on screen.\n"
+  example: []
   syntax:
     content: 'public class XRUIGridController : MonoBehaviour'
     content.vb: >-
@@ -35,33 +36,6 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: com.chwar.xrui.XRUIGridController.XruiRoot
-  commentId: F:com.chwar.xrui.XRUIGridController.XruiRoot
-  id: XruiRoot
-  parent: com.chwar.xrui.XRUIGridController
-  langs:
-  - csharp
-  - vb
-  name: XruiRoot
-  nameWithType: XRUIGridController.XruiRoot
-  fullName: com.chwar.xrui.XRUIGridController.XruiRoot
-  type: Field
-  source:
-    id: XruiRoot
-    path: ''
-    startLine: 467
-  assemblies:
-  - cs.temp.dll
-  namespace: com.chwar.xrui
-  syntax:
-    content: public VisualElement XruiRoot
-    return:
-      type: Global.VisualElement
-    content.vb: Public XruiRoot As VisualElement
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: com.chwar.xrui.XRUIGridController.gridElementsList
   commentId: F:com.chwar.xrui.XRUIGridController.gridElementsList
   id: gridElementsList
@@ -76,10 +50,12 @@ items:
   source:
     id: gridElementsList
     path: ''
-    startLine: 468
+    startLine: 633
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nList of <xref href=\"com.chwar.xrui.XRUIGridController.XRUIGrid\" data-throw-if-not-resolved=\"false\"></xref> that are in the grid.\n"
+  example: []
   syntax:
     content: public List<XRUIGridController.XRUIGrid> gridElementsList
     return:
@@ -89,28 +65,30 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUIGridController.AdaptGrid
-  commentId: M:com.chwar.xrui.XRUIGridController.AdaptGrid
-  id: AdaptGrid
+- uid: com.chwar.xrui.XRUIGridController.RefreshGrid
+  commentId: M:com.chwar.xrui.XRUIGridController.RefreshGrid
+  id: RefreshGrid
   parent: com.chwar.xrui.XRUIGridController
   langs:
   - csharp
   - vb
-  name: AdaptGrid()
-  nameWithType: XRUIGridController.AdaptGrid()
-  fullName: com.chwar.xrui.XRUIGridController.AdaptGrid()
+  name: RefreshGrid()
+  nameWithType: XRUIGridController.RefreshGrid()
+  fullName: com.chwar.xrui.XRUIGridController.RefreshGrid()
   type: Method
   source:
-    id: AdaptGrid
+    id: RefreshGrid
     path: ''
-    startLine: 505
+    startLine: 690
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
+  summary: "\nRefreshes the grid according to the settings defined in the Inspector. \n"
+  example: []
   syntax:
-    content: public void AdaptGrid()
-    content.vb: Public Sub AdaptGrid
-  overload: com.chwar.xrui.XRUIGridController.AdaptGrid*
+    content: public void RefreshGrid()
+    content.vb: Public Sub RefreshGrid
+  overload: com.chwar.xrui.XRUIGridController.RefreshGrid*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -134,11 +112,11 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Global.VisualElement
-  isExternal: true
-  name: VisualElement
-  nameWithType: VisualElement
-  fullName: VisualElement
+- uid: com.chwar.xrui.XRUIGridController.XRUIGrid
+  commentId: T:com.chwar.xrui.XRUIGridController.XRUIGrid
+  name: XRUIGridController.XRUIGrid
+  nameWithType: XRUIGridController.XRUIGrid
+  fullName: com.chwar.xrui.XRUIGridController.XRUIGrid
 - uid: System.Collections.Generic.List{com.chwar.xrui.XRUIGridController.XRUIGrid}
   commentId: T:System.Collections.Generic.List{com.chwar.xrui.XRUIGridController.XRUIGrid}
   parent: System.Collections.Generic
@@ -226,8 +204,8 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
-- uid: com.chwar.xrui.XRUIGridController.AdaptGrid*
-  commentId: Overload:com.chwar.xrui.XRUIGridController.AdaptGrid
-  name: AdaptGrid
-  nameWithType: XRUIGridController.AdaptGrid
-  fullName: com.chwar.xrui.XRUIGridController.AdaptGrid
+- uid: com.chwar.xrui.XRUIGridController.RefreshGrid*
+  commentId: Overload:com.chwar.xrui.XRUIGridController.RefreshGrid
+  name: RefreshGrid
+  nameWithType: XRUIGridController.RefreshGrid
+  fullName: com.chwar.xrui.XRUIGridController.RefreshGrid
