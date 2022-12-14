@@ -1,6 +1,6 @@
 {
   "name": "com.chwar.xrui",
-  "version": "1.0.1-pre",
+  "version": "1.0.2-pre",
   "displayName": "XRUI Framework",
   "description": "XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can adjust depending on the deployed platform, supporting 2D rendering in Landscape and Portrait modes as well as World Space rendering for XR.",
   "unity": "2021.2",
