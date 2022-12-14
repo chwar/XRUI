@@ -236,7 +236,7 @@ namespace com.chwar.xrui.UIElements
                 bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft
                                    || Input.deviceOrientation == DeviceOrientation.LandscapeRight
                                    || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")) 
-                                   || ((Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
+                                   || ((!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer)) && Input.deviceOrientation == DeviceOrientation.Unknown));
 
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
