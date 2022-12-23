@@ -154,11 +154,13 @@ namespace com.chwar.xrui.UIElements
         public void Show(VisualElement element, bool bShow)
         {
             element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
-            // Hide the panel if in 3D
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying)
+            // If trying to hide the Root Element, hide the panel if in 3D
+            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && element.Equals(RootElement) && Application.isPlaying)
             {
-                GetComponent<MeshRenderer>().enabled = bShow;
-                GetComponent<MeshCollider>().enabled = bShow;
+                var mr = GetComponent<MeshRenderer>();
+                if(mr != null) mr.enabled = bShow;
+                var mc = GetComponent<MeshCollider>();
+                if(mc != null) mc.enabled = bShow;
             }
         }
 
