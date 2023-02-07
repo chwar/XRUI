@@ -40,7 +40,7 @@ namespace com.chwar.xrui
         /// Forces 2D Portrait USS styles when in the Unity Editor.
         /// </summary>
         [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in the Unity Editor. This forces 2D Portrait USS styles.")]
-        public bool setTwoDimensionalFormatToPortraitInEditor;
+        public bool forceTwoDimensionalFormatToPortrait;
 
         /// <summary>
         /// The <see cref="XRUIConfiguration"/> to use for XRUI.
@@ -78,7 +78,7 @@ namespace com.chwar.xrui
                     Instance = FindObjectOfType<XRUI>();
 
                 // Set the format given in the inspector
-                SetCurrentXRUIFormat(xruiFormat,setTwoDimensionalFormatToPortraitInEditor);
+                SetCurrentXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
                 InitializeElements();
             }
             else
@@ -96,7 +96,7 @@ namespace com.chwar.xrui
         {
             // This only runs in Editor mode
             if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-            SetCurrentXRUIFormat(xruiFormat,setTwoDimensionalFormatToPortraitInEditor);
+            SetCurrentXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
             InitializeElements();
         }
         #endif

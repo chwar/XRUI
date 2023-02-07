@@ -235,11 +235,10 @@ namespace com.chwar.xrui.UIElements
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
                 // Check for device orientation to refine Mobile AR USS styles
-                bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft
+                bool forcePortrait = Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")); 
+                bool isLandscape =  !forcePortrait && (Input.deviceOrientation == DeviceOrientation.LandscapeLeft
                                    || Input.deviceOrientation == DeviceOrientation.LandscapeRight
-                                   || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")) 
-                                   || ((!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer)) && Input.deviceOrientation == DeviceOrientation.Unknown));
-
+                                   || (!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
                 Show(true);
