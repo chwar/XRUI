@@ -294,12 +294,12 @@ namespace com.chwar.xrui
             // var camPos = Camera.main.transform.position;
             // xrui.worldUIParameters.customPanelPosition = new Vector3(camPos.x,
             //     camPos.y - .2f, camPos.z + .3f);
+            if (onClick != null)
+                xrui.clickCallback = onClick;
 
             if(countdown > 0)
                 xrui.DisposeAlert(false,false);
             
-            if (onClick != null)
-                xrui.clickCallback = onClick;
 
             return xrui;
         }

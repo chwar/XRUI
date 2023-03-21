@@ -59,7 +59,6 @@ namespace com.chwar.xrui.UIElements
             {
                 StartCoroutine(Animate(destroyImmediate));
                 StartCoroutine(Dispose(destroyImmediate));
-                clickCallback?.Invoke();
             }
         }
 
@@ -71,6 +70,7 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator Dispose(bool destroyImmediate = true)
         {
             yield return new WaitForSeconds(destroyImmediate ? 1 : countdown == 0 ? 1 : countdown);
+            clickCallback?.Invoke();
             Destroy(this.gameObject);
         }
         
