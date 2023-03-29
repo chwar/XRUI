@@ -406,5 +406,8 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         [Tooltip("Alters the scale of the panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
         public float panelScale;
+
+        [Tooltip("By default, XRUI creates necessary components to support interactions from raycasts. Enabling this parameter disables that and only allows the display of the panel.")]
+        public bool disableXRInteraction;
     }
 }

@@ -5,6 +5,7 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using com.chwar.xrui.UIElements;
 using UnityEditor;
 using UnityEngine;
@@ -451,7 +452,6 @@ namespace com.chwar.xrui
             rt.Create();
             uiDocument.panelSettings.targetTexture = rt;
 
-            o.AddComponent<XRUIWorldSpaceInteraction>();
             var plane = o.GetComponent<XRUIPanel>() ? o.GetComponent<XRUIPanel>() : o.AddComponent<XRUIPanel>();
             if (xrui.worldUIParameters.panelScale.Equals(0))
                 xrui.worldUIParameters.panelScale = 1;
@@ -463,17 +463,21 @@ namespace com.chwar.xrui
             plane.useArc = xrui.worldUIParameters.bendPanel;
             plane.curvatureDegrees = xrui.worldUIParameters.bendPanel ? 60 : 0;
             plane.Generate(rt);
-            o.transform.position = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? Camera.main.transform.forward : xrui.worldUIParameters.customPanelPosition;
+            o.transform.localPosition = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? Camera.main.transform.forward : xrui.worldUIParameters.customPanelPosition;
 
-            var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
-            collider.sharedMesh = plane.mesh;
+            if (!xrui.worldUIParameters.disableXRInteraction)
+            {
+                var collider = o.GetComponent<MeshCollider>() ? o.GetComponent<MeshCollider>() : o.AddComponent<MeshCollider>();
+                collider.sharedMesh = plane.mesh;
+                // Add Physics Raycaster to enable XRI interactions
+                o.AddComponent<XRUIWorldSpaceInteraction>();
+                o.AddComponent<TrackedDevicePhysicsRaycaster>();
+            }
             
             // TODO Find a shader that can fade out (transparent) but that culls rays from MR/VR controllers
             // var meshRenderer =  o.GetComponent<MeshRenderer>();
             // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
             
-            // Add Physics Raycaster to enable XRI interactions
-            o.AddComponent<TrackedDevicePhysicsRaycaster>();
         }
         
 
