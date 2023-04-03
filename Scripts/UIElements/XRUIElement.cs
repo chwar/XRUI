@@ -247,18 +247,27 @@ namespace com.chwar.xrui.UIElements
             {
                 if (Application.isPlaying)
                 {
-                    // Create new PanelSettings to which we will assign a specific RenderTexture
-                    // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
-                    // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
-                    UIDocument.panelSettings = Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
-                    // Create a world UI panel after the layout pass
-                    RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
+                    ConvertToWorldUIPanel();
                 }
                 else
                 {
                     Show(false);
                 }
             }
+        }
+
+        /// <summary>
+        /// Converts a given UI Element to World UI even when in 2D mode.
+        /// This allows hybrid UI on mobile AR.
+        /// </summary>
+        public void ConvertToWorldUIPanel()
+        {
+            // Create new PanelSettings to which we will assign a specific RenderTexture
+            // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
+            // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
+            UIDocument.panelSettings = Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
+            // Create a world UI panel after the layout pass
+            RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
         }
         
         /// <summary>
