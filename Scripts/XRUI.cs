@@ -428,8 +428,11 @@ namespace com.chwar.xrui
         /// <param name="uiDocument">The UI Document of the XRUI Element.</param>
         internal static void GetWorldUIPanel(GeometryChangedEvent evt, UIDocument uiDocument)
         {
-            ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetWorldUIPanel);
+            // ((VisualElement) evt.target).UnregisterCallback<GeometryChangedEvent, UIDocument>(GetWorldUIPanel);
+            
             var xrui = uiDocument.GetComponent<XRUIElement>();
+            // Do not process when UI is hidden
+            if (xrui.RootElement.ClassListContains("xrui--hide")) return;
 
             // Position the GO at the same height as the HMD / Camera
             var o = uiDocument.gameObject;
@@ -477,7 +480,6 @@ namespace com.chwar.xrui
             // TODO Find a shader that can fade out (transparent) but that culls rays from MR/VR controllers
             // var meshRenderer =  o.GetComponent<MeshRenderer>();
             // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
-            
         }
         
 

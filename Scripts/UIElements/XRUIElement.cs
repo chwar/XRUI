@@ -45,7 +45,7 @@ namespace com.chwar.xrui.UIElements
         {
             // To override
             UIDocument = GetComponent<UIDocument>();
-            RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
+            RootElement = UIDocument.rootVisualElement?.Q(null, "xrui");
             _cachedDeviceOrientation = Input.deviceOrientation;
         }
 
@@ -146,16 +146,16 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Changes the visibility of the UIDocument with the USS `display` property.
+        /// Changes the display value of the UIDocument with the USS `display` property.
         /// For World UI, the MeshRenderer and MeshCollider are enabled/disabled.
         /// </summary>
         /// <param name="element">Element to change the visibility of</param>
-        /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
+        /// <param name="bShow">Display value, sets USS to `Flex` or `None`.</param>
         public void Show(VisualElement element, bool bShow)
         {
-            element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
-            // If trying to hide the Root Element, hide the panel if in 3D
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && element.Equals(RootElement) && Application.isPlaying)
+            element.EnableInClassList("xrui--hide", !bShow);
+            // If trying to hide the Root Element, hide the panel when in 3D
+            if (element.Equals(RootElement) && Application.isPlaying)
             {
                 var mr = GetComponent<MeshRenderer>();
                 if(mr != null) mr.enabled = bShow;
@@ -241,7 +241,7 @@ namespace com.chwar.xrui.UIElements
                                    || (!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
-                Show(true);
+                Show(!RootElement.ClassListContains("xrui--hide"));
             }
             else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
             {
