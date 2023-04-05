@@ -86,5 +86,32 @@ namespace com.chwar.xrui.UIElements
             if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
                 StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
         }
+        
+        /// <summary>
+        /// Defines the different alert types. Default styles are inspired by Bootstrap.
+        /// </summary>
+        public enum AlertType
+        {
+            /// <summary>
+            /// Primary alert type, by default in blue
+            /// </summary>
+            Primary,
+            /// <summary>
+            /// Success alert type, by default in green
+            /// </summary>
+            Success,
+            /// <summary>
+            /// Warning alert type, by default in yellow
+            /// </summary>
+            Warning,
+            /// <summary>
+            /// Danger alert type, by default in red
+            /// </summary>
+            Danger,
+            /// <summary>
+            /// Info alert type, by default in light blue
+            /// </summary>
+            Info
+        }
     }
 }

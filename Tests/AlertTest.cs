@@ -43,7 +43,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreatePrimaryAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.True(alert.RootElement.ClassListContains("primary"));
@@ -52,7 +52,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreateWarningAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Warning, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.True(alert.RootElement.ClassListContains("warning"));
@@ -61,7 +61,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreateSuccessAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Success, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.True(alert.RootElement.ClassListContains("success"));
@@ -70,7 +70,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreateInfoAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Info, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.True(alert.RootElement.ClassListContains("info"));
@@ -79,7 +79,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreateDangerAlert()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, "Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Danger, "Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.True(alert.RootElement.ClassListContains("danger"));
@@ -88,7 +88,7 @@ namespace com.chwar.xrui.Tests
         [Test]
         public void AlertTestCreateAlertWithTitle()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Title","Test");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, "Title","Test");
             var alert = Object.FindObjectOfType<XRUIAlert>();
             Assert.NotNull(alert);
             Assert.NotNull(alert.Title);
@@ -97,7 +97,7 @@ namespace com.chwar.xrui.Tests
         [UnityTest]
         public IEnumerator AlertTestWithCallback()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Click me!", "Click to trigger callback", ()=> AlertClick());
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, "Click me!", "Click to trigger callback", ()=> AlertClick());
             yield return new WaitUntil(() => _clicked);
             // Wait for animation
             yield return new WaitForSeconds(1.5f);
@@ -107,7 +107,7 @@ namespace com.chwar.xrui.Tests
         [UnityTest]
         public IEnumerator AlertTestWithCountdown()
         {
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, null, "This will disappear in one second", 1);
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, null, "This will disappear in one second", 1);
             yield return new WaitForSeconds(1.5f);
             Assert.Null(GameObject.Find("PrimaryAlert"));
         }
@@ -116,7 +116,7 @@ namespace com.chwar.xrui.Tests
         public IEnumerator WorldAlertTestWithCountdown()
         {
             XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, null, "This will disappear in one second", 1);
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, null, "This will disappear in one second", 1);
             yield return new WaitForSeconds(2f);
             Assert.Null(GameObject.Find("PrimaryAlert"));
         }

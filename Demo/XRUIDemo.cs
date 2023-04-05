@@ -45,19 +45,19 @@ namespace com.chwar.xrui
             
             // Here are various examples for showing alerts with title, text, callbacks, and countdowns
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, "Primary message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Success, "Success message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning","Clicking this turns the card green!", () =>
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Warning, "Warning","Clicking this turns the card green!", () =>
             {
                 // Find the default card template's header and make it green
                 _card.GetXRUIVisualElement("xrui-card__header").AddToClassList("xrui-background--success");
             });
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, 	"Error", "Error with a title and message.");
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Danger, 	"Error", "Error with a title and message.");
             yield return new WaitForSeconds(1);
-            XRUI.Instance.ShowAlert(XRUI.AlertType.Info, "Info", "This message will disappear automatically", 5);
+            XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Info, "Info", "This message will disappear automatically", 5);
 
             /* ========== XRUI List ========== */
             

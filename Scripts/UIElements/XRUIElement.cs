@@ -18,6 +18,22 @@ namespace com.chwar.xrui.UIElements
     public class XRUIElement : MonoBehaviour
     {
         /// <summary>
+        /// <see cref="UIDocument"/> of the element.
+        /// </summary>
+        internal UIDocument UIDocument;
+        /// <summary>
+        /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
+        /// </summary>
+        private DeviceOrientation _cachedDeviceOrientation;
+        /// <summary>
+        /// The main Camera reference, used for positioning World UI panels
+        /// </summary>
+        private Camera _camera;
+        /// <summary>
+        /// Internal flag determining whether this UI element follows the main camera.
+        /// </summary>
+        private bool _isFollowingCamera;
+        /// <summary>
         /// True if the pointer is hovering the current element.
         /// </summary>
         public bool PointerOverUI { get; private set; }
@@ -26,17 +42,13 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         public WorldUIParameters worldUIParameters;
         /// <summary>
-        /// <see cref="UIDocument"/> of the element.
-        /// </summary>
-        internal UIDocument UIDocument;
-        /// <summary>
         /// Root <see cref="VisualElement"/> that contains the `.xrui` USS class.
         /// </summary>
-        public VisualElement RootElement;
+        public VisualElement RootElement { get; private set; }
         /// <summary>
-        /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
+        /// Lets a given UI Element format to differ from the <see cref="XRUI.xruiFormat"/> defined in the XRUI controller
         /// </summary>
-        private DeviceOrientation _cachedDeviceOrientation;
+        public XRUIFormatOverride xruiFormatOverride = XRUIFormatOverride.UseGlobal;
         
         /// <summary>
         /// Initializes the UI Element. 
@@ -47,6 +59,7 @@ namespace com.chwar.xrui.UIElements
             UIDocument = GetComponent<UIDocument>();
             RootElement = UIDocument.rootVisualElement?.Q(null, "xrui");
             _cachedDeviceOrientation = Input.deviceOrientation;
+            _camera = Camera.main;
         }
 
         /// <summary>
@@ -90,10 +103,7 @@ namespace com.chwar.xrui.UIElements
             // Register event handlers for pointer clicks on the UI
             RootElement.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
-
             UpdateUI();
-            if (worldUIParameters.anchorPanelToCamera)
-                StartCoroutine(FollowCamera());
         }
 
         /// <summary>
@@ -107,9 +117,12 @@ namespace com.chwar.xrui.UIElements
             // Unregister event handlers for pointer clicks on the UI
             RootElement.UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
-            
+
             if (worldUIParameters.anchorPanelToCamera)
+            {
                 StopCoroutine(FollowCamera());
+                _isFollowingCamera = false;
+            }
         }
 
         /// <summary>
@@ -161,6 +174,12 @@ namespace com.chwar.xrui.UIElements
                 if(mr != null) mr.enabled = bShow;
                 var mc = GetComponent<MeshCollider>();
                 if(mc != null) mc.enabled = bShow;
+
+                if (!bShow && worldUIParameters.anchorPanelToCamera)
+                {
+                    StopCoroutine(FollowCamera());
+                    _isFollowingCamera = false;
+                }
             }
         }
 
@@ -228,11 +247,14 @@ namespace com.chwar.xrui.UIElements
                 return;
             }
 
+            var format = (XRUI.XRUIFormat)Enum.Parse(typeof(XRUI.XRUIFormat), 
+                xruiFormatOverride == XRUIFormatOverride.UseGlobal ? XRUI.GetCurrentXRUIFormat() : xruiFormatOverride.ToString());
+            
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.TwoDimensional.ToString().ToLower());
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.ThreeDimensional.ToString().ToLower());
-            RootElement.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
+            RootElement.EnableInClassList(format.ToString().ToLower(), true);
 
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            if (format == XRUI.XRUIFormat.TwoDimensional)
             {
                 // Check for device orientation to refine Mobile AR USS styles
                 bool forcePortrait = Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")); 
@@ -243,11 +265,16 @@ namespace com.chwar.xrui.UIElements
                 RootElement.EnableInClassList("portrait", !isLandscape);
                 Show(!RootElement.ClassListContains("xrui--hide"));
             }
-            else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            else if (format == XRUI.XRUIFormat.ThreeDimensional)
             {
                 if (Application.isPlaying)
                 {
-                    ConvertToWorldUIPanel();
+                    // Create new PanelSettings to which we will assign a specific RenderTexture
+                    // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
+                    // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
+                    UIDocument.panelSettings = Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
+                    // Create a world UI panel after the layout pass
+                    RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
                 }
                 else
                 {
@@ -256,20 +283,6 @@ namespace com.chwar.xrui.UIElements
             }
         }
 
-        /// <summary>
-        /// Converts a given UI Element to World UI even when in 2D mode.
-        /// This allows hybrid UI on mobile AR.
-        /// </summary>
-        public void ConvertToWorldUIPanel()
-        {
-            // Create new PanelSettings to which we will assign a specific RenderTexture
-            // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
-            // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
-            UIDocument.panelSettings = Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
-            // Create a world UI panel after the layout pass
-            RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
-        }
-        
         /// <summary>
         /// Updates the UIDocument when the device's rotation changed
         /// </summary>
@@ -287,28 +300,29 @@ namespace com.chwar.xrui.UIElements
         /// <returns></returns>
         protected IEnumerator FollowCamera()
         {
-            while (true)
+            _isFollowingCamera = true;
+            while (_camera != null && !RootElement.ClassListContains("xrui--hide"))
             {
                 // Reposition in front of camera
-                if (Camera.main != null)
+                var cachedTarget = _camera.transform.TransformPoint(Vector3.forward);
+                cachedTarget.y = _camera.transform.position.y;
+
+                // If camera gets too far from the panel
+                if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
                 {
-                    var cachedTarget = Camera.main.transform.TransformPoint(new Vector3(0, 0, .5f));
-                    // Slightly delay the following mechanism to let the camera move freely without aggressively repositioning the panel
-                    yield return new WaitForSeconds(.5f);
-                    // If camera gets too far from the panel
-                    if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
+                    var cameraFollowVelocity = Vector3.zero;
+                    // Reposition until panel reaches the front of the camera
+                    while (Vector3.Distance(transform.position, cachedTarget) > .1f)
                     {
-                        var cameraFollowVelocity = Vector3.zero;
-                        // Reposition until panel reaches the front of the camera
-                        while (Vector3.Distance(transform.position, cachedTarget) > .05f)
-                        {
-                            transform.position = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .3f);
-                            transform.LookAt(2 * transform.position - Camera.main.transform.position);
-                            yield return new WaitForEndOfFrame();
-                        }
+                        var newPos = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .5f);
+                        transform.position = new Vector3(newPos.x, cachedTarget.y, newPos.z);
+                        transform.LookAt(2 * transform.position - _camera.transform.position);
+                        yield return new WaitForEndOfFrame();
                     }
                 }
+                yield return new WaitForEndOfFrame();
             }
+            yield return 0;
         }
 
         /// <summary>
@@ -375,6 +389,11 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         internal void StartFollowingCamera()
         {
+            if (!Application.isPlaying || _isFollowingCamera) return;
+            var cameraFront = _camera.transform.TransformPoint(Vector3.forward);
+            cameraFront.y = _camera.transform.position.y;
+            transform.position = cameraFront;
+            transform.LookAt(2 * transform.position - _camera.transform.position);
             StartCoroutine(FollowCamera());
         }
     }
@@ -406,11 +425,6 @@ namespace com.chwar.xrui.UIElements
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
         public Vector2 customPanelDimensions;
         /// <summary>
-        /// Sets the panel to the specified position in world coordinates. This is overriden if <see cref="anchorPanelToCamera"/> is true.
-        /// </summary>
-        [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
-        public Vector3 customPanelPosition;
-        /// <summary>
         /// Alters the scale of the panel. By default, the size of panels tend towards one world space unit (one meter).
         /// </summary>
         [Tooltip("Alters the scale of the panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
@@ -418,5 +432,12 @@ namespace com.chwar.xrui.UIElements
 
         [Tooltip("By default, XRUI creates necessary components to support interactions from raycasts. Enabling this parameter disables that and only allows the display of the panel.")]
         public bool disableXRInteraction;
+    }
+
+    public enum XRUIFormatOverride
+    {
+        UseGlobal,
+        TwoDimensional,
+        ThreeDimensional
     }
 }

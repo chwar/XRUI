@@ -127,33 +127,6 @@ namespace com.chwar.xrui
             /// </summary>
             ThreeDimensional
     }
-        
-        /// <summary>
-        /// Defines the different alert types. Default styles are inspired by Bootstrap.
-        /// </summary>
-        public enum AlertType
-        {
-            /// <summary>
-            /// Primary alert type, by default in blue
-            /// </summary>
-            Primary,
-            /// <summary>
-            /// Success alert type, by default in green
-            /// </summary>
-            Success,
-            /// <summary>
-            /// Warning alert type, by default in yellow
-            /// </summary>
-            Warning,
-            /// <summary>
-            /// Danger alert type, by default in red
-            /// </summary>
-            Danger,
-            /// <summary>
-            /// Info alert type, by default in light blue
-            /// </summary>
-            Info
-        }
 
         /// <summary>
         /// Returns the current <see cref="XRUIFormat"/> based on the format defined in the inspector.
@@ -171,7 +144,7 @@ namespace com.chwar.xrui
         /// <returns>True if <paramref name="format"/> matches the current <see cref="XRUIFormat"/></returns>
         public static bool IsCurrentXRUIFormat(XRUIFormat format)
         {
-            return GetCurrentXRUIFormat().Equals(format.ToString().ToLower());
+            return GetCurrentXRUIFormat().Equals(format.ToString());
         }
 
         /// <summary>
@@ -183,7 +156,7 @@ namespace com.chwar.xrui
         {
             // Update inspector value if called from API
             xruiFormat = format;
-            PlayerPrefs.SetString("XRUIFormat", format.ToString().ToLower());
+            PlayerPrefs.SetString("XRUIFormat", format.ToString());
             PlayerPrefs.SetInt("XRUIFormatOrientationPortrait", Convert.ToInt32(setOrientationPortrait));
             PlayerPrefs.Save();
         }
@@ -208,10 +181,10 @@ namespace com.chwar.xrui
         /// <summary>
         /// Shows an alert to the end-user.
         /// </summary>
-        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="type">The <see cref="XRUIAlert.AlertType"/> to use.</param>
         /// <param name="text">The body of the alert.</param>
         ///         /// <returns>The created alert.</returns>
-        public XRUIAlert ShowAlert(AlertType type, string text)
+        public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string text)
         {
             return ShowAlert(type, null, text);     
         }
@@ -219,11 +192,11 @@ namespace com.chwar.xrui
         /// <summary>
         /// Shows an alert to the end-user.
         /// </summary>
-        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="type">The <see cref="XRUIAlert.AlertType"/> to use.</param>
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <returns>The created alert.</returns>
-        public XRUIAlert ShowAlert(AlertType type, string title, string text)
+        public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text)
         {
             return ShowAlert(null, type, title, text, 0, null);
         }
@@ -231,12 +204,12 @@ namespace com.chwar.xrui
         /// <summary>
         /// Shows an alert to the end-user.
         /// </summary>
-        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="type">The <see cref="XRUIAlert.AlertType"/> to use.</param>
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
         /// <returns>The created alert.</returns>
-        public XRUIAlert ShowAlert(AlertType type, string title, string text, int countdown)
+        public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text, int countdown)
         {
             return ShowAlert(null, type, title, text, countdown, null);
         }               
@@ -244,12 +217,12 @@ namespace com.chwar.xrui
         /// <summary>
         /// Shows an alert to the end-user.
         /// </summary>
-        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="type">The <see cref="XRUIAlert.AlertType"/> to use.</param>
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
         /// <returns>The created alert.</returns>
-        public XRUIAlert ShowAlert(AlertType type, string title, string text, Action onClick)
+        public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text, Action onClick)
         {
             return ShowAlert(null, type, title, text, 0, onClick);
         }
@@ -258,13 +231,13 @@ namespace com.chwar.xrui
         /// Shows an alert to the end-user.
         /// </summary>
         /// <param name="template">Custom alert template to use, set it to null to use the default.</param>
-        /// <param name="type">The <see cref="AlertType"/> to use.</param>
+        /// <param name="type">The <see cref="XRUIAlert.AlertType"/> to use.</param>
         /// <param name="title">The title of the alert.</param>
         /// <param name="text">The body of the alert.</param>
         /// <param name="countdown">Optional countdown after which the alert automatically disappears.</param>
         /// <param name="onClick">Optional <see cref="Action"/> that is fired after a click on the alert.</param>
         /// <returns>The created alert.</returns>
-        public XRUIAlert ShowAlert(VisualTreeAsset template, AlertType type, string title, string text, int countdown, Action onClick)
+        public XRUIAlert ShowAlert(VisualTreeAsset template, XRUIAlert.AlertType type, string title, string text, int countdown, Action onClick)
         {
             var container = GetXRUIFloatingElementContainer(type + "Alert", false);
             var uiDocument = container.GetComponent<UIDocument>();
@@ -466,7 +439,6 @@ namespace com.chwar.xrui
             plane.useArc = xrui.worldUIParameters.bendPanel;
             plane.curvatureDegrees = xrui.worldUIParameters.bendPanel ? 60 : 0;
             plane.Generate(rt);
-            o.transform.localPosition = xrui.worldUIParameters.customPanelPosition.Equals(Vector3.zero) ? Camera.main.transform.forward : xrui.worldUIParameters.customPanelPosition;
 
             if (!xrui.worldUIParameters.disableXRInteraction)
             {
