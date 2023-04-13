@@ -9,7 +9,7 @@ items:
   - com.chwar.xrui.UIElements.WorldUIParameters.bendPanel
   - com.chwar.xrui.UIElements.WorldUIParameters.cameraFollowThreshold
   - com.chwar.xrui.UIElements.WorldUIParameters.customPanelDimensions
-  - com.chwar.xrui.UIElements.WorldUIParameters.customPanelPosition
+  - com.chwar.xrui.UIElements.WorldUIParameters.disableXRInteraction
   - com.chwar.xrui.UIElements.WorldUIParameters.panelScale
   langs:
   - csharp
@@ -21,7 +21,7 @@ items:
   source:
     id: WorldUIParameters
     path: ''
-    startLine: 1873
+    startLine: 1946
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -60,7 +60,7 @@ items:
   source:
     id: bendPanel
     path: ''
-    startLine: 1880
+    startLine: 1953
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -89,7 +89,7 @@ items:
   source:
     id: anchorPanelToCamera
     path: ''
-    startLine: 1885
+    startLine: 1958
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -118,7 +118,7 @@ items:
   source:
     id: cameraFollowThreshold
     path: ''
-    startLine: 1890
+    startLine: 1963
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -147,7 +147,7 @@ items:
   source:
     id: customPanelDimensions
     path: ''
-    startLine: 1895
+    startLine: 1968
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -158,35 +158,6 @@ items:
     return:
       type: Global.Vector2
     content.vb: Public customPanelDimensions As Vector2
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: com.chwar.xrui.UIElements.WorldUIParameters.customPanelPosition
-  commentId: F:com.chwar.xrui.UIElements.WorldUIParameters.customPanelPosition
-  id: customPanelPosition
-  parent: com.chwar.xrui.UIElements.WorldUIParameters
-  langs:
-  - csharp
-  - vb
-  name: customPanelPosition
-  nameWithType: WorldUIParameters.customPanelPosition
-  fullName: com.chwar.xrui.UIElements.WorldUIParameters.customPanelPosition
-  type: Field
-  source:
-    id: customPanelPosition
-    path: ''
-    startLine: 1900
-  assemblies:
-  - cs.temp.dll
-  namespace: com.chwar.xrui.UIElements
-  summary: "\nSets the panel to the specified position in world coordinates. This is overriden if <xref href=\"com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera\" data-throw-if-not-resolved=\"false\"></xref> is true.\n"
-  example: []
-  syntax:
-    content: public Vector3 customPanelPosition
-    return:
-      type: Global.Vector3
-    content.vb: Public customPanelPosition As Vector3
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -205,7 +176,7 @@ items:
   source:
     id: panelScale
     path: ''
-    startLine: 1905
+    startLine: 1973
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -216,6 +187,33 @@ items:
     return:
       type: System.Single
     content.vb: Public panelScale As Single
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.WorldUIParameters.disableXRInteraction
+  commentId: F:com.chwar.xrui.UIElements.WorldUIParameters.disableXRInteraction
+  id: disableXRInteraction
+  parent: com.chwar.xrui.UIElements.WorldUIParameters
+  langs:
+  - csharp
+  - vb
+  name: disableXRInteraction
+  nameWithType: WorldUIParameters.disableXRInteraction
+  fullName: com.chwar.xrui.UIElements.WorldUIParameters.disableXRInteraction
+  type: Field
+  source:
+    id: disableXRInteraction
+    path: ''
+    startLine: 1976
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  syntax:
+    content: public bool disableXRInteraction
+    return:
+      type: System.Boolean
+    content.vb: Public disableXRInteraction As Boolean
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -251,11 +249,3 @@ references:
   name: Vector2
   nameWithType: Vector2
   fullName: Vector2
-- uid: com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera
-  commentId: F:com.chwar.xrui.UIElements.WorldUIParameters.anchorPanelToCamera
-  isExternal: true
-- uid: Global.Vector3
-  isExternal: true
-  name: Vector3
-  nameWithType: Vector3
-  fullName: Vector3

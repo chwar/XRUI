@@ -17,7 +17,7 @@ items:
   source:
     id: XRUIFormat
     path: ''
-    startLine: 117
+    startLine: 60
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -46,7 +46,7 @@ items:
   source:
     id: TwoDimensional
     path: ''
-    startLine: 122
+    startLine: 65
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -76,7 +76,7 @@ items:
   source:
     id: ThreeDimensional
     path: ''
-    startLine: 126
+    startLine: 69
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

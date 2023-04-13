@@ -6,9 +6,11 @@ items:
   children:
   - com.chwar.xrui.UIElements.WorldUIParameters
   - com.chwar.xrui.UIElements.XRUIAlert
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType
   - com.chwar.xrui.UIElements.XRUICard
   - com.chwar.xrui.UIElements.XRUIContextualMenu
   - com.chwar.xrui.UIElements.XRUIElement
+  - com.chwar.xrui.UIElements.XRUIFormatOverride
   - com.chwar.xrui.UIElements.XRUIList
   - com.chwar.xrui.UIElements.XRUIMenu
   - com.chwar.xrui.UIElements.XRUIModal
@@ -29,6 +31,12 @@ references:
   name: XRUIAlert
   nameWithType: XRUIAlert
   fullName: com.chwar.xrui.UIElements.XRUIAlert
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  commentId: T:com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  parent: com.chwar.xrui.UIElements
+  name: XRUIAlert.AlertType
+  nameWithType: XRUIAlert.AlertType
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType
 - uid: com.chwar.xrui.UIElements.XRUICard
   commentId: T:com.chwar.xrui.UIElements.XRUICard
   name: XRUICard
@@ -52,6 +60,12 @@ references:
   name: WorldUIParameters
   nameWithType: WorldUIParameters
   fullName: com.chwar.xrui.UIElements.WorldUIParameters
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride
+  commentId: T:com.chwar.xrui.UIElements.XRUIFormatOverride
+  parent: com.chwar.xrui.UIElements
+  name: XRUIFormatOverride
+  nameWithType: XRUIFormatOverride
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride
 - uid: com.chwar.xrui.UIElements.XRUIList
   commentId: T:com.chwar.xrui.UIElements.XRUIList
   name: XRUIList
