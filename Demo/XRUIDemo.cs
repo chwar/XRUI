@@ -21,7 +21,7 @@ namespace com.chwar.xrui
         { 
             /* Find XRUI Elements in the scene */
             _menu = FindObjectOfType<XRUIMenu>();
-            _card = FindObjectOfType<XRUICard>();
+            _card = FindObjectsOfType<XRUICard>()[1];
             _list = FindObjectOfType<XRUIList>();
 
             /* ========== XRUI Menu ========== */

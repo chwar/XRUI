@@ -118,7 +118,22 @@ namespace com.chwar.xrui.Tests
             XRUI.Instance.InitializeElements();
             var card = GameObject.FindObjectOfType<XRUICard>();
             card.Show(false);
-            Assert.True(card.RootElement.style.display.value.Equals(DisplayStyle.None));
+            Assert.True(card.RootElement.ClassListContains("xrui--hide"));
+        }
+        
+        [UnityTest]
+        public IEnumerator XRUIElementTestCardShowWorldUI()
+        {
+            XRUIEditor.AddCard();
+            var card = GameObject.FindObjectOfType<XRUICard>();
+            card.xruiFormatOverride = XRUIFormatOverride.ThreeDimensional;
+            XRUI.Instance.InitializeElements();
+            yield return new WaitForEndOfFrame();
+
+            card.Show(false);
+            Assert.True(card.RootElement.ClassListContains("xrui--hide"));
+            Assert.False(card.GetComponent<MeshRenderer>().enabled);
+            Assert.False(card.GetComponent<MeshCollider>().enabled);
         }
         
         [Test]
@@ -174,6 +189,63 @@ namespace com.chwar.xrui.Tests
             }
             // Fires OnEnable which throws a NullReferenceException, but can't be tested
             Assert.Pass();
+        }
+        
+        [Test]
+        public void XRUIElementTestFormatUseGlobal()
+        {
+            XRUIEditor.AddCard();
+            XRUI.Instance.InitializeElements();
+            var card = GameObject.FindObjectOfType<XRUICard>();
+            
+            XRUI.Instance.SetGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            
+            card.xruiFormatOverride = XRUIFormatOverride.UseGlobal;
+            Assert.True(card.IsXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
+            Assert.False(card.IsXRUIFormat(XRUI.XRUIFormat.TwoDimensional));
+        }
+        
+        [Test]
+        public void XRUIElementTestFormatTwoDimensional()
+        {
+            XRUIEditor.AddCard();
+            XRUI.Instance.InitializeElements();
+            var card = GameObject.FindObjectOfType<XRUICard>();
+            card.xruiFormatOverride = XRUIFormatOverride.TwoDimensional;
+            Assert.True(card.IsXRUIFormat(XRUI.XRUIFormat.TwoDimensional));
+            Assert.False(card.IsXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
+        }
+        
+        [Test]
+        public void XRUIElementTestFormatThreeDimensional()
+        {
+            XRUIEditor.AddCard();
+            XRUI.Instance.InitializeElements();
+            var card = GameObject.FindObjectOfType<XRUICard>();
+            card.xruiFormatOverride = XRUIFormatOverride.ThreeDimensional;
+            Assert.True(card.IsXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
+            Assert.False(card.IsXRUIFormat(XRUI.XRUIFormat.TwoDimensional));
+        }
+
+        [UnityTest]
+        public IEnumerator XRUIElementTestFollowCamera()
+        {
+            var cam = Camera.main;
+            XRUIEditor.AddCard();
+            var card = GameObject.FindObjectOfType<XRUICard>();
+            
+            // Position far outside view frustum
+            card.transform.position = new Vector3(-5, -5, -5);
+            card.worldUIParameters.anchorPanelToCamera = true;
+            card.xruiFormatOverride = XRUIFormatOverride.ThreeDimensional;
+            XRUI.Instance.InitializeElements();
+
+            yield return new WaitForEndOfFrame();
+
+            yield return new WaitForSeconds(2);
+           
+            // Assert that card is in front of camera
+            Assert.True(card.transform.position.Equals(cam.transform.position + Vector3.forward));
         }
     }
 }

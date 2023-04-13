@@ -3,7 +3,7 @@
 [![release](https://flat.badgen.net/github/release/chwar/xrui)](https://github.com/chwar/xrui)
 [![Unity 2021.2+](https://flat.badgen.net/badge/unity/2021.2+)](https://unity3d.com/get-unity/download)
 [![MIT](https://flat.badgen.net/badge/license/MIT/green)](./LICENSE)
-[![Coverage](https://flat.badgen.net/badge/coverage/90%25/green)](./Tests)
+[![Coverage](https://flat.badgen.net/badge/coverage/85%25/green)](./Tests)
 
 
 <table>
@@ -25,11 +25,11 @@
 </tr>
 </table>
 
-XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, mobile) and 3D (i.e., rendered in world space, required to render UI in VR and MR, can also be used in AR). This way, XRUI users only need to design and implement their UI once for all platforms, resulting in some time saving. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms.   
+XRUI is a responsive UI framework for making cross-platform XR applications with the Unity 3D editor. Its purpose is to assist users in creating efficient and adaptive UIs that can easily be adjusted to be rendered in 2D (for environments with a 2D screen, e.g. PC, smartphone, tablet) and 3D (i.e., rendered in world space, required to render UI in XR (AR/MR/VR)). This way, XRUI users only need to design and implement their UI once for all platforms. This can also provide memorability and familiarity to end-users that use XRUI enhanced apps on different platforms, thus increasing usability.   
 
 XRUI is based on Unity's new UI system, [UI Toolkit](https://docs.unity3d.com/Manual/UIElements.html). Internally, it uses UXML and USS, so a basic knowledge and understanding of these technologies are required to use this framework. 
 
-## Getting started
+## Getting Started
 
 1. In the package manager, click on `Add package from git URL` and insert the repository's URL: [https://github.com/chwar/XRUI.git](https://github.com/chwar/XRUI.git)
   * Alternatively, you can unzip and import the package manually.
@@ -325,7 +325,7 @@ void MyPage() {
 }
 ```
 
-### Using the default modal template
+### Using the Default Modal Template
 You can use the default modal template that comes with the package and fill it with your own content. It consists of a title, empty container, two buttons (main and secondary) sticking at the bottom, and a closing button in the top right corner. You can add your content to the container by referencing it by its USS class (`xrui-modal__container`) to the `UpdateModalFlow` method, as per the example above. You can manipulate the buttons and change the title through the `XRUIModal` API.
 
 Access the modal's public fields to change the title of the modal, the text of the buttons, or to set the icon of the top right close button:
@@ -359,7 +359,7 @@ Destroy the modal:
 _xruiModal.Destroy();
 ```
 
-#### Form validation
+#### Form Validation
 XRUI supports basic form validation by letting you define required fields. For now, only text fields are supported, i.e. XRUI determines if required text fields are empty or not.
 
 ```csharp
@@ -406,11 +406,11 @@ The provided alert template creates floating cards in 2D landscape and 3D format
 Show alerts using the `ShowAlert` method:
 
 ```csharp
-XRUI.Instance.ShowAlert(XRUI.AlertType.Primary, "Primary message.");
-XRUI.Instance.ShowAlert(XRUI.AlertType.Success, "Success message.");
-XRUI.Instance.ShowAlert(XRUI.AlertType.Warning, "Warning message.");
-XRUI.Instance.ShowAlert(XRUI.AlertType.Danger, 	"Error message.");
-XRUI.Instance.ShowAlert(XRUI.AlertType.Info, 	"Info message.");
+XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, "Primary message.");
+XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Success, "Success message.");
+XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Warning, "Warning message.");
+XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Danger, 	"Error message.");
+XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Info, 	"Info message.");
 ```
 
 You can also provide a title:
@@ -493,22 +493,46 @@ In addition, the contextual menu considers the available space on screen. By def
 	
 </details>
 	
-## XR adaptation
+## XR Adaptation
+
+### Global XRUI Format
 XRUI's main functionality is to provide responsiveness for different XR variants. This is done by setting the chosen XRUI format during the app's initialization, which all XRUI Elements (both static and dynamic) adopt thanks to USS styles.
 
-To change the XRUI format, change the related value in the XRUI controller:
+To change the global XRUI format, change the related value in the XRUI controller:
 
-The XRUI API provides a method to assess the current XRUI format. You can use it to do target-specific manipulations like so:
+The XRUI API provides methods to assess the current XRUI format. You can use it to do target-specific manipulations like so:
 
 ```csharp
-if(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional)) {
-    // MR/VR specific code here
+if(XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional)) {
+    // 3D UI specific code here
 }
+
+XRUIFormat format = XRUI.GetGlobalXRUIFormat();
 ``` 
+
+### Overriding the Global XRUI Format for Specific Elements 
+It is also possible for specific UI elements to override the global format defined in the XRUI controller. This way, hybrid 2D and 3D / World UI elements can be rendered in the same scene. Each XRUI Element possesses the `xruiFormatOverride` property, which can be set to the following values:
+
+- `UseGlobal`: uses the value set in the XRUI controller (default value)
+- `TwoDimensional`: overrides the value set in the XRUI controller by setting this UI element format to 2D
+- `ThreeDimensional`: overrides the value set in the XRUI controller by setting this UI element format to 3D
+
+The API provides methods to check the format of any XRUI Element:
+
+```csharp
+var card = GetComponent<XRUICard>();
+if(card.IsXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) {
+    // 3D UI specific code for this given element
+}
+
+XRUIFormat format = card.GetXRUIFormat(); 
+```
+
+> Note: When integrating World UI elements while using 2D as a global format, don't forget to change the Panel Settings of the UI Document to an asset that is fit for World UI (you can use the provided `DefaultWorldUIPanelSettings` asset).
 
 ### Two Dimensional Format
 For 2D UI, additional USS styles are provided to adapt for both landscape and portrait orientations. These classes are automatically added when the device (i.e., a smartphone) changes orientation.
-For ease of use, you can force the portrait mode while working in the Unity editor by checking the `Set Two Dimensional Format to Portrait in Editor` checkbox in the XRUI controller.
+For ease of use, you can force the portrait mode by checking the `Force Two Dimensional Format to Portrait` checkbox in the XRUI controller.
 
 ### Three Dimensional Format (World Space UI)
 When XRUI is set to Three Dimensional format, UI is rendered on panels in world space. Each XRUI Element contains a set of `World UI Parameters` which can alter the way it is rendered in world space.
@@ -519,7 +543,6 @@ When XRUI is set to Three Dimensional format, UI is rendered on panels in world 
 - The `Anchor Panel To Camera` property makes the panel follow the gaze of the camera, with a slight delay.
 - The `Camera Follow Threshold` property defines the minimum distance that needs to be between the panel and the camera gaze before the panel recenters itself.
 - The `Custom Panel Dimensions` overrides the size of the panel, which is otherwise calculated from the ratio of the width and height of the UI element defined in the USS sheet.
-- The `Custom Panel Position` property sets the panel to the specified position in world coordinates. This is overriden if the `Anchor Panel To Camera` checkbox is checked.
 - The `Panel Scale` property lets you alter the scale of the panel. By default, the size of panels tend towards one world space unit.
 
 ## XRUI Grid System
@@ -539,7 +562,7 @@ You can create your own UXML templates and refer them in the XRUI Configuration 
 
 Also, the root visual element of your custom templates must have the `.xrui` USS class.
 
-### USS styles
+### USS Styles
 XRUI comes with its own set of styles that are imported just after Unity's in UI Toolkit's pipeline. They are imported through a theme file which is used in the provided Panel Settings assets (also linked in the XRUI Configuration asset). You can add your own root styles to this theme file, override the root XRUI styles, or remove some of the imported assets if you don't need them. Should you want to inherit some of the XRUI styles for your own UI elements, you can add the related USS classes to the desired visual elements. 
 
 Additionally, when creating your custom elements based on existing ones, it is recommended that you add the following USS classes to keep the XRUI functionalities (e.g., updating the title from the inspector). They are the following:
@@ -577,6 +600,7 @@ Your controllers need:
 
 XRUI automatically adds the `Tracked Device Physics Raycaster` component to World UI game objects.
 
+You can also specifically disable XR interactions on specific XRUI Elements, to avoid adding unnecessary Game Objects to your scene at runtime. To do so, check the `Disable XR Interaction` checkbox in the `World UI Parameters` section of the XRUI Element.
 ## Acknowledgements
 - Thanks to [katas94](https://gist.github.com/katas94/7b220a591215efc36110860a0b1125eb) for the inspiration on interfacing XRUI with Unity Event Handlers and the XR Interaction package.
 - Thanks to [mattvr](https://gist.github.com/mattvr/8cdcc922d1a75d0a7a7abf5d46e23ef0) for their gist to create curved panels.
@@ -585,12 +609,9 @@ XRUI automatically adds the `Tracked Device Physics Raycaster` component to Worl
 
 ## Roadmap
 - Grid system for World UI
-- Implement keyboard support in MR/VR
 - Animation mechanism for all XRUI Elements
-- Add XRUIFormat override for XRUIElements, so that the app can have both 2D and 3D UI at once in the same scene (e.g., for mobile AR)
 - Custom inspectors for ease of use
 
 ## Known bugs
-- On mobile (Android), rotations show UI elements that had been previously hidden
 - Raycasts on World UI Interactions do not entirely match the visuals shown to the users when using the Oculus SDK. Collisions are detected on the left of panels although they should not, and they stop too early before the right border of the panel.
 - When scripts are recompiled in the Editor, 2D UI Elements will sometimes not update properly. This is not really problematic as going into play mode re-renders all UI Elements correctly.

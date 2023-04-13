@@ -83,7 +83,7 @@ namespace com.chwar.xrui.UIElements
         {
             yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);
             RootElement.ToggleInClassList("animate");
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            if (XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
                 StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
         }
         

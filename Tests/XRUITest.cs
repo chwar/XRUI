@@ -58,7 +58,7 @@ namespace com.chwar.xrui.Tests
         [UnityTest]
         public IEnumerator XRUITestWorldUIPanel()
         {
-            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            XRUI.Instance.SetGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
             XRUIEditor.AddCard();
             XRUI.Instance.InitializeElements();
 
@@ -68,11 +68,11 @@ namespace com.chwar.xrui.Tests
         }
 
         [Test]
-        public void XRUITestFormat()
+        public void XRUITestGlobalFormat()
         {
-            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
-            Assert.True(XRUI.GetCurrentXRUIFormat().Equals(XRUI.Instance.xruiFormat.ToString().ToLower()));
-            Assert.True(XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
+            XRUI.Instance.SetGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            Assert.True(XRUI.GetGlobalXRUIFormat().Equals(XRUI.Instance.xruiFormat.ToString()));
+            Assert.True(XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional));
         }
     }
 }

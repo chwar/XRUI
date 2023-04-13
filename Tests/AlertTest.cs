@@ -115,7 +115,7 @@ namespace com.chwar.xrui.Tests
         [UnityTest]
         public IEnumerator WorldAlertTestWithCountdown()
         {
-            XRUI.Instance.SetCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
+            XRUI.Instance.SetGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional);
             XRUI.Instance.ShowAlert(XRUIAlert.AlertType.Primary, null, "This will disappear in one second", 1);
             yield return new WaitForSeconds(2f);
             Assert.Null(GameObject.Find("PrimaryAlert"));

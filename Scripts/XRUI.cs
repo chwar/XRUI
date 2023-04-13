@@ -5,7 +5,6 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using com.chwar.xrui.UIElements;
 using UnityEditor;
 using UnityEngine;
@@ -20,47 +19,60 @@ namespace com.chwar.xrui
     [ExecuteAlways]
     public class XRUI : MonoBehaviour
     {
-
+        #region Attributes
+        
         /// <summary>
-        /// Instance of this class (singleton).
+        /// The <see cref="XRUIConfiguration"/> to use for XRUI.
         /// </summary>
-        public static XRUI Instance;
-
+        [SerializeField]
+        internal XRUIConfiguration xruiConfigurationAsset;
         /// <summary>
-        /// The <see cref="XRUIGridController"/> used to organise the UI.
+        /// List of UI Elements to be referenced in the Inspector.
         /// </summary>
-        [HideInInspector] public XRUIGridController xruiGridController;
+        [SerializeField]
+        internal List<VisualTreeAsset> uiElements = new();
+        /// <summary>
+        /// List of Modals to be referenced in the Inspector.
+        /// </summary>
+        [SerializeField]
+        internal List<InspectorModal> modals = new();
         /// <summary>
         /// Defines the <see cref="XRUIFormat"/> which sets the UI to 2D or 3D.
         /// </summary>
         [SerializeField, Tooltip(
             "Defines the way UIs will be rendered. 2D UIs are fitted for screens (i.e., PC or Mobile AR) while 3D UIs are rendered within the virtual world (i.e., for MR and VR)")]
         internal XRUIFormat xruiFormat = XRUIFormat.TwoDimensional;
-
+        /// <summary>
+        /// The <see cref="XRUIGridController"/> used to organise the UI.
+        /// </summary>
+        [HideInInspector] public XRUIGridController xruiGridController;
         /// <summary>
         /// Forces 2D Portrait USS styles when in the Unity Editor.
         /// </summary>
         [Tooltip("By default, the 2D XRUI format uses Landscape USS styles when in the Unity Editor. This forces 2D Portrait USS styles.")]
         public bool forceTwoDimensionalFormatToPortrait;
-
         /// <summary>
-        /// The <see cref="XRUIConfiguration"/> to use for XRUI.
+        /// Instance of this class (singleton).
         /// </summary>
-        [SerializeField]
-        internal XRUIConfiguration xruiConfigurationAsset;
+        public static XRUI Instance;
+        /// <summary>
+        /// Defines the nature of the UI in order to fit the desired XR device as best as possible.
+        /// </summary>
+        public enum XRUIFormat
+        {
+            /// <summary>
+            /// Two Dimensional UI, for use on traditional screens, e.g. PC, smartphones, tablets, etc.
+            /// </summary>
+            TwoDimensional,
+            /// <summary>
+            /// Three Dimensional or World Space UI. Needed for displaying UI for MR/VR applications (can also be used for AR).
+            /// </summary>
+            ThreeDimensional
+        }
         
-        /// <summary>
-        /// List of UI Elements to be referenced in the Inspector.
-        /// </summary>
-        [SerializeField]
-        internal List<VisualTreeAsset> uiElements = new();
+        #endregion
 
-        /// <summary>
-        /// List of Modals to be referenced in the Inspector.
-        /// </summary>
-        [SerializeField]
-        internal List<InspectorModal> modals = new();
-
+        #region UnityMethods
         
         /// <summary>
         /// Unity method which instantiates the Singleton design pattern.
@@ -79,7 +91,7 @@ namespace com.chwar.xrui
                     Instance = FindObjectOfType<XRUI>();
 
                 // Set the format given in the inspector
-                SetCurrentXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
+                SetGlobalXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
                 InitializeElements();
             }
             else
@@ -97,7 +109,7 @@ namespace com.chwar.xrui
         {
             // This only runs in Editor mode
             if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-            SetCurrentXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
+            SetGlobalXRUIFormat(xruiFormat,forceTwoDimensionalFormatToPortrait);
             InitializeElements();
         }
         #endif
@@ -113,26 +125,29 @@ namespace com.chwar.xrui
             xruiConfigurationAsset = Resources.Load<XRUIConfiguration>("DefaultXRUI2DConfiguration");
         }
         
-        /// <summary>
-        /// Defines the nature of the UI in order to fit the desired XR device as best as possible.
-        /// </summary>
-        public enum XRUIFormat
-        {
-            /// <summary>
-            /// Two Dimensional UI, for use on traditional screens, e.g. PC, smartphones, tablets, etc.
-            /// </summary>
-            TwoDimensional,
-            /// <summary>
-            /// Three Dimensional or World Space UI. Needed for displaying UI for MR/VR applications (can also be used for AR).
-            /// </summary>
-            ThreeDimensional
-    }
+        #endregion
 
+        #region XRUIMethods
+        
+        /// <summary>
+        /// Set the current XRUI format.
+        /// </summary>
+        /// <param name="format">The <see cref="XRUIFormat"/> to use.</param>
+        /// <param name="setOrientationPortrait">Whether to use Portrait orientation mode.</param>
+        internal void SetGlobalXRUIFormat(XRUIFormat format, bool setOrientationPortrait = false)
+        {
+            // Update inspector value if called from API
+            xruiFormat = format;
+            PlayerPrefs.SetString("XRUIFormat", format.ToString());
+            PlayerPrefs.SetInt("XRUIFormatOrientationPortrait", Convert.ToInt32(setOrientationPortrait));
+            PlayerPrefs.Save();
+        }
+        
         /// <summary>
         /// Returns the current <see cref="XRUIFormat"/> based on the format defined in the inspector.
         /// </summary>
         /// <returns>The current <see cref="XRUIFormat"/>.</returns>
-        public static string GetCurrentXRUIFormat()
+        public static string GetGlobalXRUIFormat()
         {
             return PlayerPrefs.GetString("XRUIFormat");
         }
@@ -142,25 +157,11 @@ namespace com.chwar.xrui
         /// </summary>
         /// <param name="format">The <see cref="XRUIFormat"/> to compare.</param>
         /// <returns>True if <paramref name="format"/> matches the current <see cref="XRUIFormat"/></returns>
-        public static bool IsCurrentXRUIFormat(XRUIFormat format)
+        public static bool IsGlobalXRUIFormat(XRUIFormat format)
         {
-            return GetCurrentXRUIFormat().Equals(format.ToString());
+            return GetGlobalXRUIFormat().Equals(format.ToString());
         }
 
-        /// <summary>
-        /// Set the current XRUI format.
-        /// </summary>
-        /// <param name="format">The <see cref="XRUIFormat"/> to use.</param>
-        /// <param name="setOrientationPortrait">Whether to use Portrait orientation mode.</param>
-        public void SetCurrentXRUIFormat(XRUIFormat format, bool setOrientationPortrait = false)
-        {
-            // Update inspector value if called from API
-            xruiFormat = format;
-            PlayerPrefs.SetString("XRUIFormat", format.ToString());
-            PlayerPrefs.SetInt("XRUIFormatOrientationPortrait", Convert.ToInt32(setOrientationPortrait));
-            PlayerPrefs.Save();
-        }
-        
         /// <summary>
         /// Returns a <see cref="VisualTreeAsset"/> of the given name from the templates list defined in the inspector. 
         /// </summary>
@@ -178,6 +179,25 @@ namespace com.chwar.xrui
             return asset;
         }
         
+        /// <summary>
+        /// When the XRUI Instance is initialised, all XRUI Elements are initialised by this method.
+        /// </summary>
+        internal void InitializeElements()
+        {
+            xruiGridController = FindObjectOfType<XRUIGridController>();
+            if(xruiGridController is not null) 
+                xruiGridController.RefreshGrid();
+            foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
+            {
+                xruiElement.Init();
+                xruiElement.UpdateUI();
+            }
+        }
+        
+        #endregion
+        
+        #region XRUIAlerts
+
         /// <summary>
         /// Shows an alert to the end-user.
         /// </summary>
@@ -250,7 +270,7 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(alertContainer);
 
             // Style the alert accordingly
-            alertContainer.ElementAt(0).AddToClassList(GetCurrentXRUIFormat());
+            alertContainer.ElementAt(0).AddToClassList(GetGlobalXRUIFormat());
             alertContainer.ElementAt(0).AddToClassList(type.ToString().ToLower());
 
             var xrui = container.AddComponent<XRUIAlert>();
@@ -277,7 +297,11 @@ namespace com.chwar.xrui
 
             return xrui;
         }
+        
+        #endregion
 
+        #region XRUIModals
+        
         /// <summary>
         /// Generates a modal using the provided XRUI Modal template name and appends it in the modal container.
         /// </summary>
@@ -310,6 +334,10 @@ namespace com.chwar.xrui
             return xruiModal;
         }
         
+        #endregion
+
+        #region XRUIContextualMenus
+
         /// <summary>
         /// Generates a contextual menu displayed with respect to the position of the clicked element.
         /// </summary>
@@ -341,20 +369,24 @@ namespace com.chwar.xrui
             uiDocument.rootVisualElement.Add(contextualMenuContainer);
 
             // Style and position the contextual menu accordingly
-            contextualMenuContainer.ElementAt(0).AddToClassList(GetCurrentXRUIFormat());
+            contextualMenuContainer.ElementAt(0).AddToClassList(GetGlobalXRUIFormat());
             var xrui = container.AddComponent<XRUIContextualMenu>();
             // Use default element template, can be overriden
             xrui.menuElementTemplate = Resources.Load<VisualTreeAsset>("DefaultContextualMenuElement");
             xrui.worldUIParameters = xruiConfigurationAsset.defaultContextualMenuWorldUIParameters;
             xrui.parentCoordinates = parentCoordinates;
-            xrui.showArrow = showArrow && !IsCurrentXRUIFormat(XRUIFormat.ThreeDimensional);
+            xrui.showArrow = showArrow && !IsGlobalXRUIFormat(XRUIFormat.ThreeDimensional);
  
             if (!float.IsNaN(leftOffset)) xrui.positionOffsetLeft = leftOffset;
             if (!float.IsNaN(rightOffset)) xrui.positionOffsetRight = rightOffset;
 
             return xrui;
         }
+        
+        #endregion
 
+        #region XRUIRenderingHelpers
+        
         /// <summary>
         /// Gets a Floating Element container or creates it if not existing.
         /// </summary>
@@ -393,7 +425,7 @@ namespace com.chwar.xrui
             templateContainer.style.justifyContent = new StyleEnum<Justify>(Justify.Center);
             templateContainer.style.alignItems = new StyleEnum<Align>(Align.Center);
         }
-
+        
         /// <summary>
         /// Generates a mesh on which a render texture is created. The render texture renders the XRUI element.
         /// </summary>
@@ -454,7 +486,6 @@ namespace com.chwar.xrui
             // meshRenderer.material.shader = Shader.Find("Unlit/Texture MMBias");
         }
         
-
         /// <summary>
         /// Helper that returns the greatest common divisor of two numbers. Used to calculate the ratio of a world UI panel.
         /// </summary>
@@ -464,21 +495,8 @@ namespace com.chwar.xrui
         private static int GetGreatestCommonDivisor(int a, int b) {
             return b == 0 ? Math.Abs(a) : GetGreatestCommonDivisor(b, a % b);
         }
-
-        /// <summary>
-        /// When the XRUI Instance is initialised, all XRUI Elements are initialised by this method.
-        /// </summary>
-        internal void InitializeElements()
-        {
-            xruiGridController = FindObjectOfType<XRUIGridController>();
-            if(xruiGridController is not null) 
-                xruiGridController.RefreshGrid();
-            foreach (XRUIElement xruiElement in FindObjectsOfType<XRUIElement>())
-            {
-                xruiElement.Init();
-                xruiElement.UpdateUI();
-            }
-        }
+        
+        #endregion
     }
 
     /// <summary>

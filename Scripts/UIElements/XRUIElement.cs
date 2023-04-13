@@ -20,7 +20,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// <see cref="UIDocument"/> of the element.
         /// </summary>
-        internal UIDocument UIDocument;
+        private UIDocument UIDocument { get; set; }
         /// <summary>
         /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
         /// </summary>
@@ -34,6 +34,11 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         private bool _isFollowingCamera;
         /// <summary>
+        /// Lets a given UI Element format differ from the <see cref="XRUI.xruiFormat"/> defined in the XRUI controller.
+        /// </summary>
+        [SerializeField]
+        internal XRUIFormatOverride xruiFormatOverride = XRUIFormatOverride.UseGlobal;
+        /// <summary>
         /// True if the pointer is hovering the current element.
         /// </summary>
         public bool PointerOverUI { get; private set; }
@@ -45,11 +50,7 @@ namespace com.chwar.xrui.UIElements
         /// Root <see cref="VisualElement"/> that contains the `.xrui` USS class.
         /// </summary>
         public VisualElement RootElement { get; private set; }
-        /// <summary>
-        /// Lets a given UI Element format to differ from the <see cref="XRUI.xruiFormat"/> defined in the XRUI controller
-        /// </summary>
-        public XRUIFormatOverride xruiFormatOverride = XRUIFormatOverride.UseGlobal;
-        
+
         /// <summary>
         /// Initializes the UI Element. 
         /// </summary>
@@ -150,6 +151,27 @@ namespace com.chwar.xrui.UIElements
          */
         
         /// <summary>
+        /// Returns the <see cref="XRUI.XRUIFormat"/> used by this UI element.
+        /// This can be the global format defined in the <see cref="XRUI"/> controller, or the value defined in <see cref="xruiFormatOverride"/>
+        /// </summary>
+        /// <returns>The current <see cref="XRUI.XRUIFormat"/>.</returns>
+        public XRUI.XRUIFormat GetXRUIFormat()
+        {
+            return (XRUI.XRUIFormat)Enum.Parse(typeof(XRUI.XRUIFormat), 
+                xruiFormatOverride == XRUIFormatOverride.UseGlobal ? XRUI.GetGlobalXRUIFormat() : xruiFormatOverride.ToString());
+        }
+
+        /// <summary>
+        /// Checks if the given <see cref="XRUI.XRUIFormat"/> matches the one of this UI element.
+        /// </summary>
+        /// <param name="format">The <see cref="XRUI.XRUIFormat"/> to compare.</param>
+        /// <returns>True if <paramref name="format"/> matches this element's <see cref="XRUI.XRUIFormat"/></returns>
+        public bool IsXRUIFormat(XRUI.XRUIFormat format)
+        {
+            return format.Equals(GetXRUIFormat());
+        }
+        
+        /// <summary>
         /// Changes the visibility of the UIDocument with the USS `display` property.
         /// </summary>
         /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
@@ -247,8 +269,7 @@ namespace com.chwar.xrui.UIElements
                 return;
             }
 
-            var format = (XRUI.XRUIFormat)Enum.Parse(typeof(XRUI.XRUIFormat), 
-                xruiFormatOverride == XRUIFormatOverride.UseGlobal ? XRUI.GetCurrentXRUIFormat() : xruiFormatOverride.ToString());
+            var format = GetXRUIFormat();
             
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.TwoDimensional.ToString().ToLower());
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.ThreeDimensional.ToString().ToLower());
@@ -258,9 +279,8 @@ namespace com.chwar.xrui.UIElements
             {
                 // Check for device orientation to refine Mobile AR USS styles
                 bool forcePortrait = Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")); 
-                bool isLandscape =  !forcePortrait && (Input.deviceOrientation == DeviceOrientation.LandscapeLeft
-                                   || Input.deviceOrientation == DeviceOrientation.LandscapeRight
-                                   || (!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
+                bool isLandscape =  !forcePortrait && (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight
+                                   || ((Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
                 Show(!RootElement.ClassListContains("xrui--hide"));
@@ -385,7 +405,8 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Helper to activate Camera following when the 3D panel is first created
+        /// Entry point for the camera following mechanism.
+        /// This first repositions the panel in front of the camera, then starts the <see cref="FollowCamera"/> coroutine.
         /// </summary>
         internal void StartFollowingCamera()
         {
@@ -434,10 +455,23 @@ namespace com.chwar.xrui.UIElements
         public bool disableXRInteraction;
     }
 
+    /// <summary>
+    /// Defines whether this UI element should be rendered using the format set in the <see cref="XRUI"/> controller or overriden with a specific format.
+    /// This enables hybrid 2D and World UI rendering in the same scene.  
+    /// </summary>
     public enum XRUIFormatOverride
     {
+        /// <summary>
+        /// Uses the global format set in the XRUI controller.
+        /// </summary>
         UseGlobal,
+        /// <summary>
+        /// Overrides the global format and forces the rendering of this element to 2D.
+        /// </summary>
         TwoDimensional,
+        /// <summary>
+        /// Overrides the global format and forces the rendering of this element to 3D / World UI.
+        /// </summary>
         ThreeDimensional
     }
 }
