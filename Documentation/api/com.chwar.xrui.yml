@@ -5,7 +5,6 @@ items:
   id: com.chwar.xrui
   children:
   - com.chwar.xrui.XRUI
-  - com.chwar.xrui.XRUI.AlertType
   - com.chwar.xrui.XRUI.XRUIFormat
   - com.chwar.xrui.XRUIConfiguration
   - com.chwar.xrui.XRUIGridController
@@ -34,12 +33,6 @@ references:
   name: XRUI.XRUIFormat
   nameWithType: XRUI.XRUIFormat
   fullName: com.chwar.xrui.XRUI.XRUIFormat
-- uid: com.chwar.xrui.XRUI.AlertType
-  commentId: T:com.chwar.xrui.XRUI.AlertType
-  parent: com.chwar.xrui
-  name: XRUI.AlertType
-  nameWithType: XRUI.AlertType
-  fullName: com.chwar.xrui.XRUI.AlertType
 - uid: com.chwar.xrui.XRUIConfiguration
   commentId: T:com.chwar.xrui.XRUIConfiguration
   name: XRUIConfiguration

@@ -1,0 +1,148 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride
+  commentId: T:com.chwar.xrui.UIElements.XRUIFormatOverride
+  id: XRUIFormatOverride
+  parent: com.chwar.xrui.UIElements
+  children:
+  - com.chwar.xrui.UIElements.XRUIFormatOverride.ThreeDimensional
+  - com.chwar.xrui.UIElements.XRUIFormatOverride.TwoDimensional
+  - com.chwar.xrui.UIElements.XRUIFormatOverride.UseGlobal
+  langs:
+  - csharp
+  - vb
+  name: XRUIFormatOverride
+  nameWithType: XRUIFormatOverride
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride
+  type: Enum
+  source:
+    id: XRUIFormatOverride
+    path: ''
+    startLine: 1983
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nDefines whether this UI element should be rendered using the format set in the <xref href=\"com.chwar.xrui.XRUI\" data-throw-if-not-resolved=\"false\"></xref> controller or overriden with a specific format.\nThis enables hybrid 2D and World UI rendering in the same scene.  \n"
+  example: []
+  syntax:
+    content: public enum XRUIFormatOverride
+    content.vb: Public Enum XRUIFormatOverride
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride.UseGlobal
+  commentId: F:com.chwar.xrui.UIElements.XRUIFormatOverride.UseGlobal
+  id: UseGlobal
+  parent: com.chwar.xrui.UIElements.XRUIFormatOverride
+  langs:
+  - csharp
+  - vb
+  name: UseGlobal
+  nameWithType: XRUIFormatOverride.UseGlobal
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride.UseGlobal
+  type: Field
+  source:
+    id: UseGlobal
+    path: ''
+    startLine: 1988
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nUses the global format set in the XRUI controller.\n"
+  example: []
+  syntax:
+    content: UseGlobal = 0
+    return:
+      type: com.chwar.xrui.UIElements.XRUIFormatOverride
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride.TwoDimensional
+  commentId: F:com.chwar.xrui.UIElements.XRUIFormatOverride.TwoDimensional
+  id: TwoDimensional
+  parent: com.chwar.xrui.UIElements.XRUIFormatOverride
+  langs:
+  - csharp
+  - vb
+  name: TwoDimensional
+  nameWithType: XRUIFormatOverride.TwoDimensional
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride.TwoDimensional
+  type: Field
+  source:
+    id: TwoDimensional
+    path: ''
+    startLine: 1992
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nOverrides the global format and forces the rendering of this element to 2D.\n"
+  example: []
+  syntax:
+    content: TwoDimensional = 1
+    return:
+      type: com.chwar.xrui.UIElements.XRUIFormatOverride
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride.ThreeDimensional
+  commentId: F:com.chwar.xrui.UIElements.XRUIFormatOverride.ThreeDimensional
+  id: ThreeDimensional
+  parent: com.chwar.xrui.UIElements.XRUIFormatOverride
+  langs:
+  - csharp
+  - vb
+  name: ThreeDimensional
+  nameWithType: XRUIFormatOverride.ThreeDimensional
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride.ThreeDimensional
+  type: Field
+  source:
+    id: ThreeDimensional
+    path: ''
+    startLine: 1996
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nOverrides the global format and forces the rendering of this element to 3D / World UI.\n"
+  example: []
+  syntax:
+    content: ThreeDimensional = 2
+    return:
+      type: com.chwar.xrui.UIElements.XRUIFormatOverride
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: com.chwar.xrui.XRUI
+  commentId: T:com.chwar.xrui.XRUI
+  parent: com.chwar.xrui
+  name: XRUI
+  nameWithType: XRUI
+  fullName: com.chwar.xrui.XRUI
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements
+- uid: com.chwar.xrui
+  commentId: N:com.chwar.xrui
+  name: com.chwar.xrui
+  nameWithType: com.chwar.xrui
+  fullName: com.chwar.xrui
+- uid: com.chwar.xrui.UIElements.XRUIFormatOverride
+  commentId: T:com.chwar.xrui.UIElements.XRUIFormatOverride
+  parent: com.chwar.xrui.UIElements
+  name: XRUIFormatOverride
+  nameWithType: XRUIFormatOverride
+  fullName: com.chwar.xrui.UIElements.XRUIFormatOverride

@@ -59,7 +59,6 @@ namespace com.chwar.xrui.UIElements
             {
                 StartCoroutine(Animate(destroyImmediate));
                 StartCoroutine(Dispose(destroyImmediate));
-                clickCallback?.Invoke();
             }
         }
 
@@ -71,6 +70,7 @@ namespace com.chwar.xrui.UIElements
         private IEnumerator Dispose(bool destroyImmediate = true)
         {
             yield return new WaitForSeconds(destroyImmediate ? 1 : countdown == 0 ? 1 : countdown);
+            clickCallback?.Invoke();
             Destroy(this.gameObject);
         }
         
@@ -83,8 +83,35 @@ namespace com.chwar.xrui.UIElements
         {
             yield return new WaitForSeconds(animateImmediate ? 0 : countdown -1 < 0 ? 0 : countdown -1);
             RootElement.ToggleInClassList("animate");
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            if (XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
                 StartCoroutine(FadeWorldPanel(RootElement.ClassListContains("animate")));
+        }
+        
+        /// <summary>
+        /// Defines the different alert types. Default styles are inspired by Bootstrap.
+        /// </summary>
+        public enum AlertType
+        {
+            /// <summary>
+            /// Primary alert type, by default in blue
+            /// </summary>
+            Primary,
+            /// <summary>
+            /// Success alert type, by default in green
+            /// </summary>
+            Success,
+            /// <summary>
+            /// Warning alert type, by default in yellow
+            /// </summary>
+            Warning,
+            /// <summary>
+            /// Danger alert type, by default in red
+            /// </summary>
+            Danger,
+            /// <summary>
+            /// Info alert type, by default in light blue
+            /// </summary>
+            Info
         }
     }
 }

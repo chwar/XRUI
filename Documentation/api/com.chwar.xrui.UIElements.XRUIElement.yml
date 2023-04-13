@@ -9,9 +9,11 @@ items:
   - com.chwar.xrui.UIElements.XRUIElement.Awake
   - com.chwar.xrui.UIElements.XRUIElement.FadeWorldPanel(System.Boolean)
   - com.chwar.xrui.UIElements.XRUIElement.FollowCamera
+  - com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
   - com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement(System.String)
   - com.chwar.xrui.UIElements.XRUIElement.GetXRUIVisualElement``1(System.String)
   - com.chwar.xrui.UIElements.XRUIElement.Init
+  - com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
   - com.chwar.xrui.UIElements.XRUIElement.OnDisable
   - com.chwar.xrui.UIElements.XRUIElement.OnEnable
   - com.chwar.xrui.UIElements.XRUIElement.OnPointerEnter(PointerEnterEvent)
@@ -32,7 +34,7 @@ items:
   source:
     id: XRUIElement
     path: ''
-    startLine: 1515
+    startLine: 1538
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -73,7 +75,7 @@ items:
   source:
     id: PointerOverUI
     path: ''
-    startLine: 1521
+    startLine: 1565
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -106,7 +108,7 @@ items:
   source:
     id: worldUIParameters
     path: ''
-    startLine: 1525
+    startLine: 1569
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -122,7 +124,7 @@ items:
   modifiers.vb:
   - Public
 - uid: com.chwar.xrui.UIElements.XRUIElement.RootElement
-  commentId: F:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  commentId: P:com.chwar.xrui.UIElements.XRUIElement.RootElement
   id: RootElement
   parent: com.chwar.xrui.UIElements.XRUIElement
   langs:
@@ -131,25 +133,29 @@ items:
   name: RootElement
   nameWithType: XRUIElement.RootElement
   fullName: com.chwar.xrui.UIElements.XRUIElement.RootElement
-  type: Field
+  type: Property
   source:
     id: RootElement
     path: ''
-    startLine: 1533
+    startLine: 1573
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
   summary: "\nRoot <see cref=\"!:VisualElement\"></see> that contains the `.xrui` USS class.\n"
   example: []
   syntax:
-    content: public VisualElement RootElement
+    content: public VisualElement RootElement { get; }
+    parameters: []
     return:
       type: Global.VisualElement
-    content.vb: Public RootElement As VisualElement
+    content.vb: Public ReadOnly Property RootElement As VisualElement
+  overload: com.chwar.xrui.UIElements.XRUIElement.RootElement*
   modifiers.csharp:
   - public
+  - get
   modifiers.vb:
   - Public
+  - ReadOnly
 - uid: com.chwar.xrui.UIElements.XRUIElement.Init
   commentId: M:com.chwar.xrui.UIElements.XRUIElement.Init
   id: Init
@@ -164,7 +170,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1542
+    startLine: 1578
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -194,7 +200,7 @@ items:
   source:
     id: Awake
     path: ''
-    startLine: 1553
+    startLine: 1590
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -222,7 +228,7 @@ items:
   source:
     id: OnEnable
     path: ''
-    startLine: 1580
+    startLine: 1617
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -254,7 +260,7 @@ items:
   source:
     id: OnDisable
     path: ''
-    startLine: 1600
+    startLine: 1634
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -270,6 +276,72 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
+- uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  id: GetXRUIFormat
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  langs:
+  - csharp
+  - vb
+  name: GetXRUIFormat()
+  nameWithType: XRUIElement.GetXRUIFormat()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat()
+  type: Method
+  source:
+    id: GetXRUIFormat
+    path: ''
+    startLine: 1679
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nReturns the <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> used by this UI element.\nThis can be the global format defined in the <xref href=\"com.chwar.xrui.XRUI\" data-throw-if-not-resolved=\"false\"></xref> controller, or the value defined in <xref href=\"com.chwar.xrui.UIElements.XRUIElement.xruiFormatOverride\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
+  syntax:
+    content: public XRUI.XRUIFormat GetXRUIFormat()
+    return:
+      type: com.chwar.xrui.XRUI.XRUIFormat
+      description: The current <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GetXRUIFormat As XRUI.XRUIFormat
+  overload: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  id: IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  langs:
+  - csharp
+  - vb
+  name: IsXRUIFormat(XRUI.XRUIFormat)
+  nameWithType: XRUIElement.IsXRUIFormat(XRUI.XRUIFormat)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  type: Method
+  source:
+    id: IsXRUIFormat
+    path: ''
+    startLine: 1690
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nChecks if the given <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> matches the one of this UI element.\n"
+  example: []
+  syntax:
+    content: public bool IsXRUIFormat(XRUI.XRUIFormat format)
+    parameters:
+    - id: format
+      type: com.chwar.xrui.XRUI.XRUIFormat
+      description: The <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref> to compare.
+    return:
+      type: System.Boolean
+      description: True if <code data-dev-comment-type="paramref" class="paramref">format</code> matches this element&apos;s <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>
+    content.vb: Public Function IsXRUIFormat(format As XRUI.XRUIFormat) As Boolean
+  overload: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
   commentId: M:com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
   id: Show(System.Boolean)
@@ -284,7 +356,7 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1641
+    startLine: 1699
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -316,11 +388,11 @@ items:
   source:
     id: Show
     path: ''
-    startLine: 1652
+    startLine: 1710
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
-  summary: "\nChanges the visibility of the UIDocument with the USS `display` property.\nFor World UI, the MeshRenderer and MeshCollider are enabled/disabled.\n"
+  summary: "\nChanges the display value of the UIDocument with the USS `display` property.\nFor World UI, the MeshRenderer and MeshCollider are enabled/disabled.\n"
   example: []
   syntax:
     content: public void Show(VisualElement element, bool bShow)
@@ -330,7 +402,7 @@ items:
       description: Element to change the visibility of
     - id: bShow
       type: System.Boolean
-      description: Visibility value, sets USS to `Flex` or `None`.
+      description: Display value, sets USS to `Flex` or `None`.
     content.vb: Public Sub Show(element As VisualElement, bShow As Boolean)
   overload: com.chwar.xrui.UIElements.XRUIElement.Show*
   modifiers.csharp:
@@ -351,7 +423,7 @@ items:
   source:
     id: AddUIElement
     path: ''
-    startLine: 1669
+    startLine: 1735
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -390,7 +462,7 @@ items:
   source:
     id: RemoveUIElement
     path: ''
-    startLine: 1687
+    startLine: 1753
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -422,7 +494,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1698
+    startLine: 1764
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -465,7 +537,7 @@ items:
   source:
     id: GetXRUIVisualElement
     path: ''
-    startLine: 1708
+    startLine: 1774
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -500,7 +572,7 @@ items:
   source:
     id: FollowCamera
     path: ''
-    startLine: 1776
+    startLine: 1842
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -531,7 +603,7 @@ items:
   source:
     id: FadeWorldPanel
     path: ''
-    startLine: 1807
+    startLine: 1874
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -566,7 +638,7 @@ items:
   source:
     id: OnPointerEnter
     path: ''
-    startLine: 1829
+    startLine: 1896
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -598,7 +670,7 @@ items:
   source:
     id: OnPointerLeave
     path: ''
-    startLine: 1838
+    startLine: 1905
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -665,6 +737,11 @@ references:
   name: XRUIElement
   nameWithType: XRUIElement
   fullName: com.chwar.xrui.UIElements.XRUIElement
+- uid: com.chwar.xrui.UIElements.XRUIElement.RootElement*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  name: RootElement
+  nameWithType: XRUIElement.RootElement
+  fullName: com.chwar.xrui.UIElements.XRUIElement.RootElement
 - uid: Global.VisualElement
   isExternal: true
   name: VisualElement
@@ -770,7 +847,7 @@ references:
     nameWithType: )
     fullName: )
 - uid: com.chwar.xrui.UIElements.XRUIElement.RootElement
-  commentId: F:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  commentId: P:com.chwar.xrui.UIElements.XRUIElement.RootElement
   parent: com.chwar.xrui.UIElements.XRUIElement
   name: RootElement
   nameWithType: XRUIElement.RootElement
@@ -788,6 +865,25 @@ references:
   name: OnDisable
   nameWithType: XRUIElement.OnDisable
   fullName: com.chwar.xrui.UIElements.XRUIElement.OnDisable
+- uid: com.chwar.xrui.XRUI.XRUIFormat
+  commentId: T:com.chwar.xrui.XRUI.XRUIFormat
+  parent: com.chwar.xrui
+  name: XRUI.XRUIFormat
+  nameWithType: XRUI.XRUIFormat
+  fullName: com.chwar.xrui.XRUI.XRUIFormat
+- uid: com.chwar.xrui.UIElements.XRUIElement.xruiFormatOverride
+  commentId: F:com.chwar.xrui.UIElements.XRUIElement.xruiFormatOverride
+  isExternal: true
+- uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  name: GetXRUIFormat
+  nameWithType: XRUIElement.GetXRUIFormat
+  fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+- uid: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat*
+  commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat
+  name: IsXRUIFormat
+  nameWithType: XRUIElement.IsXRUIFormat
+  fullName: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat
 - uid: com.chwar.xrui.UIElements.XRUIElement.Show*
   commentId: Overload:com.chwar.xrui.UIElements.XRUIElement.Show
   name: Show

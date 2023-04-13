@@ -4,8 +4,6 @@
   items:
   - uid: com.chwar.xrui.XRUI
     name: XRUI
-  - uid: com.chwar.xrui.XRUI.AlertType
-    name: XRUI.AlertType
   - uid: com.chwar.xrui.XRUI.XRUIFormat
     name: XRUI.XRUIFormat
   - uid: com.chwar.xrui.XRUIConfiguration
@@ -25,12 +23,16 @@
     name: WorldUIParameters
   - uid: com.chwar.xrui.UIElements.XRUIAlert
     name: XRUIAlert
+  - uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+    name: XRUIAlert.AlertType
   - uid: com.chwar.xrui.UIElements.XRUICard
     name: XRUICard
   - uid: com.chwar.xrui.UIElements.XRUIContextualMenu
     name: XRUIContextualMenu
   - uid: com.chwar.xrui.UIElements.XRUIElement
     name: XRUIElement
+  - uid: com.chwar.xrui.UIElements.XRUIFormatOverride
+    name: XRUIFormatOverride
   - uid: com.chwar.xrui.UIElements.XRUIList
     name: XRUIList
   - uid: com.chwar.xrui.UIElements.XRUIMenu

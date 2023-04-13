@@ -79,7 +79,7 @@ namespace com.chwar.xrui
         /// <exception cref="MissingComponentException">Fired if a <see cref="UIDocument"/> is missing on a row.</exception>
         public void RefreshGrid()
         {
-            var worldUI = XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
+            var worldUI = XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && Application.isPlaying;
             
             // TODO Custom Editor that fills the list of elements automatically from the hierarchy
             var i = 0;

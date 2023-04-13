@@ -22,7 +22,7 @@ items:
   source:
     id: XRUIContextualMenu
     path: ''
-    startLine: 1398
+    startLine: 1421
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -43,6 +43,8 @@ items:
   - com.chwar.xrui.UIElements.XRUIElement.Awake
   - com.chwar.xrui.UIElements.XRUIElement.OnEnable
   - com.chwar.xrui.UIElements.XRUIElement.OnDisable
+  - com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  - com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
   - com.chwar.xrui.UIElements.XRUIElement.Show(System.Boolean)
   - com.chwar.xrui.UIElements.XRUIElement.Show(VisualElement,System.Boolean)
   - com.chwar.xrui.UIElements.XRUIElement.AddUIElement(VisualElement,System.String)
@@ -73,7 +75,7 @@ items:
   source:
     id: menuElementTemplate
     path: ''
-    startLine: 1407
+    startLine: 1430
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -102,7 +104,7 @@ items:
   source:
     id: parentCoordinates
     path: ''
-    startLine: 1411
+    startLine: 1434
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -131,7 +133,7 @@ items:
   source:
     id: positionOffsetLeft
     path: ''
-    startLine: 1415
+    startLine: 1438
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -160,7 +162,7 @@ items:
   source:
     id: positionOffsetRight
     path: ''
-    startLine: 1419
+    startLine: 1442
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -189,7 +191,7 @@ items:
   source:
     id: showArrow
     path: ''
-    startLine: 1423
+    startLine: 1446
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -218,7 +220,7 @@ items:
   source:
     id: Init
     path: ''
-    startLine: 1428
+    startLine: 1451
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -249,7 +251,7 @@ items:
   source:
     id: AddMenuElement
     path: ''
-    startLine: 1478
+    startLine: 1501
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui.UIElements
@@ -298,7 +300,7 @@ references:
   nameWithType: XRUIElement.worldUIParameters
   fullName: com.chwar.xrui.UIElements.XRUIElement.worldUIParameters
 - uid: com.chwar.xrui.UIElements.XRUIElement.RootElement
-  commentId: F:com.chwar.xrui.UIElements.XRUIElement.RootElement
+  commentId: P:com.chwar.xrui.UIElements.XRUIElement.RootElement
   parent: com.chwar.xrui.UIElements.XRUIElement
   name: RootElement
   nameWithType: XRUIElement.RootElement
@@ -384,6 +386,70 @@ references:
   - name: (
     nameWithType: (
     fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: GetXRUIFormat()
+  nameWithType: XRUIElement.GetXRUIFormat()
+  fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat()
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+    name: GetXRUIFormat
+    nameWithType: XRUIElement.GetXRUIFormat
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+    name: GetXRUIFormat
+    nameWithType: XRUIElement.GetXRUIFormat
+    fullName: com.chwar.xrui.UIElements.XRUIElement.GetXRUIFormat
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  commentId: M:com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  parent: com.chwar.xrui.UIElements.XRUIElement
+  name: IsXRUIFormat(XRUI.XRUIFormat)
+  nameWithType: XRUIElement.IsXRUIFormat(XRUI.XRUIFormat)
+  fullName: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  spec.csharp:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+    name: IsXRUIFormat
+    nameWithType: XRUIElement.IsXRUIFormat
+    fullName: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: com.chwar.xrui.XRUI.XRUIFormat
+    name: XRUI.XRUIFormat
+    nameWithType: XRUI.XRUIFormat
+    fullName: com.chwar.xrui.XRUI.XRUIFormat
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+    name: IsXRUIFormat
+    nameWithType: XRUIElement.IsXRUIFormat
+    fullName: com.chwar.xrui.UIElements.XRUIElement.IsXRUIFormat
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: com.chwar.xrui.XRUI.XRUIFormat
+    name: XRUI.XRUIFormat
+    nameWithType: XRUI.XRUIFormat
+    fullName: com.chwar.xrui.XRUI.XRUIFormat
   - name: )
     nameWithType: )
     fullName: )
@@ -813,6 +879,7 @@ references:
   nameWithType: VisualTreeAsset
   fullName: VisualTreeAsset
 - uid: Global.Vector3
+  commentId: '!:Global.Vector3'
   isExternal: true
   name: Vector3
   nameWithType: Vector3

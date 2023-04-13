@@ -5,17 +5,16 @@ items:
   id: XRUI
   parent: com.chwar.xrui
   children:
-  - com.chwar.xrui.XRUI.GetCurrentXRUIFormat
+  - com.chwar.xrui.XRUI.forceTwoDimensionalFormatToPortrait
+  - com.chwar.xrui.XRUI.GetGlobalXRUIFormat
   - com.chwar.xrui.XRUI.GetUIElement(System.String)
   - com.chwar.xrui.XRUI.Instance
-  - com.chwar.xrui.XRUI.IsCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
-  - com.chwar.xrui.XRUI.SetCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat,System.Boolean)
-  - com.chwar.xrui.XRUI.setTwoDimensionalFormatToPortraitInEditor
-  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String)
-  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String)
-  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Action)
-  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32)
-  - com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32,System.Action)
+  - com.chwar.xrui.XRUI.IsGlobalXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String)
+  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String)
+  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Action)
+  - com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32)
+  - com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32,System.Action)
   - com.chwar.xrui.XRUI.ShowContextualMenu(Vector2,System.Boolean)
   - com.chwar.xrui.XRUI.ShowContextualMenu(VisualTreeAsset,Vector2,System.Boolean,System.Single,System.Single)
   - com.chwar.xrui.XRUI.ShowModal(System.String,System.Type)
@@ -49,6 +48,64 @@ items:
   modifiers.vb:
   - Public
   - Class
+- uid: com.chwar.xrui.XRUI.xruiGridController
+  commentId: F:com.chwar.xrui.XRUI.xruiGridController
+  id: xruiGridController
+  parent: com.chwar.xrui.XRUI
+  langs:
+  - csharp
+  - vb
+  name: xruiGridController
+  nameWithType: XRUI.xruiGridController
+  fullName: com.chwar.xrui.XRUI.xruiGridController
+  type: Field
+  source:
+    id: xruiGridController
+    path: ''
+    startLine: 47
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nThe <xref href=\"com.chwar.xrui.XRUIGridController\" data-throw-if-not-resolved=\"false\"></xref> used to organise the UI.\n"
+  example: []
+  syntax:
+    content: public XRUIGridController xruiGridController
+    return:
+      type: com.chwar.xrui.XRUIGridController
+    content.vb: Public xruiGridController As XRUIGridController
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: com.chwar.xrui.XRUI.forceTwoDimensionalFormatToPortrait
+  commentId: F:com.chwar.xrui.XRUI.forceTwoDimensionalFormatToPortrait
+  id: forceTwoDimensionalFormatToPortrait
+  parent: com.chwar.xrui.XRUI
+  langs:
+  - csharp
+  - vb
+  name: forceTwoDimensionalFormatToPortrait
+  nameWithType: XRUI.forceTwoDimensionalFormatToPortrait
+  fullName: com.chwar.xrui.XRUI.forceTwoDimensionalFormatToPortrait
+  type: Field
+  source:
+    id: forceTwoDimensionalFormatToPortrait
+    path: ''
+    startLine: 52
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui
+  summary: "\nForces 2D Portrait USS styles when in the Unity Editor.\n"
+  example: []
+  syntax:
+    content: public bool forceTwoDimensionalFormatToPortrait
+    return:
+      type: System.Boolean
+    content.vb: Public forceTwoDimensionalFormatToPortrait As Boolean
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: com.chwar.xrui.XRUI.Instance
   commentId: F:com.chwar.xrui.XRUI.Instance
   id: Instance
@@ -63,7 +120,7 @@ items:
   source:
     id: Instance
     path: ''
-    startLine: 25
+    startLine: 56
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -80,119 +137,61 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: com.chwar.xrui.XRUI.xruiGridController
-  commentId: F:com.chwar.xrui.XRUI.xruiGridController
-  id: xruiGridController
+- uid: com.chwar.xrui.XRUI.GetGlobalXRUIFormat
+  commentId: M:com.chwar.xrui.XRUI.GetGlobalXRUIFormat
+  id: GetGlobalXRUIFormat
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: xruiGridController
-  nameWithType: XRUI.xruiGridController
-  fullName: com.chwar.xrui.XRUI.xruiGridController
-  type: Field
-  source:
-    id: xruiGridController
-    path: ''
-    startLine: 30
-  assemblies:
-  - cs.temp.dll
-  namespace: com.chwar.xrui
-  summary: "\nThe <xref href=\"com.chwar.xrui.XRUIGridController\" data-throw-if-not-resolved=\"false\"></xref> used to organise the UI.\n"
-  example: []
-  syntax:
-    content: public XRUIGridController xruiGridController
-    return:
-      type: com.chwar.xrui.XRUIGridController
-    content.vb: Public xruiGridController As XRUIGridController
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: com.chwar.xrui.XRUI.setTwoDimensionalFormatToPortraitInEditor
-  commentId: F:com.chwar.xrui.XRUI.setTwoDimensionalFormatToPortraitInEditor
-  id: setTwoDimensionalFormatToPortraitInEditor
-  parent: com.chwar.xrui.XRUI
-  langs:
-  - csharp
-  - vb
-  name: setTwoDimensionalFormatToPortraitInEditor
-  nameWithType: XRUI.setTwoDimensionalFormatToPortraitInEditor
-  fullName: com.chwar.xrui.XRUI.setTwoDimensionalFormatToPortraitInEditor
-  type: Field
-  source:
-    id: setTwoDimensionalFormatToPortraitInEditor
-    path: ''
-    startLine: 42
-  assemblies:
-  - cs.temp.dll
-  namespace: com.chwar.xrui
-  summary: "\nForces 2D Portrait USS styles when in the Unity Editor.\n"
-  example: []
-  syntax:
-    content: public bool setTwoDimensionalFormatToPortraitInEditor
-    return:
-      type: System.Boolean
-    content.vb: Public setTwoDimensionalFormatToPortraitInEditor As Boolean
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: com.chwar.xrui.XRUI.GetCurrentXRUIFormat
-  commentId: M:com.chwar.xrui.XRUI.GetCurrentXRUIFormat
-  id: GetCurrentXRUIFormat
-  parent: com.chwar.xrui.XRUI
-  langs:
-  - csharp
-  - vb
-  name: GetCurrentXRUIFormat()
-  nameWithType: XRUI.GetCurrentXRUIFormat()
-  fullName: com.chwar.xrui.XRUI.GetCurrentXRUIFormat()
+  name: GetGlobalXRUIFormat()
+  nameWithType: XRUI.GetGlobalXRUIFormat()
+  fullName: com.chwar.xrui.XRUI.GetGlobalXRUIFormat()
   type: Method
   source:
-    id: GetCurrentXRUIFormat
+    id: GetGlobalXRUIFormat
     path: ''
-    startLine: 160
+    startLine: 149
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nReturns the current <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> based on the format defined in the inspector.\n"
   example: []
   syntax:
-    content: public static string GetCurrentXRUIFormat()
+    content: public static string GetGlobalXRUIFormat()
     return:
       type: System.String
       description: The current <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>.
-    content.vb: Public Shared Function GetCurrentXRUIFormat As String
-  overload: com.chwar.xrui.XRUI.GetCurrentXRUIFormat*
+    content.vb: Public Shared Function GetGlobalXRUIFormat As String
+  overload: com.chwar.xrui.XRUI.GetGlobalXRUIFormat*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: com.chwar.xrui.XRUI.IsCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
-  commentId: M:com.chwar.xrui.XRUI.IsCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
-  id: IsCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+- uid: com.chwar.xrui.XRUI.IsGlobalXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  commentId: M:com.chwar.xrui.XRUI.IsGlobalXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  id: IsGlobalXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: IsCurrentXRUIFormat(XRUI.XRUIFormat)
-  nameWithType: XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat)
-  fullName: com.chwar.xrui.XRUI.IsCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
+  name: IsGlobalXRUIFormat(XRUI.XRUIFormat)
+  nameWithType: XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat)
+  fullName: com.chwar.xrui.XRUI.IsGlobalXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat)
   type: Method
   source:
-    id: IsCurrentXRUIFormat
+    id: IsGlobalXRUIFormat
     path: ''
-    startLine: 170
+    startLine: 159
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nCompares an <xref href=\"com.chwar.xrui.XRUI.XRUIFormat\" data-throw-if-not-resolved=\"false\"></xref> to the current one. .\n"
   example: []
   syntax:
-    content: public static bool IsCurrentXRUIFormat(XRUI.XRUIFormat format)
+    content: public static bool IsGlobalXRUIFormat(XRUI.XRUIFormat format)
     parameters:
     - id: format
       type: com.chwar.xrui.XRUI.XRUIFormat
@@ -200,49 +199,14 @@ items:
     return:
       type: System.Boolean
       description: True if <code data-dev-comment-type="paramref" class="paramref">format</code> matches the current <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref>
-    content.vb: Public Shared Function IsCurrentXRUIFormat(format As XRUI.XRUIFormat) As Boolean
-  overload: com.chwar.xrui.XRUI.IsCurrentXRUIFormat*
+    content.vb: Public Shared Function IsGlobalXRUIFormat(format As XRUI.XRUIFormat) As Boolean
+  overload: com.chwar.xrui.XRUI.IsGlobalXRUIFormat*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: com.chwar.xrui.XRUI.SetCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat,System.Boolean)
-  commentId: M:com.chwar.xrui.XRUI.SetCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat,System.Boolean)
-  id: SetCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat,System.Boolean)
-  parent: com.chwar.xrui.XRUI
-  langs:
-  - csharp
-  - vb
-  name: SetCurrentXRUIFormat(XRUI.XRUIFormat, Boolean)
-  nameWithType: XRUI.SetCurrentXRUIFormat(XRUI.XRUIFormat, Boolean)
-  fullName: com.chwar.xrui.XRUI.SetCurrentXRUIFormat(com.chwar.xrui.XRUI.XRUIFormat, System.Boolean)
-  type: Method
-  source:
-    id: SetCurrentXRUIFormat
-    path: ''
-    startLine: 180
-  assemblies:
-  - cs.temp.dll
-  namespace: com.chwar.xrui
-  summary: "\nSet the current XRUI format.\n"
-  example: []
-  syntax:
-    content: public void SetCurrentXRUIFormat(XRUI.XRUIFormat format, bool setOrientationPortrait = false)
-    parameters:
-    - id: format
-      type: com.chwar.xrui.XRUI.XRUIFormat
-      description: The <xref href="com.chwar.xrui.XRUI.XRUIFormat" data-throw-if-not-resolved="false"></xref> to use.
-    - id: setOrientationPortrait
-      type: System.Boolean
-      description: Whether to use Portrait orientation mode.
-    content.vb: Public Sub SetCurrentXRUIFormat(format As XRUI.XRUIFormat, setOrientationPortrait As Boolean = False)
-  overload: com.chwar.xrui.XRUI.SetCurrentXRUIFormat*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: com.chwar.xrui.XRUI.GetUIElement(System.String)
   commentId: M:com.chwar.xrui.XRUI.GetUIElement(System.String)
   id: GetUIElement(System.String)
@@ -257,7 +221,7 @@ items:
   source:
     id: GetUIElement
     path: ''
-    startLine: 194
+    startLine: 169
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -278,70 +242,70 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String)
-  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String)
-  id: ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String)
+- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String)
+  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String)
+  id: ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: ShowAlert(XRUI.AlertType, String)
-  nameWithType: XRUI.ShowAlert(XRUI.AlertType, String)
-  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType, System.String)
+  name: ShowAlert(XRUIAlert.AlertType, String)
+  nameWithType: XRUI.ShowAlert(XRUIAlert.AlertType, String)
+  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType, System.String)
   type: Method
   source:
     id: ShowAlert
     path: ''
-    startLine: 212
+    startLine: 206
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nShows an alert to the end-user.\n"
   example: []
   syntax:
-    content: public XRUIAlert ShowAlert(XRUI.AlertType type, string text)
+    content: public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string text)
     parameters:
     - id: type
-      type: com.chwar.xrui.XRUI.AlertType
-      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+      description: The <xref href="com.chwar.xrui.UIElements.XRUIAlert.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: text
       type: System.String
       description: The body of the alert.
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
       description: The created alert.
-    content.vb: Public Function ShowAlert(type As XRUI.AlertType, text As String) As XRUIAlert
+    content.vb: Public Function ShowAlert(type As XRUIAlert.AlertType, text As String) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String)
-  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String)
-  id: ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String)
+- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String)
+  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String)
+  id: ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: ShowAlert(XRUI.AlertType, String, String)
-  nameWithType: XRUI.ShowAlert(XRUI.AlertType, String, String)
-  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType, System.String, System.String)
+  name: ShowAlert(XRUIAlert.AlertType, String, String)
+  nameWithType: XRUI.ShowAlert(XRUIAlert.AlertType, String, String)
+  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType, System.String, System.String)
   type: Method
   source:
     id: ShowAlert
     path: ''
-    startLine: 224
+    startLine: 218
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nShows an alert to the end-user.\n"
   example: []
   syntax:
-    content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text)
+    content: public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text)
     parameters:
     - id: type
-      type: com.chwar.xrui.XRUI.AlertType
-      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+      description: The <xref href="com.chwar.xrui.UIElements.XRUIAlert.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
       description: The title of the alert.
@@ -351,38 +315,38 @@ items:
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
       description: The created alert.
-    content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String) As XRUIAlert
+    content.vb: Public Function ShowAlert(type As XRUIAlert.AlertType, title As String, text As String) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32)
-  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32)
-  id: ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32)
+- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32)
+  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32)
+  id: ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: ShowAlert(XRUI.AlertType, String, String, Int32)
-  nameWithType: XRUI.ShowAlert(XRUI.AlertType, String, String, Int32)
-  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType, System.String, System.String, System.Int32)
+  name: ShowAlert(XRUIAlert.AlertType, String, String, Int32)
+  nameWithType: XRUI.ShowAlert(XRUIAlert.AlertType, String, String, Int32)
+  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType, System.String, System.String, System.Int32)
   type: Method
   source:
     id: ShowAlert
     path: ''
-    startLine: 237
+    startLine: 231
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nShows an alert to the end-user.\n"
   example: []
   syntax:
-    content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text, int countdown)
+    content: public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text, int countdown)
     parameters:
     - id: type
-      type: com.chwar.xrui.XRUI.AlertType
-      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+      description: The <xref href="com.chwar.xrui.UIElements.XRUIAlert.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
       description: The title of the alert.
@@ -395,38 +359,38 @@ items:
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
       description: The created alert.
-    content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String, countdown As Integer) As XRUIAlert
+    content.vb: Public Function ShowAlert(type As XRUIAlert.AlertType, title As String, text As String, countdown As Integer) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Action)
-  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Action)
-  id: ShowAlert(com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Action)
+- uid: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Action)
+  commentId: M:com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Action)
+  id: ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Action)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: ShowAlert(XRUI.AlertType, String, String, Action)
-  nameWithType: XRUI.ShowAlert(XRUI.AlertType, String, String, Action)
-  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.XRUI.AlertType, System.String, System.String, System.Action)
+  name: ShowAlert(XRUIAlert.AlertType, String, String, Action)
+  nameWithType: XRUI.ShowAlert(XRUIAlert.AlertType, String, String, Action)
+  fullName: com.chwar.xrui.XRUI.ShowAlert(com.chwar.xrui.UIElements.XRUIAlert.AlertType, System.String, System.String, System.Action)
   type: Method
   source:
     id: ShowAlert
     path: ''
-    startLine: 250
+    startLine: 244
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nShows an alert to the end-user.\n"
   example: []
   syntax:
-    content: public XRUIAlert ShowAlert(XRUI.AlertType type, string title, string text, Action onClick)
+    content: public XRUIAlert ShowAlert(XRUIAlert.AlertType type, string title, string text, Action onClick)
     parameters:
     - id: type
-      type: com.chwar.xrui.XRUI.AlertType
-      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+      description: The <xref href="com.chwar.xrui.UIElements.XRUIAlert.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
       description: The title of the alert.
@@ -439,41 +403,41 @@ items:
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
       description: The created alert.
-    content.vb: Public Function ShowAlert(type As XRUI.AlertType, title As String, text As String, onClick As Action) As XRUIAlert
+    content.vb: Public Function ShowAlert(type As XRUIAlert.AlertType, title As String, text As String, onClick As Action) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32,System.Action)
-  commentId: M:com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32,System.Action)
-  id: ShowAlert(VisualTreeAsset,com.chwar.xrui.XRUI.AlertType,System.String,System.String,System.Int32,System.Action)
+- uid: com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32,System.Action)
+  commentId: M:com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset,com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32,System.Action)
+  id: ShowAlert(VisualTreeAsset,com.chwar.xrui.UIElements.XRUIAlert.AlertType,System.String,System.String,System.Int32,System.Action)
   parent: com.chwar.xrui.XRUI
   langs:
   - csharp
   - vb
-  name: ShowAlert(VisualTreeAsset, XRUI.AlertType, String, String, Int32, Action)
-  nameWithType: XRUI.ShowAlert(VisualTreeAsset, XRUI.AlertType, String, String, Int32, Action)
-  fullName: com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset, com.chwar.xrui.XRUI.AlertType, System.String, System.String, System.Int32, System.Action)
+  name: ShowAlert(VisualTreeAsset, XRUIAlert.AlertType, String, String, Int32, Action)
+  nameWithType: XRUI.ShowAlert(VisualTreeAsset, XRUIAlert.AlertType, String, String, Int32, Action)
+  fullName: com.chwar.xrui.XRUI.ShowAlert(VisualTreeAsset, com.chwar.xrui.UIElements.XRUIAlert.AlertType, System.String, System.String, System.Int32, System.Action)
   type: Method
   source:
     id: ShowAlert
     path: ''
-    startLine: 265
+    startLine: 259
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
   summary: "\nShows an alert to the end-user.\n"
   example: []
   syntax:
-    content: public XRUIAlert ShowAlert(VisualTreeAsset template, XRUI.AlertType type, string title, string text, int countdown, Action onClick)
+    content: public XRUIAlert ShowAlert(VisualTreeAsset template, XRUIAlert.AlertType type, string title, string text, int countdown, Action onClick)
     parameters:
     - id: template
       type: Global.VisualTreeAsset
       description: Custom alert template to use, set it to null to use the default.
     - id: type
-      type: com.chwar.xrui.XRUI.AlertType
-      description: The <xref href="com.chwar.xrui.XRUI.AlertType" data-throw-if-not-resolved="false"></xref> to use.
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+      description: The <xref href="com.chwar.xrui.UIElements.XRUIAlert.AlertType" data-throw-if-not-resolved="false"></xref> to use.
     - id: title
       type: System.String
       description: The title of the alert.
@@ -489,7 +453,7 @@ items:
     return:
       type: com.chwar.xrui.UIElements.XRUIAlert
       description: The created alert.
-    content.vb: Public Function ShowAlert(template As VisualTreeAsset, type As XRUI.AlertType, title As String, text As String, countdown As Integer, onClick As Action) As XRUIAlert
+    content.vb: Public Function ShowAlert(template As VisualTreeAsset, type As XRUIAlert.AlertType, title As String, text As String, countdown As Integer, onClick As Action) As XRUIAlert
   overload: com.chwar.xrui.XRUI.ShowAlert*
   modifiers.csharp:
   - public
@@ -509,7 +473,7 @@ items:
   source:
     id: ShowModal
     path: ''
-    startLine: 312
+    startLine: 310
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -547,7 +511,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 344
+    startLine: 346
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -585,7 +549,7 @@ items:
   source:
     id: ShowContextualMenu
     path: ''
-    startLine: 358
+    startLine: 360
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -637,12 +601,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: com.chwar.xrui.XRUI
-  commentId: T:com.chwar.xrui.XRUI
-  parent: com.chwar.xrui
-  name: XRUI
-  nameWithType: XRUI
-  fullName: com.chwar.xrui.XRUI
 - uid: com.chwar.xrui.XRUIGridController
   commentId: T:com.chwar.xrui.XRUIGridController
   parent: com.chwar.xrui
@@ -656,17 +614,23 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: com.chwar.xrui.XRUI
+  commentId: T:com.chwar.xrui.XRUI
+  parent: com.chwar.xrui
+  name: XRUI
+  nameWithType: XRUI
+  fullName: com.chwar.xrui.XRUI
 - uid: com.chwar.xrui.XRUI.XRUIFormat
   commentId: T:com.chwar.xrui.XRUI.XRUIFormat
   parent: com.chwar.xrui
   name: XRUI.XRUIFormat
   nameWithType: XRUI.XRUIFormat
   fullName: com.chwar.xrui.XRUI.XRUIFormat
-- uid: com.chwar.xrui.XRUI.GetCurrentXRUIFormat*
-  commentId: Overload:com.chwar.xrui.XRUI.GetCurrentXRUIFormat
-  name: GetCurrentXRUIFormat
-  nameWithType: XRUI.GetCurrentXRUIFormat
-  fullName: com.chwar.xrui.XRUI.GetCurrentXRUIFormat
+- uid: com.chwar.xrui.XRUI.GetGlobalXRUIFormat*
+  commentId: Overload:com.chwar.xrui.XRUI.GetGlobalXRUIFormat
+  name: GetGlobalXRUIFormat
+  nameWithType: XRUI.GetGlobalXRUIFormat
+  fullName: com.chwar.xrui.XRUI.GetGlobalXRUIFormat
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -674,16 +638,11 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: com.chwar.xrui.XRUI.IsCurrentXRUIFormat*
-  commentId: Overload:com.chwar.xrui.XRUI.IsCurrentXRUIFormat
-  name: IsCurrentXRUIFormat
-  nameWithType: XRUI.IsCurrentXRUIFormat
-  fullName: com.chwar.xrui.XRUI.IsCurrentXRUIFormat
-- uid: com.chwar.xrui.XRUI.SetCurrentXRUIFormat*
-  commentId: Overload:com.chwar.xrui.XRUI.SetCurrentXRUIFormat
-  name: SetCurrentXRUIFormat
-  nameWithType: XRUI.SetCurrentXRUIFormat
-  fullName: com.chwar.xrui.XRUI.SetCurrentXRUIFormat
+- uid: com.chwar.xrui.XRUI.IsGlobalXRUIFormat*
+  commentId: Overload:com.chwar.xrui.XRUI.IsGlobalXRUIFormat
+  name: IsGlobalXRUIFormat
+  nameWithType: XRUI.IsGlobalXRUIFormat
+  fullName: com.chwar.xrui.XRUI.IsGlobalXRUIFormat
 - uid: com.chwar.xrui.XRUI.GetUIElement*
   commentId: Overload:com.chwar.xrui.XRUI.GetUIElement
   name: GetUIElement
@@ -694,12 +653,12 @@ references:
   name: VisualTreeAsset
   nameWithType: VisualTreeAsset
   fullName: VisualTreeAsset
-- uid: com.chwar.xrui.XRUI.AlertType
-  commentId: T:com.chwar.xrui.XRUI.AlertType
-  parent: com.chwar.xrui
-  name: XRUI.AlertType
-  nameWithType: XRUI.AlertType
-  fullName: com.chwar.xrui.XRUI.AlertType
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  commentId: T:com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  parent: com.chwar.xrui.UIElements
+  name: XRUIAlert.AlertType
+  nameWithType: XRUIAlert.AlertType
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType
 - uid: com.chwar.xrui.XRUI.ShowAlert*
   commentId: Overload:com.chwar.xrui.XRUI.ShowAlert
   name: ShowAlert

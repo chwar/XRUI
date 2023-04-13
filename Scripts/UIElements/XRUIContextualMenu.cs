@@ -58,7 +58,7 @@ namespace com.chwar.xrui.UIElements
         /// <param name="evt"></param>
         internal void PositionRelativeToParent(GeometryChangedEvent evt)
         {
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            if (XRUI.IsGlobalXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
             {
                 RootElement.style.position = new StyleEnum<Position>(Position.Absolute);
                 RootElement.style.top = parentCoordinates.y;

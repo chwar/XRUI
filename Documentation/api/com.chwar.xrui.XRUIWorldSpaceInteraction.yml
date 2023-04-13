@@ -26,7 +26,7 @@ items:
   source:
     id: XRUIWorldSpaceInteraction
     path: ''
-    startLine: 912
+    startLine: 908
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -59,7 +59,7 @@ items:
   source:
     id: targetPanel
     path: ''
-    startLine: 918
+    startLine: 914
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -88,7 +88,7 @@ items:
   source:
     id: OnPointerMove
     path: ''
-    startLine: 998
+    startLine: 994
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -117,7 +117,7 @@ items:
   source:
     id: OnPointerDown
     path: ''
-    startLine: 1003
+    startLine: 999
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -146,7 +146,7 @@ items:
   source:
     id: OnPointerUp
     path: ''
-    startLine: 1008
+    startLine: 1004
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -175,7 +175,7 @@ items:
   source:
     id: OnSubmit
     path: ''
-    startLine: 1013
+    startLine: 1009
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -204,7 +204,7 @@ items:
   source:
     id: OnCancel
     path: ''
-    startLine: 1018
+    startLine: 1014
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -233,7 +233,7 @@ items:
   source:
     id: OnMove
     path: ''
-    startLine: 1023
+    startLine: 1019
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -262,7 +262,7 @@ items:
   source:
     id: OnScroll
     path: ''
-    startLine: 1028
+    startLine: 1024
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -291,7 +291,7 @@ items:
   source:
     id: OnSelect
     path: ''
-    startLine: 1033
+    startLine: 1029
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -320,7 +320,7 @@ items:
   source:
     id: OnDeselect
     path: ''
-    startLine: 1038
+    startLine: 1034
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui
@@ -349,7 +349,7 @@ items:
   source:
     id: OnDrag
     path: ''
-    startLine: 1043
+    startLine: 1039
   assemblies:
   - cs.temp.dll
   namespace: com.chwar.xrui

@@ -191,7 +191,7 @@ Transform:
   - {fileID: 763657462}
   - {fileID: 1765315701}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410655637
 GameObject:
@@ -223,13 +223,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b638efb99a37e179a19c2d5eb8477e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xruiFormatOverride: 1
   worldUIParameters:
-    bendPanel: 0
-    anchorPanelToCamera: 0
+    bendPanel: 1
+    anchorPanelToCamera: 1
     cameraFollowThreshold: 0
     customPanelDimensions: {x: 0, y: 0}
-    customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0
+    disableXRInteraction: 0
   titleText: XRUI Card
   subtitleText: This is the default card
 --- !u!114 &410655639
@@ -293,13 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43e2faa06c94cc282692fa4349938b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xruiFormatOverride: 0
   worldUIParameters:
     bendPanel: 0
     anchorPanelToCamera: 0
     cameraFollowThreshold: 0
     customPanelDimensions: {x: 0, y: 0}
-    customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0
+    disableXRInteraction: 0
 --- !u!114 &555882576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +558,78 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1126418810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126418813}
+  - component: {fileID: 1126418812}
+  - component: {fileID: 1126418811}
+  m_Layer: 0
+  m_Name: XRUI Card (World UI)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1126418811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126418810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b638efb99a37e179a19c2d5eb8477e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xruiFormatOverride: 2
+  worldUIParameters:
+    bendPanel: 1
+    anchorPanelToCamera: 1
+    cameraFollowThreshold: 0
+    customPanelDimensions: {x: 0, y: 0}
+    panelScale: 0.5
+    disableXRInteraction: 1
+  titleText: This is a World UI Card!
+  subtitleText: 
+--- !u!114 &1126418812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126418810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 1e56d56428c545e79309860adf7f0207, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: b98a165502e4faaffb5e5ce2b8e00adb, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1126418813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126418810}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504209363
 GameObject:
@@ -588,13 +661,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a8319a5cb94f4fbe979445cffcd5ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xruiFormatOverride: 0
   worldUIParameters:
     bendPanel: 0
     anchorPanelToCamera: 0
     cameraFollowThreshold: 0
     customPanelDimensions: {x: 0, y: 0}
-    customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0
+    disableXRInteraction: 0
   titleText: XRUI List
   listElementTemplate: {fileID: 9197481963319205126, guid: d23a0e1836e6e918bafffe0b1eb757e8, type: 3}
 --- !u!114 &1504209365
@@ -703,7 +777,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594399923
 GameObject:
@@ -735,13 +809,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bb1c75fe7b421caf0e22acecfa117d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xruiFormatOverride: 0
   worldUIParameters:
     bendPanel: 0
     anchorPanelToCamera: 0
     cameraFollowThreshold: 0
     customPanelDimensions: {x: 0, y: 0}
-    customPanelPosition: {x: 0, y: 0, z: 0}
     panelScale: 0
+    disableXRInteraction: 0
   titleText: XRUI Menu
   subtitleText: This is the default menu
   menuElementTemplate: {fileID: 9197481963319205126, guid: 2dadee764299b942281a055856ce0fda, type: 3}
@@ -774,7 +849,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602110629
 GameObject:
@@ -806,19 +881,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a8f2f1abdbf906cae39f9df48a0b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xruiGridController: {fileID: 224704475}
-  xruiFormat: 0
-  setTwoDimensionalFormatToPortraitInEditor: 0
   xruiConfigurationAsset: {fileID: 11400000, guid: 5c81f767ce39c4a1f81f4631ca30706a, type: 2}
   uiElements:
   - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
   modals:
   - modalName: MyModal
     mainTemplateOverride: {fileID: 0}
     modalFlowList:
     - {fileID: 9197481963319205126, guid: bf5f9b83d6b7318b28f4ae472bd42617, type: 3}
+  xruiFormat: 0
+  xruiGridController: {fileID: 224704475}
+  forceTwoDimensionalFormatToPortrait: 0
 --- !u!4 &1602110631
 Transform:
   m_ObjectHideFlags: 0
@@ -832,7 +905,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1602110632
 MonoBehaviour:

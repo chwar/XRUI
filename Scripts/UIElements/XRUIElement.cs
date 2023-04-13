@@ -18,6 +18,27 @@ namespace com.chwar.xrui.UIElements
     public class XRUIElement : MonoBehaviour
     {
         /// <summary>
+        /// <see cref="UIDocument"/> of the element.
+        /// </summary>
+        private UIDocument UIDocument { get; set; }
+        /// <summary>
+        /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
+        /// </summary>
+        private DeviceOrientation _cachedDeviceOrientation;
+        /// <summary>
+        /// The main Camera reference, used for positioning World UI panels
+        /// </summary>
+        private Camera _camera;
+        /// <summary>
+        /// Internal flag determining whether this UI element follows the main camera.
+        /// </summary>
+        private bool _isFollowingCamera;
+        /// <summary>
+        /// Lets a given UI Element format differ from the <see cref="XRUI.xruiFormat"/> defined in the XRUI controller.
+        /// </summary>
+        [SerializeField]
+        internal XRUIFormatOverride xruiFormatOverride = XRUIFormatOverride.UseGlobal;
+        /// <summary>
         /// True if the pointer is hovering the current element.
         /// </summary>
         public bool PointerOverUI { get; private set; }
@@ -26,18 +47,10 @@ namespace com.chwar.xrui.UIElements
         /// </summary>
         public WorldUIParameters worldUIParameters;
         /// <summary>
-        /// <see cref="UIDocument"/> of the element.
-        /// </summary>
-        internal UIDocument UIDocument;
-        /// <summary>
         /// Root <see cref="VisualElement"/> that contains the `.xrui` USS class.
         /// </summary>
-        public VisualElement RootElement;
-        /// <summary>
-        /// Last cached orientation of the device. Used for updating UI when a rotation is detected on smartphones/tablets.
-        /// </summary>
-        private DeviceOrientation _cachedDeviceOrientation;
-        
+        public VisualElement RootElement { get; private set; }
+
         /// <summary>
         /// Initializes the UI Element. 
         /// </summary>
@@ -45,8 +58,9 @@ namespace com.chwar.xrui.UIElements
         {
             // To override
             UIDocument = GetComponent<UIDocument>();
-            RootElement = UIDocument.rootVisualElement.Q(null, "xrui");
+            RootElement = UIDocument.rootVisualElement?.Q(null, "xrui");
             _cachedDeviceOrientation = Input.deviceOrientation;
+            _camera = Camera.main;
         }
 
         /// <summary>
@@ -90,10 +104,7 @@ namespace com.chwar.xrui.UIElements
             // Register event handlers for pointer clicks on the UI
             RootElement.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
-
             UpdateUI();
-            if (worldUIParameters.anchorPanelToCamera)
-                StartCoroutine(FollowCamera());
         }
 
         /// <summary>
@@ -107,9 +118,12 @@ namespace com.chwar.xrui.UIElements
             // Unregister event handlers for pointer clicks on the UI
             RootElement.UnregisterCallback<PointerEnterEvent>(OnPointerEnter);
             RootElement.UnregisterCallback<PointerLeaveEvent>(OnPointerLeave);
-            
+
             if (worldUIParameters.anchorPanelToCamera)
+            {
                 StopCoroutine(FollowCamera());
+                _isFollowingCamera = false;
+            }
         }
 
         /// <summary>
@@ -137,6 +151,27 @@ namespace com.chwar.xrui.UIElements
          */
         
         /// <summary>
+        /// Returns the <see cref="XRUI.XRUIFormat"/> used by this UI element.
+        /// This can be the global format defined in the <see cref="XRUI"/> controller, or the value defined in <see cref="xruiFormatOverride"/>
+        /// </summary>
+        /// <returns>The current <see cref="XRUI.XRUIFormat"/>.</returns>
+        public XRUI.XRUIFormat GetXRUIFormat()
+        {
+            return (XRUI.XRUIFormat)Enum.Parse(typeof(XRUI.XRUIFormat), 
+                xruiFormatOverride == XRUIFormatOverride.UseGlobal ? XRUI.GetGlobalXRUIFormat() : xruiFormatOverride.ToString());
+        }
+
+        /// <summary>
+        /// Checks if the given <see cref="XRUI.XRUIFormat"/> matches the one of this UI element.
+        /// </summary>
+        /// <param name="format">The <see cref="XRUI.XRUIFormat"/> to compare.</param>
+        /// <returns>True if <paramref name="format"/> matches this element's <see cref="XRUI.XRUIFormat"/></returns>
+        public bool IsXRUIFormat(XRUI.XRUIFormat format)
+        {
+            return format.Equals(GetXRUIFormat());
+        }
+        
+        /// <summary>
         /// Changes the visibility of the UIDocument with the USS `display` property.
         /// </summary>
         /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
@@ -146,21 +181,27 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Changes the visibility of the UIDocument with the USS `display` property.
+        /// Changes the display value of the UIDocument with the USS `display` property.
         /// For World UI, the MeshRenderer and MeshCollider are enabled/disabled.
         /// </summary>
         /// <param name="element">Element to change the visibility of</param>
-        /// <param name="bShow">Visibility value, sets USS to `Flex` or `None`.</param>
+        /// <param name="bShow">Display value, sets USS to `Flex` or `None`.</param>
         public void Show(VisualElement element, bool bShow)
         {
-            element.style.display = bShow ? DisplayStyle.Flex : DisplayStyle.None;
-            // If trying to hide the Root Element, hide the panel if in 3D
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional) && element.Equals(RootElement) && Application.isPlaying)
+            element.EnableInClassList("xrui--hide", !bShow);
+            // If trying to hide the Root Element, hide the panel when in 3D
+            if (element.Equals(RootElement) && Application.isPlaying)
             {
                 var mr = GetComponent<MeshRenderer>();
                 if(mr != null) mr.enabled = bShow;
                 var mc = GetComponent<MeshCollider>();
                 if(mc != null) mc.enabled = bShow;
+
+                if (!bShow && worldUIParameters.anchorPanelToCamera)
+                {
+                    StopCoroutine(FollowCamera());
+                    _isFollowingCamera = false;
+                }
             }
         }
 
@@ -228,23 +269,23 @@ namespace com.chwar.xrui.UIElements
                 return;
             }
 
+            var format = GetXRUIFormat();
+            
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.TwoDimensional.ToString().ToLower());
             RootElement.RemoveFromClassList(XRUI.XRUIFormat.ThreeDimensional.ToString().ToLower());
-            RootElement.EnableInClassList(XRUI.GetCurrentXRUIFormat(), true);
+            RootElement.EnableInClassList(format.ToString().ToLower(), true);
 
-            if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.TwoDimensional))
+            if (format == XRUI.XRUIFormat.TwoDimensional)
             {
                 // Check for device orientation to refine Mobile AR USS styles
-                bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft
-                                   || Input.deviceOrientation == DeviceOrientation.LandscapeRight
-                                   || (Application.isEditor && !Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")) 
-                                   || ((!Application.isEditor && (Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer)) && Input.deviceOrientation == DeviceOrientation.Unknown));
-
+                bool forcePortrait = Convert.ToBoolean(PlayerPrefs.GetInt("XRUIFormatOrientationPortrait")); 
+                bool isLandscape =  !forcePortrait && (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight
+                                   || ((Application.platform != RuntimePlatform.Android || Application.platform != RuntimePlatform.IPhonePlayer) && Input.deviceOrientation == DeviceOrientation.Unknown));
                 RootElement.EnableInClassList("landscape", isLandscape);
                 RootElement.EnableInClassList("portrait", !isLandscape);
-                Show(true);
+                Show(!RootElement.ClassListContains("xrui--hide"));
             }
-            else if (XRUI.IsCurrentXRUIFormat(XRUI.XRUIFormat.ThreeDimensional))
+            else if (format == XRUI.XRUIFormat.ThreeDimensional)
             {
                 if (Application.isPlaying)
                 {
@@ -261,7 +302,7 @@ namespace com.chwar.xrui.UIElements
                 }
             }
         }
-        
+
         /// <summary>
         /// Updates the UIDocument when the device's rotation changed
         /// </summary>
@@ -279,28 +320,29 @@ namespace com.chwar.xrui.UIElements
         /// <returns></returns>
         protected IEnumerator FollowCamera()
         {
-            while (true)
+            _isFollowingCamera = true;
+            while (_camera != null && !RootElement.ClassListContains("xrui--hide"))
             {
                 // Reposition in front of camera
-                if (Camera.main != null)
+                var cachedTarget = _camera.transform.TransformPoint(Vector3.forward);
+                cachedTarget.y = _camera.transform.position.y;
+
+                // If camera gets too far from the panel
+                if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
                 {
-                    var cachedTarget = Camera.main.transform.TransformPoint(new Vector3(0, 0, .5f));
-                    // Slightly delay the following mechanism to let the camera move freely without aggressively repositioning the panel
-                    yield return new WaitForSeconds(.5f);
-                    // If camera gets too far from the panel
-                    if (Vector3.Distance(transform.position, cachedTarget) > worldUIParameters.cameraFollowThreshold)
+                    var cameraFollowVelocity = Vector3.zero;
+                    // Reposition until panel reaches the front of the camera
+                    while (Vector3.Distance(transform.position, cachedTarget) > .1f)
                     {
-                        var cameraFollowVelocity = Vector3.zero;
-                        // Reposition until panel reaches the front of the camera
-                        while (Vector3.Distance(transform.position, cachedTarget) > .05f)
-                        {
-                            transform.position = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .3f);
-                            transform.LookAt(2 * transform.position - Camera.main.transform.position);
-                            yield return new WaitForEndOfFrame();
-                        }
+                        var newPos = Vector3.SmoothDamp(transform.position, cachedTarget, ref cameraFollowVelocity, .5f);
+                        transform.position = new Vector3(newPos.x, cachedTarget.y, newPos.z);
+                        transform.LookAt(2 * transform.position - _camera.transform.position);
+                        yield return new WaitForEndOfFrame();
                     }
                 }
+                yield return new WaitForEndOfFrame();
             }
+            yield return 0;
         }
 
         /// <summary>
@@ -363,10 +405,16 @@ namespace com.chwar.xrui.UIElements
         }
 
         /// <summary>
-        /// Helper to activate Camera following when the 3D panel is first created
+        /// Entry point for the camera following mechanism.
+        /// This first repositions the panel in front of the camera, then starts the <see cref="FollowCamera"/> coroutine.
         /// </summary>
         internal void StartFollowingCamera()
         {
+            if (!Application.isPlaying || _isFollowingCamera) return;
+            var cameraFront = _camera.transform.TransformPoint(Vector3.forward);
+            cameraFront.y = _camera.transform.position.y;
+            transform.position = cameraFront;
+            transform.LookAt(2 * transform.position - _camera.transform.position);
             StartCoroutine(FollowCamera());
         }
     }
@@ -398,14 +446,32 @@ namespace com.chwar.xrui.UIElements
         [Tooltip("By default, XRUI uses the ratio of the element's dimensions defined in the USS. You can define a custom size here in Unity units here.")]
         public Vector2 customPanelDimensions;
         /// <summary>
-        /// Sets the panel to the specified position in world coordinates. This is overriden if <see cref="anchorPanelToCamera"/> is true.
-        /// </summary>
-        [Tooltip("By default, the VR panel will be positioned at (0,0,1). You can define a custom position here.")]
-        public Vector3 customPanelPosition;
-        /// <summary>
         /// Alters the scale of the panel. By default, the size of panels tend towards one world space unit (one meter).
         /// </summary>
         [Tooltip("Alters the scale of the panel in the virtual world. This parameter is overridden if custom dimensions are specified")]
         public float panelScale;
+
+        [Tooltip("By default, XRUI creates necessary components to support interactions from raycasts. Enabling this parameter disables that and only allows the display of the panel.")]
+        public bool disableXRInteraction;
+    }
+
+    /// <summary>
+    /// Defines whether this UI element should be rendered using the format set in the <see cref="XRUI"/> controller or overriden with a specific format.
+    /// This enables hybrid 2D and World UI rendering in the same scene.  
+    /// </summary>
+    public enum XRUIFormatOverride
+    {
+        /// <summary>
+        /// Uses the global format set in the XRUI controller.
+        /// </summary>
+        UseGlobal,
+        /// <summary>
+        /// Overrides the global format and forces the rendering of this element to 2D.
+        /// </summary>
+        TwoDimensional,
+        /// <summary>
+        /// Overrides the global format and forces the rendering of this element to 3D / World UI.
+        /// </summary>
+        ThreeDimensional
     }
 }

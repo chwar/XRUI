@@ -1,0 +1,199 @@
+### YamlMime:ManagedReference
+items:
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  commentId: T:com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  id: XRUIAlert.AlertType
+  parent: com.chwar.xrui.UIElements
+  children:
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType.Danger
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType.Info
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType.Primary
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType.Success
+  - com.chwar.xrui.UIElements.XRUIAlert.AlertType.Warning
+  langs:
+  - csharp
+  - vb
+  name: XRUIAlert.AlertType
+  nameWithType: XRUIAlert.AlertType
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  type: Enum
+  source:
+    id: AlertType
+    path: ''
+    startLine: 1279
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nDefines the different alert types. Default styles are inspired by Bootstrap.\n"
+  example: []
+  syntax:
+    content: public enum AlertType
+    content.vb: Public Enum AlertType
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Primary
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.AlertType.Primary
+  id: Primary
+  parent: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  langs:
+  - csharp
+  - vb
+  name: Primary
+  nameWithType: XRUIAlert.AlertType.Primary
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Primary
+  type: Field
+  source:
+    id: Primary
+    path: ''
+    startLine: 1284
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nPrimary alert type, by default in blue\n"
+  example: []
+  syntax:
+    content: Primary = 0
+    return:
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Success
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.AlertType.Success
+  id: Success
+  parent: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  langs:
+  - csharp
+  - vb
+  name: Success
+  nameWithType: XRUIAlert.AlertType.Success
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Success
+  type: Field
+  source:
+    id: Success
+    path: ''
+    startLine: 1288
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nSuccess alert type, by default in green\n"
+  example: []
+  syntax:
+    content: Success = 1
+    return:
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Warning
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.AlertType.Warning
+  id: Warning
+  parent: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  langs:
+  - csharp
+  - vb
+  name: Warning
+  nameWithType: XRUIAlert.AlertType.Warning
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Warning
+  type: Field
+  source:
+    id: Warning
+    path: ''
+    startLine: 1292
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nWarning alert type, by default in yellow\n"
+  example: []
+  syntax:
+    content: Warning = 2
+    return:
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Danger
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.AlertType.Danger
+  id: Danger
+  parent: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  langs:
+  - csharp
+  - vb
+  name: Danger
+  nameWithType: XRUIAlert.AlertType.Danger
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Danger
+  type: Field
+  source:
+    id: Danger
+    path: ''
+    startLine: 1296
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nDanger alert type, by default in red\n"
+  example: []
+  syntax:
+    content: Danger = 3
+    return:
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Info
+  commentId: F:com.chwar.xrui.UIElements.XRUIAlert.AlertType.Info
+  id: Info
+  parent: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  langs:
+  - csharp
+  - vb
+  name: Info
+  nameWithType: XRUIAlert.AlertType.Info
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType.Info
+  type: Field
+  source:
+    id: Info
+    path: ''
+    startLine: 1300
+  assemblies:
+  - cs.temp.dll
+  namespace: com.chwar.xrui.UIElements
+  summary: "\nInfo alert type, by default in light blue\n"
+  example: []
+  syntax:
+    content: Info = 4
+    return:
+      type: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: com.chwar.xrui.UIElements
+  commentId: N:com.chwar.xrui.UIElements
+  name: com.chwar.xrui.UIElements
+  nameWithType: com.chwar.xrui.UIElements
+  fullName: com.chwar.xrui.UIElements
+- uid: com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  commentId: T:com.chwar.xrui.UIElements.XRUIAlert.AlertType
+  parent: com.chwar.xrui.UIElements
+  name: XRUIAlert.AlertType
+  nameWithType: XRUIAlert.AlertType
+  fullName: com.chwar.xrui.UIElements.XRUIAlert.AlertType
