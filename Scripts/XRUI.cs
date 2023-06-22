@@ -465,7 +465,7 @@ namespace com.chwar.xrui
                 xrui.worldUIParameters.panelScale = 1;
             if (xrui.worldUIParameters.anchorPanelToCamera) 
                 xrui.StartFollowingCamera();
-            plane.numSegments = 512;
+            plane.numSegments = 128;
             plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.height / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
             plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.width / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
             plane.useArc = xrui.worldUIParameters.bendPanel;
@@ -479,6 +479,12 @@ namespace com.chwar.xrui
                 // Add Physics Raycaster to enable XRI interactions
                 o.AddComponent<XRUIWorldSpaceInteraction>();
                 o.AddComponent<TrackedDevicePhysicsRaycaster>();
+            }
+            // find the automatically generated PanelRaycasters for World Space XRUI panels and disable them, as they do not work properly
+            foreach (PanelRaycaster panelRaycaster in FindObjectsOfType<PanelRaycaster>())
+            {
+                var ui = panelRaycaster.panel.visualTree.ElementAt(0);
+                panelRaycaster.enabled = !(ui.ClassListContains("xrui") && ui.ClassListContains("threedimensional"));
             }
             
             // TODO Find a shader that can fade out (transparent) but that culls rays from MR/VR controllers
