@@ -24,7 +24,7 @@ namespace com.chwar.xrui.UIElements
         /// <summary>
         /// The container UXML node of the menu.
         /// </summary>
-        private ScrollView _container;
+        private VisualElement _container;
 
         /// <summary>
         /// The title property in the Inspector.
@@ -53,7 +53,7 @@ namespace com.chwar.xrui.UIElements
             base.Init();
             _title = GetXRUIVisualElement<Label>("xrui-menu__title");
             _subtitle = GetXRUIVisualElement<Label>("xrui-menu__subtitle");
-            _container = GetXRUIVisualElement<ScrollView>("xrui-menu__container");
+            _container = GetXRUIVisualElement<VisualElement>("xrui-menu__container");
         }
         
         /// <summary>
