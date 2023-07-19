@@ -5,8 +5,10 @@
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace com.chwar.xrui.UIElements
@@ -289,10 +291,17 @@ namespace com.chwar.xrui.UIElements
             {
                 if (Application.isPlaying)
                 {
-                    // Create new PanelSettings to which we will assign a specific RenderTexture
-                    // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
-                    // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
-                    UIDocument.panelSettings = Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
+                    var psName = Regex.Replace(gameObject.name, @"\s+", "") + RootElement.GetHashCode() + "PanelSettings";
+                    if (!EventSystem.current?.transform.Find(psName))
+                    {
+                        // Create new PanelSettings to which we will assign a specific RenderTexture
+                        // Since assigning a render texture to PanelSettings removes the linked VisualElement from the original panel's hierarchy,
+                        // we need to do this before the layout pass to prevent the old PanelSettings from keeping an incorrect index of its children nodes
+                        var ps= Instantiate(Resources.Load<PanelSettings>("DefaultWorldUIPanelSettings"));
+                        ps.name = psName;
+                        UIDocument.panelSettings = ps;
+                    }
+                    
                     // Create a world UI panel after the layout pass
                     RootElement.RegisterCallback<GeometryChangedEvent, UIDocument>(XRUI.GetWorldUIPanel, UIDocument);
                 }

@@ -30,6 +30,11 @@ namespace com.chwar.xrui
         private Func<Vector2, Vector2> _renderTextureScreenTranslation;
 
         /// <summary>
+        /// The Layer Mask used to only raycast against the UI layer. 
+        /// </summary>
+        private LayerMask _rayMask;
+
+        /// <summary>
         /// Unity method.
         /// </summary>
         void OnEnable()
@@ -44,20 +49,19 @@ namespace com.chwar.xrui
                 targetPanel.SetScreenToPanelSpaceFunction(_renderTextureScreenTranslation);
             }
             
-            // find the automatically generated PanelEventHandler and PanelRaycaster for this panel and disable the raycaster
-            PanelEventHandler[] handlers = FindObjectsOfType<PanelEventHandler>();
-            var uiDocument = GetComponent<UIDocument>();
-            foreach (PanelEventHandler handler in handlers)
+            _rayMask = 1 << LayerMask.NameToLayer("UI");
+
+            if (EventSystem.current != null)
             {
-                if (handler.panel == uiDocument.rootVisualElement.panel)
-                {
-                    _panelEventHandler = handler;
-                    PanelRaycaster panelRaycaster = _panelEventHandler.GetComponent<PanelRaycaster>();
-                    if (panelRaycaster != null)
-                        panelRaycaster.enabled = false;
-                    
-                    break;
-                }
+                // find the automatically generated PanelEventHandler and PanelRaycaster for this panel and disable the raycaster
+                var handlerGo = EventSystem.current.transform.Find(targetPanel.name);
+                var panelRaycaster = handlerGo.GetComponent<PanelRaycaster>();
+                _panelEventHandler = handlerGo.GetComponent<PanelEventHandler>();
+                if(panelRaycaster != null) panelRaycaster.enabled = false;
+            }
+            else
+            {
+                Debug.LogWarning("No Event System detected. XRUI interactions will not work.");
             }
         }
 
@@ -85,11 +89,10 @@ namespace com.chwar.xrui
             Ray cameraRay = Camera.main.ScreenPointToRay(screenPosition);
             
             RaycastHit hit;
-            if (!Physics.Raycast(cameraRay, out hit))
+            if (!Physics.Raycast(cameraRay, out hit, Mathf.Infinity, _rayMask))
             {
                 return invalidPosition;
             }
-            
             var targetTexture = targetPanel.targetTexture;
             Vector2 pixelUV = hit.textureCoord;
 

@@ -44,7 +44,7 @@ namespace com.chwar.xrui
         [MenuItem("XRUI/Add XRUI Grid", false, 1)]
         public static void AddGrid()
         {
-            GameObject xruiGo = new GameObject() {name = "XRUI Grid"};
+            GameObject xruiGo = new GameObject() {name = "XRUI Grid", layer = LayerMask.NameToLayer("UI")};
             var ui = xruiGo.AddComponent<UIDocument>();
             ui.panelSettings = GetXRUIConfiguration().panelSettings;
             ui.visualTreeAsset = Resources.Load<VisualTreeAsset>("XRUIRoot");
@@ -109,7 +109,7 @@ namespace com.chwar.xrui
         internal static GameObject AddXRUIElement(string name, VisualTreeAsset template = null)
         {
             // TODO Check if root XRUI GO exists and add the element there
-            GameObject uiElement = new GameObject {name = name};
+            GameObject uiElement = new GameObject {name = name, layer = LayerMask.NameToLayer("UI")};
             var uiDocument = uiElement.AddComponent<UIDocument>();
             uiDocument.visualTreeAsset = template;
             uiDocument.panelSettings = GetXRUIConfiguration().panelSettings;

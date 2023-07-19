@@ -396,7 +396,7 @@ namespace com.chwar.xrui
             var containerGO = GameObject.Find(containerName);
             if (containerGO is null)
             {
-                containerGO = new GameObject {name = containerName};
+                containerGO = new GameObject {name = containerName, layer = LayerMask.NameToLayer("UI")};
                 var ui = containerGO.AddComponent<UIDocument>();
                 ui.panelSettings = xruiConfigurationAsset.panelSettings;
                 ui.sortingOrder = 1000;
@@ -465,7 +465,7 @@ namespace com.chwar.xrui
                 xrui.worldUIParameters.panelScale = 1;
             if (xrui.worldUIParameters.anchorPanelToCamera) 
                 xrui.StartFollowingCamera();
-            plane.numSegments = 512;
+            plane.numSegments = 64;
             plane.height = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.height / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.y;
             plane.radius = xrui.worldUIParameters.customPanelDimensions.Equals(Vector2.zero) ? (scale * (dimensions.width / ratio)) * xrui.worldUIParameters.panelScale : xrui.worldUIParameters.customPanelDimensions.x;
             plane.useArc = xrui.worldUIParameters.bendPanel;
