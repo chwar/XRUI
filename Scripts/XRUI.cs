@@ -317,7 +317,7 @@ namespace com.chwar.xrui
                                             $"Check its presence in the inspector.");
             }
             
-            var container = GetXRUIFloatingElementContainer("XRUIModal", true);
+            var container = GetXRUIFloatingElementContainer(modalName + "XRUIModal", true);
             var uiDocument = container.GetComponent<UIDocument>();
 
             // Instantiate main template
@@ -393,11 +393,11 @@ namespace com.chwar.xrui
         /// <returns>The Floating Element container game object.</returns>
         private GameObject GetXRUIFloatingElementContainer(string containerName, bool bDarkenBackground)
         {
-            var containerGO = GameObject.Find(containerName);
-            if (containerGO is null)
-            {
-                containerGO = new GameObject {name = containerName, layer = LayerMask.NameToLayer("UI")};
-                var ui = containerGO.AddComponent<UIDocument>();
+            // var containerGO = GameObject.Find(containerName);
+            // if (containerGO is null)
+            // {
+                var containerGo = new GameObject {name = containerName, layer = LayerMask.NameToLayer("UI")};
+                var ui = containerGo.AddComponent<UIDocument>();
                 ui.panelSettings = xruiConfigurationAsset.panelSettings;
                 ui.sortingOrder = 1000;
                 ui.rootVisualElement.style.position = new StyleEnum<Position>(Position.Absolute);
@@ -410,8 +410,8 @@ namespace com.chwar.xrui
                 ui.rootVisualElement.style.width = new StyleLength(Length.Percent(100));
                 ui.rootVisualElement.style.height = new StyleLength(Length.Percent(100));
                 ui.rootVisualElement.EnableInClassList("xrui-background--dark", bDarkenBackground);
-            }
-            return containerGO;
+            // }
+            return containerGo;
         }
 
         /// <summary>
